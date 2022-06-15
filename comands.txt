@@ -1,0 +1,43 @@
+ECHO :
+        il comando echo mi permette di visualizzare sullo schermo un testo o il contenuto di una variabile.
+        	http://blog.prometheusproject.it/15-esempi-pratici-del-comando-echo-su-linux/
+			https://www.tecmint.com/echo-command-in-linux/
+
+	 -> $
+	 -> ""
+	 -> ''
+	 -> -n (elimina il \n)
+	 -> * (stampa a video tutti i file presenti, simile ad ls)
+	 -> *. nome_estensione_file (stampa a video tuti i file con quella determinata estensione)
+	 -> # (commento)
+	 -> !numero_comando_history (esegue l'ennesimo comando eseguito secondo l'history)
+	 -> operazioni tra variabili
+	 -> > (inserisce all'interno dei file il testo)
+	 -> \\b (toglie uno spazio nel testo)
+	 -> \\n (fa un new line)
+	 -> \\t (tab nel testo)
+	 -> \\v (tab verticale nel testo)
+	 -> \\c (interrompe il testo e riporta il terminale senza new line)
+	 -> \\r (elimina tutto il testo precedente al \r)
+	 -> \\a (printa con l'avviso sonoro)
+
+EXPORT :
+		stampa a video la lista delle variabili esportate
+			https://it.wikipedia.org/wiki/Export_(Unix)
+
+	-> nome_variabile (aggiunge alla lista delle variabili la variabile)
+
+UNSET :
+		elimina la variabile dalla lista delle variabili salvate
+			https://man7.org/linux/man-pages/man1/unset.1p.html
+	
+	-> nome_variabile
+
+ENV : 
+		stampa la lista delle variabili di ambiente
+			https://www.computerhope.com/unix/uenv.htm
+
+EXIT :
+		Il comando exit termina uno script, proprio come in un programma C.
+		Può anche restituire un valore, che è disponibile per il processo padre dello script.
+
