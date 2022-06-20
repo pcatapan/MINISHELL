@@ -9,17 +9,8 @@ ECHO :
 	 -> -n (elimina il \n)
 	 -> * (stampa a video tutti i file presenti, simile ad ls)
 	 -> *. nome_estensione_file (stampa a video tuti i file con quella determinata estensione)
-	 -> # (commento)
-	 -> !numero_comando_history (esegue l'ennesimo comando eseguito secondo l'history)
 	 -> operazioni tra variabili
 	 -> > (inserisce all'interno dei file il testo)
-	 -> \\b (toglie uno spazio nel testo)
-	 -> \\n (fa un new line)
-	 -> \\t (tab nel testo)
-	 -> \\v (tab verticale nel testo)
-	 -> \\c (interrompe il testo e riporta il terminale senza new line)
-	 -> \\r (elimina tutto il testo precedente al \r)
-	 -> \\a (printa con l'avviso sonoro)
 
 EXPORT :
 		stampa a video la lista delle variabili esportate
@@ -41,3 +32,31 @@ EXIT :
 		Il comando exit termina uno script, proprio come in un programma C.
 		Può anche restituire un valore, che è disponibile per il processo padre dello script.
 
+
+&& || :
+	AND and OR lists are sequences of one of more pipelines separated by the &&  and  ||  control  operators,
+respectively.  AND and OR lists are executed with left associativity.  An AND list has the form
+
+       command1 && command2
+
+command2 is executed if, and only if, command1 returns an exit status of zero.
+
+An OR list has the form
+
+       command1 || command2
+
+command2  is  executed  if and only if command1 returns a non-zero exit status.  The return status of AND
+and OR lists is the exit status of the last command executed in the list.
+
+Se un comando viene terminato dall'operatore di controllo & , la shell esegue il comando in background in 
+una subshell. La shell non attende il completamento del comando e lo stato di ritorno è 0.
+
+Wildcarts and Hidden Files :
+	Another feature of shells like bash is that wildcards by default will not match hidden files that start with the character “.”.
+	In UNIX hidden files start with “.” like .login, .bashrc etc.
+	Files that start with “.” should not be matched with a wildcard.
+	For example “echo *” will not display “.” and “..”.
+	To do this, the shell will add a filename that starts with “.” only if the wildcard also has a “.” at the beginning of the wildcard.
+	To do this, the match if statement has to be modified in the following way:. 
+	If the filename matches the wildcard, then only if the filename starts with ‘.’ and the wildcard starts with ‘.’ then add the filename as argument.
+	Otherwise, if the file name does not start with “.” then add it to the list of arguments.
