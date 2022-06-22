@@ -60,3 +60,9 @@ Wildcarts and Hidden Files :
 	To do this, the match if statement has to be modified in the following way:. 
 	If the filename matches the wildcard, then only if the filename starts with ‘.’ and the wildcard starts with ‘.’ then add the filename as argument.
 	Otherwise, if the file name does not start with “.” then add it to the list of arguments.
+
+| o |& :
+	L'output di ogni comando nella pipeline è collegato tramite una pipe all'input del comando successivo. 
+	Cioè, ogni comando legge l'output del comando precedente. Questa connessione viene eseguita prima di qualsiasi reindirizzamento specificato dal comando.
+	Se '|&' viene utilizzato, l'errore standard di comando1 , oltre al suo output standard, è collegato allo standard input di comando2 tramite la pipe. 
+	Questo reindirizzamento implicito dell'errore standard allo standard output viene eseguito dopo qualsiasi reindirizzamento specificato dal comando.
