@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:14:05 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/22 19:40:10 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/23 01:20:53 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 /*
 envp racchiude tutte le variabili di ambinete attualmente dichiarate
 Non è una variabile che si può modificare, bisognera copiarla e lavorare sulla copia
-Dopo averlo copiato ci saranno dei valori da odificare
+Dopo averlo copiato ci saranno dei valori da modificare
 	- SHELL \\Nome della shell
 	- SHLVL \\Numero di livello del terminale
 */
