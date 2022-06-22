@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:47:12 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/15 21:01:58 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/22 19:42:52 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void sig_handler(int signal)
         printf("42minishell %%\n");
     if (rl_on_new_line() == -1)
         exit(1);
-    rl_replace_line("", 1);
+    rl_replace_line("", 0);
     rl_redisplay();  
 }
 
@@ -36,6 +36,7 @@ void setting_signal()
     signal(SIGQUIT, SIG_IGN); 
 }
 
+//bisognerebbe sostituire line con cmd, successivamnete fare lo split
 int main(void)
 {
 	char 			*line;

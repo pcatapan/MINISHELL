@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:14:05 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/14 19:07:39 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/22 19:40:10 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,22 @@
 #include <readline/readline.h> 
 #include <readline/history.h>
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
-	printf("Questa è una prova");
+/*
+envp racchiude tutte le variabili di ambinete attualmente dichiarate
+Non è una variabile che si può modificare, bisognera copiarla e lavorare sulla copia
+Dopo averlo copiato ci saranno dei valori da odificare
+	- SHELL \\Nome della shell
+	- SHLVL \\Numero di livello del terminale
+*/
+	int	i;
+
+	i  = 0;
+	while(envp[i])
+	{
+		printf("%s\n", envp[i]);
+		i++;
+	}
+	printf("\nQuesta è tutto");
 }

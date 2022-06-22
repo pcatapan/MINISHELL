@@ -60,7 +60,14 @@ int unlinkat(int fd, const char *path, int flag);
 			https://pubs.opengroup.org/onlinepubs/9699919799/functions/unlink.html
 
 int execve(const char * nomepercorso , char *const argv [], char *const envp []);
+		In genere, quando si desidera eseguire un nuovo processo, non si desidera semplicemente
+		un'altra copia dello stesso programma, ma si desidera eseguire un programma diverso.
+		Ecco di cosa tratta la exec()chiamata di sistema. Sostituisce l'attuale programma in esecuzione con uno
+		completamente nuovo. Ciò significa che quando chiami exec, il sistema operativo interrompe il processo,
+		carica il nuovo programma e avvia quello al suo posto. Un processo non ritorna mai da una exec()chiamata
+		(a meno che non si verifichi un errore).
 			https://man7.org/linux/man-pages/man2/execve.2.html
+			https://www.youtube.com/watch?v=iq7puCxsgHQ
 
 int dup(int oldfd ) :
 		scrive il testo passatogli nello stesso file aperto
@@ -146,3 +153,4 @@ Fonti varie
 			https://velog.io/@sham/minishell%EA%B3%BC-readline
 			https://www.gnu.org/software/libc/manual/html_node/Mode-Functions.html#Mode-Functions
 			https://www.gnu.org/software/bash/manual/bash.html
+			https://brennan.io/2015/01/16/write-a-shell-in-c/
