@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   terminal.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:47:12 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/22 19:42:52 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/23 01:34:48 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,26 @@
 #include <unistd.h>
 #include <termios.h>
 
-void sig_handler(int signal)
+void	sig_handler(int signal)
 {
-     if (signal == SIGINT)
-        printf("42minishell %%\n");
-    if (rl_on_new_line() == -1)
-        exit(1);
-    rl_replace_line("", 0);
-    rl_redisplay();  
+	if (signal == SIGINT)
+		printf("42minishell %%\n");
+	if (rl_on_new_line() == -1)
+		exit(1);
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
-void setting_signal()
+void	setting_signal(void)
 {
-    signal(SIGINT, sig_handler); // CTRL + C
-    signal(SIGQUIT, SIG_IGN); 
+	signal(SIGINT, sig_handler); // CTRL + C
+	signal(SIGQUIT, SIG_IGN);
 }
 
 //bisognerebbe sostituire line con cmd, successivamnete fare lo split
-int main(void)
+int	main(void)
 {
-	char 			*line;
+	char			*line;
 	struct termios	term;
 
 	tcgetattr(STDIN_FILENO, &term);
