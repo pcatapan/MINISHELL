@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/23 17:30:28 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/23 17:55:50 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_token
 {
 	char	command;
 	char	value;
+	char	sep;
 	int		priority;
 	s_token	*next;
 	s_token	*prev;
