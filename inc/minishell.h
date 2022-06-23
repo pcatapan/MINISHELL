@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/23 01:33:42 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/06/23 17:27:49 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,17 @@ typedef struct s_data
 {
 	int		input; //da valutare sia il tipo e sia se serve veramente
 	int		output; //idem di input
-	int		pipe;
-	char	token;
-	char	**matrix;
+	s_token	*token;
 }	t_data;
+
+typedef struct s_token
+{
+	char	command;
+	char	value;
+	int		priority;
+	s_token	*next;
+	s_token	*prev;
+}	t_token;
+
 
 #endif
