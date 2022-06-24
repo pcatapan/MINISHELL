@@ -6,12 +6,19 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/24 01:53:13 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/24 19:01:32 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+/**
+ * @brief Inrase of one the SHLVL
+ * 
+ * @param copy_envp Where save the date, the copy of envp
+ * @param num_str 	The number of SHLVL
+ * @param index 	Position of SHLVL
+ */
 void	ft_change_shlvl(char **copy_envp, char num_str, int index)
 {
 	int	num;
@@ -22,6 +29,12 @@ void	ft_change_shlvl(char **copy_envp, char num_str, int index)
 	copy_envp[index] = ft_strjoin("SHLVL=", &num_str);
 }
 
+/**
+ * @brief Copy all parameter of variable envp
+ * 
+ * @param copy_envp 	The copy of envp, where save the date
+ * @param envp			The original envp
+ */
 void	ft_init_envp(char ***copy_envp, char **envp)
 {
 	int	i;
