@@ -3,35 +3,42 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+         #
+#    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/23 01:38:13 by aanghel           #+#    #+#              #
-#    Updated: 2022/06/23 01:45:05 by aanghel          ###   ########.fr        #
+#    Updated: 2022/06/24 02:28:09 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME: minishell
+NAME = minishell
 
-SRC: #vari file.c
+SRC =	src/main \
+		src/init_envp \
+		./src/utils/ft_atoi.c \
+		./src/utils/ft_strdup.c \
+		./src/utils/ft_strjoin.c \
+		./src/utils/ft_strlen.c \
+		./src/utils/ft_strncmp.c \
+		./src/free.c \
 
-CC: gcc
+CC = gcc
 
-FLAGS: -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra
 
-FLAG_READLINE: -lreadline -I/opt/homebrew/opt/readline/include -L/opt/homebrew/opt/readline/lib
+FLAG_READLINE = -lreadline -I/opt/homebrew/opt/readline/include -L/opt/homebrew/opt/readline/lib
 
-OBJC: $( SRC:%.c=%.o)
+OBJC = $(SRC:.c=.o)
 
 $(NAME) : $(SRC)
-	$(CC) $(FLAG_READLINE) $(FLAGS) @nomefile.c -o $(NAME)
+	@$(CC) $(FLAGS) $(FLAG_READLINE) -o $(NAME)
 	
 all: $(NAME)
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 	
 re: all fclean 
 
