@@ -1,46 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/24 01:37:37 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/26 01:47:04 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/06/26 01:21:47 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/06/26 01:35:24 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 /**
- * @brief Convert the string in int
+ * @brief Comparete two string
  * 
- * @param str String to convert
- * @return int 
+ * @param s1 string one
+ * @param s2 string two
+ * 
+ * @return int 1 if the string is equal,
+ * 0 if the string isn't equal
  */
-int	ft_atoi(const char *str)
+int ft_strcmp(char *s1, char *s2)
 {
-	size_t	i;
-	size_t	s;
-	size_t	num;
+	int i;
 
 	i = 0;
-	num = 0;
-	s = 1;
-	while ((str[i] <= 13 && str[i] >= 9) || str[i] == ' ')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if (ft_strlen(s1) != ft_strlen(s2))
+		return (0);
+	while (s1[i] == s2[i])
 	{
-		if (str[i] == '-')
-		{
-			s *= -1;
-			i++;
-		}
-		else
-			i++;
+		i++;
+    	if (!s1[i] && !s2[i])
+			return (1);
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-		num = num * 10 + (str[i++] - '0');
-	s *= num;
-	return (s);
+	return (0);
 }

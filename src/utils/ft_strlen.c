@@ -6,11 +6,12 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:35:12 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/24 01:38:01 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/26 01:46:51 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
 /**
  * Computes the length of a string.
  *

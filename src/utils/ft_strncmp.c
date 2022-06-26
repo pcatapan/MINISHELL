@@ -6,11 +6,12 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:36:47 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/24 01:37:57 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/26 01:46:38 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
 /**
  * @brief Compares at most the first n bytes of s1 and s2.
  * 

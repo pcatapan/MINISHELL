@@ -1,46 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/24 01:37:37 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/26 01:47:04 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/01/15 12:43:47 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/06/26 01:46:46 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/**
- * @brief Convert the string in int
- * 
- * @param str String to convert
- * @return int 
- */
-int	ft_atoi(const char *str)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
-	size_t	s;
-	size_t	num;
+	unsigned int		l;
+	char				*str;
+	unsigned int		i;
 
+	if (!s)
+		return (NULL);
+	l = ft_strlen((char *)s);
+	if (l < len)
+		str = (char *)malloc(l * sizeof(char) + 1);
+	else
+		str = (char *)malloc(len * sizeof(char) + 1);
 	i = 0;
-	num = 0;
-	s = 1;
-	while ((str[i] <= 13 && str[i] >= 9) || str[i] == ' ')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if (str == NULL)
+		return (NULL);
+	while (i <= l && len > 0 && start <= l)
 	{
-		if (str[i] == '-')
-		{
-			s *= -1;
-			i++;
-		}
-		else
-			i++;
+		str[i] = s[start];
+		i++;
+		start++;
+		len--;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-		num = num * 10 + (str[i++] - '0');
-	s *= num;
-	return (s);
+	str[i] = '\0';
+	return (str);
 }

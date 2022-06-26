@@ -6,11 +6,12 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:38:25 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/24 01:38:41 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/26 01:46:55 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
 /**
  * @brief Concatenate two string
  * 
