@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:36:47 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/26 01:46:38 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/26 18:45:21 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 	i = 0;
 	while (s1[i] == s2[i] && i < n && s1[i] && s2[i])
-	{
 		i++;
-	}
 	if (s1[i] != s2[i] && i < n)
-	{
 		return (((unsigned char)s1[i]) - ((unsigned char)s2[i]));
-	}
 	return (0);
 }

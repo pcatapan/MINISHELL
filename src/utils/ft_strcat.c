@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 19:10:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/27 02:53:07 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/06/26 20:16:09 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/06/26 20:18:04 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+/**
+ * Concatenates two strings.
+ *
+ * @param dest The destination string.
+ * @param src The source string.
+ *
+ * @returns The destination string.
+ */
+char	*ft_strcat(char *dest, const char *src)
 {
-	t_main	main;
+	int	i;
+	int	j;
 
-	(void)argc;
-	(void)argv;
-	ft_init_envp(&main.copy_env, envp);
-	signal(SIGINT, ft_sig_handel);
-	signal(SIGQUIT, ft_sig_handel);
-	while (1)
-		ft_prompt(main.copy_env);
+	i = 0;
+	j = ft_strlen(dest);
+	while (*(src + i))
+	{
+		*(dest + i + j) = *(src + i);
+		i++;
+	}
+	*(dest + i + j) = '\0';
+	return (dest);
 }

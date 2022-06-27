@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/24 19:01:32 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/27 02:52:15 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@
  * @param num_str 	The number of SHLVL
  * @param index 	Position of SHLVL
  */
-void	ft_change_shlvl(char **copy_envp, char num_str, int index)
+void	ft_change_shlvl(char **copy_envp, char *str, int index)
 {
-	int	num;
+	int		num;
+	char	*num_str;
 
-	num = 0 + (num_str - '0');
+	num = 0 + (str[6] - '0');
 	num = num + 1;
-	num_str = num + 48;
-	copy_envp[index] = ft_strjoin("SHLVL=", &num_str);
+	num_str = ft_itoa(num);
+	copy_envp[index] = ft_strjoin("SHLVL=", num_str);
+	free(num_str);
 }
 
 /**
@@ -38,27 +40,33 @@ void	ft_change_shlvl(char **copy_envp, char num_str, int index)
 void	ft_init_envp(char ***copy_envp, char **envp)
 {
 	int	i;
+	char	*tmp;
 
 	i = 0;
 	while (envp[i])
 		i++;
-	*copy_envp = malloc(sizeof(char *) * i);
+	*copy_envp = malloc(sizeof(char *) * (i + 2));
 	if (!copy_envp)
 		return ;
 	i = -1;
 	while (envp[++i])
 	{
 		if (!ft_strncmp("SHLVL=", envp[i], 6))
-			ft_change_shlvl((*copy_envp), envp[i][6], i);
-		else if (!ft_strncmp("SHELL=", envp[i], 5))
+			ft_change_shlvl((*copy_envp), envp[i], i);
+		if (!ft_strncmp("SHELL=", envp[i], 5))
 			(*copy_envp)[i] = ft_strdup("SHELL=42minishell");
 		else
 		{
 			(*copy_envp)[i] = ft_strdup(envp[i]);
 			if ((*copy_envp)[i])
-				continue ;
-			ft_free_copy_env((*copy_envp));
+				continue;
+			ft_free_copy_env(*copy_envp);
 			exit(write(1, "Error setting up env\n", 21));
-		}
+		}				
 	}
+	(*copy_envp)[i++] = ft_strdup("HISTSIZE=2000");
+	tmp = ft_searchstrchr("HOME=", envp);
+	(*copy_envp)[i++] = ft_strjoin(tmp, FILE_HISTORY);
+	free(tmp);
+	(*copy_envp)[i] = NULL;
 }

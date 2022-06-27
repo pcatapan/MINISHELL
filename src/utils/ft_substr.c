@@ -6,12 +6,21 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 12:43:47 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/26 01:46:46 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/26 16:51:51 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+/**
+ * @brief Create a sub string
+ * 
+ * @param s 	String to create a sub string
+ * @param start Index start to create a sub string
+ * @param len 	Lengt of s
+ * 
+ * @return char*
+ */
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	unsigned int		l;

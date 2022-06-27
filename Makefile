@@ -6,7 +6,7 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/23 01:38:13 by aanghel           #+#    #+#              #
-#    Updated: 2022/06/26 03:07:14 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/06/27 02:53:10 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJC = $(SRC:%.c=%.o)
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra #-fsanitize=thread
+FLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
 
 FLAG_READLINE = -lreadline -I/opt/homebrew/opt/readline/include -L/opt/homebrew/opt/readline/lib
 
@@ -33,6 +33,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f 42minishell_history
 	
 re: fclean all
 

@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 19:10:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/27 02:53:07 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/01/16 20:37:46 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/06/26 17:58:42 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+/**
+ * @brief Write a string in file with '\n'
+ * 
+ * @param s 	String to write
+ * @param fd	File in to write 
+ */
+void	ft_putendl_fd(char *s, int fd)
 {
-	t_main	main;
+	int	i;
 
-	(void)argc;
-	(void)argv;
-	ft_init_envp(&main.copy_env, envp);
-	signal(SIGINT, ft_sig_handel);
-	signal(SIGQUIT, ft_sig_handel);
-	while (1)
-		ft_prompt(main.copy_env);
+	i = 0;
+	if (fd < 0 || !s)
+		return ;
+	while (s[i] != '\0')
+	{
+		write (fd, &s[i], 1);
+		i++;
+	}
+	if (s[i] == '\0')
+		write (fd, "\n", 1);
 }
