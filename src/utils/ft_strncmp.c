@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:36:47 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/26 18:45:21 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/27 03:18:44 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@
  * @param s2 Second string
  * @param n bytes to confront
  * 
- * @return int if Return value < 0 then it indicates str1 is less than str2.
- * if Return value > 0 then it indicates str2 is less than str1.
- * if Return value = 0 then it indicates str1 is equal to str2.
+ * @return 0 then it indicates str1 is equal to str2.
  */
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

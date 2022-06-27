@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/27 02:52:15 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/27 03:29:30 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	ft_change_shlvl(char **copy_envp, char *str, int index)
 	char	*num_str;
 
 	num = 0 + (str[6] - '0');
-	num = num + 1;
-	num_str = ft_itoa(num);
+	num_str = ft_itoa(num + 1);
 	copy_envp[index] = ft_strjoin("SHLVL=", num_str);
 	free(num_str);
 }
@@ -53,7 +52,7 @@ void	ft_init_envp(char ***copy_envp, char **envp)
 	{
 		if (!ft_strncmp("SHLVL=", envp[i], 6))
 			ft_change_shlvl((*copy_envp), envp[i], i);
-		if (!ft_strncmp("SHELL=", envp[i], 5))
+		else if (!ft_strncmp("SHELL=", envp[i], 5))
 			(*copy_envp)[i] = ft_strdup("SHELL=42minishell");
 		else
 		{
