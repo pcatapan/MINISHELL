@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:36:08 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/26 01:46:59 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/28 23:20:53 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
  */
 char	*ft_strdup(const char *s1)
 {
-    int     i;
+	int		i;
 	char	*str;
 
-    i = 0;
+	i = 0;
 	str = malloc(sizeof(*str) * (ft_strlen((char *)s1) + 1));
 	if (!str)
 		return (NULL);
@@ -33,6 +33,6 @@ char	*ft_strdup(const char *s1)
 		str[i] = s1[i];
 		i++;
 	}
-    str[i] = '\0';
+	str[i] = '\0';
 	return (str);
 }

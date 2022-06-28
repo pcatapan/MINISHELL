@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:37:46 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/27 01:08:00 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/28 23:20:21 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@
  * 
  * @return char* sub str that eqaul to str less n byte
  */
-char    *ft_searchstrchr(char const *str, char **array)
+char	*ft_searchstrchr(char const *str, char **array)
 {
-    int i;
-    int len;
+	int	i;
+	int	len;
 
-    i = -1;
-    len = ft_strlen((char *)str);
-    while (array[++i])
-    {
-        if(ft_strncmp(str, array[i], len) == 0)
-            return (ft_substr(array[i], len, ft_strlen(array[i])));
-    }
-    return (NULL);    
+	i = -1;
+	len = ft_strlen((char *)str);
+	while (array[++i])
+	{
+		if (ft_strncmp(str, array[i], len) == 0)
+			return (ft_substr(array[i], len, ft_strlen(array[i])));
+	}
+	return (NULL);
 }

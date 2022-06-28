@@ -6,17 +6,17 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:53:41 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/27 01:28:51 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/28 23:19:02 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void    ft_add_history(char *line, char **envp)
+void	ft_add_history(char *line, char **envp)
 {
-	int     fd;
-	int     flag_file;
-	char    *path;
+	int		fd;
+	int		flag_file;
+	char	*path;
 	char	*tmp;
 
 	flag_file = O_APPEND | O_WRONLY | O_CREAT;

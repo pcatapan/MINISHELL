@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:47:12 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/27 01:26:49 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/28 23:18:02 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_set_term(char *name_shell)
 	return (rtr);
 }
 
-char	*ft_clear_prompt(char  *prompt)
+char	*ft_clear_prompt(char *prompt)
 {
 	char	*rtr;
 	int		i;
@@ -75,7 +75,7 @@ char	*ft_get_line_input(char **envp)
 
 	home = ft_searchstrchr("HOME=", envp);
 	pwd = ft_searchstrchr("PWD=", envp);
-	if(ft_strcmp(home, pwd))
+	if (ft_strcmp(home, pwd))
 		prompt = ft_strjoin(pwd, HOME_SHELL);
 	else
 		prompt = ft_strjoin(pwd, DIVISOR_SHELL);
@@ -96,13 +96,13 @@ int	ft_prompt(char **envp)
 	if (!line)
 	{
 		printf("\nSaving session...\n"
-		"...copying shared history...\n"
-		"...saving history...truncating history files..."
-		"\n...completed.\n\n[Processo completato]\n");
+			"...copying shared history...\n"
+			"...saving history...truncating history files..."
+			"\n...completed.\n\n[Processo completato]\n");
 		exit(0);
 	}
 	else if (line[0] != '\0')
-	 	ft_add_history(line, envp);
+		ft_add_history(line, envp);
 	free(line);
 	return (0);
 }

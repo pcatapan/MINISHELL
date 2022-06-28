@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/27 03:29:30 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/28 23:18:42 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_change_shlvl(char **copy_envp, char *str, int index)
  */
 void	ft_init_envp(char ***copy_envp, char **envp)
 {
-	int	i;
+	int		i;
 	char	*tmp;
 
 	i = 0;
@@ -58,7 +58,7 @@ void	ft_init_envp(char ***copy_envp, char **envp)
 		{
 			(*copy_envp)[i] = ft_strdup(envp[i]);
 			if ((*copy_envp)[i])
-				continue;
+				continue ;
 			ft_free_copy_env(*copy_envp);
 			exit(write(1, "Error setting up env\n", 21));
 		}				
