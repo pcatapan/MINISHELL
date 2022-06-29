@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:47:12 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/29 04:19:14 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/29 21:16:13 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_sig_handel(int signal)
 	if (signal == SIGINT)
 	{
 		printf("\n");
-		//rl_replace_line("", 0); 
+		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
@@ -88,7 +88,7 @@ char	*ft_get_line_input(char **envp)
 	return (prompt);
 }
 
-int	ft_prompt(char **envp)
+int	ft_prompt(char **envp, t_main main)
 {
 	char			*line;
 
@@ -100,6 +100,6 @@ int	ft_prompt(char **envp)
 	}
 	else if (line[0] != '\0')
 		ft_add_history(line, envp);
-	free(line);
+	check_syntax(line, envp)
 	return (0);
 }

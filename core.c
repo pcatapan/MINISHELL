@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:16:37 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/22 18:53:58 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/29 20:52:36 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@
 #include <stdlib.h>
 #include <curses.h>
 
-int lsh_launch(char **args, char *envp)
+int main(int argv, char **args, char **envp)
 {
 	pid_t	pid, wpid;
 	int	status;
 	char 	*cmd;
 
-	cmd = "ls";
+	cmd = "/bin/ls";
 	pid = fork();
 	if (pid == 0) {
 		// Child process
 		if (execve(cmd, args, envp) == -1) {
-			perror("lsh");
+			perror(cmd);
 			}
 		exit(EXIT_FAILURE);
 /*

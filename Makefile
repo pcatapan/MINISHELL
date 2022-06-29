@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/23 01:38:13 by aanghel           #+#    #+#              #
-#    Updated: 2022/06/29 02:00:39 by pcatapan         ###   ########.fr        #
+#    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
+#    Updated: 2022/06/29 20:21:03 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ USER = pcatapan
 
 FLAGS = -Wall -Werror -Wextra #-g #-fsanitize=address
 
-FLAG_READLINE = -lreadline -lcurses -I /Users/$(USER)/.brew/opt/readline/include #-L /Users/$(USER)/.brew/opt/readline/lib 
+FLAG_READLINE = -lreadline -lcurses -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
 
 all: $(NAME)
 

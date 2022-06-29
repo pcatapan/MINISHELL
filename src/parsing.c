@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 19:10:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/29 21:00:19 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/06/29 20:59:22 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/06/29 21:18:14 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+// Idea is count the ' and "" if the number is pari is ok
+// is disapr is no ok
+void	check_syntax(char *line, char **envp)
 {
-	t_main	main;
-
-	(void)argc;
-	(void)argv;
-	ft_init_envp(&main.copy_env, envp);
-	signal(SIGINT, ft_sig_handel);
-	signal(SIGQUIT, ft_sig_handel);
-	while (1)
-		ft_prompt(main.copy_env, main);
+	
 }

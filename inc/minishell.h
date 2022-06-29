@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/29 02:30:46 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/29 21:00:42 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_main
 	int				input; //da valutare sia il tipo e sia se serve veramente
 	int				output; //idem di input
 	char			**copy_env;
+	char			*line;
 	struct t_token	*token;
 }	t_main;
 
@@ -68,8 +69,8 @@ void		ft_free_copy_env(char **copy_env);
 void		ft_init_envp(char ***copy_envp, char **envp);
 
 // prompt.c
+int			ft_prompt(char **envp, t_main main);
 void		ft_sig_handel(int signal);
-int			ft_prompt(char **envp);
 
 void		ft_add_history(char *line, char **envp);
 
