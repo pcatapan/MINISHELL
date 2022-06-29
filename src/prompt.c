@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:47:12 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/28 23:18:02 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/29 04:19:14 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_sig_handel(int signal)
 	if (signal == SIGINT)
 	{
 		printf("\n");
-		rl_replace_line("", 0);
+		//rl_replace_line("", 0); 
 		rl_on_new_line();
 		rl_redisplay();
 	}
@@ -95,10 +95,7 @@ int	ft_prompt(char **envp)
 	line = ft_get_line_input(envp);
 	if (!line)
 	{
-		printf("\nSaving session...\n"
-			"...copying shared history...\n"
-			"...saving history...truncating history files..."
-			"\n...completed.\n\n[Processo completato]\n");
+		printf(" exit\n");
 		exit(0);
 	}
 	else if (line[0] != '\0')

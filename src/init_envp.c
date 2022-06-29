@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/28 23:18:42 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/29 03:25:53 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ void	ft_change_shlvl(char **copy_envp, char *str, int index)
 	free(num_str);
 }
 
+void	ft_add_shell_env(char ***copy_envp, char **envp, int i)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	(*copy_envp)[i++] = ft_strdup("HISTSIZE=2000");
+	tmp = ft_searchstrchr("HOME=", envp);
+	tmp2 = ft_strjoin("HISTFILE=", tmp);
+	(*copy_envp)[i++] = ft_strjoin(tmp, FILE_HISTORY);
+	free(tmp);
+	free(tmp2);
+	(*copy_envp)[i] = NULL;
+}
+
 /**
  * @brief Copy all parameter of variable envp
  * 
@@ -39,12 +53,11 @@ void	ft_change_shlvl(char **copy_envp, char *str, int index)
 void	ft_init_envp(char ***copy_envp, char **envp)
 {
 	int		i;
-	char	*tmp;
 
 	i = 0;
 	while (envp[i])
 		i++;
-	*copy_envp = malloc(sizeof(char *) * (i + 2));
+	(*copy_envp) = malloc(sizeof(char *) * (i + 2));
 	if (!copy_envp)
 		return ;
 	i = -1;
@@ -63,9 +76,5 @@ void	ft_init_envp(char ***copy_envp, char **envp)
 			exit(write(1, "Error setting up env\n", 21));
 		}				
 	}
-	(*copy_envp)[i++] = ft_strdup("HISTSIZE=2000");
-	tmp = ft_searchstrchr("HOME=", envp);
-	(*copy_envp)[i++] = ft_strjoin(tmp, FILE_HISTORY);
-	free(tmp);
-	(*copy_envp)[i] = NULL;
+	ft_add_shell_env(copy_envp, envp, i);
 }

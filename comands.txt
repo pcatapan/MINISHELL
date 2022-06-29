@@ -16,6 +16,7 @@ EXPORT :
 		stampa a video la lista delle variabili esportate
 			https://it.wikipedia.org/wiki/Export_(Unix)
 
+.
 	-> nome_variabile (aggiunge alla lista delle variabili la variabile)
 
 UNSET :
