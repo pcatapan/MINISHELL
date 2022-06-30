@@ -25,6 +25,15 @@ UNSET :
 	
 	-> nome_variabile
 
+PWD
+
+CD :'
+		""
+			Non legge \ quindi funzione diversa rispetto a echo per controllo sintassi
+			Legge le variabili globali
+		''
+			Non legge le variabili
+
 ENV : 
 		stampa la lista delle variabili di ambiente
 			https://www.computerhope.com/unix/uenv.htm

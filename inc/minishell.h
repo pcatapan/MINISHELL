@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/30 03:15:57 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/30 16:56:08 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct s_main
 
 typedef struct s_token
 {
-	char			command;
-	char			value;
+	char			token;
+	char			**value;
 	char			sep;
 	int				priority;
 	struct t_token	*next;
