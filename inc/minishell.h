@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/29 21:00:42 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/30 03:15:57 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@
 # define DIVISOR_SHELL " % "
 # define HOME_SHELL " ~ "
 # define FILE_HISTORY "/.42minishell_history"
+# define ERROR_DOUBLE_QUOTE "Mistake : unclosed double quotes"
+# define ERROR_SINGLE_QUOTE "Mistake : unclosed single quotes"
 
 typedef struct s_main
 {
+	int				quotes;
 	int				input; //da valutare sia il tipo e sia se serve veramente
 	int				output; //idem di input
 	char			**copy_env;
-	char			*line;
 	struct t_token	*token;
 }	t_main;
 
@@ -51,8 +53,11 @@ typedef struct s_token
 
 // Dir utils
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_strchr(const char *s, int c);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi(const char *str);
+int			ft_isalnum(int c);
+int			ft_isalpha(int c);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_searchstrchr(char const *str, char **array);
 char		*ft_strjoin(char const *s1, char const *s2);
@@ -69,10 +74,18 @@ void		ft_free_copy_env(char **copy_env);
 void		ft_init_envp(char ***copy_envp, char **envp);
 
 // prompt.c
-int			ft_prompt(char **envp, t_main main);
+int			ft_prompt(char **envp, t_main *main);
 void		ft_sig_handel(int signal);
 
+// history.c
 void		ft_add_history(char *line, char **envp);
+
+// syntax_check.c
+void		check_syntax(char *line, t_main *main);
+
+// environment.c
+int			ft_check_envi(char *line);
+char		**ft_add_envi(char *line, t_main *main);
 
 extern void	rl_replace_line(const char *text, int clear_undo);
 

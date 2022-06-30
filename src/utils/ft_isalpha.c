@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 19:10:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/30 00:06:06 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/01/10 12:58:56 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/06/30 03:15:33 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+/**
+ * @brief Check if the char is a character
+ * 
+ * @param c char to check
+ * @return 1 is it, 0 isn't it
+ */
+int	ft_isalpha(int c)
 {
-	t_main	*main;
-
-	(void)argc;
-	(void)argv;
-	main = malloc(sizeof(t_main));
-	if (!main)
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (1);
+	else
 		return (0);
-	main->quotes = 0;
-	ft_init_envp(&main->copy_env, envp);
-	signal(SIGINT, ft_sig_handel);
-	signal(SIGQUIT, ft_sig_handel);
-	while (1)
-		ft_prompt(main->copy_env, main);
 }
