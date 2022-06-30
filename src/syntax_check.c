@@ -6,12 +6,13 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 20:59:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/30 03:17:09 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/30 17:42:31 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+// Aggiungere controllo sul '\'
 int	ft_check_double_quote(char *line, t_main *main)
 {
 	int	i;
