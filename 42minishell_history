@@ -1,0 +1,10 @@
+echo "ciao 'come stai' scemo"
+echo "ciao'comestai'scemo"
+echo "ciao'comestai\'scemo"
+echo "ciao'comestai;'scemo"
+echo "ciao'comestai'scemo"
+echo "ciao        lll"  lol lol lol
+echo "ciao        lll"  lol lol          lol
+exit
+exit
+exit

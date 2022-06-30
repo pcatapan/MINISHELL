@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/30 16:56:08 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/30 19:47:42 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@
 typedef struct s_main
 {
 	int				quotes;
-	int				input; //da valutare sia il tipo e sia se serve veramente
-	int				output; //idem di input
 	char			**copy_env;
 	struct t_token	*token;
 }	t_main;
@@ -61,6 +59,7 @@ int			ft_isalpha(int c);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_searchstrchr(char const *str, char **array);
 char		*ft_strjoin(char const *s1, char const *s2);
+char		**ft_split(char const *s, char *charset);
 char		*ft_strcat(char *dest, const char *src);
 char		*ft_strdup(const char *s1);
 char		*ft_itoa(int n);
@@ -81,6 +80,7 @@ void		ft_sig_handel(int signal);
 void		ft_add_history(char *line, char **envp);
 
 // syntax_check.c
+void		ft_parsing(char *line);
 void		check_syntax(char *line, t_main *main);
 
 // environment.c

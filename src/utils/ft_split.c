@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/14 19:04:57 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/30 19:43:57 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/01/18 11:38:30 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/06/30 19:36:01 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/minishell.h"
+#include "../../inc/minishell.h"
 
 static int	ft_is_charset(char str, char *charset)
 {
@@ -69,7 +69,7 @@ static char	*ft_strdupp(char *src, int j)
 	return (dst);
 }
 
-char	**ft_split_2(char const *s, char *charset)
+char	**ft_split(char const *s, char *charset)
 {
 	char		**dest;
 	int			size;
@@ -93,34 +93,4 @@ char	**ft_split_2(char const *s, char *charset)
 	}
 	dest[size] = 0;
 	return (dest);
-}
-
-int	main(void)
-{
-	char	*one;
-	char	**result;
-	char	*segni;
-	int i;
-
-	segni = malloc(sizeof(char) * 6);
-	segni[0] = 32;
-	segni[1] = 92;
-	segni[2] = 34;
-	segni[3] = 39;
-	segni[4] = 59;
-	segni[5] = '\0';
-	one = malloc(sizeof(char *) * 20);
-	one = "ciao\"come;stai\'scemo nero\\";
-	result = ft_split_2(one, segni);
-	while (result[i])
-	{
-		printf("%s\n", result[i]);
-		i++;
-	}
-	free(segni);
-	ft_free_copy_env(result);
-	// one[0] = "pwd";
-	// one[1] = "Messaggio";
-	// if (execve("pwd", one, envp))
-	// 	perror("TEST");
 }
