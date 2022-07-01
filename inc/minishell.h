@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/30 19:47:42 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/01 15:03:21 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define DIVISOR_SHELL " % "
 # define HOME_SHELL " ~ "
 # define FILE_HISTORY "/.42minishell_history"
+# define RED "\033[0;31m"
 # define ERROR_DOUBLE_QUOTE "Mistake : unclosed double quotes"
 # define ERROR_SINGLE_QUOTE "Mistake : unclosed single quotes"
 

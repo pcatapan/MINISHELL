@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:47:12 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/30 19:47:59 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/01 15:03:44 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	ft_prompt(char **envp, t_main *main)
 	line = ft_get_line_input(envp);
 	if (!line)
 	{
-		printf(" exit\n");
+		printf("\t%sexit\n", RED);
 		exit(0);
 	}
 	else if (line[0] != '\0')
