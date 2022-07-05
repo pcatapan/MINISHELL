@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/29 03:25:53 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/05 18:19:44 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ void	ft_change_shlvl(char **copy_envp, char *str, int index)
 	free(num_str);
 }
 
-void	ft_add_shell_env(char ***copy_envp, char **envp, int i)
+void	ft_add_shell_env(char **copy_envp, char **envp, int i)
 {
 	char	*tmp;
 	char	*tmp2;
 
-	(*copy_envp)[i++] = ft_strdup("HISTSIZE=2000");
+	copy_envp[i++] = ft_strdup("HISTSIZE=2000");
 	tmp = ft_searchstrchr("HOME=", envp);
 	tmp2 = ft_strjoin("HISTFILE=", tmp);
-	(*copy_envp)[i++] = ft_strjoin(tmp, FILE_HISTORY);
+	copy_envp[i++] = ft_strjoin(tmp, FILE_HISTORY);
 	free(tmp);
 	free(tmp2);
-	(*copy_envp)[i] = NULL;
+	copy_envp[i] = NULL;
 }
 
 /**
@@ -50,31 +50,31 @@ void	ft_add_shell_env(char ***copy_envp, char **envp, int i)
  * @param copy_envp 	The copy of envp, where save the date
  * @param envp			The original envp
  */
-void	ft_init_envp(char ***copy_envp, char **envp)
+char	**ft_init_envp(char **envp)
 {
 	int		i;
+	char	**copy_envp;
 
 	i = 0;
 	while (envp[i])
 		i++;
-	(*copy_envp) = malloc(sizeof(char *) * (i + 2));
-	if (!copy_envp)
-		return ;
+	copy_envp = malloc(sizeof(char *) * (i + 2));
 	i = -1;
 	while (envp[++i])
 	{
 		if (!ft_strncmp("SHLVL=", envp[i], 6))
-			ft_change_shlvl((*copy_envp), envp[i], i);
+			ft_change_shlvl(copy_envp, envp[i], i);
 		else if (!ft_strncmp("SHELL=", envp[i], 5))
-			(*copy_envp)[i] = ft_strdup("SHELL=42minishell");
+			copy_envp[i] = ft_strdup("SHELL=42minishell");
 		else
 		{
-			(*copy_envp)[i] = ft_strdup(envp[i]);
-			if ((*copy_envp)[i])
+			copy_envp[i] = ft_strdup(envp[i]);
+			if (copy_envp[i])
 				continue ;
-			ft_free_copy_env(*copy_envp);
+			ft_free_copy_env(copy_envp);
 			exit(write(1, "Error setting up env\n", 21));
 		}				
 	}
 	ft_add_shell_env(copy_envp, envp, i);
+	return (copy_envp);
 }

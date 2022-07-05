@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:47:12 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/01 15:03:44 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/05 19:43:28 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int	ft_prompt(char **envp, t_main *main)
 	}
 	else if (line[0] != '\0')
 		ft_add_history(line, envp);
-	ft_parsing(line);
-	//check_syntax(line, main);
+	ft_check_syntax(line, main);
+	ft_check_command(line, main);
+	//ft_parsing(line);
 	return (0);
 }

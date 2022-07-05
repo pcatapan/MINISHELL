@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/01 15:03:21 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/05 19:32:18 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <termios.h>
 # include <stdbool.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 # include <readline/history.h>
 # include <readline/readline.h> 
 
@@ -29,26 +30,28 @@
 # define DIVISOR_SHELL " % "
 # define HOME_SHELL " ~ "
 # define FILE_HISTORY "/.42minishell_history"
-# define RED "\033[0;31m"
+# define RED "\x1b[31m"
+# define COLOR_RES  "\x1b[0m"
 # define ERROR_DOUBLE_QUOTE "Mistake : unclosed double quotes"
-# define ERROR_SINGLE_QUOTE "Mistake : unclosed single quotes"
-
-typedef struct s_main
-{
-	int				quotes;
-	char			**copy_env;
-	struct t_token	*token;
-}	t_main;
+# define ERROR_SING_QUOTE "Mistake : unclosed single quotes"
+# define ERROR_BACKSLASH "Mistake : find the '\\'"
 
 typedef struct s_token
 {
-	char			token;
+	char			*token;
 	char			**value;
 	char			sep;
 	int				priority;
 	struct t_token	*next;
 	struct t_token	*prev;
 }	t_token;
+
+typedef struct s_main
+{
+	int				quotes;
+	char			**copy_env;
+	t_token			*token;
+}	t_main;
 
 // Dir utils
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -71,7 +74,7 @@ size_t		ft_strlen(char *s);
 void		ft_free_copy_env(char **copy_env);
 
 // init_envp.c
-void		ft_init_envp(char ***copy_envp, char **envp);
+char		**ft_init_envp(char **envp);
 
 // prompt.c
 int			ft_prompt(char **envp, t_main *main);
@@ -82,7 +85,10 @@ void		ft_add_history(char *line, char **envp);
 
 // syntax_check.c
 void		ft_parsing(char *line);
-void		check_syntax(char *line, t_main *main);
+void		ft_check_syntax(char *line, t_main *main);
+int			ft_check_single_quote(char *line, t_main *main);
+int			ft_check_double_quote(char *line, t_main *main);
+void		ft_check_command(char *line, t_main *main);
 
 // environment.c
 int			ft_check_envi(char *line);
