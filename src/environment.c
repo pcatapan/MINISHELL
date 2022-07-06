@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 02:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/05 18:14:48 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/06 17:13:42 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**ft_add_envi(char *line, t_main *main)
 	}
 	temp[i++] = ft_strdup(line);
 	temp[i] = NULL;
-	ft_free_copy_env(main->copy_env);
+	ft_free_matrix(main->copy_env);
 	free(line);
 	return (temp);
 }

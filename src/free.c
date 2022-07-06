@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 20:44:10 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/28 23:19:07 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/06 17:11:23 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 /**
  * @brief Free the matrix
  * 
- * @param copy_env is the matrix to free
+ * @param matrix is the matrix to free
  */
-void	ft_free_copy_env(char **copy_env)
+void	ft_free_matrix(char **matrix)
 {
 	int	i;
 
 	i = 0;
-	if (!copy_env)
+	if (!matrix)
 		return ;
-	while (copy_env[i])
+	while (matrix[i])
 	{
-		free(copy_env[i]);
+		free(matrix[i]);
 		i++;
 	}
-	free(copy_env);
+	free(matrix);
 }

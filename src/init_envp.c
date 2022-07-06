@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/05 18:19:44 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/06 17:12:02 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	**ft_init_envp(char **envp)
 			copy_envp[i] = ft_strdup(envp[i]);
 			if (copy_envp[i])
 				continue ;
-			ft_free_copy_env(copy_envp);
+			ft_free_matrix(copy_envp);
 			exit(write(1, "Error setting up env\n", 21));
 		}				
 	}

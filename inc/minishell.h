@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/06 13:02:54 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/07/06 20:15:26 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,28 @@
 # define ERROR_DOUBLE_QUOTE "Mistake : unclosed double quotes"
 # define ERROR_SING_QUOTE "Mistake : unclosed single quotes"
 # define ERROR_BACKSLASH "Mistake : find the '\\'"
+# define ERROR_OPEN_BRACKETS "Mistake : find open brackets exstra"
+# define ERROR_CLOSE_BRACKETS "Mistake : find close brackets exstra"
 
 typedef struct s_token
 {
 	char			*token;
 	char			**value;
 	char			sep;
-	int				priority;
 	struct t_token	*next;
 	struct t_token	*prev;
 }	t_token;
 
 typedef struct s_main
 {
-	int				quotes;
-	char			**copy_env;
-	char			*path;
-	t_token			*token;
+	int			dub_quotes;
+	int			sin_quotes;
+	bool		error;
+	int			open_brackets;
+	int			close_brackets;
+	bool		op_logic;
+	char		**copy_env;
+	t_token		*token;
 }	t_main;
 
 // Dir utils
@@ -73,7 +78,7 @@ void		ft_putendl_fd(char *s, int fd);
 size_t		ft_strlen(char *s);
 
 // free.c
-void		ft_free_copy_env(char **copy_env);
+void		ft_free_matrix(char **matrix);
 
 // init_envp.c
 char		**ft_init_envp(char **envp);
@@ -88,8 +93,8 @@ void		ft_add_history(char *line, char **envp);
 // syntax_check.c
 void		ft_parsing(char *line);
 void		ft_check_syntax(char *line, t_main *main);
-int			ft_check_single_quote(char *line, t_main *main);
-int			ft_check_double_quote(char *line, t_main *main);
+int			ft_check_single_quote(char *line, t_main *main, int i);
+int			ft_check_double_quote(char *line, t_main *main, int i);
 void		ft_check_command(char *line, t_main *main);
 
 // environment.c
@@ -99,15 +104,14 @@ char		**ft_add_envi(char *line, t_main *main);
 extern void	rl_replace_line(const char *text, int clear_undo);
 
 // temporary
-char	*find_path(char *cmd, t_main *main);
-void 	check_built_in(char *cmd);
-void 	ft_exit(void);
-void	ft_cd(void);
-void	ft_env(void);
-void	ft_unset(void);
-void	ft_echo(void);
-void	ft_export(void);
-void	ft_pwd(void);
-
+char		*find_path(char *cmd, t_main *main);
+void		check_built_in(char *cmd);
+void		ft_exit(void);
+void		ft_cd(void);
+void		ft_env(void);
+void		ft_unset(void);
+void		ft_echo(void);
+void		ft_export(void);
+void		ft_pwd(void);
 
 #endif
