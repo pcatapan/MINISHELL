@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
+#    By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/07/05 19:17:23 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/07/06 11:13:08 by fgrossi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJC = $(SRC:%.c=%.o)
 
 CC = gcc
 
-USER = pcatapan
+USER = fgrossi
 
 #LDFLAGS = -L/opt/homebrew/opt/readline/lib
 #CPPFLAGS = -I/opt/homebrew/opt/readline/include

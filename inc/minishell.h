@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/05 19:32:18 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/06 13:02:54 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_main
 {
 	int				quotes;
 	char			**copy_env;
+	char			*path;
 	t_token			*token;
 }	t_main;
 
@@ -66,6 +67,7 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		**ft_split(char const *s, char *charset);
 char		*ft_strcat(char *dest, const char *src);
 char		*ft_strdup(const char *s1);
+char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		*ft_itoa(int n);
 void		ft_putendl_fd(char *s, int fd);
 size_t		ft_strlen(char *s);
@@ -95,5 +97,17 @@ int			ft_check_envi(char *line);
 char		**ft_add_envi(char *line, t_main *main);
 
 extern void	rl_replace_line(const char *text, int clear_undo);
+
+// temporary
+char	*find_path(char *cmd, t_main *main);
+void 	check_built_in(char *cmd);
+void 	ft_exit(void);
+void	ft_cd(void);
+void	ft_env(void);
+void	ft_unset(void);
+void	ft_echo(void);
+void	ft_export(void);
+void	ft_pwd(void);
+
 
 #endif
