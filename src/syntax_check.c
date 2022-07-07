@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 20:59:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/06 20:15:30 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/07 13:34:12 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ int	ft_check_brackets(char *line, t_main *main)
 		main->close_brackets++;
 		i++;
 	}
-	if (main->open_brackets > main->close_brackets && !main->error)
+	if (main->open_brackets > main->close_brackets)
 		ft_putendl_fd(RED ERROR_OPEN_BRACKETS COLOR_RES, STDOUT_FILENO);
-	else if (main->open_brackets < main->close_brackets && !main->error)
+	else if (main->open_brackets < main->close_brackets)
 		ft_putendl_fd(RED ERROR_CLOSE_BRACKETS COLOR_RES, STDOUT_FILENO);
 	return (i);
 }
@@ -111,7 +111,7 @@ void	ft_check_syntax(char *line, t_main *main)
 	main->dub_quotes = 0;
 	main->sin_quotes = 0;
 	ft_easy_synatx(line, main);
-	if (main->op_logic)
+	if (main->op_logic && !main->error)
 		ft_check_brackets(line, main);
 	if (ft_strchr(line, '=') == 1 && ft_check_envi(line) == 1)
 		main->copy_env = ft_add_envi(line, main);

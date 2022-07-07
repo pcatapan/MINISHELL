@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 19:10:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/06 19:31:11 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/07 14:14:07 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_main	*main;
-	t_token	*token;
+//	t_token	*token;
 
 	(void)argc;
 	(void)argv;
 	main = malloc(sizeof(t_main));
-	token = malloc(sizeof(t_token));
-	token->value = NULL;
+//	token = malloc(sizeof(t_token));
 	if (!main)
 		return (0);
 	main->copy_env = ft_init_envp(envp);

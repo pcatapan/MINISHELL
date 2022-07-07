@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/06 20:15:26 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:27:45 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,24 @@
 
 typedef struct s_token
 {
-	char			*token;
+	char			*command;
 	char			**value;
-	char			sep;
+	int				priority;
+	bool			res;
 	struct t_token	*next;
 	struct t_token	*prev;
 }	t_token;
 
 typedef struct s_main
 {
-	int			dub_quotes;
-	int			sin_quotes;
+	t_token		*token;
+	char		**copy_env;
+	bool		op_logic;
 	bool		error;
 	int			open_brackets;
 	int			close_brackets;
-	bool		op_logic;
-	char		**copy_env;
-	t_token		*token;
+	int			dub_quotes;
+	int			sin_quotes;
 }	t_main;
 
 // Dir utils
@@ -70,11 +71,14 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_searchstrchr(char const *str, char **array);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		**ft_split(char const *s, char *charset);
+char		**ft_split_original(char const *s, char c);
 char		*ft_strcat(char *dest, const char *src);
 char		*ft_strdup(const char *s1);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		*ft_itoa(int n);
 void		ft_putendl_fd(char *s, int fd);
+void		ft_lstadd_back(t_token **lst, t_token *new);
+t_token		*ft_lstnew(void *content);
 size_t		ft_strlen(char *s);
 
 // free.c
@@ -91,7 +95,6 @@ void		ft_sig_handel(int signal);
 void		ft_add_history(char *line, char **envp);
 
 // syntax_check.c
-void		ft_parsing(char *line);
 void		ft_check_syntax(char *line, t_main *main);
 int			ft_check_single_quote(char *line, t_main *main, int i);
 int			ft_check_double_quote(char *line, t_main *main, int i);
@@ -104,6 +107,7 @@ char		**ft_add_envi(char *line, t_main *main);
 extern void	rl_replace_line(const char *text, int clear_undo);
 
 // temporary
+void		ft_parsing(char *line, t_main *main);
 char		*find_path(char *cmd, t_main *main);
 void		check_built_in(char *cmd);
 void		ft_exit(void);

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:16:35 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/06 17:40:02 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:35:25 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,93 +38,116 @@ char	*find_path(char *cmd, t_main *main)
 	return (0);
 }
 
-void	ft_check_command(char *line, t_main *main)
+char	*ft_find_token(char *line, t_main *main)
 {
-	char	*path;
 	int		start;
+	char	*command;
+	t_token	*tmp;
 	int		end;
-	pid_t	pid;
 
 	start = 0;
 	end = 0;
-	pid = fork();
-	if (pid == -1)
-		exit(0);
-	if (pid == 0)
-	{
-		main->token->value = (char **)malloc(sizeof(char *) * 4);
-		if (!main->token->value)
-			return ;
-		while (line[start] == ' ')
-			start++;
-		while (line[start + end] != ' ' && line[start + end] != '\0')
-			end++;
-		// main->token->value dovrebbe essere riempito dallo split - Parsering
-		main->token->value[0] = ft_substr(line, start, end);
-		main->token->value[1] = ft_strdup("testo ' messaggio");
-		main->token->value[2] = ft_strdup("PROVA");
-		main->token->value[3] = NULL;
-		//check_built_in(main->token->value[0]);
-		path = find_path(main->token->value[0], main);
-		if (!path)
-			printf("ERRORE CON PATH IN PARSING --LINE 69\n");
-		if (execve(path, main->token->value, main->copy_env))
-			perror(main->token->value[1]);
-		exit(0);
-	}
+	while (line[start] == ' ')
+		start++;
+	while (line[start + end] != ' ' && line[start + end] != '\0')
+		end++;
+	command = ft_substr(line, start, end);
+	if (!main->token)
+		main->token = ft_lstnew(command);
 	else
-		waitpid(pid, NULL, 0);
+	{
+		tmp = ft_lstnew(command);
+		ft_lstadd_back(&main->token, tmp);
+		printf("Maledetto\n");
+	}
+	free(command);
+	return (&line[++end]);
 }
 
-void check_built_in(char *cmd)
+void	ft_set_values(char *line, t_main *main)
 {
-	if (ft_strcmp(cmd, "exit") == 1)
-		ft_exit();
-	if (ft_strcmp(cmd, "env") == 1)
-		ft_env();
-	if (ft_strcmp(cmd, "unset") == 1)
-		ft_unset();
-	if (ft_strcmp(cmd, "pwd") == 1)
-		ft_pwd();
-	if (ft_strcmp(cmd, "cd") == 1)
-		ft_cd();
-	if (ft_strcmp(cmd, "echo") == 1)
-		ft_echo();
-	if (ft_strcmp(cmd, "export") == 1)
-		ft_export();
+	char	*charset;
+	char	**tmp;
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		i = ft_check_single_quote(line, main, i);
+		i = ft_check_double_quote(line, main, i);
+		if (line[i] != 38 && line[i] != 59 && line[i] != 124)
+			i++;
+		else
+		{
+			count++;
+			i++;
+		}
+	}
+	tmp = (char **)malloc(sizeof(char *) * count);
+	if (!tmp)
+		return ;
+	
 }
 
-void ft_exit(void)
+//	"'; & | "
+void	ft_parsing(char *line, t_main *main)
 {
-	exit(1);
+	char	**tmp;
+	int		i;
+	char	*copy_line;
+
+	i = 0;
+	copy_line = ft_strdup(line);
+	while (line[i])
+	{
+		i = ft_check_single_quote(line, main, i);
+		i = ft_check_double_quote(line, main, i);
+		if (line[i] != 38 && line[i] != 59 && line[i] != 124)
+			i++;
+		else
+		{
+			line[i] = 127;
+			i++;
+		}
+	}
+	tmp = ft_split_original(line, 127);
+	i = -1;
+	while (tmp[++i])
+		ft_find_token(tmp[i], main);
+	i = -1;
+	while (main->token->value[++i])
+		printf("%s\n", main->token->value[i]);
+	//ft_set_values(tmp, main);
 }
 
-void ft_env(void)
+void	ft_check_command(char *line, t_main *main)
 {
-	exit(1);
-}
+	//char	*path;
+	//pid_t	pid;
 
-void ft_unset(void)
-{
-	exit(1);
-}
-
-void ft_pwd(void)
-{
-	exit(1);
-}
-
-void ft_cd(void)
-{
-	exit(1);
-}
-
-void ft_echo(void)
-{
-	exit(1);
-}
-
-void ft_export(void)
-{
-	exit(1);
+	ft_parsing(line, main);
+	// pid = fork();
+	// if (pid == -1)
+	// 	exit(0);
+	// if (pid == 0)
+	// {
+	// 	main->token->value = (char **)malloc(sizeof(char *) * 4);
+	// 	if (!main->token->value)
+	// 		return ;
+	// 	// main->token->value dovrebbe essere riempito dallo split - Parsering
+	// 	main->token->value[1] = ft_strdup("testo ' messaggio");
+	// 	main->token->value[2] = ft_strdup("PROVA");
+	// 	main->token->value[3] = NULL;
+	// 	//check_built_in(main->token->value[0]);
+	// 	path = find_path(main->token->value[0], main);
+	// 	if (!path)
+	// 		printf("ERRORE CON PATH IN PARSING --LINE 69\n");
+	// 	if (execve(path, main->token->value, main->copy_env))
+	// 		perror(main->token->value[1]);
+	// 	exit(0);
+	// }
+	// else
+	// 	waitpid(pid, NULL, 0);
 }
