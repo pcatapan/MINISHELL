@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 19:04:57 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/30 19:43:57 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/07 17:41:57 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,4 +123,13 @@ int	main(void)
 	// one[1] = "Messaggio";
 	// if (execve("pwd", one, envp))
 	// 	perror("TEST");
+}
+
+void	ft_print_lst(t_token *a)
+{
+	while (a)
+	{
+		printf("%s\n", a->command);
+		a = a->next;
+	}	
 }

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/07 16:27:45 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/07 17:55:10 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ typedef struct s_token
 	char			**value;
 	int				priority;
 	bool			res;
-	struct t_token	*next;
-	struct t_token	*prev;
+	struct s_token	*next;
+	struct s_token	*prev;
 }	t_token;
 
 typedef struct s_main
@@ -77,7 +77,7 @@ char		*ft_strdup(const char *s1);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		*ft_itoa(int n);
 void		ft_putendl_fd(char *s, int fd);
-void		ft_lstadd_back(t_token **lst, t_token *new);
+void		ft_lstcopy(t_token **lst, t_token *new);
 t_token		*ft_lstnew(void *content);
 size_t		ft_strlen(char *s);
 

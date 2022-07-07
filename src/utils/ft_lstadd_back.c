@@ -6,25 +6,45 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 14:47:41 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/07 16:22:30 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/07 17:57:04 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_lstadd_back(t_token **lst, t_token *new)
-{
-	t_token	*node;
+// void	ft_lstadd_back(t_token **lst, t_token *new)
+// {
+// 	t_token	*node;
 
-	if (!lst || !new)
-		return ;
-	node = *lst;
-	if (*lst == NULL)
+// 	if (!lst || !new)
+// 		return ;
+// 	node = *lst;
+// 	if (*lst == NULL)
+// 	{
+// 		*lst = new;
+// 		return ;
+// 	}
+// 	while (node->next != NULL)
+// 		node = node->next;
+// 	node->next = new;
+// }
+
+static t_token	*ft_lstlast(t_token *lst)
+{
+	while (lst != NULL)
 	{
-		*lst = new;
-		return ;
+		if (lst->next == NULL)
+			return (lst);
+		lst = lst->next;
 	}
-	while (node->next != NULL)
-		node = node->next;
-	node->next = new;
+	return (lst);
+}
+
+/*
+Create a funcion that copy a node and set this node withe 
+the next e the prev the old node
+*/
+void	ft_lstcopy(t_token **lst, t_token *new)
+{
+	;
 }

@@ -6,11 +6,25 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:16:35 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/07 16:35:25 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/07 18:00:04 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	ft_print_lst(t_token *a)
+{
+	while (a)
+	{
+		printf("%s\n", a->command);
+		a = a->next;
+	}	
+}
+
+void	ft_test(t_main *main)
+{
+	ft_print_lst(main->token);
+}
 
 char	*find_path(char *cmd, t_main *main)
 {
@@ -38,32 +52,7 @@ char	*find_path(char *cmd, t_main *main)
 	return (0);
 }
 
-char	*ft_find_token(char *line, t_main *main)
-{
-	int		start;
-	char	*command;
-	t_token	*tmp;
-	int		end;
-
-	start = 0;
-	end = 0;
-	while (line[start] == ' ')
-		start++;
-	while (line[start + end] != ' ' && line[start + end] != '\0')
-		end++;
-	command = ft_substr(line, start, end);
-	if (!main->token)
-		main->token = ft_lstnew(command);
-	else
-	{
-		tmp = ft_lstnew(command);
-		ft_lstadd_back(&main->token, tmp);
-		printf("Maledetto\n");
-	}
-	free(command);
-	return (&line[++end]);
-}
-
+//Dovrebbe servire per salvare tutti i ritorini della funzione precedente nel token->value
 void	ft_set_values(char *line, t_main *main)
 {
 	char	*charset;
@@ -88,10 +77,33 @@ void	ft_set_values(char *line, t_main *main)
 	tmp = (char **)malloc(sizeof(char *) * count);
 	if (!tmp)
 		return ;
-	
 }
 
-//	"'; & | "
+char	*ft_find_token(char *line, t_main *main)
+{
+	int		start;
+	char	*command;
+	t_token	*tmp;
+	int		end;
+
+	start = 0;
+	end = 0;
+	while (line[start] == ' ')
+		start++;
+	while (line[start + end] != ' ' && line[start + end] != '\0')
+		end++;
+	command = ft_substr(line, start, end);
+	if (!main->token)
+		main->token = ft_lstnew(command);
+	else
+	{
+		tmp = ft_lstnew(command);
+		ft_lstcopy(&main->token, tmp);
+	}
+	free(command);
+	return (&line[++end]);
+}
+
 void	ft_parsing(char *line, t_main *main)
 {
 	char	**tmp;
@@ -100,6 +112,8 @@ void	ft_parsing(char *line, t_main *main)
 
 	i = 0;
 	copy_line = ft_strdup(line);
+	// Questo while preparo lo split, mettendo il 127 sui caratteri da splittare
+	// Si potrebbe provare con un numero negativo, in questo modo non bisogna copiare la line
 	while (line[i])
 	{
 		i = ft_check_single_quote(line, main, i);
@@ -114,11 +128,14 @@ void	ft_parsing(char *line, t_main *main)
 	}
 	tmp = ft_split_original(line, 127);
 	i = -1;
+	main->token = NULL;
+	// Questo while salva tutta i comandi.
 	while (tmp[++i])
 		ft_find_token(tmp[i], main);
+	ft_test(main);
 	i = -1;
-	while (main->token->value[++i])
-		printf("%s\n", main->token->value[i]);
+	// while (main->token->value[++i])
+	// 	printf("%s\n", main->token->value[i]);
 	//ft_set_values(tmp, main);
 }
 
