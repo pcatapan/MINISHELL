@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/07 17:55:10 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/10 19:32:16 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define ERROR_BACKSLASH "Mistake : find the '\\'"
 # define ERROR_OPEN_BRACKETS "Mistake : find open brackets exstra"
 # define ERROR_CLOSE_BRACKETS "Mistake : find close brackets exstra"
+# define ERROR_OP_LOGIC "Syntax error near unexpected token"
 
 typedef struct s_token
 {
@@ -76,8 +77,9 @@ char		*ft_strcat(char *dest, const char *src);
 char		*ft_strdup(const char *s1);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		*ft_itoa(int n);
-void		ft_putendl_fd(char *s, int fd);
+void		ft_lstadd_back(t_token **lst, t_token *new);
 void		ft_lstcopy(t_token **lst, t_token *new);
+void		ft_putendl_fd(char *s, int fd);
 t_token		*ft_lstnew(void *content);
 size_t		ft_strlen(char *s);
 

@@ -6,28 +6,29 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 14:47:41 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/07 17:57:04 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/10 19:46:07 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-// void	ft_lstadd_back(t_token **lst, t_token *new)
-// {
-// 	t_token	*node;
+void	ft_lstadd_back(t_token **lst, t_token *new)
+{
+	t_token	*node;
 
-// 	if (!lst || !new)
-// 		return ;
-// 	node = *lst;
-// 	if (*lst == NULL)
-// 	{
-// 		*lst = new;
-// 		return ;
-// 	}
-// 	while (node->next != NULL)
-// 		node = node->next;
-// 	node->next = new;
-// }
+	if (!lst || !new)
+		return ;
+	node = *lst;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	while (node->next != NULL)
+		node = node->next;
+	node->next = new;
+	new->prev = node;
+}
 
 static t_token	*ft_lstlast(t_token *lst)
 {
