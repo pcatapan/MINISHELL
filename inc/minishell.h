@@ -44,6 +44,8 @@ typedef struct s_token
 	char			*command;
 	char			**value;
 	int				priority;
+	bool			or;
+	bool			and;
 	bool			res;
 	struct s_token	*next;
 	struct s_token	*prev;

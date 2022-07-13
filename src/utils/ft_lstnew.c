@@ -20,9 +20,11 @@ t_token	*ft_lstnew(void *content)
 	if (!nlist)
 		return (NULL);
 	nlist->command = ft_strdup(content);
-	nlist->value = NULL;
 	nlist->priority = 0;
+	nlist->or = false;
+	nlist->and = false;
 	nlist->res = false;
+	nlist->value = NULL;
 	nlist->next = NULL;
 	nlist->prev = NULL;
 	return (nlist);

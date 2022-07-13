@@ -24,7 +24,7 @@ void	ft_lstadd_back(t_token **lst, t_token *new)
 		*lst = new;
 		return ;
 	}
-	while (node->next != NULL)
+	while (node->next)
 		node = node->next;
 	node->next = new;
 	new->prev = node;

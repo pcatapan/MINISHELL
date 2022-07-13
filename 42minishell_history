@@ -1,0 +1,4 @@
+echo "testo " 55 66 && pwd && cd path
+
+echo "testo " 55 66 && pwd || cd path
+

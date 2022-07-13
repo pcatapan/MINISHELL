@@ -74,15 +74,18 @@ void	ft_check_operetor_logic(char *line, t_main *main)
 	{
 		i = ft_check_double_quote(line, main, i);
 		i = ft_check_single_quote(line, main, i);
-		if (line[i] == '&' && line[i + 1] == '&' && line[i + 2] != '&')
-			i++;
-		else if (line[i] == '|' && line[i + 1] == '|' && line[i + 2] != '|')
-			i++;
-		else
+		if (line[i] == '&' || line[i] =='|')
 		{
-			ft_putendl_fd(RED ERROR_OP_LOGIC COLOR_RES, STDOUT_FILENO);
-			main->error = true;
-			break ;
+			if (line[i + 1] == '&' && line[i + 2] != '&')
+				i++;
+			else if (line[i + 1] == '|' && line[i + 2] != '|')
+				i++;
+			else
+			{
+				ft_putendl_fd(RED ERROR_OP_LOGIC COLOR_RES, STDOUT_FILENO);
+				main->error = true;
+				break ;
+			}
 		}
 		i++;
 	}
@@ -95,8 +98,8 @@ void	ft_check_syntax(char *line, t_main *main)
 	main->dub_quotes = 0;
 	main->sin_quotes = 0;
 	ft_easy_synatx(line, main);
-	// if (!main->error)
-	// 	ft_check_operetor_logic(line, main);
+	if (!main->error)
+		ft_check_operetor_logic(line, main);
 	if (main->op_logic && !main->error)
 		ft_check_brackets(line, main);
 	if (ft_strchr(line, '=') == 1 && ft_check_envi(line) == 1 && !main->error)

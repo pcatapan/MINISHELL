@@ -12,6 +12,17 @@
 
 #include "../inc/minishell.h"
 
+t_token	*ft_return_head(t_token *list)
+{
+	while (list)
+	{
+		list = list->prev;
+		if (!list->prev)
+			break ;
+	}
+	return (list);
+}
+
 void	ft_print_lst(t_token *a)
 {
 	int	i;
@@ -20,13 +31,8 @@ void	ft_print_lst(t_token *a)
 		a = a->prev;
 	while (a)
 	{
-		i = 0;
-		printf("%s --- Command\n", a->command);
-		while (a->value[i])
-		{
-			printf("%s --- Values %d\n", a->value[i], i);
-			i++;
-		}
+		printf("%d\n", a->and);
+		printf("%d\n", a->or);
 		a = a->next;
 	}	
 }
@@ -44,12 +50,8 @@ char	*find_path(char *cmd, t_main *main)
 	char	*part_path;
 
 	i = 0;
-	// Non trova path nel copy_env
 	while (ft_strncmp("PATH=", main->copy_env[i], 5))
-	{
-		printf("%s\n", main->copy_env[i]);
 		i++;
-	}
 	paths = ft_split(main->copy_env[i] + 5, ":");
 	i = 0;
 	while (paths[i])
@@ -66,26 +68,85 @@ char	*find_path(char *cmd, t_main *main)
 	return (0);
 }
 
-void	ft_set_values(char **line, t_main *main)
+int	ft_count_array(char *line, t_main *main)
 {
 	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		if (line[i] == 39 || line[i] == 34)
+			count++;
+		i = ft_check_double_quote(line, main, i);
+		i = ft_check_single_quote(line, main, i);
+		if (line[i] != 32 && line[i - 1] == 32)
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+void	ft_divide_line(char *line, t_main *main)
+{
+	int		count;
+	int		i;
+	char	**tmp;
+
+	i = -1;
+	count = ft_count_array(line, main);
+	while (line[++i])
+	{
+		i = ft_check_double_quote(line, main, i);
+		i = ft_check_single_quote(line, main, i);
+		if (line[i] == 32)
+			line[i] = 127;
+	}
+	i = -1;
+	while (line[++i])
+	{
+		if (line[i] == 34 || line[i] == 39)
+			line[i] = 127;
+	}
+	tmp = ft_split_original(line, 127);
+	i = 0;
+	while (tmp[i])
+	{
+		main->token->value[i + 1] = ft_strdup(tmp[i]);
+		i++;
+	}
+	main->token->value[i + 1] = NULL;
+}
+
+void	ft_set_values(char **line, t_main *main)
+{
 	int	j;
 
 	j = 0;
 	while (main->token)
 	{
-		i = 0;
-		main->token->value = (char **)malloc(sizeof(char *) * 3);
-		main->token->value[i++] = ft_strdup(main->token->command);
+		main->token->value = (char **)malloc(sizeof(char *) * \
+							(ft_count_array(line[j], main) + 2));
+		main->token->value[0] = ft_strdup(main->token->command);
 		free(main->token->command);
 		main->token->command = find_path(main->token->value[0], main);
-		main->token->value[i++] = ft_strdup(line[j]);
-		main->token->value[i] = NULL;
+		ft_divide_line(line[j], main);
 		if (!main->token->next)
 			break ;
 		main->token = main->token->next;
 		j++;
 	}
+	main->token = ft_return_head(main->token);
+	// while (main->token)
+	// {
+	// 	j = -1;
+	// 	while (main->token->value[++j])
+	// 		printf("%s\n", main->token->value[j]);
+	// 	if (!main->token->next)
+	// 		break ;
+	// 	main->token = main->token->next;
+	// }
 }
 
 char	*ft_find_token(char *line, t_main *main)
@@ -107,6 +168,31 @@ char	*ft_find_token(char *line, t_main *main)
 		ft_lstadd_back(&main->token, ft_lstnew(command));
 	free(command);
 	return (&line[++end]);
+}
+
+void	ft_set_op_logic(char *line, t_token *token)
+{
+	int	i;
+
+	i = 0;
+	while (token)
+	{
+		while (line[i])
+		{
+			if(line[i] == '&' || line[i] =='|')
+				break ;
+			i++;
+		}
+		i++;
+		if (line[i] == '&')
+			token->and = true;
+		else if (line[i] == '|')
+			token->or = true;
+		i++;
+		if(!token->next)
+			break;
+		token = token->next;
+	}
 }
 
 void	ft_parsing(char *line, t_main *main)
@@ -135,17 +221,21 @@ void	ft_parsing(char *line, t_main *main)
 		}
 	}
 	tmp = ft_split_original(line, 127);
-	tmp_value = (char **)malloc(sizeof(char *) * (count + 1));
+	tmp_value = (char **)malloc(sizeof(char *) * (count + 2));
 	i = -1;
 	main->token = NULL;
-	// Questo while salva tutta i comandi.
+	// Questo while salva tutti i comandi.
 	while (tmp[++i])
 		tmp_value[i] = ft_find_token(tmp[i], main);
 	tmp_value[i] = NULL;
+	// i = -1;
+	// while (tmp_value[++i])
+	// 	printf("%s --- TMP VALUE\n", tmp_value[i]);
+	// ft_free_matrix(tmp);
 	ft_set_values(tmp_value, main);
-	ft_free_matrix(tmp);
+	ft_set_op_logic(copy_line, main->token);
 	//ft_free_matrix(tmp_value);
-	ft_test(main);
+	// ft_test(main);
 }
 
 void	ft_check_command(char *line, t_main *main)
@@ -153,18 +243,18 @@ void	ft_check_command(char *line, t_main *main)
 	pid_t	pid;
 
 	ft_parsing(line, main);
-	pid = fork();
-	if (pid == -1)
-		exit(0);
-	if (pid == 0)
-	{
-		//check_built_in(main->token->value[0]);
-		if (!main->token->command)
-			printf("ERRORE CON PATH IN PARSING --LINE 159\n");
-		if (execve(main->token->command, main->token->value, main->copy_env))
-			perror(main->token->value[0]);
-		exit(0);
-	}
-	else
-		waitpid(pid, NULL, 0);
+	// pid = fork();
+	// if (pid == -1)
+	// 	exit(0);
+	// if (pid == 0)
+	// {
+	// 	//check_built_in(main->token->value[0]);
+	// 	if (!main->token->command)
+	// 		printf("ERRORE CON PATH IN PARSING --LINE 159\n");
+	// 	if (execve(main->token->command, main->token->value, main->copy_env))
+	// 		perror(main->token->value[0]);
+	// 	exit(0);
+	// }
+	// else
+	// 	waitpid(pid, NULL, 0);
 }

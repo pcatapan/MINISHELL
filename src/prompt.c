@@ -95,14 +95,15 @@ int	ft_prompt(char **envp, t_main *main)
 	line = ft_get_line_input(envp);
 	if (!line)
 	{
-		printf("\t%sexit\n", RED);
+		printf(RED "\texit\n" COLOR_RES);
 		exit(0);
 	}
 	else if (line[0] != '\0')
 	{
 		ft_add_history(line, envp);
 		ft_check_syntax(line, main);
-		ft_check_command(line, main);
+		if (!main->error)
+			ft_check_command(line, main);
 	}
 	return (0);
 }
