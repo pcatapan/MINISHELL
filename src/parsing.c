@@ -221,7 +221,7 @@ void	ft_parsing(char *line, t_main *main)
 		}
 	}
 	tmp = ft_split_original(line, 127);
-	tmp_value = (char **)malloc(sizeof(char *) * (count + 2));
+	tmp_value = (char **)malloc(sizeof(char *) * (count + 1));
 	i = -1;
 	main->token = NULL;
 	// Questo while salva tutti i comandi.
@@ -243,6 +243,14 @@ void	ft_check_command(char *line, t_main *main)
 	pid_t	pid;
 
 	ft_parsing(line, main);
+	main->token = ft_return_head(main->token);
+	while (main->token)
+	{
+		ft_print_lst(main->token);
+		if (!main->token->next)
+			break ;
+		main->token = main->token->next;
+	}
 	// pid = fork();
 	// if (pid == -1)
 	// 	exit(0);
