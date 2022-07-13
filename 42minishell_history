@@ -1,1 +1,1 @@
-echo messaggio && (pwd && pwd && echo "messaggio        1" 55 ) && echo testo || ls
+echo "questa 'prova"

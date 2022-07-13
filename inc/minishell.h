@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/10 19:32:16 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/13 18:00:10 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ extern void	rl_replace_line(const char *text, int clear_undo);
 // temporary
 void		ft_parsing(char *line, t_main *main);
 char		*find_path(char *cmd, t_main *main);
-void		check_built_in(char *cmd);
+void		check_built_in(t_main *main);
 void		ft_exit(void);
 void		ft_cd(void);
 void		ft_env(void);

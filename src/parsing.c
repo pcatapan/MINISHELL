@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:16:35 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/10 20:56:45 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/13 18:10:28 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,30 +88,51 @@ int	ft_count_array(char *line, t_main *main)
 	return (count);
 }
 
+char	*ft_clear_value(char *str)
+{
+	int	start;
+	int	end;
+	int	i;
+
+	start = 0;
+	end = 0;
+	i = 0;
+	if (str[0] == 34 || str[0] == 39)
+		start = 1;
+	while (str[i + start])
+		i++;
+	if (str[i] == 34 || str[i] == 39)
+		end = i - 1;
+	return (ft_substr(str, start, end));
+}
+
 void	ft_divide_line(char *line, t_main *main)
 {
 	int		i;
 	char	**tmp;
+	char	*tmp_comand;
 
 	i = -1;
 	while (line[++i])
 	{
 		i = ft_check_double_quote(line, main, i);
 		i = ft_check_single_quote(line, main, i);
-		if (line[i] == 32)
+		if (line[i] == 32 || line[i] == 41)
 			line[i] = 127;
 	}
-	i = -1;
-	while (line[++i])
-	{
-		if (line[i] == 34 || line[i] == 39)
-			line[i] = 127;
-	}
+	// i = -1;
+	// while (line[++i])
+	// {
+	// 	if (line[i] == 34 || line[i] == 39)
+	// 		line[i] = 127;
+	// }
 	tmp = ft_split_original(line, 127);
 	i = 0;
 	while (tmp[i])
 	{
-		main->token->value[i + 1] = ft_strdup(tmp[i]);
+		tmp_comand = ft_strdup(tmp[i]);
+		main->token->value[i + 1] = ft_clear_value(tmp_comand);
+		free(tmp_comand);
 		i++;
 	}
 	main->token->value[i + 1] = NULL;
@@ -132,6 +153,7 @@ void	ft_set_values(char **line, t_main *main)
 		main->token->value = (char **)malloc(sizeof(char *) * \
 							(ft_count_array(line[j], main) + 2));
 		main->token->value[0] = ft_strdup(main->token->command);
+		printf("%s -- Value in ft_set_values\n", main->token->value[0]);
 		free(main->token->command);
 		main->token->command = find_path(main->token->value[0], main);
 		ft_divide_line(line[j], main);
@@ -165,7 +187,7 @@ char	*ft_find_token(char *line, t_main *main)
 
 	start = 0;
 	end = 0;
-	while (line[start] == ' ')
+	while (line[start] == ' ' || line[start] == '(')
 		start++;
 	while (line[start + end] != ' ' && line[start + end] != '\0')
 		end++;
@@ -187,7 +209,7 @@ void	ft_set_op_logic(char *line, t_token *token)
 	{
 		while (line[i])
 		{
-			if(line[i] == '&' || line[i] =='|')
+			if (line[i] == '&' || line[i] == '|')
 				break ;
 			i++;
 		}
@@ -197,8 +219,39 @@ void	ft_set_op_logic(char *line, t_token *token)
 		else if (line[i] == '|')
 			token->or = true;
 		i++;
-		if(!token->next)
-			break;
+		if (!token->next)
+			break ;
+		token = token->next;
+	}
+}
+
+void	ft_set_priority(char *line, t_token *token, int brack)
+{
+	int		i;
+	bool	first;
+
+	i = 0;
+	first = true;
+	while (token)
+	{
+		while (line[i])
+		{
+			if (line[i] == '(' && first)
+				token->priority = brack;
+			else if (line[i] == '(' && !first)
+				ft_set_priority(&line[i], token, brack + 1);
+			else if (line[i] == ')' && line[i + 1])
+				ft_set_priority(&line[i], token, brack - 1);
+			if (line[i++] == '&' || line[i] == '|')
+				break ;
+			i++;
+		}
+		printf("%s -- Comand\n", token->value[0]);
+		//i += 2;
+		token->priority = brack;
+		i++;
+		if (!token->next)
+			break ;
 		token = token->next;
 	}
 }
@@ -242,6 +295,7 @@ void	ft_parsing(char *line, t_main *main)
 	// ft_free_matrix(tmp);
 	ft_set_values(tmp_value, main);
 	ft_set_op_logic(copy_line, main->token);
+	ft_set_priority(copy_line, main->token, 1);
 	//ft_free_matrix(tmp_value);
 	// ft_test(main);
 }
@@ -252,7 +306,6 @@ void	ft_check_command(char *line, t_main *main)
 
 	ft_parsing(line, main);
 	main->token = ft_return_head(main->token);
-	printf("TOTTI\n");
 	while (main->token)
 	{
 		ft_print_lst(main->token);
