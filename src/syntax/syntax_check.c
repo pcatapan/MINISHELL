@@ -78,7 +78,7 @@ void	ft_check_operetor_logic(char *line, t_main *main)
 		{
 			if (line[i + 1] == '&' && line[i + 2] != '&')
 				i++;
-			else if (line[i + 1] == '|' && line[i + 2] != '|')
+			else if ((line[i + 1] == '|' || line[i + 1] != '|')&& line[i + 2] != '|')
 				i++;
 			else
 			{

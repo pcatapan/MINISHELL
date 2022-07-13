@@ -16,9 +16,9 @@ t_token	*ft_return_head(t_token *list)
 {
 	while (list)
 	{
-		list = list->prev;
 		if (!list->prev)
 			break ;
+		list = list->prev;
 	}
 	return (list);
 }
@@ -27,14 +27,14 @@ void	ft_print_lst(t_token *a)
 {
 	int	i;
 
-	while (a->prev != NULL)
-		a = a->prev;
-	while (a)
-	{
-		printf("%d\n", a->and);
-		printf("%d\n", a->or);
-		a = a->next;
-	}	
+	printf("%s --- Comand\n", a->command);
+	i = -1;
+	while (a->value[++i])
+		printf("%s --- Value %d\n", a->value[i], i);
+	printf("%d -- Priority\n", a->priority);
+	printf("%d -- Bool Res\n", a->res);
+	printf("%d -- Bool And\n", a->and);
+	printf("%d -- Bool Or\n", a->or);
 }
 
 void	ft_test(t_main *main)
@@ -90,12 +90,10 @@ int	ft_count_array(char *line, t_main *main)
 
 void	ft_divide_line(char *line, t_main *main)
 {
-	int		count;
 	int		i;
 	char	**tmp;
 
 	i = -1;
-	count = ft_count_array(line, main);
 	while (line[++i])
 	{
 		i = ft_check_double_quote(line, main, i);
@@ -119,6 +117,11 @@ void	ft_divide_line(char *line, t_main *main)
 	main->token->value[i + 1] = NULL;
 }
 
+/*
+Aggiungere funzione per settare priorita, ideale prima dello strudup
+prima di passare a path bisogna pulire il paramentro da eventuali '('
+come chiuderla?
+*/
 void	ft_set_values(char **line, t_main *main)
 {
 	int	j;
@@ -149,6 +152,11 @@ void	ft_set_values(char **line, t_main *main)
 	// }
 }
 
+/*
+Altra ipotesi per gestire le () farle saltre sullo start e end
+successivamnte andare a fare check sulla copy, come fatto con gli op_logic
+!Soluzione che al momento mi sembra la migliore
+*/
 char	*ft_find_token(char *line, t_main *main)
 {
 	int		start;
@@ -244,6 +252,7 @@ void	ft_check_command(char *line, t_main *main)
 
 	ft_parsing(line, main);
 	main->token = ft_return_head(main->token);
+	printf("TOTTI\n");
 	while (main->token)
 	{
 		ft_print_lst(main->token);

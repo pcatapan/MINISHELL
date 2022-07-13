@@ -1,4 +1,1 @@
-echo "testo " 55 66 && pwd && cd path
-
-echo "testo " 55 66 && pwd || cd path
-
+echo messaggio && (pwd && pwd && echo "messaggio        1" 55 ) && echo testo || ls
