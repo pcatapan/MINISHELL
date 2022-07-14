@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/13 18:00:10 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/14 05:36:21 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_token
 	bool			or;
 	bool			and;
 	bool			res;
+	struct s_main	*main;
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
@@ -63,7 +64,7 @@ typedef struct s_main
 	int			sin_quotes;
 }	t_main;
 
-// Dir utils
+// DIR Utils
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_strchr(const char *s, int c);
 int			ft_strcmp(char *s1, char *s2);
@@ -98,7 +99,7 @@ void		ft_sig_handel(int signal);
 // history.c
 void		ft_add_history(char *line, char **envp);
 
-// syntax_check.c
+// DIR syntax_check
 void		ft_check_syntax(char *line, t_main *main);
 int			ft_check_single_quote(char *line, t_main *main, int i);
 int			ft_check_double_quote(char *line, t_main *main, int i);
@@ -108,11 +109,18 @@ void		ft_check_command(char *line, t_main *main);
 int			ft_check_envi(char *line);
 char		**ft_add_envi(char *line, t_main *main);
 
+// DIR Parsing
+void		ft_parsing(char *line, t_main *main);
+char		*ft_find_token(char *line, t_main *main);
+void		ft_set_op_logic(char *line, t_token *token);
+void		ft_set_values(char **line, t_main *main);
+void		ft_set_priority(char *line, t_main *main, int brack);
+t_token		*ft_return_head(t_token *list);
+char		*find_path(char *cmd, t_main *main);
+
 extern void	rl_replace_line(const char *text, int clear_undo);
 
 // temporary
-void		ft_parsing(char *line, t_main *main);
-char		*find_path(char *cmd, t_main *main);
 void		check_built_in(t_main *main);
 void		ft_exit(void);
 void		ft_cd(void);
@@ -121,5 +129,6 @@ void		ft_unset(void);
 void		ft_echo(void);
 void		ft_export(void);
 void		ft_pwd(void);
+void		ft_print_lst(t_token *a);
 
 #endif

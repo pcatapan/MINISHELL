@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 20:59:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/10 19:22:06 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/14 06:00:08 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,12 @@ void	ft_check_operetor_logic(char *line, t_main *main)
 	{
 		i = ft_check_double_quote(line, main, i);
 		i = ft_check_single_quote(line, main, i);
-		if (line[i] == '&' || line[i] =='|')
+		if (line[i] == '&' || line[i] == '|')
 		{
 			if (line[i + 1] == '&' && line[i + 2] != '&')
 				i++;
-			else if ((line[i + 1] == '|' || line[i + 1] != '|')&& line[i + 2] != '|')
+			else if ((line[i + 1] == '|' || line[i + 1] != '|') \
+					&& line[i + 2] != '|')
 				i++;
 			else
 			{
@@ -89,7 +90,6 @@ void	ft_check_operetor_logic(char *line, t_main *main)
 		}
 		i++;
 	}
-
 }
 
 void	ft_check_syntax(char *line, t_main *main)

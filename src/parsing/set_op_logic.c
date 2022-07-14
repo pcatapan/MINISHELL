@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_double_quote.c                               :+:      :+:    :+:   */
+/*   set_op_logic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/10 18:54:17 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/14 03:20:08 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/07/13 23:59:43 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/07/14 00:00:02 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	ft_check_double_quote(char *line, t_main *main, int i)
+void	ft_set_op_logic(char *line, t_token *token)
 {
-	if (line[i] == '"')
+	int	i;
+
+	i = 0;
+	while (token)
 	{
-		main->dub_quotes++;
-		i++;
 		while (line[i])
 		{
-			if (line[i] == '"' && line[i - 1] != 92)
-			{
-				main->dub_quotes++;
-				i++;
+			if (line[i] == '&' || line[i] == '|')
 				break ;
-			}
 			i++;
 		}
+		i++;
+		if (line[i] == '&')
+			token->and = true;
+		else if (line[i] == '|')
+			token->or = true;
+		i++;
+		if (!token->next)
+			break ;
+		token = token->next;
 	}
-	return (i);
 }
