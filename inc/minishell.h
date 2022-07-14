@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/14 05:36:21 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/14 19:21:25 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,13 @@ int			ft_check_envi(char *line);
 char		**ft_add_envi(char *line, t_main *main);
 
 // DIR Parsing
-void		ft_parsing(char *line, t_main *main);
+char		*find_path(char *cmd, t_main *main);
 char		*ft_find_token(char *line, t_main *main);
+void		ft_parsing(char *line, t_main *main);
 void		ft_set_op_logic(char *line, t_token *token);
 void		ft_set_values(char **line, t_main *main);
 void		ft_set_priority(char *line, t_main *main, int brack);
 t_token		*ft_return_head(t_token *list);
-char		*find_path(char *cmd, t_main *main);
 
 extern void	rl_replace_line(const char *text, int clear_undo);
 

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:16:35 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/14 05:58:54 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/14 20:55:05 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,49 @@ void	ft_parsing(char *line, t_main *main)
 	ft_set_priority(copy_line, main, 0);
 }
 
+int	ft_change_var_in_dollar(char *line, int i, t_main *main)
+{
+	char	*var;
+	char	*tmp;
+	int		end;
+	int		start;
+
+	end = 0;
+	start = i + 1;
+	while (line[++i] != 32)
+		end++;
+	tmp = ft_substr(line, start, end);
+	var = ft_strjoin(tmp, "=");
+	free(tmp);
+	tmp = ft_searchstrchr(var, main->copy_env);
+	free(var);
+	return (i);
+}
+
+void	ft_expand_dollar(char *line, t_main *main)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '"')
+		{
+			while (line[++i])
+			{
+				if (line[i] == '$')
+					i = ft_change_var_in_dollar(line, i, main);
+			}
+		}
+		i++;
+	}
+}
+
 void	ft_check_command(char *line, t_main *main)
 {
 	pid_t	pid;
 
+	ft_expand_dollar(line, main);
 	ft_parsing(line, main);
 	main->token = ft_return_head(main->token);
 	while (main->token)

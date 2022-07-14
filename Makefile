@@ -6,7 +6,7 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/07/13 23:55:50 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/07/14 19:54:37 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJC = $(SRC:%.c=%.o)
 
 CC = gcc
 
-USER = evento
+USER = pcatapan
 
 #LDFLAGS = -L/opt/homebrew/opt/readline/lib
 #CPPFLAGS = -I/opt/homebrew/opt/readline/include
