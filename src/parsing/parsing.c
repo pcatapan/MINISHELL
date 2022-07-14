@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:16:35 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/14 20:55:05 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/14 21:05:28 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ void	ft_parsing(char *line, t_main *main)
 	ft_set_priority(copy_line, main, 0);
 }
 
+/*
+In tmp ho la cosa con cui sostituire
+In var ho la parte del str da sostituire
+ora bisogna ricreare la str e inserire  il tmp al posto del var
+*/
 int	ft_change_var_in_dollar(char *line, int i, t_main *main)
 {
 	char	*var;
