@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:16:35 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/14 21:05:28 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/15 23:28:30 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,12 @@ void	ft_check_command(char *line, t_main *main)
 	// 	exit(0);
 	// if (pid == 0)
 	// {
-	// 	//check_built_in(main->token->value[0]);
+	// 	// check_built_in(main->token->value[0]);
 	// 	if (!main->token->command)
 	// 		printf("ERRORE CON PATH IN PARSING --LINE 159\n");
+	//	// Inserire controllo per i path errati "If command == NULL"
+	//	// Cambiare l'outpt della execve
+	//	// Implementare Pipex 
 	// 	if (execve(main->token->command, main->token->value, main->copy_env))
 	// 		perror(main->token->value[0]);
 	// 	exit(0);

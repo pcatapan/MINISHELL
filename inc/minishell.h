@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/14 19:21:25 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/07/15 23:22:52 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ typedef struct s_token
 	char			*command;
 	char			**value;
 	int				priority;
+	// bool per here_doc
+	// char *parola di stop
+	// bool pipe
+	// char *res_str
 	bool			or;
 	bool			and;
 	bool			res;
