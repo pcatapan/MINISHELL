@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/15 23:22:52 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/09/30 12:58:54 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_main
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_strchr(const char *s, int c);
 int			ft_strcmp(char *s1, char *s2);
+int			ft_lstsize(t_token *lst_or);
 int			ft_atoi(const char *str);
 int			ft_isalnum(int c);
 int			ft_isalpha(int c);

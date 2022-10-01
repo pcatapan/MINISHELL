@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:00:25 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/14 05:42:42 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/09/29 01:02:39 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,23 @@
 char	**ft_utils_set_priority(char *line, t_main *main)
 {
 	int	i;
+	char *dup;
 
 	i = 0;
-	while (line[i])
+	dup = ft_strdup(line);
+	while (dup[i])
 	{
-		i = ft_check_single_quote(line, main, i);
-		i = ft_check_double_quote(line, main, i);
-		if (line[i] != 38 && line[i] != 59 && line[i] != 124 && line[i])
+		i = ft_check_single_quote(dup, main, i);
+		i = ft_check_double_quote(dup, main, i);
+		if (dup[i] != 38 && dup[i] != 59 && dup[i] != 124 && dup[i])
 			i++;
-		else if (line[i])
+		else if (dup[i])
 		{
-			line[i] = 127;
+			dup[i] = 127;
 			i++;
 		}
 	}
-	return (ft_split_original(line, 127));
+	return (ft_split_original(dup, 127));
 }
 
 void	ft_set_priority(char *line, t_main *main, int brack)
@@ -56,6 +58,7 @@ void	ft_set_priority(char *line, t_main *main, int brack)
 				break ;
 			}
 		}
-		main->token = main->token->next;
+		if (main->token->next)
+			main->token = main->token->next;
 	}
 }

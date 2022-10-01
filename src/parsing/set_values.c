@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:57:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/14 03:07:06 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/09/29 00:55:12 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,10 @@ void	ft_set_values(char **line, t_main *main)
 		free(token->command);
 		token->command = find_path(token->value[0], main);
 		ft_divide_line(line[j], token, main);
-		token = token->next;
+		if (token->next)
+			token = token->next;
+		else
+			break;
 		j++;
 	}
 }

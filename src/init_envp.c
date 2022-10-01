@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/06 17:12:02 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/09/28 20:31:07 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	ft_add_shell_env(char **copy_envp, char **envp, int i)
 /**
  * @brief Copy all parameter of variable envp
  * 
- * @param copy_envp 	The copy of envp, where save the date
  * @param envp			The original envp
+ * @return copy_envp 	The copy of envp, where save the date
  */
 char	**ft_init_envp(char **envp)
 {
