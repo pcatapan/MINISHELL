@@ -23,7 +23,7 @@ t_token	*ft_lstnew(void *content)
 	nlist->priority = 0;
 	nlist->or = false;
 	nlist->and = false;
-	nlist->res = false;
+	nlist->res = 0;
 	nlist->value = NULL;
 	nlist->next = NULL;
 	nlist->prev = NULL;

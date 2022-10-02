@@ -24,9 +24,9 @@ void	ft_add_history(char *line, char **envp)
 	free(tmp);
 	fd = open(path, O_APPEND | O_WRONLY | O_CREAT, S_IRWXU | S_IRGRP | S_IROTH);
 	free(path);
+	add_history(line);
 	if (fd < 0)
 		return ;
 	ft_putendl_fd(line, fd);
 	close(fd);
-	add_history(line);
 }

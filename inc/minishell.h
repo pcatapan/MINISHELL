@@ -50,7 +50,7 @@ typedef struct s_token
 	// char *res_str
 	bool			or;
 	bool			and;
-	bool			res;
+	int				res;
 	struct s_main	*main;
 	struct s_token	*next;
 	struct s_token	*prev;

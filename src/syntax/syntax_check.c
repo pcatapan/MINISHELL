@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 20:59:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/14 06:00:08 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/01 23:42:13 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	ft_check_brackets(char *line, t_main *main)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	main->open_brackets = 0;
 	main->close_brackets = 0;
-	while (line[i])
+	while (line[++i])
 	{
 		i = ft_check_double_quote(line, main, i);
 		i = ft_check_single_quote(line, main, i);
@@ -27,12 +27,17 @@ int	ft_check_brackets(char *line, t_main *main)
 			main->open_brackets++;
 		if (line[i] == ')')
 		main->close_brackets++;
-		i++;
 	}
 	if (main->open_brackets > main->close_brackets)
+	{
+		main->error = TRUE;
 		ft_putendl_fd(RED ERROR_OPEN_BRACKETS COLOR_RES, STDOUT_FILENO);
+	}
 	else if (main->open_brackets < main->close_brackets)
+	{
+		main->error = TRUE;
 		ft_putendl_fd(RED ERROR_CLOSE_BRACKETS COLOR_RES, STDOUT_FILENO);
+	}
 	return (i);
 }
 
@@ -103,5 +108,8 @@ void	ft_check_syntax(char *line, t_main *main)
 	if (main->op_logic && !main->error)
 		ft_check_brackets(line, main);
 	if (ft_strchr(line, '=') == 1 && ft_check_envi(line) == 1 && !main->error)
+	{
 		main->copy_env = ft_add_envi(line, main);
+		main->error = TRUE;
+	}
 }

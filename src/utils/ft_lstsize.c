@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 14:18:02 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/09/30 13:25:45 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/01 22:51:58 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	ft_lstsize(t_token *lst_or)
 	t_token	*cpy;
 
 	c = 0;
-	cpy = lst_or;
-	while (cpy != NULL)
+	cpy = ft_return_head(lst_or);
+	while (cpy)
 	{
 		c++;
 		cpy = cpy->next;

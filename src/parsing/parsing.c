@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 18:16:35 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/09/30 15:38:56 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/10/01 23:57:30 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/10/01 23:57:53 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_print_lst(t_token *token)
 {
-	int	i;
-	t_token *a;
+	int		i;
+	t_token	*a;
 
 	a = ft_return_head(token);
 	while (a)
@@ -67,11 +67,11 @@ void	ft_parsing(char *line, t_main *main)
 		tmp_value[i] = ft_find_token(tmp[i], main);
 	tmp_value[i] = NULL;
 	ft_set_values(tmp_value, main);
-	ft_set_priority(copy_line, main, 0);
 	ft_set_op_logic(copy_line, main->token);
+	ft_set_priority(copy_line, main, 0);
 }
 
-char	*ft_change_var_in_dollar(int start, int l, char* str, char** copy_env)
+char	*ft_change_var_in_dollar(int start, int l, char *str, char **copy_env)
 {
 	char	*first_part;
 	char	*second_part;
@@ -92,7 +92,7 @@ char	*ft_change_var_in_dollar(int start, int l, char* str, char** copy_env)
 	return (str);
 }
 
-char	*ft_expand_dollar(char *line, char **copy_env)
+char	*ft_expand_dollar(char *line, t_main *main)
 {
 	int	i;
 	int	l;
@@ -102,13 +102,17 @@ char	*ft_expand_dollar(char *line, char **copy_env)
 	l = 0;
 	start = 0;
 	while (line[i] != '$' && line[i])
+	{
+		i = ft_check_single_quote(line, main, i);
 		i++;
+	}
 	if (line[i] == '$')
 		start = i + 1;
-	while (line[++i] != ' ' && line[i])
+	while (line[++i] && line[i] != ' ' && line[i] != '"')
 		l++;
+	printf("Start :%d -- Len:%d\n\n", start, l);
 	if (start != 0)
-		line = ft_change_var_in_dollar(start, l, line, copy_env);
+		line = ft_change_var_in_dollar(start, l, line, main->copy_env);
 	return (line);
 }
 
@@ -116,34 +120,61 @@ void	ft_check_command(char *line, t_main *main)
 {
 	pid_t	pid;
 	int		c;
-	int		tmp;
+	int		fd[2];
+	int		lstsize;
+	char	*buffer;
 
 	c = 1;
-	tmp = ft_lstsize(main->token);
-	if (main->dub_quotes != 0)
-		line = ft_expand_dollar(line, main->copy_env);
+	pipe(fd);
+	buffer = (char *)malloc(sizeof(char) * 8);
+	if (main->dub_quotes != 0 || ft_strchr(line, '$'))
+		line = ft_expand_dollar(line, main);
 	ft_parsing(line, main);
-	//ft_print_lst(main->token);
+	lstsize = ft_lstsize(main->token);
 	main->token = ft_return_head(main->token);
-	// if (!main->token)
-	// 	printf("NON ESISTE\n");
 	pid = fork();
-	while (pid != 0 && c < 2)
+	while (pid != 0 && c < lstsize)
 	{
+		close(fd[1]);
+		wait(0);
+		main->token->next->res = read(fd[0], buffer, 1);
+		// printf("%d --- RES\n", main->token->next->res);
+		if (main->token->next->res == -1)
+			exit(0);
 		pid = fork();
 		if (pid == -1)
 			exit(0);
+		main->token = main->token->next;
 		c++;
 	}
+	wait(0);
 	if (pid == 0)
 	{
-		printf("%d\n", c);
+		close(fd[0]);
+		// printf("%d --- RES IN CHILD\n", main->token->res);
+		if (main->token->res == 0 && main->token->or)
+			exit(0);
+		if (main->token->prev)
+		{
+			// printf("--%s\n", main->token->value[1]);
+			ft_print_lst(main->token);
+			if (main->token->prev->priority == main->token->priority && main->token->res != 0 && !main->token->or)
+			{
+				write(fd[1], "1", 1);
+				printf("--%s\n", main->token->value[1]);
+				exit(0);
+			}
+		}
 		if (execve(main->token->command, main->token->value, main->copy_env))
-			perror("ERRORE\n");
-		if (main->token->next)
-			main->token = main->token->next;
-		exit(0);
+		{
+			perror(RED"ERRORE");
+			printf("%s", COLOR_RES);
+			write(fd[1], "1", 1);
+			exit(0);
+			// printf("SCRITTO\n");
+		}
 	}
+
 	// {
 	// 	// check_built_in(main->token->value[0]);
 	// 	if (!main->token->command)

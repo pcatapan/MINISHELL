@@ -28,9 +28,9 @@ void	ft_set_op_logic(char *line, t_token *token)
 		}
 		i++;
 		if (line[i] == '&')
-			token->and = true;
+			token->next->and = true;
 		else if (line[i] == '|')
-			token->or = true;
+			token->next->or = true;
 		i++;
 		if (!token->next)
 			break ;

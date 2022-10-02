@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:57:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/09/29 00:55:12 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/01 19:17:19 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	ft_set_values(char **line, t_main *main)
 		if (token->next)
 			token = token->next;
 		else
-			break;
+			break ;
 		j++;
 	}
 }
