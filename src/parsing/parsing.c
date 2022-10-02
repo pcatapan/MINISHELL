@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 23:57:30 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/01 23:57:53 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/02 19:45:25 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void	ft_check_command(char *line, t_main *main)
 		line = ft_expand_dollar(line, main);
 	ft_parsing(line, main);
 	lstsize = ft_lstsize(main->token);
+	// ft_print_lst(main->token);
 	main->token = ft_return_head(main->token);
 	pid = fork();
 	while (pid != 0 && c < lstsize)
@@ -160,8 +161,9 @@ void	ft_check_command(char *line, t_main *main)
 			ft_print_lst(main->token);
 			if (main->token->prev->priority == main->token->priority && main->token->res != 0 && !main->token->or)
 			{
+				fd[1] = open(fd[1], O_WRONLY);
 				write(fd[1], "1", 1);
-				printf("--%s\n", main->token->value[1]);
+				// printf("--%s\n", main->token->value[1]);
 				exit(0);
 			}
 		}
