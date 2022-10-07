@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/09/30 12:58:54 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/07 23:35:30 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_main
 	char		**copy_env;
 	bool		op_logic;
 	bool		error;
+	bool		sub_shell;
 	int			open_brackets;
 	int			close_brackets;
 	int			dub_quotes;
@@ -108,7 +109,7 @@ void		ft_add_history(char *line, char **envp);
 void		ft_check_syntax(char *line, t_main *main);
 int			ft_check_single_quote(char *line, t_main *main, int i);
 int			ft_check_double_quote(char *line, t_main *main, int i);
-void		ft_check_command(char *line, t_main *main);
+char		*ft_expand_dollar(char *line, t_main *main);
 
 // environment.c
 int			ft_check_envi(char *line);

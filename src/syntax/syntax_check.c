@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 20:59:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/01 23:42:13 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/07 23:30:38 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	ft_check_operetor_logic(char *line, t_main *main)
 void	ft_check_syntax(char *line, t_main *main)
 {
 	main->error = false;
+	main->sub_shell = false;
 	main->dub_quotes = 0;
 	main->sin_quotes = 0;
 	ft_easy_synatx(line, main);
@@ -107,6 +108,11 @@ void	ft_check_syntax(char *line, t_main *main)
 		ft_check_operetor_logic(line, main);
 	if (main->op_logic && !main->error)
 		ft_check_brackets(line, main);
+	if (main->dub_quotes != 0 || ft_strchr(line, '$'))
+	{
+		line = ft_expand_dollar(line, main);
+		main->sub_shell = true;
+	}
 	if (ft_strchr(line, '=') == 1 && ft_check_envi(line) == 1 && !main->error)
 	{
 		main->copy_env = ft_add_envi(line, main);
