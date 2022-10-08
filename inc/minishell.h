@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/07 23:35:30 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/08 17:45:58 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,9 @@ char		*ft_expand_dollar(char *line, t_main *main);
 // environment.c
 int			ft_check_envi(char *line);
 char		**ft_add_envi(char *line, t_main *main);
+
+// DIR Execute
+void		ft_execute_command(char *line, t_main *main);
 
 // DIR Parsing
 char		*find_path(char *cmd, t_main *main);
