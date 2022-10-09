@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/08 17:45:49 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/09 22:56:28 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_execute_command(char *line, t_main *main)
 		if (main->token->prev)
 		{
 			// printf("--%s\n", main->token->value[1]);
-			ft_print_lst(main->token);
+			//ft_print_lst(main->token);
 			if (main->token->prev->priority == main->token->priority && main->token->res != 0 && !main->token->or)
 			{
 				//fd[1] = open(fd[1], O_WRONLY);

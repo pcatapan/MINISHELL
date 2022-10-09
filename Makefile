@@ -6,7 +6,7 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/10/01 22:02:47 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/10/09 22:53:48 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME = minishell
 SRC =	./src/*.c \
 		./src/utils/*.c \
 		./src/syntax/*.c \
-		./src/parsing/*.c
+		./src/parsing/*.c \
+		./src/execute/*.c
 
 OBJC = $(SRC:%.c=%.o)
 
