@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/08 17:45:58 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/10 03:44:44 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ char		**ft_add_envi(char *line, t_main *main);
 
 // DIR Execute
 void		ft_execute_command(char *line, t_main *main);
+void		ft_loop_command(t_main *main, int fd[2]);
 
 // DIR Parsing
 char		*find_path(char *cmd, t_main *main);
