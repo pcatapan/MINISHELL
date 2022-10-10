@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/10 04:21:58 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/10 05:37:03 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_execve(t_main *main, pid_t pid, int fd[2])
 		{
 			main->token = main->token->next;
 			main->token->res = 1;
-			//printf("RES:%d --- Value: %s\n", main->token->res, main->token->value[1]);
+			printf("EXECVE -- RES:%d --- Value: %s\n", main->token->res, main->token->value[1]);
 			ft_loop_command(main, fd);
 		}
 		exit(0);
@@ -41,15 +41,12 @@ void	ft_loop_command(t_main *main, int fd[2])
 	if (pid == 0)
 	{
 		close(fd[0]);
-		// if (main->token->res == 0 && !main->token->or)
-		// 	exit(0);
 		if (main->token->res == 0 && main->token->or)
 		{
 			// printf("RES:%d --- Value: %s --- OR:%d\n", main->token->res, main->token->value[1], main->token->or);
 			if (execve(main->token->command, main->token->value, main->copy_env))
 			{
-				perror(RED"ERRORE");
-				printf("%s", COLOR_RES);
+				perror(RED"ERRORE1"COLOR_RES);
 				write(fd[1], "1", 1);
 				exit(0);
 			}
@@ -58,18 +55,20 @@ void	ft_loop_command(t_main *main, int fd[2])
 		if (main->token->prev)
 		{
 			if (main->token->prev->priority == main->token->priority \
-				&& main->token->res != 0 && main->token->and)
+				&& main->token->res != 0 && main->token->prev->and)
 			{
 				// printf("RES:%d --- Value: %s\n", main->token->res, main->token->value[1]);
 				ft_execve(main, pid, fd);
 				exit(0);
 			}
+			if (main->token->prev->priority == main->token->priority \
+				&& main->token->res == 0 && main->token->prev->or)
+				exit(0);
 		}
 		if (execve(main->token->command, main->token->value, main->copy_env))
 		{
-			perror(RED"ERRORE");
-			printf("%s", COLOR_RES);
-			//printf("RES:%d --- Value: %s\n", main->token->res, main->token->value[1]);
+			perror(RED"ERRORE2"COLOR_RES);
+			printf("RES:%d --- Value: %s\n", main->token->res, main->token->value[1]);
 			ft_execve(main, pid, fd);
 			exit(0);
 		}
@@ -96,6 +95,7 @@ void	ft_execute_command(char *line, t_main *main)
 	main->token = ft_return_head(main->token);
 	while (c < lstsize)
 	{
+		ft_print_lst(main->token);
 		ft_loop_command(main, fd);
 		if (main->token->next)
 			main->token = main->token->next;

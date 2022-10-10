@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:59:43 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/09/29 01:04:53 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/10 05:05:15 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	ft_set_op_logic(char *line, t_token *token)
 		}
 		i++;
 		if (line[i] == '&')
-			token->next->and = true;
+			token->and = true;
 		else if (line[i] == '|')
-			token->next->or = true;
+			token->or = true;
 		i++;
 		if (!token->next)
 			break ;
