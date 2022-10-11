@@ -6,7 +6,7 @@
 #    By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/10/11 18:21:29 by aanghel          ###   ########.fr        #
+#    Updated: 2022/10/11 22:17:47 by aanghel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,14 @@ USER = pcatapan
 
 FLAGS = #-Wall -Werror -Wextra #-g #-fsanitize=address
 
-FLAG_READLINE = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
+F_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
+#FLAG_READLINE = -lreadline -lcurses -L/Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
+
+
 all: $(NAME)
 
 $(NAME) : $(SRC)
-	@$(CC) $(FLAGS) $(FLAG_READLINE) $(SRC) -o $(NAME)
+	@$(CC) $(FLAGS) $(FLAG_READLINE) $(F_IRINA) $(SRC) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
