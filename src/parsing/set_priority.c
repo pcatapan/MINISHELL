@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_priority.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:00:25 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/09/29 01:02:39 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/11 19:32:20 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**ft_utils_set_priority(char *line, t_main *main)
 	{
 		i = ft_check_single_quote(dup, main, i);
 		i = ft_check_double_quote(dup, main, i);
-		if (dup[i] != 38 && dup[i] != 59 && dup[i] != 124 && dup[i])
+		if (dup[i] != 38 && dup[i] != 59 && dup[i] != 124)
 			i++;
 		else if (dup[i])
 		{

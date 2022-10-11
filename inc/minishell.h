@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/10 05:36:34 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/11 18:53:19 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include <readline/history.h>
 # include <readline/readline.h> 
 
-# define NAME_SHELL "42minishell "
-# define DIVISOR_SHELL " % "
+# define NAME_SHELL "\033[0;36m\033[1m" "42minishell ▸ " "\x1b[0m"
+# define DIVISOR_SHELL " ▸ "
 # define HOME_SHELL " ~ "
 # define FILE_HISTORY "/.42minishell_history"
 # define RED "\x1b[31m"
@@ -39,18 +39,24 @@
 # define ERROR_CLOSE_BRACKETS "Mistake : find close brackets exstra"
 # define ERROR_OP_LOGIC "Syntax error near unexpected token"
 
+# define INPUT 60
+# define OUTPUT 62
+
 typedef struct s_token
 {
-	char			*command;
-	char			**value;
-	int				priority;
-	// bool per here_doc
 	// char *parola di stop
 	// bool pipe
 	// char *res_str
+	int				priority;
+	int				res;
+	char			*command;
+	char			**value;
 	bool			or;
 	bool			and;
-	int				res;
+	bool			input;
+	bool			output;
+	bool			append;
+	bool			heredoc;
 	struct s_main	*main;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -58,15 +64,16 @@ typedef struct s_token
 
 typedef struct s_main
 {
-	t_token		*token;
-	char		**copy_env;
-	bool		op_logic;
-	bool		error;
-	bool		sub_shell;
 	int			open_brackets;
 	int			close_brackets;
 	int			dub_quotes;
 	int			sin_quotes;
+	char		**copy_env;
+	bool		op_logic;
+	bool		error;
+	bool		redirections;
+	bool		sub_shell;
+	t_token		*token;
 }	t_main;
 
 // DIR Utils
@@ -106,10 +113,11 @@ void		ft_sig_handel(int signal);
 void		ft_add_history(char *line, char **envp);
 
 // DIR syntax_check
-void		ft_check_syntax(char *line, t_main *main);
 int			ft_check_single_quote(char *line, t_main *main, int i);
 int			ft_check_double_quote(char *line, t_main *main, int i);
 char		*ft_expand_dollar(char *line, t_main *main);
+void		ft_check_syntax(char *line, t_main *main);
+void		ft_check_redirection(char *line, t_main *main);
 
 // environment.c
 int			ft_check_envi(char *line);
@@ -126,6 +134,7 @@ void		ft_parsing(char *line, t_main *main);
 void		ft_set_op_logic(char *line, t_token *token);
 void		ft_set_values(char **line, t_main *main);
 void		ft_set_priority(char *line, t_main *main, int brack);
+void		ft_set_redirections(char *line, t_token *token);
 t_token		*ft_return_head(t_token *list);
 
 extern void	rl_replace_line(const char *text, int clear_undo);

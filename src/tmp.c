@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:46:39 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/08 17:47:10 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/11 18:34:30 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	ft_print_lst(t_token *token)
 		printf("%d -- Bool Res\n", a->res);
 		printf("%d -- Bool And\n", a->and);
 		printf("%d -- Bool Or\n", a->or);
+		printf("%d -- Bool Output\n", a->output);
+		printf("%d -- Bool Append\n", a->append);
+		printf("%d -- Bool Input\n", a->input);
+		printf("%d -- Bool Heredoc\n", a->heredoc);
 		if (!a->next)
 			break ;
 		a = a->next;
