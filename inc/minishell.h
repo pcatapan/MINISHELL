@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/14 15:30:05 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/14 18:37:36 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,8 +155,8 @@ void		ft_print_lst(t_token *a);
 void    	ft_redirections(t_token *token, t_main *main);
 
 int			ft_heredoc(t_token *token, t_main *main);
+int  		ft_write_fd(int fd, char *limiter, t_main *main);
 void  		ft_redirections(t_token *token, t_main *main);
 void		ft_input_redirect(t_token *token, t_main *main);
 void    	ft_output_redirect(t_token *token);
-void   		ft_write_fd(int fd, char *limitor, t_main *main);
 #endif

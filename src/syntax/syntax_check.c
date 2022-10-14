@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 20:59:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/11 22:02:58 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/14 18:21:56 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	ft_check_syntax(char *line, t_main *main)
 	main->dub_quotes = 0;
 	main->sin_quotes = 0;
 	main->redirections = false;
+	main->expand = false;
 	ft_easy_synatx(line, main);
 	ft_check_redirection(line, main);
 	if (!main->error)
