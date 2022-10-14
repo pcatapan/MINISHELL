@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/07 23:34:14 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:20:11 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char	*ft_expand_dollar(char *line, t_main *main)
 		start = i + 1;
 	while (line[++i] && line[i] != ' ' && line[i] != '"')
 		l++;
-	printf("Start :%d -- Len:%d\n\n", start, l);
 	if (start != 0)
 		line = ft_change_var_in_dollar(start, l, line, main->copy_env);
 	return (line);

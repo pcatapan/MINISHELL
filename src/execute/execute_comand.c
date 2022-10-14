@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/11 18:48:11 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/14 15:18:45 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,19 @@ void	ft_execute_command(char *line, t_main *main)
 	pipe(fd);
 	buffer = (char *)malloc(sizeof(char) * 8);
 	lstsize = ft_lstsize(main->token);
-	// ft_print_lst(main->token);
 	main->token = ft_return_head(main->token);
-	while (c < lstsize)
-	{
-		//ft_print_lst(main->token);
-		ft_loop_command(main, fd);
-		if (main->token->next)
-			main->token = main->token->next;
-		c++;
-	}
+	// ft_print_lst(main->token);
+	if (main->redirections == 1)
+		ft_redirections(main->token, main);
+	main->token = ft_return_head(main->token);
+	// while (c < lstsize)
+	// {
+	// 	// ft_print_lst(main->token);
+	// 	ft_loop_command(main, fd);
+	// 	if (main->token->next)
+	// 		main->token = main->token->next;
+	// 	c++;
+	// }
 	// wait(0);
 	// if (pid == 0)
 	// {

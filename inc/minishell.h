@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/11 18:53:19 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/14 15:30:05 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define ERROR_OPEN_BRACKETS "Mistake : find open brackets exstra"
 # define ERROR_CLOSE_BRACKETS "Mistake : find close brackets exstra"
 # define ERROR_OP_LOGIC "Syntax error near unexpected token"
+# define ERROR_FILE "No such file or directory"
 
 # define INPUT 60
 # define OUTPUT 62
@@ -73,6 +74,7 @@ typedef struct s_main
 	bool		error;
 	bool		redirections;
 	bool		sub_shell;
+	bool		expand;
 	t_token		*token;
 }	t_main;
 
@@ -96,6 +98,7 @@ char		*ft_itoa(int n);
 void		ft_lstadd_back(t_token **lst, t_token *new);
 void		ft_lstcopy(t_token **lst, t_token *new);
 void		ft_putendl_fd(char *s, int fd);
+char		*ft_strtrim(char const *s1, char const *set);
 t_token		*ft_lstnew(void *content);
 size_t		ft_strlen(char *s);
 
@@ -149,5 +152,11 @@ void		ft_echo(void);
 void		ft_export(void);
 void		ft_pwd(void);
 void		ft_print_lst(t_token *a);
+void    	ft_redirections(t_token *token, t_main *main);
 
+int			ft_heredoc(t_token *token, t_main *main);
+void  		ft_redirections(t_token *token, t_main *main);
+void		ft_input_redirect(t_token *token, t_main *main);
+void    	ft_output_redirect(t_token *token);
+void   		ft_write_fd(int fd, char *limitor, t_main *main);
 #endif

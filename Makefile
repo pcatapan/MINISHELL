@@ -6,7 +6,7 @@
 #    By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/10/11 22:17:47 by aanghel          ###   ########.fr        #
+#    Updated: 2022/10/14 15:34:46 by aanghel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,8 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@rm -f 42minishell_history
+	@rm -f file
+	@rm -f heredoc
 	
 re: fclean all
 

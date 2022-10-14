@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:32:21 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/11 22:01:56 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/12 10:50:40 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void ft_check_redirection(char *line, t_main *main)
 		if (line[i] == OUTPUT && line[i + 1] == OUTPUT)
 			main->redirections = true;
 	}
-	if (main->redirections == false)
+	if ((line[i] == OUTPUT && line[i + 1] == INPUT) || \
+			(line[i] == INPUT && line[i + 1] == OUTPUT))
 	{
 		ft_putendl_fd(RED ERROR_OP_LOGIC COLOR_RES, STDOUT_FILENO);
 		main->error = true;
