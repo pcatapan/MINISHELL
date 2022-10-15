@@ -1,7 +1,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include <stdio.h>
+# include "../PRINTF/ft_printf.h"
 # include <fcntl.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
@@ -32,13 +33,11 @@
 
 typedef struct s_token
 {
-	// char *parola di stop
-	// bool pipe
-	// char *res_str
 	char			**value;
 	char			*command;
 	int				res;
 	int				priority;
+	int				stdinput;
 	bool			or;
 	bool			and;
 	bool			pipe;
@@ -129,10 +128,11 @@ void		ft_set_priority(char *line, t_main *main, int brack);
 void		ft_set_redirections(t_token *token);
 t_token		*ft_return_head(t_token *list);
 
-// DIR Bult_in
-int			ft_check_bultin(t_token *token);
-t_token		*ft_execute_bultin(t_token *s_token);
+// DIR Built_in
+int			ft_check_builtin(t_token *token);
+t_token		*ft_execute_builtin(t_token *s_token);
 void		ft_echo(t_token *token, int fd[2]);
+t_token		*ft_end_execute_(t_token *token, int fd[2], int fd_pipe[2]);
 
 extern void	rl_replace_line(const char *text, int clear_undo);
 

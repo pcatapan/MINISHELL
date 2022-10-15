@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:43:32 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/15 19:26:38 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/15 23:52:47 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ t_token	*ft_lstnew(void *content, t_main *main)
 	if (!nlist)
 		return (NULL);
 	nlist->command = ft_strdup(content);
-	nlist->res = 0;
 	nlist->priority = 0;
 	nlist->main = main;
+	nlist->res = 0;
+	nlist->stdinput = STDIN_FILENO;
 	nlist->or = false;
 	nlist->and = false;
 	nlist->pipe = false;
@@ -30,8 +31,8 @@ t_token	*ft_lstnew(void *content, t_main *main)
 	nlist->append = false;
 	nlist->output = false;
 	nlist->heredoc = false;
-	nlist->value = NULL;
-	nlist->next = NULL;
 	nlist->prev = NULL;
+	nlist->next = NULL;
+	nlist->value = NULL;
 	return (nlist);
 }

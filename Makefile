@@ -6,18 +6,19 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/10/15 19:00:23 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/10/16 00:45:25 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRC =	./src/*.c \
+SRC =	./PRINTF/*.c \
+		./src/*.c \
 		./src/utils/*.c \
 		./src/syntax/*.c \
 		./src/parsing/*.c \
 		./src/execute/*.c \
-		./src/bult_in/*.c
+		./src/built_in/*.c
 
 OBJC = $(SRC:%.c=%.o)
 

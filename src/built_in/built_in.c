@@ -6,50 +6,49 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/15 20:02:56 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/16 00:23:22 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	ft_check_bultin(t_token *token)
+void	ft_serach_builtin(t_token *token, int fd[2], int fd_pipe[2])
 {
-	if (ft_strcmp(token->value[0], "exit") || ft_strcmp(token->value[0], "env") \
-	|| ft_strcmp(token->value[0], "unset") || ft_strcmp(token->value[0], "pwd") \
-	|| ft_strcmp(token->value[0], "cd") || ft_strcmp(token->value[0], "echo") \
-	|| ft_strcmp(token->value[0], "export"))
-		return (1);
-	return (0);
+	if (ft_strcmp(token->value[0], "echo"))
+		ft_echo(token, fd);
+	// else if (ft_strcmp(token->value[0], "env"))
+	// else if (ft_strcmp(token->value[0], "unset"))
+	// else if (ft_strcmp(token->value[0], "pwd"))
+	// else if (ft_strcmp(token->value[0], "cd"))
+	// else if (ft_strcmp(token->value[0], "export"))
+	// else if (ft_strcmp(token->value[0], "exit"))
 }
 
-t_token	*ft_execute_bultin(t_token *token)
+t_token	*ft_execute_builtin(t_token *token)
 {
 	pid_t	pidchild;
+	int		fd_pipe[2];
 	int		fd[2];
 
-	pidchild = fork();
 	if (pipe(fd) == -1)
 		perror(RED"ERRORE2"COLOR_RES);
-	//Qui il processo che gesticse le esecuzioni si ferma
+	if (pipe(fd_pipe) == -1)
+		perror(RED"ERRORE2"COLOR_RES);
+	pidchild = fork();
 	if (pidchild != 0)
 	{
 		close(fd[1]);//Close Write
-		waitpid(pidchild, 0, 0);
+		close(fd_pipe[1]);
+		waitpid(pidchild, NULL, 0);
 	}
-	// Tutti i processi che entrano qui muoiono
 	else
 	{
 		close(fd[0]);//Close Read
-		if (ft_strcmp(token->value[0], "echo"))
-			ft_echo(token, fd);
-		// file_desc = open("test.txt", O_WRONLY | O_APPEND);
-		// dup2(file_desc, STDOUT_FILENO);
+		close(fd_pipe[0]);
+		if (token->pipe)
+			dup2(fd_pipe[1], STDOUT_FILENO);
+		ft_serach_builtin(token, fd, fd_pipe);
 	}
-	if (token->next)
-	{
-		token = token->next;
-		token->res = read(fd[0], "1", 1);
-	}
-	token->res = read(fd[0], "1", 1);
+	ft_end_execute_(token, fd, fd_pipe);
 	return (token);
 }

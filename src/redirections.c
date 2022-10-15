@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/15 16:10:59 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/15 23:20:44 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,14 @@ void	ft_input_redirect(t_token *token, t_main *main)
 
 void	ft_redirections(t_token *token, t_main *main)
 {
-	while (token)
+	pid_t	pidchild;
+
+	pidchild = fork();
+	// Qui il processo che gesticse le esecuzioni si ferma
+	// La chiusura della write è irreversibile
+	if (pidchild != 0)
+		waitpid(pidchild, 0, 0);
+	while (token && pidchild == 0)
 	{
 		if (token->output == 1 || token->append == 1)
 			ft_output_redirect(token);
