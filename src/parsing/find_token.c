@@ -6,17 +6,12 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:56:42 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/02 18:51:37 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/15 17:01:12 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/*
-Altra ipotesi per gestire le () farle saltre sullo start e end
-successivamnte andare a fare check sulla copy, come fatto con gli op_logic
-!Soluzione che al momento mi sembra la migliore
-*/
 char	*ft_find_token(char *line, t_main *main)
 {
 	int		start;

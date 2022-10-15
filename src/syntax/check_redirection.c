@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   check_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:32:21 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/12 10:50:40 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/15 16:56:29 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void ft_check_redirection(char *line, t_main *main)
+void	ft_check_redirection(char *line, t_main *main)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (line[++i])
@@ -23,20 +23,12 @@ void ft_check_redirection(char *line, t_main *main)
 		i = ft_check_single_quote(line, main, i);
 		if ((line[i] == OUTPUT && line[i + 1] == INPUT) || \
 			(line[i] == INPUT && line[i + 1] == OUTPUT))
-			break;
-		if (line[i] == INPUT && line[i + 1] != INPUT)
+			main->error = true;
+		if (line[i] == INPUT)
 			main->redirections = true;
-		if (line[i] == INPUT && line[i + 1] == INPUT)
-			main->redirections = true;
-		if (line[i] == OUTPUT && line[i + 1] != OUTPUT)
-			main->redirections = true;
-		if (line[i] == OUTPUT && line[i + 1] == OUTPUT)
+		if (line[i] == OUTPUT)
 			main->redirections = true;
 	}
-	if ((line[i] == OUTPUT && line[i + 1] == INPUT) || \
-			(line[i] == INPUT && line[i + 1] == OUTPUT))
-	{
+	if (main->error)
 		ft_putendl_fd(RED ERROR_OP_LOGIC COLOR_RES, STDOUT_FILENO);
-		main->error = true;
-	}
 }

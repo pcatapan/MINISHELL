@@ -41,6 +41,7 @@ typedef struct s_token
 	char			**value;
 	bool			or;
 	bool			and;
+	bool			pipe;
 	bool			input;
 	bool			output;
 	bool			append;
@@ -128,17 +129,12 @@ void		ft_set_priority(char *line, t_main *main, int brack);
 void		ft_set_redirections(t_token *token);
 t_token		*ft_return_head(t_token *list);
 
+// DIR Bult_in
+int			ft_check_bultin(t_token *token);
+
 extern void	rl_replace_line(const char *text, int clear_undo);
 
 // temporary
-void		check_built_in(t_main *main);
-void		ft_exit(void);
-void		ft_cd(void);
-void		ft_env(void);
-void		ft_unset(void);
-void		ft_echo(void);
-void		ft_export(void);
-void		ft_pwd(void);
 void		ft_print_lst(t_token *a);
 void		ft_redirections(t_token *token, t_main *main);
 
