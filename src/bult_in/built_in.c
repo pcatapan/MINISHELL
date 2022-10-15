@@ -22,11 +22,16 @@ int	ft_check_bultin(t_token *token)
 	return (0);
 }
 
-t_token	*ft_execute_bultin(t_token *s_token)
+t_token	*ft_execute_bultin(t_token *token)
 {
 	pid_t	pidchild;
 
 	pidchild = fork();
 	if (pidchild != 0)
-		printf("Testo\n");
+		waitpid(pidchild, 0, 0);
+	else
+	{
+		if (ft_strcmp(token->value[0], "exit"))
+			ft_exit(token);
+	}
 }

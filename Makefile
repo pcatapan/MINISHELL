@@ -16,7 +16,8 @@ SRC =	./src/*.c \
 		./src/utils/*.c \
 		./src/syntax/*.c \
 		./src/parsing/*.c \
-		./src/execute/*.c
+		./src/execute/*.c \
+		./src/bult_in/*.c
 
 OBJC = $(SRC:%.c=%.o)
 

@@ -131,6 +131,8 @@ t_token		*ft_return_head(t_token *list);
 
 // DIR Bult_in
 int			ft_check_bultin(t_token *token);
+void		ft_exit(t_token *token);
+t_token		*ft_execute_bultin(t_token *token);
 
 extern void	rl_replace_line(const char *text, int clear_undo);
 
