@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/15 15:11:41 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/15 16:10:59 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	ft_output_redirect(t_token *token)
 	int	fd;
 
 	if (token->output == 1)
-		fd = open (token->next->value[0], O_CREAT | O_RDWR | O_TRUNC, 0644);
+		fd = open (token->value[2], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	else if (token->append == 1)
-		fd = open (token->next->value[0], O_CREAT | O_RDWR | O_APPEND, 0644);
+		fd = open (token->value[2], O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd == -1)
 	{
 		perror(RED ERROR_FILE COLOR_RES);
@@ -34,7 +34,7 @@ void	ft_input_redirect(t_token *token, t_main *main)
 
 	if (token->input == 1)
 	{
-		fd = open (token->next->value[0], O_RDONLY);
+		fd = open (token->value[2], O_RDONLY);
 		if (fd == -1)
 		{
 			perror(RED ERROR_FILE COLOR_RES);

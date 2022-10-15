@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/01 23:57:30 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/11 21:47:49 by aanghel          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../inc/minishell.h"
 
 void	ft_set_info(char **tmp, t_main *main, char *copy_line, int count)
@@ -43,16 +31,12 @@ void	ft_parsing(char *line, t_main *main)
 	{
 		i = ft_check_single_quote(line, main, i);
 		i = ft_check_double_quote(line, main, i);
-		if (line[i] != 38 && line[i] != 59 && line[i] != 124 && line[i] != 60 && line[i] != 62)
+		if (line[i] != 38 && line[i] != 59 && line[i] != 124)
 			i++;
 		else
 		{
 			line[i] = 127;
 			if (line[i + 1] == 38 || line[i + 1] == 124)
-				count++;
-			if (line[i] == 60 && line[i + 1] == 60)
-				count++;
-			if (line[i] == 62 && line[i + 1] == 62)
 				count++;
 			i++;
 		}

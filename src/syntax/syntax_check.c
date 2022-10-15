@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 20:59:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/14 18:21:56 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/15 15:46:36 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,10 @@ void	ft_check_syntax(char *line, t_main *main)
 		line = ft_expand_dollar(line, main);
 		main->sub_shell = true;
 	}
-	if (ft_strchr(line, '=') == 1 && ft_check_envi(line) == 1 && !main->error)
-	{
-		main->copy_env = ft_add_envi(line, main);
-		main->error = TRUE;
-	}
+	// Questo non deve anadre qui
+	// if (ft_strchr(line, '=') == 1 && ft_check_envi(line) == 1 && !main->error)
+	// {
+	// 	main->copy_env = ft_add_envi(line, main);
+	// 	main->error = TRUE;
+	// }
 }

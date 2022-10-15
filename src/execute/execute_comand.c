@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_comand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/15 00:33:57 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/15 16:06:13 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,18 @@ void	ft_loop_command(t_main *main, int fd[2])
 	}
 }
 
+// void	ft_execute_command(char *line, t_main *main)
+// {
+// 	int	c;
+// 	int	lstsize;
+
+// 	lstsize = ft_listsize(main->token);
+// 	while (c <= lstsize)
+// 	{
+// 		c++;
+// 	}
+// }
+
 void	ft_execute_command(char *line, t_main *main)
 {
 	int		c;
@@ -96,35 +108,13 @@ void	ft_execute_command(char *line, t_main *main)
 	if (main->redirections == 1)
 		ft_redirections(main->token, main);
 	main->token = ft_return_head(main->token);
-	while (c < lstsize)
-	{
-		// ft_print_lst(main->token);
-		ft_loop_command(main, fd);
-		if (main->token->next)
-			main->token = main->token->next;
-		c++;
-	}
-	// wait(0);
-	// if (pid == 0)
+// 	// while (c < lstsize)
 	// {
-	// 	close(fd[0]);
-	// 	if (main->token->or)
-	// 		exit(0);
-	// 	if (main->token->prev)
-	// 	{
-	// 		if (main->token->prev->priority == main->token->priority \
-	// 			&& main->token->res != 0 && !main->token->or)
-	// 		{
-	// 			write(fd[1], "1", 1);
-	// 			exit(0);
-	// 		}
-	// 	}
-	// 	if (execve(main->token->command, main->token->value, main->copy_env))
-	// 	{
-	// 		perror(RED"ERRORE");
-	// 		printf("%s", COLOR_RES);
-	// 		write(fd[1], "1", 1);
-	// 		exit(0);
-	// 	}
+	// 	// ft_print_lst(main->token);
+	// 	// ft_loop_command(main, fd);
+		
+	// 	if (main->token->next)
+	// 		main->token = main->token->next;
+	// 	c++;
 	// }
 }
