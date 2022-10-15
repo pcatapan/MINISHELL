@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirections.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 18:50:37 by aanghel           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/15 17:19:13 by aanghel          ###   ########.fr       */
-=======
-/*   Updated: 2022/10/15 16:51:13 by pcatapan         ###   ########.fr       */
->>>>>>> refs/remotes/origin/master
+/*   Created: 2022/10/15 18:54:54 by aanghel           #+#    #+#             */
+/*   Updated: 2022/10/15 18:55:00 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,11 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/15 17:26:35 by aanghel          ###   ########.fr       */
-=======
-/*   Updated: 2022/10/15 18:43:24 by pcatapan         ###   ########.fr       */
->>>>>>> refs/remotes/origin/master
+/*   Updated: 2022/10/15 18:56:36 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +33,7 @@
 // 	exit(0);
 // }
 
-void	ft_execute_command(char *line, t_main *main)
+void	ft_execute_command(char *line, t_main	*main)
 {
 	pid_t	pidchild;
 	int		file_desc;
@@ -73,28 +69,15 @@ void	ft_execute_command(char *line, t_main *main)
 // 	int		lstsize;
 // 	char	*buffer;
 
-<<<<<<< HEAD
-	c = 0;
-	pipe(fd);
-	buffer = (char *)malloc(sizeof(char) * 8);
-	lstsize = ft_lstsize(main->token);
-	main->token = ft_return_head(main->token);
-	if (main->redirections == 1)
-		ft_redirections(main->token, main);
-	main->token = ft_return_head(main->token);
+	// c = 0;
+	// pipe(fd);
+	// buffer = (char *)malloc(sizeof(char) * 8);
+	// lstsize = ft_lstsize(main->token);
+	// main->token = ft_return_head(main->token);
+	// if (main->redirections == 1)
+	// 	ft_redirections(main->token, main);
+	// main->token = ft_return_head(main->token);
 // 	// while (c < lstsize)
-=======
-// 	c = 0;
-// 	pipe(fd);
-// 	buffer = (char *)malloc(sizeof(char) * 8);
-// 	lstsize = ft_lstsize(main->token);
-// 	main->token = ft_return_head(main->token);
-// 	// ft_print_lst(main->token);
-// 	if (main->redirections == 1)
-// 		ft_redirections(main->token, main);
-// 	main->token = ft_return_head(main->token);
-	// while (c < lstsize)
->>>>>>> refs/remotes/origin/master
 	// {
 	// 	// ft_print_lst(main->token);
 	// 	// ft_loop_command(main, fd);		
