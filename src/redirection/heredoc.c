@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:31:25 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/15 18:02:57 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/15 23:38:00 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 //main->expand == false -> no expand dollar
 //main->expand == true -> expand dollar
@@ -48,11 +48,12 @@ int	ft_write_fd(int fd, char *limiter, t_main *main)
 int	ft_heredoc(t_token *token, t_main *main)
 {
 	int		fd;
-	char	*name_file;
+	char	*n_file;
 
-	name_file = "heredoc";
-	fd = open (name_file, O_CREAT | O_EXCL | O_WRONLY, 0644);
-	ft_write_fd(fd, token->value[2], main);
-	fd = open (name_file, O_RDONLY);
+	n_file = "heredoc";
+	fd = open (n_file, O_CREAT | O_EXCL | O_WRONLY, 0644);
+	ft_write_fd(fd, token->name_file, main);
+	fd = open (n_file, O_RDONLY);
+	dup2(fd, STDIN_FILENO);
 	return (fd);
 }

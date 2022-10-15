@@ -1,1 +1,4 @@
-exit
+echo ciao > file
+echo ciao < file
+echo ciao << file
+echo ciao >> file

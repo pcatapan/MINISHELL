@@ -14,7 +14,7 @@
 # include <readline/history.h>
 # include <readline/readline.h> 
 
-# define NAME_SHELL "\033[0;36m\033[1m 42minishell ▸ \x1b[0m"
+# define NAME_SHELL "\033[0;36m\033[1m42minishell ▸ \x1b[0m"
 # define DIVISOR_SHELL " ▸ "
 # define HOME_SHELL " ~ "
 # define FILE_HISTORY "/.42minishell_history"
@@ -32,13 +32,11 @@
 
 typedef struct s_token
 {
-	// char *parola di stop
-	// bool pipe
-	// char *res_str
-	int				priority;
 	int				res;
-	char			*command;
+	int				priority;
 	char			**value;
+	char			*command;
+	char			*name_file;
 	bool			or;
 	bool			and;
 	bool			pipe;
@@ -87,7 +85,7 @@ void		ft_lstadd_back(t_token **lst, t_token *new);
 void		ft_lstcopy(t_token **lst, t_token *new);
 void		ft_putendl_fd(char *s, int fd);
 char		*ft_strtrim(char const *s1, char const *set);
-t_token		*ft_lstnew(void *content);
+t_token		*ft_lstnew(void *content, t_main *main);
 size_t		ft_strlen(char *s);
 
 // free.c
@@ -131,18 +129,20 @@ t_token		*ft_return_head(t_token *list);
 
 // DIR Bult_in
 int			ft_check_bultin(t_token *token);
-void		ft_exit(t_token *token);
-t_token		*ft_execute_bultin(t_token *token);
+t_token		*ft_execute_bultin(t_token *s_token);
+void		ft_echo(t_token *token, int fd[2]);
 
 extern void	rl_replace_line(const char *text, int clear_undo);
 
-// temporary
-void		ft_print_lst(t_token *a);
-void		ft_redirections(t_token *token, t_main *main);
-
+//DIR Redirection
 int			ft_heredoc(t_token *token, t_main *main);
 int			ft_write_fd(int fd, char *limiter, t_main *main);
 void		ft_redirections(t_token *token, t_main *main);
 void		ft_input_redirect(t_token *token, t_main *main);
-void		ft_output_redirect(t_token *token);
+void		ft_output_redirect(t_token *token, t_main *main);
+void		ft_redirections(t_token *token, t_main *main);
+
+// temporary
+void		ft_print_lst(t_token *a);
+
 #endif

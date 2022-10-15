@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:56:42 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/15 17:01:12 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/15 19:25:33 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ char	*ft_find_token(char *line, t_main *main)
 		end++;
 	command = ft_substr(line, start, end);
 	if (!main->token)
-		main->token = ft_lstnew(command);
+		main->token = ft_lstnew(command, main);
 	else
-		ft_lstadd_back(&main->token, ft_lstnew(command));
+		ft_lstadd_back(&main->token, ft_lstnew(command, main));
 	//free(command);
 	return (&line[start + end]);
 }
