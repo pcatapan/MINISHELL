@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:43:32 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/15 23:52:47 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/16 01:41:09 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_token	*ft_lstnew(void *content, t_main *main)
 	nlist->append = false;
 	nlist->output = false;
 	nlist->heredoc = false;
+	nlist->name_file = NULL;
 	nlist->prev = NULL;
 	nlist->next = NULL;
 	nlist->value = NULL;
