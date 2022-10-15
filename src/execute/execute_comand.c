@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/15 16:06:13 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/15 16:46:56 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,41 +80,41 @@ void	ft_loop_command(t_main *main, int fd[2])
 	}
 }
 
-// void	ft_execute_command(char *line, t_main *main)
-// {
-// 	int	c;
-// 	int	lstsize;
-
-// 	lstsize = ft_listsize(main->token);
-// 	while (c <= lstsize)
-// 	{
-// 		c++;
-// 	}
-// }
-
 void	ft_execute_command(char *line, t_main *main)
 {
-	int		c;
-	int		fd[2];
-	int		lstsize;
-	char	*buffer;
+	int	c;
+	int	lstsize;
 
-	c = 0;
-	pipe(fd);
-	buffer = (char *)malloc(sizeof(char) * 8);
 	lstsize = ft_lstsize(main->token);
-	main->token = ft_return_head(main->token);
-	// ft_print_lst(main->token);
-	if (main->redirections == 1)
-		ft_redirections(main->token, main);
-	main->token = ft_return_head(main->token);
-// 	// while (c < lstsize)
+	c = 0;
+	while (c <= lstsize)
+	{
+		c++;
+	}
+}
+
+// void	ft_execute_command(char *line, t_main *main)
+// {
+// 	int		c;
+// 	int		fd[2];
+// 	int		lstsize;
+// 	char	*buffer;
+
+// 	c = 0;
+// 	pipe(fd);
+// 	buffer = (char *)malloc(sizeof(char) * 8);
+// 	lstsize = ft_lstsize(main->token);
+// 	main->token = ft_return_head(main->token);
+// 	// ft_print_lst(main->token);
+// 	if (main->redirections == 1)
+// 		ft_redirections(main->token, main);
+// 	main->token = ft_return_head(main->token);
+	// while (c < lstsize)
 	// {
 	// 	// ft_print_lst(main->token);
-	// 	// ft_loop_command(main, fd);
-		
+	// 	// ft_loop_command(main, fd);		
 	// 	if (main->token->next)
 	// 		main->token = main->token->next;
 	// 	c++;
 	// }
-}
+// }
