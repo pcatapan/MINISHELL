@@ -11,10 +11,10 @@ void	ft_set_info(char **tmp, t_main *main, char *copy_line, int count)
 	while (tmp[++i])
 		tmp_value[i] = ft_find_token(tmp[i], main);
 	tmp_value[i] = NULL;
-	ft_set_redirections(copy_line, main->token);
 	ft_set_values(tmp_value, main);
 	ft_set_op_logic(copy_line, main->token);
 	ft_set_priority(copy_line, main, 0);
+	ft_set_redirections(main->token);
 }
 
 void	ft_parsing(char *line, t_main *main)

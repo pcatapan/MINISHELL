@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_comand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/15 16:06:13 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/15 17:26:35 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	ft_execute_command(char *line, t_main *main)
 	buffer = (char *)malloc(sizeof(char) * 8);
 	lstsize = ft_lstsize(main->token);
 	main->token = ft_return_head(main->token);
-	// ft_print_lst(main->token);
 	if (main->redirections == 1)
 		ft_redirections(main->token, main);
 	main->token = ft_return_head(main->token);

@@ -125,7 +125,7 @@ void		ft_parsing(char *line, t_main *main);
 void		ft_set_op_logic(char *line, t_token *token);
 void		ft_set_values(char **line, t_main *main);
 void		ft_set_priority(char *line, t_main *main, int brack);
-void		ft_set_redirections(char *line, t_token *token);
+void		ft_set_redirections(t_token *token);
 t_token		*ft_return_head(t_token *list);
 
 extern void	rl_replace_line(const char *text, int clear_undo);

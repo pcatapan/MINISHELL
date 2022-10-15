@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/15 15:24:42 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/15 17:59:52 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ char	*ft_expand_heredoc(char *line, t_main *main)
 	i = 0;
 	l = 0;
 	start = 0;
+	while (line[i] != '$' )
+		i++;
 	if (line[i] == '$')
 		start = i + 1;
 	while (line[++i] && line[i] != ' ' && line[i] != '"')

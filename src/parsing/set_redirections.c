@@ -6,39 +6,27 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:50:37 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/11 19:36:53 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/15 17:19:13 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_set_redirections(char *line, t_token *token)
+void	ft_set_redirections(t_token *token)
 {
-	int	i;
-
-	i = 0;
 	token = ft_return_head(token);
 	while (token)
 	{
-		while (line[i])
-		{
-			if (line[i] == OUTPUT || line[i] == INPUT)
-				break;
-			i++;
-		}
-		i++;
-		if (line[i] != OUTPUT && line[i - 1] == OUTPUT)
-				token->output = true;
-		else if (line[i] == OUTPUT)
+		if (ft_strcmp(token->value[1], ">"))
+			token->output = true;
+		if (ft_strcmp(token->value[1], ">>"))
 			token->append = true;
-		else if (line[i] != INPUT && line[i - 1] == INPUT)
+		else if (ft_strcmp(token->value[1], "<"))
 			token->input = true;
-		else if (line[i] == INPUT)
+		else if (ft_strcmp(token->value[1], "<<"))
 			token->heredoc = true;
-		i++;
 		if (!token->next)
-			break;
+			break ;
 		token = token->next;
 	}
 }
-
