@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+         #
+#    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/10/14 15:34:46 by aanghel          ###   ########.fr        #
+#    Updated: 2022/10/15 15:06:05 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,8 @@ USER = pcatapan
 
 FLAGS = #-Wall -Werror -Wextra #-g #-fsanitize=address
 
-F_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
-#FLAG_READLINE = -lreadline -lcurses -L/Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
+# F_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
+FLAG_READLINE = -lreadline -lcurses -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 
 all: $(NAME)

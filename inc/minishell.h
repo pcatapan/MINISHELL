@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:59:21 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/14 18:37:36 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/15 15:09:34 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <readline/history.h>
 # include <readline/readline.h> 
 
-# define NAME_SHELL "\033[0;36m\033[1m" "42minishell ▸ " "\x1b[0m"
+# define NAME_SHELL "\033[0;36m\033[1m 42minishell ▸ \x1b[0m"
 # define DIVISOR_SHELL " ▸ "
 # define HOME_SHELL " ~ "
 # define FILE_HISTORY "/.42minishell_history"
@@ -39,7 +39,6 @@
 # define ERROR_CLOSE_BRACKETS "Mistake : find close brackets exstra"
 # define ERROR_OP_LOGIC "Syntax error near unexpected token"
 # define ERROR_FILE "No such file or directory"
-
 # define INPUT 60
 # define OUTPUT 62
 
@@ -152,11 +151,11 @@ void		ft_echo(void);
 void		ft_export(void);
 void		ft_pwd(void);
 void		ft_print_lst(t_token *a);
-void    	ft_redirections(t_token *token, t_main *main);
+void		ft_redirections(t_token *token, t_main *main);
 
 int			ft_heredoc(t_token *token, t_main *main);
-int  		ft_write_fd(int fd, char *limiter, t_main *main);
-void  		ft_redirections(t_token *token, t_main *main);
+int			ft_write_fd(int fd, char *limiter, t_main *main);
+void		ft_redirections(t_token *token, t_main *main);
 void		ft_input_redirect(t_token *token, t_main *main);
-void    	ft_output_redirect(t_token *token);
+void		ft_output_redirect(t_token *token);
 #endif
