@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:43:32 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/11 18:47:33 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/15 18:36:20 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@ t_token	*ft_lstnew(void *content)
 	if (!nlist)
 		return (NULL);
 	nlist->command = ft_strdup(content);
+	nlist->res = 0;
 	nlist->priority = 0;
 	nlist->or = false;
 	nlist->and = false;
+	nlist->pipe = false;
 	nlist->input = false;
 	nlist->append = false;
 	nlist->output = false;
 	nlist->heredoc = false;
-	nlist->res = 0;
 	nlist->value = NULL;
 	nlist->next = NULL;
 	nlist->prev = NULL;

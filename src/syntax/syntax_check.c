@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 20:59:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/15 15:46:36 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/15 16:59:42 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ void	ft_check_syntax(char *line, t_main *main)
 	main->redirections = false;
 	main->expand = false;
 	ft_easy_synatx(line, main);
-	ft_check_redirection(line, main);
+	if (!main->error)
+		ft_check_redirection(line, main);
 	if (!main->error)
 		ft_check_operetor_logic(line, main);
 	if (main->op_logic && !main->error)
@@ -116,10 +117,4 @@ void	ft_check_syntax(char *line, t_main *main)
 		line = ft_expand_dollar(line, main);
 		main->sub_shell = true;
 	}
-	// Questo non deve anadre qui
-	// if (ft_strchr(line, '=') == 1 && ft_check_envi(line) == 1 && !main->error)
-	// {
-	// 	main->copy_env = ft_add_envi(line, main);
-	// 	main->error = TRUE;
-	// }
 }
