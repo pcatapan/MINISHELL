@@ -6,13 +6,13 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:43:32 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/15 18:36:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/15 19:26:38 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-t_token	*ft_lstnew(void *content)
+t_token	*ft_lstnew(void *content, t_main *main)
 {
 	t_token	*nlist;
 
@@ -22,6 +22,7 @@ t_token	*ft_lstnew(void *content)
 	nlist->command = ft_strdup(content);
 	nlist->res = 0;
 	nlist->priority = 0;
+	nlist->main = main;
 	nlist->or = false;
 	nlist->and = false;
 	nlist->pipe = false;
