@@ -58,6 +58,7 @@ typedef struct s_main
 	int			dub_quotes;
 	int			sin_quotes;
 	char		**copy_env;
+	char		**copy_set;
 	bool		op_logic;
 	bool		error;
 	bool		redirections;
@@ -83,6 +84,7 @@ char		*ft_strcat(char *dest, const char *src);
 char		*ft_strdup(const char *s1);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		*ft_itoa(int n);
+char		*get_next_line(int fd);
 void		ft_lstadd_back(t_token **lst, t_token *new);
 void		ft_lstcopy(t_token **lst, t_token *new);
 void		ft_putendl_fd(char *s, int fd);
@@ -95,6 +97,7 @@ void		ft_free_matrix(char **matrix);
 
 // init_envp.c
 char		**ft_init_envp(char **envp);
+void		ft_init_set(t_main *main);
 
 // prompt.c
 int			ft_prompt(char **envp, t_main *main);
