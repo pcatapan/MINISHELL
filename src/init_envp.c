@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_envp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 18:35:52 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/16 19:33:41 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,29 +77,4 @@ char	**ft_init_envp(char **envp)
 	}
 	ft_add_shell_env(copy_envp, envp, i);
 	return (copy_envp);
-}
-
-void	ft_init_set(t_main *main)
-{
-	pid_t	pid;
-	int		fd[2];
-
-	if (pipe(fd) == -1)
-		error();
-	pid = fork();
-	if (pid == -1)
-		error();
-	if (pid == 0)
-	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		exceve("/bin/set", "set", main->copy_env);
-	}
-	else
-	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		waitpid(pid, NULL, 0);
-		main->copy_set = get_next_line(fd[0]);
-	}	
 }

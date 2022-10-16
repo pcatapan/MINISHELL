@@ -84,20 +84,19 @@ char		*ft_strcat(char *dest, const char *src);
 char		*ft_strdup(const char *s1);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		*ft_itoa(int n);
-char		*get_next_line(int fd);
 void		ft_lstadd_back(t_token **lst, t_token *new);
 void		ft_lstcopy(t_token **lst, t_token *new);
 void		ft_putendl_fd(char *s, int fd);
 char		*ft_strtrim(char const *s1, char const *set);
 t_token		*ft_lstnew(void *content, t_main *main);
 size_t		ft_strlen(char *s);
+char		**get_next_line(int fd);
 
 // free.c
 void		ft_free_matrix(char **matrix);
 
 // init_envp.c
 char		**ft_init_envp(char **envp);
-void		ft_init_set(t_main *main);
 
 // prompt.c
 int			ft_prompt(char **envp, t_main *main);
