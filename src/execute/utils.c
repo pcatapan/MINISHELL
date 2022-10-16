@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:43:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 18:50:22 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/16 20:05:31 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_print_matrix(t_token *token)
 
 	i = 0;
 	dup2(token->fd_mini[1], STDOUT_FILENO);
+	printf("%d\n", token->fd_mini[1]);
 	while (token->main->copy_env[i])
 	{
 		printf("%s\n", token->main->copy_env[i]);

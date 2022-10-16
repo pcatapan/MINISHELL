@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 18:39:19 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/16 19:55:37 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	ft_env(t_token *token, int fd[2])
 
 	i = 0;
 	printf("nostro\n");
-	while (token->main->copy_set[i])
+	while (token->main->copy_env[i])// Sostituito copy_set
 	{
-		ft_printf("%s\n", token->main->copy_set[i]);
+		ft_printf("%s\n", token->main->copy_env[i]);
 		i++;
 	}
 }

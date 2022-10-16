@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:28:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/16 19:39:22 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/10/16 20:08:30 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
-char	**get_next_line(int fd)
+char	**ft_get_next_line(int fd)
 {
 	char	a[999999];
 	char	buffer[1];
@@ -21,7 +21,6 @@ char	**get_next_line(int fd)
 	char	**set;
 
 	a[i] = 0;
-
 	while (read(fd, buffer, 1) == 1)
 	{
 		a[i] = buffer[0];

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_comand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/16 18:54:45 by pcatapan         ###   ########.fr       */
-=======
-/*   Updated: 2022/10/16 16:37:57 by fgrossi          ###   ########.fr       */
->>>>>>> 56f970b2cb3f959a7a790adb9f3ea191c0e27a28
+/*   Updated: 2022/10/16 20:13:36 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +114,12 @@ void	ft_execute_command(char *line, t_main *main)
 	pid_t	pidchild;
 	int		c;
 	int		lstsize;
-	int		filse_desc[2];
+	int		file_desc[2];
 
 	c = 0;
-	main->token->fd_mini[1] = filse_desc[1];
-	main->token->fd_mini[0] = filse_desc[0];
+	pipe(file_desc);
+	main->token->fd_mini[1] = file_desc[1];
+	main->token->fd_mini[0] = file_desc[0];
 	lstsize = ft_lstsize(main->token);
 	main->token = ft_return_head(main->token);
 	// ft_print_lst(main->token);
@@ -141,8 +138,7 @@ void	ft_execute_command(char *line, t_main *main)
 			ft_execute_dollar(main->token);
 			// if (ft_check_builtin(main->token) && !main->redirections)
 			// 	main->token = ft_execute_builtin(main->token);
-			/*else*/ if (ft_strchr(main->token->value[0], '=') && \
-						ft_check_envi(main->token->value[0]))
+			/*else*/ if (ft_strchr(main->token->value[0], '=') && ft_check_envi(main->token->value[0]))
 				main->token = ft_execute_enviroment(main->token, main->token->value[0]);
 			else // Qui entra se il comando bultin é errato o se non é da gestirte
 				main->token = ft_execute_exeve(main->token);
@@ -153,5 +149,6 @@ void	ft_execute_command(char *line, t_main *main)
 		}
 		exit(0);
 	}
-	// ft_free_matrix(main->copy_env);
+	ft_free_matrix(main->copy_env);
+	main->copy_env = ft_get_next_line(file_desc[0]);
 }

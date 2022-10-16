@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:57:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 19:16:38 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/10/16 19:51:58 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ int	ft_prompt(char **envp, t_main *main)
 		if (!main->error)
 		{
 			ft_parsing(line, main);
-			// ft_execute_command(line, main);
-			ft_print_lst(main->token);
+			ft_execute_command(line, main);
+			// ft_print_lst(main->token);
 		}
 	}
 	return (0);

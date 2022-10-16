@@ -92,7 +92,7 @@ void		ft_putendl_fd(char *s, int fd);
 char		*ft_strtrim(char const *s1, char const *set);
 t_token		*ft_lstnew(void *content, t_main *main);
 size_t		ft_strlen(char *s);
-char		**get_next_line(int fd);
+char		**ft_get_next_line(int fd);
 
 // free.c
 void		ft_free_matrix(char **matrix);

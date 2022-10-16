@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 02:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 18:43:46 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/16 20:05:54 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	ft_check_envi(char *line)
 
 t_token	*ft_execute_enviroment(t_token *token, char *var_add)
 {
-	// dup2(fd[1], STDOUT_FILENO);
 	token->main->copy_env = ft_add_envi(var_add, token->main);
 	ft_print_matrix(token);
 	return (token->next);
