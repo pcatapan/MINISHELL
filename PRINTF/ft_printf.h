@@ -3,28 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/27 16:19:34 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/28 08:45:03 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/01/12 09:31:46 by fgrossi           #+#    #+#             */
+/*   Updated: 2022/02/22 12:19:09 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <stdarg.h>
 # include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
+# include <stdarg.h>
 
 int				ft_printf(const char *str, ...);
-int				ft_char(char lett);
-unsigned int	ft_lenunsi(unsigned int num);
-int				ft_unsigned(unsigned int num);
-unsigned int	ft_esadecimal(unsigned int num, char lett);
-int				ft_putnumber(int num);
-int				ft_lenesa(uintptr_t nb);
-int				ft_putesa(uintptr_t num);
+int				ft_putstr_v2(char *str);
+int				ft_putnbr(int n);
+int				ft_put_unsigned(unsigned int n);
+int				ft_putchar(int c);
 
 #endif

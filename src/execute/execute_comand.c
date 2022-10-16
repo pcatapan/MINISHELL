@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_comand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 01:37:38 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/16 15:57:10 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_exceve(t_token *token, int fd[2])
 		}
 		if (execve(token->command, token->value, token->main->copy_env))
 		{
-			printf(RED"%s: coomand not found\n"COLOR_RES, token->value[0]);
+			ft_printf(RED"%s: coomand not found\n"COLOR_RES, token->value[0]);
 			write(fd[1], "1", 1);
 			exit(0);
 		}
@@ -37,14 +37,14 @@ void	ft_exceve(t_token *token, int fd[2])
 		}
 		if (execve(token->command, token->value, token->main->copy_env))
 		{
-			printf(RED"%s: command not found\n"COLOR_RES, token->value[0]);
+			ft_printf(RED"%s: command not found\n"COLOR_RES, token->value[0]);
 			write(fd[1], "1", 1);
 			exit(0);
 		}
 	}
 	else if (execve(token->command, token->value, token->main->copy_env))
 	{
-		printf(RED"%s: command not found\n"COLOR_RES, token->value[0]);
+		ft_printf(RED"%s: command not found\n"COLOR_RES, token->value[0]);
 		write(fd[1], "1", 1);
 		exit(0);
 	}
@@ -89,7 +89,7 @@ void	ft_execute_command(char *line, t_main *main)
 	lstsize = ft_lstsize(main->token);
 	// ft_print_lst(main->token);
 	main->token = ft_return_head(main->token);
-	ft_print_lst(main->token);
+	// ft_print_lst(main->token);
 	pidchild = fork();
 	// Qui il processo che gestisce minishell si ferma
 	if (pidchild != 0)
@@ -110,14 +110,14 @@ void	ft_execute_command(char *line, t_main *main)
 			// 		ft_check_envi(main->token->value))
 			// 	main->token = ft_add_var_to_env(main->token);
 			// // main->copy_env = ft_add_envi(main->token->value, main);
-<<<<<<< HEAD
-=======
-			// else if (main->redirections)
-			// 	main->token = ft_execute_redirection(main->token);
-			// else
-			// // Qui entra se il comando bultin é errato o se non é da gestirte
-			// 	main->token = ft_execute_exeve(main->token);
->>>>>>> 3b443c0100100717225c5d3263a325ac0ae6683e
+// <<<<<<< HEAD
+// =======
+// 			// else if (main->redirections)
+// 			// 	main->token = ft_execute_redirection(main->token);
+// 			// else
+// 			// // Qui entra se il comando bultin é errato o se non é da gestirte
+// 			// 	main->token = ft_execute_exeve(main->token);
+// >>>>>>> 3b443c0100100717225c5d3263a325ac0ae6683e
 			c++;
 		}
 		exit(0);
