@@ -119,7 +119,7 @@ void		ft_check_redirection(char *line, t_main *main);
 // DIR Execute
 void		ft_execute_command(char *line, t_main *main);
 void		ft_execute_dollar(t_token *token);
-void		ft_print_matrix(t_token *token);
+void		ft_store_matrix(t_token *token, char **matrix);
 t_token		*ft_execute_enviroment(t_token *token, char *var_add);
 t_token		*ft_execute_exeve(t_token *token);
 int			ft_check_envi(char *line);

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 21:05:44 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/16 21:46:32 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void	ft_execute_command(char *line, t_main *main)
 	}
 	if (read(file_desc[0], NULL, 1))
 	{
-		ft_free_matrix(main->copy_env);
-		main->copy_env = ft_get_next_line(file_desc[0]);
+		ft_free_matrix(main->set_variables);
+		main->set_variables = ft_get_next_line(file_desc[0]);
 	}
 }

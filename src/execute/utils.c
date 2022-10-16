@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:43:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 21:03:19 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/16 21:48:35 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ void	ft_execute_dollar(t_token *token)
 	}
 }
 
-void	ft_print_matrix(t_token *token)
+void	ft_store_matrix(t_token *token, char **matrix)
 {
 	int	i;
 
 	i = 0;
 	dup2(token->fd_mini[1], STDOUT_FILENO);
 	printf("%d\n", token->fd_mini[1]);
-	while (token->main->set_variables[i])
+	while (matrix[i])
 	{
-		printf("%s\n", token->main->set_variables[i]);
+		printf("%s\n", matrix[i]);
 		i++;
 	}
 	dup2(token->stdoutpt, STDOUT_FILENO);
