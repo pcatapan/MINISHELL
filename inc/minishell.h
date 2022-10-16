@@ -60,6 +60,7 @@ typedef struct s_main
 	int			dub_quotes;
 	int			sin_quotes;
 	char		**copy_env;
+	char		**copy_set;
 	bool		op_logic;
 	bool		error;
 	bool		redirections;
@@ -91,6 +92,7 @@ void		ft_putendl_fd(char *s, int fd);
 char		*ft_strtrim(char const *s1, char const *set);
 t_token		*ft_lstnew(void *content, t_main *main);
 size_t		ft_strlen(char *s);
+char		**get_next_line(int fd);
 
 // free.c
 void		ft_free_matrix(char **matrix);
@@ -132,6 +134,8 @@ void		ft_set_redirections(t_token *token);
 t_token		*ft_return_head(t_token *list);
 
 // DIR Built_in
+void		ft_pwd(t_token *token, int fd[2]);
+void		ft_search_builtin(t_token *token, int fd[2], int fd_pipe[2]);
 int			ft_check_builtin(t_token *token);
 t_token		*ft_execute_builtin(t_token *s_token);
 void		ft_echo(t_token *token, int fd[2]);

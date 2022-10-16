@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 09:31:46 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/02/22 12:19:09 by fgrossi          ###   ########.fr       */
+/*   Created: 2022/10/16 18:28:58 by aanghel           #+#    #+#             */
+/*   Updated: 2022/10/16 19:39:22 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+ #include "../../inc/minishell.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <stdarg.h>
+char	**get_next_line(int fd)
+{
+	char	a[999999];
+	char	buffer[1];
+	char	*new_a;
+	int		i;
+	char	**set;
 
-int				ft_printf(const char *str, ...);
-int				ft_putstr_v2(char *str);
-int				ft_putnbr(int n);
-int				ft_put_unsigned(unsigned int n);
-int				ft_putchar(int c);
+	a[i] = 0;
 
-#endif
+	while (read(fd, buffer, 1) == 1)
+	{
+		a[i] = buffer[0];
+		a[i + 1] = '\0';
+		if (a[i] == '\0')
+			break ;
+		i++;
+	}
+	new_a = malloc(i + 1);
+	i = -1;
+	while (a[++i])
+		new_a[i] = a[i];
+	new_a[i] = '\0';
+	set = ft_split_original(new_a, '\n');
+	return (set);
+}

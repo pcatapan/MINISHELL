@@ -3,85 +3,116 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/27 16:18:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/28 09:04:50 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/01/24 16:14:55 by fgrossi           #+#    #+#             */
+/*   Updated: 2022/10/16 15:56:12 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_write(char *str)
+static void	ft_digit(uintptr_t nb, char *base)
+{
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		ft_digit(-nb, base);
+	}
+	if (nb >= 16)
+	{
+		ft_digit(nb / 16, base);
+		ft_putchar(base[nb % 16]);
+	}
+	else if (nb >= 0)
+	{
+		ft_putchar(base[nb % 16]);
+	}
+}
+
+int	ft_len(uintptr_t n)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
+	if (n == 0)
+		return (1);
+	while (n > 0)
 	{
-		write (1, "(null)", 6);
-		return (6);
-	}	
-	while (str[i] != '\0')
-	{
-		write (1, &str[i], 1);
+		n = n / 16;
 		i++;
 	}
 	return (i);
 }
 
-int	ft_printf(const char *str, ...)
+unsigned int	ft_puthex(uintptr_t num, char lett)
 {
-	int		i;
 	int		count;
-	va_list	var;
+	char	*base;
 
-	i = 0;
-	count = 0;
-	va_start(var, str);	
-	while(str[i] != '%')
-		count += ft_char(str[i++]);
-	while (str[i] != '%')
-		i++;
-	while (str[i] != '\0')
+	count = ft_len(num);
+	if (lett == 'p')
 	{
-		if (str[i] == 's')
-			count += ft_write(va_arg(var, char *));
-		else if (str[i] == 'c')
-			count += ft_char(va_arg(var, int));
-		else if (str[i] == 'p')
-			count += ft_putesa(va_arg(var, uintptr_t));
-		else if (str[i] == 'd' || str[i] == 'i')
-			count += ft_putnumber(va_arg(var,int));
-		else if (str[i] == 'u')
-			count += ft_unsigned(va_arg(var,unsigned int));
-		else if (str[i] == 'x' || str[i] == 'X')
-			count += ft_esadecimal(va_arg(var, unsigned int), str[i]);
-		else if (str[i] == '%' && str[i + 1] == '%')
-		{
-			write(1, "%%", 1);
-			count++;
-			i++;
-		}
-		else if (str[i] != '%')
-		{
-			write (1, &str[i], 1);
-			count++;
-		}
-		i++;
+		write(1, "0x", 2);
+		count += 2;
+		base = "0123456789abcdef";
+		ft_digit(num, base);
 	}
-	va_end(var);
+	else if (lett == 'X')
+	{
+		base = "0123456789ABCDEF";
+		ft_digit(num, base);
+	}
+	else
+	{
+		base = "0123456789abcdef";
+		ft_digit(num, base);
+	}
 	return (count);
 }
 
+int	ft_formats(va_list args, const char format)
+{
+	int	count;
 
-// int main()
-// {
-// 	int ret;
- 	
-//  	ret = 5;
-//   	ft_printf("%d",ft_printf(" %% "));
-//   	//printf("\n\n");
-//   	printf("%d", printf(" %% "));
-//  }
+	count = 0;
+	if (format == 'c')
+		count += ft_putchar(va_arg(args, int));
+	else if (format == 's')
+		count += ft_putstr_v2(va_arg(args, char *));
+	else if (format == 'p')
+		count += ft_puthex(va_arg(args, uintptr_t), format);
+	else if (format == 'd' || format == 'i')
+		count += ft_putnbr(va_arg(args, int));
+	else if (format == 'u')
+		count += ft_put_unsigned(va_arg(args, unsigned int));
+	else if (format == 'x' || format == 'X')
+		count += ft_puthex(va_arg(args, unsigned int), format);
+	else if (format == '%')
+		count += ft_putchar('%');
+	return (count);
+}
 
+int	ft_printf(const char *str, ...)
+{
+	int		i;
+	va_list	args;
+	int		count;
+
+	i = 0;
+	count = 0;
+	va_start(args, str);
+	while (str[i])
+	{
+		if (str[i] == '%')
+		{
+			count += ft_formats(args, str[i + 1]);
+			i++;
+		}
+		else
+			count += ft_putchar(str[i]);
+		i++;
+	}
+	va_end(args);
+	return (count);
+}
