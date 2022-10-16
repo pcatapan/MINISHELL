@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/16 01:38:54 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/16 15:55:56 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,8 @@ void	ft_redirections(t_token *token, t_main *main)
 	pid_t	pidchild;
 
 	pidchild = fork();
-<<<<<<< HEAD:src/redirections.c
 	// Qui il processo che gesticse le esecuzioni si ferma
 	// La chiusura della write è irreversibile
-=======
->>>>>>> 3b443c0100100717225c5d3263a325ac0ae6683e:src/redirection/redirections.c
 	if (pidchild != 0)
 		waitpid(pidchild, 0, 0);
 	while (token && pidchild == 0)

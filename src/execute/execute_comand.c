@@ -6,34 +6,61 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 01:37:38 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/16 18:54:45 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+void	ft_qualcossa(t_token *token)
+{
+	// if (ft_check_builtin(main->token) && !main->redirections)
+	// 	main->token = ft_execute_builtin(main->token);
+	// else // Qui entra se il comando bultin é errato o se non é da gestirte
+	token = ft_execute_exeve(token);
+	// else if (main->redirections)
+	// 	main->token = ft_execute_redirection(main->token);
+	// else if (ft_strchr(main->token->value, '=') && \
+	// 		ft_check_envi(main->token->value))
+	// 	main->token = ft_add_var_to_env(main->token);
+	// // main->copy_env = ft_add_envi(main->token->value, main);
+}
+
 void	ft_exceve(t_token *token, int fd[2])
 {
-	if (token->prev && token->prev->or)
+	if (token->prev)
 	{
-		if (!token->res)
-		{
-			write(fd[1], "1", 1);
+		if (token->priority == (token->prev->priority - 1))
+			ft_qualcossa(token);
+		else if (token->priority == (token->prev->priority - 2))
 			exit(0);
+		if (token->prev->or)
+		{
+			if (!token->res)
+			{
+				write(fd[1], "1", 1);
+				exit(0);
+			}
+			if (execve(token->command, token->value, token->main->copy_env))
+			{
+				printf(RED"%s: coomand not found\n"COLOR_RES, token->value[0]);
+				write(fd[1], "1", 1);
+				exit(0);
+			}
 		}
-		if (execve(token->command, token->value, token->main->copy_env))
+		else if (token->prev->and)
 		{
-			printf(RED"%s: coomand not found\n"COLOR_RES, token->value[0]);
-			write(fd[1], "1", 1);
-			exit(0);
-		}
-	}
-	else if (token->prev && token->prev->and)
-	{
-		if (token->res)
-		{
-			write(fd[1], "1", 1);
-			exit(0);
+			if (token->res)
+			{
+				write(fd[1], "1", 1);
+				exit(0);
+			}
+			if (execve(token->command, token->value, token->main->copy_env))
+			{
+				printf(RED"%s: command not found\n"COLOR_RES, token->value[0]);
+				write(fd[1], "1", 1);
+				exit(0);
+			}
 		}
 		if (execve(token->command, token->value, token->main->copy_env))
 		{
@@ -42,12 +69,16 @@ void	ft_exceve(t_token *token, int fd[2])
 			exit(0);
 		}
 	}
-	else if (execve(token->command, token->value, token->main->copy_env))
+	else
 	{
-		printf(RED"%s: command not found\n"COLOR_RES, token->value[0]);
-		write(fd[1], "1", 1);
-		exit(0);
+		if (execve(token->command, token->value, token->main->copy_env))
+		{
+			printf(RED"%s: command not found\n"COLOR_RES, token->value[0]);
+			write(fd[1], "1", 1);
+			exit(0);
+		}
 	}
+	exit(0);
 }
 
 t_token	*ft_execute_exeve(t_token *token)
@@ -83,43 +114,40 @@ void	ft_execute_command(char *line, t_main *main)
 	pid_t	pidchild;
 	int		c;
 	int		lstsize;
-	int		file_desc;
+	int		filse_desc[2];
 
 	c = 0;
+	main->token->fd_mini[1] = filse_desc[1];
+	main->token->fd_mini[0] = filse_desc[0];
 	lstsize = ft_lstsize(main->token);
-	// ft_print_lst(main->token);
 	main->token = ft_return_head(main->token);
-	ft_print_lst(main->token);
+	// ft_print_lst(main->token);
 	pidchild = fork();
 	// Qui il processo che gestisce minishell si ferma
 	if (pidchild != 0)
+	{
+		close(main->token->fd_mini[1]);
 		wait(0);
+	}
 	else
 	{
-		// file_desc = open("test.txt", O_WRONLY | O_APPEND);
-		// dup2(file_desc, STDOUT_FILENO);
+		close(main->token->fd_mini[0]);
 		while (c < lstsize)
 		{
+			ft_execute_dollar(main->token);
 			// if (ft_check_builtin(main->token) && !main->redirections)
 			// 	main->token = ft_execute_builtin(main->token);
-			// else // Qui entra se il comando bultin é errato o se non é da gestirte
-			main->token = ft_execute_exeve(main->token);
+			/*else*/ if (ft_strchr(main->token->value[0], '=') && \
+						ft_check_envi(main->token->value[0]))
+				main->token = ft_execute_enviroment(main->token, main->token->value[0]);
+			else // Qui entra se il comando bultin é errato o se non é da gestirte
+				main->token = ft_execute_exeve(main->token);
 			// else if (main->redirections)
 			// 	main->token = ft_execute_redirection(main->token);
-			// else if (ft_strchr(main->token->value, '=') && \
-			// 		ft_check_envi(main->token->value))
-			// 	main->token = ft_add_var_to_env(main->token);
 			// // main->copy_env = ft_add_envi(main->token->value, main);
-<<<<<<< HEAD
-=======
-			// else if (main->redirections)
-			// 	main->token = ft_execute_redirection(main->token);
-			// else
-			// // Qui entra se il comando bultin é errato o se non é da gestirte
-			// 	main->token = ft_execute_exeve(main->token);
->>>>>>> 3b443c0100100717225c5d3263a325ac0ae6683e
 			c++;
 		}
 		exit(0);
 	}
+	// ft_free_matrix(main->copy_env);
 }

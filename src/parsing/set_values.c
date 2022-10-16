@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_values.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:57:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/11 21:46:55 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/16 17:31:44 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ void	ft_divide_line(char *line, t_token *token, t_main *main)
 	i = 0;
 	while (tmp[i])
 	{
-		tmp_comand = ft_strdup(tmp[i]);
-		token->value[i + 1] = ft_clear_value(tmp_comand);
-		free(tmp_comand);
+		token->value[i + 1] = ft_strdup(tmp[i]);
 		i++;
 	}
 	token->value[i + 1] = NULL;

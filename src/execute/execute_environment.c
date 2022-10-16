@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environment.c                                      :+:      :+:    :+:   */
+/*   execute_environment.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 02:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/06 17:13:42 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/16 18:43:46 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
-char	**ft_add_envi(char *line, t_main *main)
+char	**ft_add_envi(char *var_add, t_main *main)
 {
 	int		i;
 	char	**temp;
@@ -30,10 +30,10 @@ char	**ft_add_envi(char *line, t_main *main)
 		if (!temp[i])
 			break ;
 	}
-	temp[i++] = ft_strdup(line);
+	temp[i++] = ft_strdup(var_add);
 	temp[i] = NULL;
 	ft_free_matrix(main->copy_env);
-	free(line);
+	//free(var_add);
 	return (temp);
 }
 
@@ -51,4 +51,12 @@ int	ft_check_envi(char *line)
 		i++;
 	}
 	return (1);
+}
+
+t_token	*ft_execute_enviroment(t_token *token, char *var_add)
+{
+	// dup2(fd[1], STDOUT_FILENO);
+	token->main->copy_env = ft_add_envi(var_add, token->main);
+	ft_print_matrix(token);
+	return (token->next);
 }

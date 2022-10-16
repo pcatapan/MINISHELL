@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 20:59:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/15 16:59:42 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/16 17:32:18 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ void	ft_check_syntax(char *line, t_main *main)
 		ft_check_operetor_logic(line, main);
 	if (main->op_logic && !main->error)
 		ft_check_brackets(line, main);
-	if (main->dub_quotes != 0 || ft_strchr(line, '$'))
-	{
-		line = ft_expand_dollar(line, main);
-		main->sub_shell = true;
-	}
+	// if (main->dub_quotes != 0 || ft_strchr(line, '$'))
+	// {
+	// 	line = ft_expand_dollar(line, main);
+	// 	main->sub_shell = true;
+	// }
 }

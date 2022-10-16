@@ -35,10 +35,12 @@ typedef struct s_token
 {
 	int				res;
 	int				priority;
+	int				fd_mini[2];
+	int				stdinput;
+	int				stdoutpt;
 	char			**value;
 	char			*command;
 	char			*name_file;
-	int				stdinput;
 	bool			or;
 	bool			and;
 	bool			pipe;
@@ -111,13 +113,13 @@ char		*ft_expand_heredoc(char *line, t_main *main);
 void		ft_check_syntax(char *line, t_main *main);
 void		ft_check_redirection(char *line, t_main *main);
 
-// environment.c
-int			ft_check_envi(char *line);
-char		**ft_add_envi(char *line, t_main *main);
-
 // DIR Execute
 void		ft_execute_command(char *line, t_main *main);
-void		ft_loop_command(t_main *main, int fd[2]);
+void		ft_execute_dollar(t_token *token);
+void		ft_print_matrix(t_token *token);
+t_token		*ft_execute_enviroment(t_token *token, char *var_add);
+t_token		*ft_execute_exeve(t_token *token);
+int			ft_check_envi(char *line);
 
 // DIR Parsing
 char		*find_path(char *cmd, t_main *main);
