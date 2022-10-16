@@ -6,7 +6,7 @@
 /*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 15:57:10 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/10/16 16:37:57 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,10 @@ void	ft_execute_command(char *line, t_main *main)
 		// dup2(file_desc, STDOUT_FILENO);
 		while (c < lstsize)
 		{
-			// if (ft_check_builtin(main->token) && !main->redirections)
-			// 	main->token = ft_execute_builtin(main->token);
-			// else // Qui entra se il comando bultin é errato o se non é da gestirte
-			main->token = ft_execute_exeve(main->token);
+			if (ft_check_builtin(main->token) && !main->redirections)
+				main->token = ft_execute_builtin(main->token);
+			else // Qui entra se il comando bultin é errato o se non é da gestirte
+				main->token = ft_execute_exeve(main->token);
 			// else if (main->redirections)
 			// 	main->token = ft_execute_redirection(main->token);
 			// else if (ft_strchr(main->token->value, '=') && \
