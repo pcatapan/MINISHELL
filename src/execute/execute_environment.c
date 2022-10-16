@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 02:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 20:05:54 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/16 21:02:48 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ char	**ft_add_envi(char *var_add, t_main *main)
 	char	**temp;
 
 	i = 0;
-	while (main->copy_env[i])
+	while (main->set_variables[i])
 		i++;
 	temp = malloc(sizeof(char *) * (i + 2));
 	if (!temp)
 		return (NULL);
 	i = -1;
-	while (main->copy_env[++i])
+	while (main->set_variables[++i])
 	{
-		temp[i] = ft_strdup(main->copy_env[i]);
+		temp[i] = ft_strdup(main->set_variables[i]);
 		if (!temp[i])
 			break ;
 	}
 	temp[i++] = ft_strdup(var_add);
 	temp[i] = NULL;
-	ft_free_matrix(main->copy_env);
+	ft_free_matrix(main->set_variables);
 	//free(var_add);
 	return (temp);
 }
@@ -55,7 +55,7 @@ int	ft_check_envi(char *line)
 
 t_token	*ft_execute_enviroment(t_token *token, char *var_add)
 {
-	token->main->copy_env = ft_add_envi(var_add, token->main);
+	token->main->set_variables = ft_add_envi(var_add, token->main);
 	ft_print_matrix(token);
 	return (token->next);
 }

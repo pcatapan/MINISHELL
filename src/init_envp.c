@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_envp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 19:33:41 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/10/16 20:47:19 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,6 @@ void	ft_change_shlvl(char **copy_envp, char *str, int index)
 	free(num_str);
 }
 
-void	ft_add_shell_env(char **copy_envp, char **envp, int i)
-{
-	char	*tmp;
-	char	*tmp2;
-
-	copy_envp[i++] = ft_strdup("HISTSIZE=2000");
-	tmp = ft_searchstrchr("HOME=", envp);
-	tmp2 = ft_strjoin("HISTFILE=", tmp);
-	copy_envp[i++] = ft_strjoin(tmp, FILE_HISTORY);
-	free(tmp);
-	free(tmp2);
-	copy_envp[i] = NULL;
-}
-
 /**
  * @brief Copy all parameter of variable envp
  * 
@@ -58,7 +44,7 @@ char	**ft_init_envp(char **envp)
 	i = 0;
 	while (envp[i])
 		i++;
-	copy_envp = malloc(sizeof(char *) * (i + 2));
+	copy_envp = malloc(sizeof(char *) * (i + 1));
 	i = -1;
 	while (envp[++i])
 	{
@@ -75,6 +61,23 @@ char	**ft_init_envp(char **envp)
 			exit(write(1, "Error setting up env\n", 21));
 		}				
 	}
-	ft_add_shell_env(copy_envp, envp, i);
+	copy_envp[i] = NULL;
 	return (copy_envp);
+}
+
+char	**ft_init_set(char	**envp)
+{
+	char	**set;
+	char	*tmp;
+	char	*tmp2;
+
+	set = malloc(sizeof(char *) * 3);
+	set[0] = ft_strdup("HISTSIZE=2000");
+	tmp = ft_searchstrchr("HOME=", envp);
+	tmp2 = ft_strjoin("HISTFILE=", tmp);
+	set[1] = ft_strjoin(tmp, FILE_HISTORY);
+	free(tmp);
+	free(tmp2);
+	set[2] = NULL;
+	return (set);
 }

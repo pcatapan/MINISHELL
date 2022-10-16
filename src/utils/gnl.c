@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:28:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/16 20:08:30 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/16 21:08:00 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 char	**ft_get_next_line(int fd)
 {
-	char	a[999999];
+	char	array[999999];
 	char	buffer[1];
 	char	*new_a;
 	int		i;
 	char	**set;
 
-	a[i] = 0;
+	i = 0;
+	array[i] = 0;
 	while (read(fd, buffer, 1) == 1)
 	{
-		a[i] = buffer[0];
-		a[i + 1] = '\0';
-		if (a[i] == '\0')
+		printf("SONO QUI\n");
+		array[i] = buffer[0];
+		array[i + 1] = '\0';
+		if (array[i] == '\0')
 			break ;
 		i++;
 	}

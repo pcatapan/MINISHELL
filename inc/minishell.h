@@ -55,12 +55,12 @@ typedef struct s_token
 
 typedef struct s_main
 {
+	char		**copy_env;
+	char		**set_variables;
 	int			open_brackets;
 	int			close_brackets;
 	int			dub_quotes;
 	int			sin_quotes;
-	char		**copy_env;
-	char		**copy_set;
 	bool		op_logic;
 	bool		error;
 	bool		redirections;
@@ -99,6 +99,7 @@ void		ft_free_matrix(char **matrix);
 
 // init_envp.c
 char		**ft_init_envp(char **envp);
+char		**ft_init_set(char	**envp);
 
 // prompt.c
 int			ft_prompt(char **envp, t_main *main);
