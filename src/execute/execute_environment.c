@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 02:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 21:49:58 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/17 20:27:53 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ int	ft_check_envi(char *line)
 t_token	*ft_execute_enviroment(t_token *token, char *var_add)
 {
 	token->main->set_variables = ft_add_envi(var_add, token->main);
-	ft_store_matrix(token, token->main->set_variables);
+	// ft_store_matrix(token, token->main->set_variables);
 	return (token->next);
 }

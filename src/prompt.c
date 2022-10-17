@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:57:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 19:51:58 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/17 20:37:33 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ char	*ft_set_term(char *name_shell)
 	char			*rtr;	
 
 	if (tcgetattr(STDIN_FILENO, &old))
-		perror("tcgetattr");
+		perror("tcgetattr1");
 	new = old;
 	new.c_lflag &= ~(ECHOCTL);
 	if (tcsetattr(STDIN_FILENO, TCSANOW | TCSAFLUSH, &new))
-		perror("tcsetattr");
+		perror("tcsetattr2");
 	rtr = readline(name_shell);
 	if (tcsetattr(STDIN_FILENO, TCSANOW | TCSAFLUSH, &old))
-		perror("tcsetattr");
+		perror("tcsetattr3");
 	free(name_shell);
 	return (rtr);
 }

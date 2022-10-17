@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 19:55:37 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/17 21:06:10 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_env(t_token *token, int fd[2])
 
 	i = 0;
 	printf("nostro\n");
-	while (token->main->copy_env[i])// Sostituito copy_set
+	while (token->main->copy_env[i])
 	{
 		ft_printf("%s\n", token->main->copy_env[i]);
 		i++;
@@ -113,7 +113,7 @@ t_token	*ft_execute_builtin(t_token *token)
 			dup2(fd_pipe[1], STDOUT_FILENO);
 		ft_search_builtin(token, fd, fd_pipe);
 	}
-	ft_end_execute_(token, fd, fd_pipe);
+	ft_end_execute_(token, fd_pipe);
 	return (token);
 }
 

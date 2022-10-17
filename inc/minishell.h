@@ -2,6 +2,7 @@
 # define MINISHELL_H
 # include "../PRINTF/ft_printf.h"
 # include <fcntl.h>
+# include <errno.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -140,7 +141,7 @@ void		ft_search_builtin(t_token *token, int fd[2], int fd_pipe[2]);
 int			ft_check_builtin(t_token *token);
 t_token		*ft_execute_builtin(t_token *s_token);
 void		ft_echo(t_token *token, int fd[2]);
-t_token		*ft_end_execute_(t_token *token, int fd[2], int fd_pipe[2]);
+t_token		*ft_end_execute_(t_token *token, int fd_pipe[2]);
 
 extern void	rl_replace_line(const char *text, int clear_undo);
 
