@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 23:32:54 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/17 21:33:16 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/26 15:57:19 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,18 @@ int	ft_check_builtin(t_token *token)
 
 t_token	*ft_end_execute_(t_token *token, int fd_pipe[2])
 {
-	// char	*buffer;
-
-	// buffer = (char *)malloc(sizeof(char) * 42);
 	if (token->next)
 		token = token->next;
-	printf("SONO QUI\n");
 	// else
 	// 	token->res = read(fd[0], buffer, 42);
 	// free(buffer);
-	if (token->prev && token->prev->pipe)
+	if (token->prev && token->prev->pipe && token->stdinput == STDIN_FILENO)
 	{
+		token->dup = dup(STDIN_FILENO);
 		dup2(fd_pipe[0], STDIN_FILENO);
 		token->stdinput = fd_pipe[0];
 	}
+	else if (token->stdinput != STDIN_FILENO)
+		dup2(token->dup, STDIN_FILENO);
 	return (token);
 }

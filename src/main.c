@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 19:10:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 20:43:52 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:42:52 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char **argv, char **envp)
 	if (!main || !main->token)
 		return (0);
 	main->copy_env = ft_init_envp(envp);
-	main->set_variables = ft_init_set(main->copy_env);
 	signal(SIGINT, ft_sig_handel);
 	signal(SIGQUIT, ft_sig_handel);
 	while (1)

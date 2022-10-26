@@ -36,7 +36,7 @@ typedef struct s_token
 {
 	int				res;
 	int				priority;
-	int				fd_mini[2];
+	int				dup;
 	int				stdinput;
 	int				stdoutpt;
 	char			**value;

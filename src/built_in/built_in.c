@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/17 21:06:10 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:13:52 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ void	ft_search_builtin(t_token *token, int fd[2], int fd_pipe[2])
 {
 	if (ft_strcmp(token->value[0], "echo"))
 		ft_echo(token, fd);
-	 else if (ft_strcmp(token->value[0], "env"))
-	 	ft_env(token, fd);
+	else if (ft_strcmp(token->value[0], "env"))
+		ft_env(token, fd);
 	else if (ft_strcmp(token->value[0], "unset"))
 		ft_unset(token, fd);
 	else if (ft_strcmp(token->value[0], "pwd"))
@@ -130,7 +130,7 @@ void	ft_search_builtin(t_token *token, int fd[2], int fd_pipe[2])
 	else if (ft_strcmp(token->value[0], "cd"))
 		ft_cd(token, fd);
 	// else if (ft_strcmp(token->value[0], "export"))
-	// 	ft_export(token, fd);
+		// ft_export(token, fd);
 	// else if (ft_strcmp(token->value[0], "exit"))
 	// 	ft_exit(token, fd);
 	// else

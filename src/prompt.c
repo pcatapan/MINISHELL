@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:57:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/17 20:37:33 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:58:14 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	ft_prompt(char **envp, t_main *main)
 {
 	char			*line;
 
-	line = ft_get_line_input(envp);
+	line = ft_get_line_input(main->copy_env);
 	if (!line)
 	{
 		printf(RED "\texit\n" COLOR_RES);
@@ -106,7 +106,6 @@ int	ft_prompt(char **envp, t_main *main)
 		{
 			ft_parsing(line, main);
 			ft_execute_command(line, main);
-			// ft_print_lst(main->token);
 		}
 	}
 	return (0);
