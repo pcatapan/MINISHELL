@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:43:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/26 16:32:25 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:41:43 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ void	ft_store_matrix(t_token *token, char **matrix)
 		printf("%s\n", matrix[i]);
 		i++;
 	}
-	dup2(token->stdoutpt, STDOUT_FILENO);
+	dup2(token->stdoutput, STDOUT_FILENO);
 }

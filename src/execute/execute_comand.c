@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_comand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/26 17:06:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/26 18:04:36 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_qualcosa(t_token *token)
 		token = ft_execute_enviroment(token, token->value[0]);
 	else // Qui entra se il comando bultin é errato o se non é da gestirte
 		token = ft_execute_exeve(token);
+	exit(0);
 }
 
 void	ft_exceve(t_token *token)
@@ -30,7 +31,7 @@ void	ft_exceve(t_token *token)
 		if (token->priority == (token->prev->priority - 1))
 		{
 			printf("QUALCOSA\n");
-			ft_qualcossa(token);
+			ft_qualcosa(token);
 		}
 		else if (token->priority == (token->prev->priority - 2))
 			exit(0);
@@ -107,7 +108,7 @@ void	ft_execute_command(char *line, t_main *main)
 	c = 0;
 	lstsize = ft_lstsize(main->token);
 	main->token = ft_return_head(main->token);
-	// ft_print_lst(main->token);
+	ft_print_lst(main->token);
 	while (c < lstsize)
 	{
 		ft_execute_dollar(main->token);
@@ -116,7 +117,7 @@ void	ft_execute_command(char *line, t_main *main)
 		else if (ft_strchr(main->token->value[0], '=') && ft_check_envi(main->token->value[0]))
 			main->token = ft_execute_enviroment(main->token, main->token->value[0]);
 		else if (main->redirections)
-			main->token = ft_execute_redirection(main->token);
+			main->token = ft_redirections(main->token, main);
 		else // Qui entra se il comando bultin é errato o se non é da gestirte
 			main->token = ft_execute_exeve(main->token);
 		c++;

@@ -38,7 +38,7 @@ typedef struct s_token
 	int				priority;
 	int				dup;
 	int				stdinput;
-	int				stdoutpt;
+	int				stdoutput;
 	char			**value;
 	char			*command;
 	char			*name_file;
@@ -148,12 +148,12 @@ extern void	rl_replace_line(const char *text, int clear_undo);
 //DIR Redirection
 int			ft_heredoc(t_token *token, t_main *main);
 int			ft_write_fd(int fd, char *limiter, t_main *main);
-void		ft_redirections(t_token *token, t_main *main);
 void		ft_input_redirect(t_token *token, t_main *main);
 void		ft_output_redirect(t_token *token, t_main *main);
-void		ft_redirections(t_token *token, t_main *main);
+t_token		*ft_redirections(t_token *token, t_main *main);
 
 // temporary
 void		ft_print_lst(t_token *a);
+void		ft_qualcosa(t_token *token);
 
 #endif

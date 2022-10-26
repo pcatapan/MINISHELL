@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
+#    By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/10/16 19:41:48 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/10/26 17:58:11 by aanghel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJC = $(SRC:%.c=%.o)
 
 CC = gcc
 
-USER = pcatapan
+USER = aanghel
 
 #LDFLAGS = -L/opt/homebrew/opt/readline/lib
 #CPPFLAGS = -I/opt/homebrew/opt/readline/include
@@ -48,7 +48,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@rm -f 42minishell_history
-	@rm -f file
+	@rm -f fil*
 	@rm -f heredoc
 	
 re: fclean all
