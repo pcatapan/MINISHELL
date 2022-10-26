@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 23:32:54 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/26 15:57:19 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:35:07 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	ft_check_builtin(t_token *token)
 t_token	*ft_end_execute_(t_token *token, int fd_pipe[2])
 {
 	if (token->next)
+	{
 		token = token->next;
-	// else
-	// 	token->res = read(fd[0], buffer, 42);
-	// free(buffer);
+		token->res = token->prev->res;
+	}
 	if (token->prev && token->prev->pipe && token->stdinput == STDIN_FILENO)
 	{
 		token->dup = dup(STDIN_FILENO);

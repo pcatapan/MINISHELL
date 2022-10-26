@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+         #
+#    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/10/26 17:58:11 by aanghel          ###   ########.fr        #
+#    Updated: 2022/10/26 19:45:50 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC =	./PRINTF/*.c \
 		./src/syntax/*.c \
 		./src/parsing/*.c \
 		./src/execute/*.c \
+		./src/execute/execve/*.c \
 		./src/built_in/*.c \
 		./src/redirection/*.c 
 
@@ -25,7 +26,7 @@ OBJC = $(SRC:%.c=%.o)
 
 CC = gcc
 
-USER = aanghel
+USER = pcatapan
 
 #LDFLAGS = -L/opt/homebrew/opt/readline/lib
 #CPPFLAGS = -I/opt/homebrew/opt/readline/include
