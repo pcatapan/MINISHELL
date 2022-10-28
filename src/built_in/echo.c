@@ -14,10 +14,18 @@
 
 void	ft_echo(t_token *token, int fd[2])
 {
-	if (execve(token->command, token->value, token->main->copy_env))
+	int	i;
+
+	i = 1;
+	if (ft_strcmp(token->value[1], "-n") != 0)
+		i++;
+	while (token->value[i])
 	{
-		perror(RED"ERRORE1"COLOR_RES);
-		write(fd[1], "1", 1);
-		exit(0);
+		printf("%s", ft_clear_value(token->value[i]));
+		if (token->value[i + 1])
+			printf(" ");
+		i++;
 	}
+	if (ft_strcmp(token->value[1], "-n") == 0)
+		printf("\n");
 }

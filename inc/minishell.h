@@ -57,7 +57,7 @@ typedef struct s_token
 typedef struct s_main
 {
 	char		**copy_env;
-	char		**set_variables;
+	char		**export_env;
 	int			open_brackets;
 	int			close_brackets;
 	int			dub_quotes;
@@ -73,6 +73,7 @@ typedef struct s_main
 // DIR Utils
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_strchr(const char *s, int c);
+int			ft_strchr_until(const char *s, int c);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_lstsize(t_token *lst_or);
 int			ft_atoi(const char *str);
@@ -93,6 +94,9 @@ void		ft_putendl_fd(char *s, int fd);
 char		*ft_strtrim(char const *s1, char const *set);
 t_token		*ft_lstnew(void *content, t_main *main);
 size_t		ft_strlen(char *s);
+size_t		ft_matrixlen(char **s);
+int			ft_find_in_env(char **matrix, char *str);
+int			ft_find_in_exp(char **matrix, char *str);
 char		**ft_get_next_line(int fd);
 
 // free.c
@@ -136,12 +140,17 @@ void		ft_set_redirections(t_token *token);
 t_token		*ft_return_head(t_token *list);
 
 // DIR Built_in
-void		ft_pwd(t_token *token, int fd[2]);
-void		ft_search_builtin(t_token *token, int fd[2], int fd_pipe[2]);
+void		ft_search_builtin(t_token *token, int fd[2]);
 int			ft_check_builtin(t_token *token);
 t_token		*ft_execute_builtin(t_token *s_token);
-void		ft_echo(t_token *token, int fd[2]);
 t_token		*ft_end_execute_(t_token *token, int fd_pipe[2]);
+void		ft_echo(t_token *token, int fd[2]);
+void		ft_export(t_token *token);
+void		ft_cd(t_token *token);
+void		ft_pwd(void);
+void		ft_env(t_token *token);
+void		ft_unset(t_token *token);
+void		ft_exit(t_token *token);
 
 extern void	rl_replace_line(const char *text, int clear_undo);
 
@@ -155,5 +164,9 @@ t_token		*ft_redirections(t_token *token, t_main *main);
 // temporary
 void		ft_print_lst(t_token *a);
 void		ft_qualcosa(t_token *token);
+void		ft_execve_or(t_token *token);
+void		ft_execve_and(t_token *token);
+void		ft_execve_priority(t_token *token);
+char		*ft_clear_value(char *str);
 
 #endif

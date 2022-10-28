@@ -12,6 +12,34 @@
 
 #include "../../inc/minishell.h"
 
+int	ft_find_in_env(char **matrix, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+	{
+		if (ft_strncmp(matrix[i], str, ft_strchr_until(str, '=')) == 0)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+int	ft_find_in_exp(char **matrix, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+	{
+		if (ft_strncmp(matrix[i], str, ft_strlen(str)) == 0)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
 int	ft_check_builtin(t_token *token)
 {
 	if (ft_strcmp(token->value[0], "exit") || ft_strcmp(token->value[0], "env") \

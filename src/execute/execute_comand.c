@@ -91,10 +91,10 @@ void	ft_execute_command(char *line, t_main *main)
 	while (c < lstsize)
 	{
 		ft_execute_dollar(main->token);
-		// if (ft_check_builtin(main->token) && !main->redirections)
-		// 	main->token = ft_execute_builtin(main->token);
-		/*else*/ if (ft_strchr(main->token->value[0], '=') && ft_check_envi(main->token->value[0]))
-			main->token = ft_execute_enviroment(main->token, main->token->value[0]);
+		if (ft_check_builtin(main->token) && !main->redirections)
+			main->token = ft_execute_builtin(main->token);
+		// /*else*/ if (ft_strchr(main->token->value[0], '=') && ft_check_envi(main->token->value[0]))
+		// 	main->token = ft_execute_enviroment(main->token, main->token->value[0]);
 		else if (main->redirections)
 			main->token = ft_redirections(main->token, main);
 		else // Qui entra se il comando bultin é errato o se non é da gestirte

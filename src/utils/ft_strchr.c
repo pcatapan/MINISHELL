@@ -32,3 +32,17 @@ int	ft_strchr(const char *s, int c)
 		return (1);
 	return (0);
 }
+
+int	ft_strchr_until(const char *s, int c)
+{
+	size_t	i;
+	char	let;
+
+	i = 0;
+	let = c;
+	while (s[i] != let && s[i] != '\0')
+		i++;
+	if (s[i] == let)
+		return (i);
+	return (0);
+}

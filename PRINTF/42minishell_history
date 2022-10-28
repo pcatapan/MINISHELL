@@ -1,0 +1,12 @@
+pwd
+env
+unset LESS
+env
+export
+export ciao=52
+ls
+env
+env
+export porcodiooooooooooooo=234235345
+env
+set

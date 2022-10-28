@@ -26,7 +26,7 @@ OBJC = $(SRC:%.c=%.o)
 
 CC = gcc
 
-USER = pcatapan
+USER = fgrossi
 
 #LDFLAGS = -L/opt/homebrew/opt/readline/lib
 #CPPFLAGS = -I/opt/homebrew/opt/readline/include
