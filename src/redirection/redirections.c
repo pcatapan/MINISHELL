@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/26 18:08:51 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/29 00:07:01 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	ft_input_redirect(t_token *token, t_main *main)
 			perror(RED ERROR_FILE COLOR_RES);
 			write(fd, "1", 1);
 			exit(0);
-		}	
+		}
+			
 	}
 	token->stdinput = fd;
 }
@@ -77,9 +78,7 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 			ft_output_redirect(token, main);
 		if (token->input == 1 || token->heredoc == 1)
 			ft_input_redirect(token, main);
-		free(token->value[1]);
-		free(token->value[2]);
-		token->value[1] = NULL;
+		ft_delete_redirection(token);
 		ft_qualcosa(token);
 	}
 	main->redirections = false;
@@ -90,4 +89,33 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 	if (token->next)
 		token = token->next;
 	return (token);
+}
+
+void	ft_delete_redirection(t_token *token)
+{
+	int i;
+
+	i = 0;
+	token = ft_return_head(token);
+	while (token)
+	{
+		if (token->output || token->input || token->append || token->heredoc)
+		{
+			while (token->value[i])
+			{
+				if (ft_strcmp(token->value[i], "<")  \
+					|| ft_strcmp(token->value[i], "<<") \
+					|| ft_strcmp(token->value[i], ">") \
+					|| ft_strcmp(token->value[i], ">>"))
+				{
+					free(token->value[i]);
+					token->value[i] = NULL;
+				}
+				i++;
+			}
+		}
+		if (!token->next)
+			break ;
+		token = token->next;
+	}
 }

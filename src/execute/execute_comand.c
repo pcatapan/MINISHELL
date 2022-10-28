@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_comand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/26 19:52:15 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/29 00:25:52 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	ft_execute_command(char *line, t_main *main)
 		ft_execute_dollar(main->token);
 		if (ft_check_builtin(main->token) && !main->redirections)
 			main->token = ft_execute_builtin(main->token);
-		// /*else*/ if (ft_strchr(main->token->value[0], '=') && ft_check_envi(main->token->value[0]))
-		// 	main->token = ft_execute_enviroment(main->token, main->token->value[0]);
+		else if (ft_strchr(main->token->value[0], '=') && ft_check_envi(main->token->value[0]))
+			main->token = ft_execute_enviroment(main->token, main->token->value[0]);
 		else if (main->redirections)
 			main->token = ft_redirections(main->token, main);
 		else // Qui entra se il comando bultin é errato o se non é da gestirte

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
+#    By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/10/26 19:45:50 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/10/29 00:27:28 by aanghel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ USER = fgrossi
 
 FLAGS = #-Wall -Werror -Wextra #-g #-fsanitize=address
 
-# F_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
+#F_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
 FLAG_READLINE = -lreadline -lcurses -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 
@@ -50,7 +50,7 @@ fclean: clean
 	@rm -f $(NAME)
 	@rm -f 42minishell_history
 	@rm -f fil*
-	@rm -f heredoc
+	@rm -f .heredoc
 	
 re: fclean all
 
