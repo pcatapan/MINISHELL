@@ -128,6 +128,10 @@ void		ft_store_matrix(t_token *token, char **matrix);
 t_token		*ft_execute_enviroment(t_token *token, char *var_add);
 t_token		*ft_execute_exeve(t_token *token);
 int			ft_check_envi(char *line);
+//// DIR EXECVE
+void		ft_execve_or(t_token *token);
+void		ft_execve_and(t_token *token);
+void		ft_execve_priority(t_token *token);
 
 // DIR Parsing
 char		*find_path(char *cmd, t_main *main);
@@ -140,17 +144,17 @@ void		ft_set_redirections(t_token *token);
 t_token		*ft_return_head(t_token *list);
 
 // DIR Built_in
-void		ft_search_builtin(t_token *token, int fd[2]);
 int			ft_check_builtin(t_token *token);
-t_token		*ft_execute_builtin(t_token *s_token);
-t_token		*ft_end_execute_(t_token *token, int fd_pipe[2]);
-void		ft_echo(t_token *token, int fd[2]);
+char		*ft_clear_value(char *str);
+void		ft_check_echo(t_token *token);
 void		ft_export(t_token *token);
 void		ft_cd(t_token *token);
 void		ft_pwd(void);
 void		ft_env(t_token *token);
 void		ft_unset(t_token *token);
 void		ft_exit(t_token *token);
+t_token		*ft_execute_builtin(t_token *s_token);
+t_token		*ft_end_execute_(t_token *token, int fd_pipe[2]);
 
 extern void	rl_replace_line(const char *text, int clear_undo);
 
@@ -165,9 +169,5 @@ t_token		*ft_redirections(t_token *token, t_main *main);
 // temporary
 void		ft_print_lst(t_token *a);
 void		ft_qualcosa(t_token *token);
-void		ft_execve_or(t_token *token);
-void		ft_execve_and(t_token *token);
-void		ft_execve_priority(t_token *token);
-char		*ft_clear_value(char *str);
 
 #endif

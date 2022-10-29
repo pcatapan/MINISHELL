@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 23:32:54 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/26 19:35:07 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/30 01:09:22 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,22 @@ int	ft_check_builtin(t_token *token)
 	return (0);
 }
 
-t_token	*ft_end_execute_(t_token *token, int fd_pipe[2])
+char	*ft_clear_value(char *str)
 {
-	if (token->next)
-	{
-		token = token->next;
-		token->res = token->prev->res;
-	}
-	if (token->prev && token->prev->pipe && token->stdinput == STDIN_FILENO)
-	{
-		token->dup = dup(STDIN_FILENO);
-		dup2(fd_pipe[0], STDIN_FILENO);
-		token->stdinput = fd_pipe[0];
-	}
-	else if (token->stdinput != STDIN_FILENO)
-		dup2(token->dup, STDIN_FILENO);
-	return (token);
+	int		start;
+	int		end;
+	int		i;
+
+	start = 0;
+	end = 0;
+	i = 0;
+	if (str[0] == 34 || str[0] == 39)
+		start = 1;
+	while (str[i + start])
+		i++;
+	if (str[i] == 34 || str[i] == 39)
+		end = i - 1;
+	else
+		end = ft_strlen(str);
+	return (ft_substr(str, start, end));
 }

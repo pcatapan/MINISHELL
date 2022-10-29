@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/26 16:45:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/30 00:48:40 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_add_shell_env(char **copy_envp, char **envp, int i)
 	copy_envp[i++] = ft_strdup("HISTSIZE=2000");
 	tmp = ft_searchstrchr("HOME=", envp);
 	tmp2 = ft_strjoin("HISTFILE=", tmp);
-	copy_envp[i++] = ft_strjoin(tmp, FILE_HISTORY);
+	copy_envp[i++] = ft_strjoin(tmp2, FILE_HISTORY);
 	free(tmp);
 	free(tmp2);
 	copy_envp[i] = NULL;

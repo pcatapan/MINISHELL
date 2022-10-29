@@ -6,31 +6,11 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:57:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/16 17:31:44 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/30 01:10:36 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-char	*ft_clear_value(char *str)
-{
-	int		start;
-	int		end;
-	int		i;
-
-	start = 0;
-	end = 0;
-	i = 0;
-	if (str[0] == 34 || str[0] == 39)
-		start = 1;
-	while (str[i + start])
-		i++;
-	if (str[i] == 34 || str[i] == 39)
-		end = i - 1;
-	else
-		end = ft_strlen(str);
-	return (ft_substr(str, start, end));
-}
 
 void	ft_divide_line(char *line, t_token *token, t_main *main)
 {

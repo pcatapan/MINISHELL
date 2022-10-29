@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:43:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/26 17:41:43 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/30 01:34:09 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,29 @@ void	ft_execute_dollar(t_token *token)
 		}
 		i++;
 	}
+}
+
+t_token	*ft_end_execute_(t_token *token, int fd_pipe[2])
+{
+	if (token->next)
+	{
+		token = token->next;
+		token->res = token->prev->res;
+	}
+	if (token->prev && token->prev->pipe && token->stdinput == STDIN_FILENO)
+	{
+		token->dup = dup(STDIN_FILENO);
+		dup2(fd_pipe[0], STDIN_FILENO);
+		token->stdinput = fd_pipe[0];
+		close(fd_pipe[0]);
+		printf("Fake :%d --- Ori: %d\n", token->stdinput, STDIN_FILENO);
+	}
+	else if (token->stdinput != STDIN_FILENO)
+	{
+		dup2(token->dup, STDIN_FILENO);
+		printf("Entro --- Dup: %d\n", token->dup);
+	}
+	return (token);
 }
 
 void	ft_store_matrix(t_token *token, char **matrix)
