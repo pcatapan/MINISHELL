@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:43:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/30 01:34:09 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:25:13 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_token	*ft_end_execute_(t_token *token, int fd_pipe[2])
 	{
 		token = token->next;
 		token->res = token->prev->res;
+		token->dup = token->prev->dup;
 	}
 	if (token->prev && token->prev->pipe && token->stdinput == STDIN_FILENO)
 	{
@@ -47,13 +48,9 @@ t_token	*ft_end_execute_(t_token *token, int fd_pipe[2])
 		dup2(fd_pipe[0], STDIN_FILENO);
 		token->stdinput = fd_pipe[0];
 		close(fd_pipe[0]);
-		printf("Fake :%d --- Ori: %d\n", token->stdinput, STDIN_FILENO);
 	}
-	else if (token->stdinput != STDIN_FILENO)
-	{
+	else if (token->stdinput != token->dup)
 		dup2(token->dup, STDIN_FILENO);
-		printf("Entro --- Dup: %d\n", token->dup);
-	}
 	return (token);
 }
 
