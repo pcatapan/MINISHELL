@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/30 01:29:36 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/30 23:58:25 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	ft_qualcosa(t_token *token)
 
 void	ft_exceve(t_token *token)
 {
+	// if (token->priority != 0)
+	// 	ft_execve_priority(token);
 	if (token->prev)
 	{
 		if (token->prev->or)
@@ -38,8 +40,6 @@ void	ft_exceve(t_token *token)
 			exit(1);
 		}
 	}
-	else if (token->priority != 0)
-		ft_execve_priority(token);
 	else
 	{
 		if (execve(token->command, token->value, token->main->copy_env))
@@ -81,15 +81,16 @@ t_token	*ft_execute_exeve(t_token *token)
 void	ft_execute_command(char *line, t_main *main)
 {
 	pid_t	pidchild;
-	int		c;
 	int		lstsize;
 
-	c = 0;
+	main->count = 0;
 	lstsize = ft_lstsize(main->token);
 	main->token = ft_return_head(main->token);
 	// ft_print_lst(main->token);
-	while (c < lstsize)
+	while (main->count < lstsize)
 	{
+		if (main->token->priority != 0)
+			main->token = ft_priority(main->token, main->token->priority, main);
 		ft_execute_dollar(main->token);
 		if (ft_strchr(main->token->value[0], '=') && ft_check_envi(main->token->value[0]))
 			main->token = ft_execute_enviroment(main->token, main->token->value[0]);
@@ -99,6 +100,6 @@ void	ft_execute_command(char *line, t_main *main)
 			main->token = ft_redirections(main->token, main);
 		else // Qui entra se il comando bultin é errato o se non é da gestirte
 			main->token = ft_execute_exeve(main->token);
-		c++;
+		main->count++;
 	}
 }

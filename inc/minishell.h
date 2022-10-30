@@ -62,6 +62,7 @@ typedef struct s_main
 	int			close_brackets;
 	int			dub_quotes;
 	int			sin_quotes;
+	int			count;
 	bool		op_logic;
 	bool		error;
 	bool		redirections;
@@ -76,6 +77,7 @@ int			ft_strchr(const char *s, int c);
 int			ft_strchr_until(const char *s, int c);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_lstsize(t_token *lst_or);
+int			ft_lstsize_this(t_token *lst_or);
 int			ft_atoi(const char *str);
 int			ft_isalnum(int c);
 int			ft_isalpha(int c);
@@ -131,7 +133,7 @@ int			ft_check_envi(char *line);
 //// DIR EXECVE
 void		ft_execve_or(t_token *token);
 void		ft_execve_and(t_token *token);
-void		ft_execve_priority(t_token *token);
+t_token		*ft_priority(t_token *token, int lvl, t_main *main);
 
 // DIR Parsing
 char		*find_path(char *cmd, t_main *main);
@@ -169,5 +171,6 @@ t_token		*ft_redirections(t_token *token, t_main *main);
 // temporary
 void		ft_print_lst(t_token *a);
 void		ft_qualcosa(t_token *token);
+t_token		*ft_execute_exeve(t_token *token);
 
 #endif
