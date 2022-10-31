@@ -21,7 +21,10 @@ void	ft_echo(t_token *token)
 		i++;
 	while (token->value[i])
 	{
-		printf("%s", ft_clear_value(token->value[i]));
+		if (token->value[i][0] == '$')
+			printf("%s", getenv(token->value[i]));
+		else
+			printf("%s", ft_clear_value(token->value[i]));
 		if (token->value[i + 1])
 			printf(" ");
 		i++;
