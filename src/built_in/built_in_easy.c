@@ -40,10 +40,7 @@ void	ft_cd(t_token *token)
 	else if (chdir(token->value[1]) == -1)
 		ft_printf(RED"cd: \n" ERROR_FILE COLOR_RES, token->value[1]);
 	else
-	{
-		chdir(token->value[1]);
 		cd_path(token);
-	}
 }
 
 void	ft_pwd(void)
