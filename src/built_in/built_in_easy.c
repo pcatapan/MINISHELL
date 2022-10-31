@@ -12,30 +12,37 @@
 
 #include "../../inc/minishell.h"
 
+void	cd_path(t_token *token)
+{
+	int		i;
+	char	*tmp;
+
+	while (token->main->copy_env[i])
+	{
+		if (ft_strncmp(token->main->copy_env[i], "PWD=", 4) == 0)
+		{
+			tmp = getcwd(NULL, 0);
+			free(token->main->copy_env[i]);
+			token->main->copy_env[i] = ft_strjoin("PWD=", tmp);
+			free(tmp);
+		}
+		i++;
+	}
+}
+
 void	ft_cd(t_token *token)
 {
-	char	*tmp;
-	int		i;
-
-	i = 0;
 	if (token->value[1] == NULL)
-		return ;
-	if (chdir(token->value[1]) == -1)
+	{
+		chdir(getenv("HOME"));
+		cd_path(token);
+	}
+	else if (chdir(token->value[1]) == -1)
 		ft_printf(RED"cd: \n" ERROR_FILE COLOR_RES, token->value[1]);
 	else
 	{
 		chdir(token->value[1]);
-		while (token->main->copy_env[i])
-		{
-			if (ft_strncmp(token->main->copy_env[i], "PWD=", 4) == 0)
-			{
-				tmp = getcwd(NULL, 0);
-				free(token->main->copy_env[i]);
-				token->main->copy_env[i] = ft_strjoin("PWD=", tmp);
-				free(tmp);
-			}
-			i++;
-		}
+		cd_path(token);
 	}
 }
 
