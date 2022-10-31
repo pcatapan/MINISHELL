@@ -98,6 +98,8 @@ size_t		ft_matrixlen(char **s);
 int			ft_find_in_env(char **matrix, char *str);
 int			ft_find_in_exp(char **matrix, char *str);
 char		**ft_get_next_line(int fd);
+char		*ft_clear_brackets(char *str);
+char		*ft_strcpy(char *dst, char *src);
 
 // free.c
 void		ft_free_matrix(char **matrix);
@@ -120,6 +122,7 @@ char		*ft_expand_dollar(char *line, t_main *main);
 char		*ft_expand_heredoc(char *line, t_main *main);
 void		ft_check_syntax(char *line, t_main *main);
 void		ft_check_redirection(char *line, t_main *main);
+char 		*ft_delete_brackets(char *line);
 
 // DIR Execute
 void		ft_execute_command(char *line, t_main *main);

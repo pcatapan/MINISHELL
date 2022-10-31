@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 23:32:54 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/30 01:09:22 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/31 00:40:49 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,25 @@ char	*ft_clear_value(char *str)
 		end = i - 1;
 	else
 		end = ft_strlen(str);
+	return (ft_substr(str, start, end));
+}
+
+char	*ft_clear_brackets(char *str)
+{
+	int		start;
+	int		end;
+	int		i;
+
+	start = 0;
+	end = 0;
+	i = 0;
+	if (str[0] == 123)
+		start = 1;
+	while (str[i] != 123)
+		i++;
+	start = i + 1;
+	while (str[i] != 125)
+		i++;
+	end  = i - 2;
 	return (ft_substr(str, start, end));
 }
