@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/30 17:02:31 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/02 22:35:05 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 		ft_delete_redirection(token);
 		ft_qualcosa(token);
 	}
-	main->redirections = false;
 	if (token->stdoutput != STDOUT_FILENO)
 		dup2(token->dup, STDOUT_FILENO);
 	else if (token->stdinput != STDIN_FILENO)
@@ -96,7 +95,6 @@ void	ft_delete_redirection(t_token *token)
 	int i;
 
 	i = 0;
-	token = ft_return_head(token);
 	while (token)
 	{
 		if (token->output || token->input || token->append || token->heredoc)
