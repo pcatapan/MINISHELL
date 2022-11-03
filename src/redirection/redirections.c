@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/03 00:15:38 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/03 15:42:19 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,24 +117,17 @@ char    *ft_set_to_del(char *line)
     return (line);
 }
 
-void    ft_execute_multi_redir(t_token *token)
+void    ft_execute_multi_redir(t_main *main)
 {
     char    *line;
     char    **matrix;
     t_token *tmp_token;
+	int		i;
 
-    line = ft_set_to_del(token->main->copy_line);
+	line = ft_set_to_del(main->copy_line);
     matrix = ft_split_original(line, 127);
-    ft_print_lst(token);
-    ft_set_info(matrix, token->main, line, 1);
-    tmp_token = token;
-    // int i = -1;
-    // while (matrix[++i])
-    //  matrix[i] = ft_find_token(line, token->main);
-    // i = 0;
-    // while (matrix[i])
-    //  printf("%s\n", matrix[i++]);
-    // tmp_token = ft_set_values_redir(matrix, token->main);
+    ft_set_info(matrix, main, main->copy_line, 1);
+    ft_print_lst(main->token);
 }
 
 t_token *ft_redirections(t_token *token, t_main *main)
@@ -144,8 +137,7 @@ t_token *ft_redirections(t_token *token, t_main *main)
     
     if (ft_count_redirection(token) != 1)
     {
-        line = ft_create_line(token);
-        ft_execute_multi_redir(main->token);
+        ft_execute_multi_redir(main);
     }
     else
     {

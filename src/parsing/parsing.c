@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:58:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/15 21:45:01 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/03 15:19:44 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_parsing(char *line, t_main *main)
 	i = 0;
 	count = 1;
 	copy_line = ft_strdup(line);
+	main->copy_line = ft_strdup(copy_line);
 	while (line[i])
 	{
 		i = ft_check_single_quote(line, main, i);

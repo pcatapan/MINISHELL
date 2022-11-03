@@ -58,6 +58,7 @@ typedef struct s_main
 {
 	char		**copy_env;
 	char		**export_env;
+	char		*copy_line;
 	int			open_brackets;
 	int			close_brackets;
 	int			dub_quotes;
@@ -145,6 +146,7 @@ void		ft_set_values(char **line, t_main *main);
 void		ft_set_priority(char *line, t_main *main, int brack);
 void		ft_set_redirections(t_token *token);
 t_token		*ft_return_head(t_token *list);
+void		ft_set_info(char **tmp, t_main *main, char *copy_line, int count);
 
 // DIR Built_in
 int			ft_check_builtin(t_token *token);
@@ -168,6 +170,7 @@ void		ft_input_redirect(t_token *token, t_main *main);
 void		ft_output_redirect(t_token *token, t_main *main);
 void		ft_delete_redirection(t_token *token);
 t_token		*ft_redirections(t_token *token, t_main *main);
+
 
 // temporary
 void		ft_print_lst(t_token *a);
