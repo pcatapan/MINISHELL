@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/30 23:58:25 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/11 22:08:13 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,10 @@ void	ft_execute_command(char *line, t_main *main)
 		if (main->token->priority != 0)
 			main->token = ft_priority(main->token, main->token->priority, main);
 		ft_execute_dollar(main->token);
-		if (ft_strchr(main->token->value[0], '=') && ft_check_envi(main->token->value[0]))
-			main->token = ft_execute_enviroment(main->token, main->token->value[0]);
+		if (ft_strchr(main->token->value[0], '=') \
+			&& ft_check_envi(main->token->value[0]))
+			main->token = \
+			ft_execute_enviroment(main->token, main->token->value[0]);
 		else if (ft_check_builtin(main->token) && !main->redirections)
 			main->token = ft_execute_builtin(main->token);
 		else if (main->redirections)

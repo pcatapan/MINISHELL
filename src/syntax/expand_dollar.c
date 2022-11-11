@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/26 17:01:58 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/10/31 01:13:48 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,15 @@ char	*ft_change_var_in_dollar(int start, int l, char *str, t_main *main)
 
 char	*ft_expand_dollar(char *line, t_main *main)
 {
-	int	i;
-	int	l;
-	int	start;
+	int		i;
+	int		l;
+	int		start;
 
 	i = 0;
 	l = 0;
 	start = 0;
+	if (ft_strchr(line, '{'))
+		line = ft_delete_brackets(line);
 	while (line[i] != '$' && line[i])
 	{
 		i = ft_check_single_quote(line, main, i);
@@ -54,7 +56,7 @@ char	*ft_expand_dollar(char *line, t_main *main)
 	}
 	if (line[i] == '$')
 		start = i + 1;
-	while (line[++i] && line[i] != ' ' && line[i] != '"')
+	while (line[++i] && line[i] != ' ' && line[i] != '"' && line[i] != '\'')
 		l++;
 	if (start != 0)
 		line = ft_change_var_in_dollar(start, l, line, main);
@@ -79,4 +81,22 @@ char	*ft_expand_heredoc(char *line, t_main *main)
 	if (start != 0)
 		line = ft_change_var_in_dollar(start, l, line, main);
 	return (line);
+}
+
+char *ft_delete_brackets(char *line)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = malloc(sizeof(line));
+	tmp2 = malloc(sizeof(line));
+	if (!(tmp) || !tmp2)
+		return (NULL);
+	tmp = NULL;
+	tmp = line;
+	line = "$";
+	tmp = ft_clear_brackets(tmp);
+	ft_strcpy(tmp2, line);
+	ft_strcat(tmp2, tmp);
+	return (tmp2);
 }

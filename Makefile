@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
+#    By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/10/30 00:21:30 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/11/11 21:14:22 by aanghel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,13 @@ OBJC = $(SRC:%.c=%.o)
 
 CC = gcc
 
-USER = fgrossi
+USER = aanghel
 
-LDFLAGS = -L/opt/homebrew/opt/readline/lib
-CPPFLAGS = -I/opt/homebrew/opt/readline/include
+#LDFLAGS = -L/opt/homebrew/opt/readline/lib
+#CPPFLAGS = -I/opt/homebrew/opt/readline/include
 
+LDFLAGS= -L/Users/aanghel/.brew/opt/readline/lib
+CPPFLAGS= -I/Users/aanghel/.brew/opt/readline/include
 
 FLAGS = #-Wall -Werror -Wextra #-g #-fsanitize=address
 
@@ -41,7 +43,7 @@ FLAG_READLINE = -lreadline -lcurses #-L/Users/$(USER)/.brew/opt/readline/lib -I/
 all: $(NAME)
 
 $(NAME) : $(SRC)
-	@$(CC) $(FLAGS) $(FLAG_READLINE) $(LDFLAGS) $(CPPFLAGS) $(SRC) -o $(NAME)
+	@$(CC) $(FLAGS) $(FLAG_READLINE) $(F_IRINA) $(LDFLAGS) $(CPPFLAGS) $(SRC) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
