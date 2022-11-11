@@ -6,7 +6,7 @@
 #    By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/10/31 15:46:14 by aanghel          ###   ########.fr        #
+#    Updated: 2022/11/11 21:14:22 by aanghel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,16 +26,18 @@ OBJC = $(SRC:%.c=%.o)
 
 CC = gcc
 
-USER = fgrossi
+USER = aanghel
 
 #LDFLAGS = -L/opt/homebrew/opt/readline/lib
 #CPPFLAGS = -I/opt/homebrew/opt/readline/include
 
+LDFLAGS= -L/Users/aanghel/.brew/opt/readline/lib
+CPPFLAGS= -I/Users/aanghel/.brew/opt/readline/include
 
 FLAGS = #-Wall -Werror -Wextra #-g #-fsanitize=address
 
-F_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
-#FLAG_READLINE = -lreadline -lcurses #-L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
+#F_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
+FLAG_READLINE = -lreadline -lcurses #-L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 
 all: $(NAME)
