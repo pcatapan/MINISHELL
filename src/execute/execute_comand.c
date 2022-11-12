@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/11 22:08:13 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/12 20:29:34 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_qualcosa(t_token *token)
 {
 	ft_execute_dollar(token);
-	if (ft_check_builtin(token) && !token->main->redirections)
+	if (ft_check_builtin(token))
 		token = ft_execute_builtin(token);
 	else if (ft_strchr(token->value[0], '=') && ft_check_envi(token->value[0]))
 		token = ft_execute_enviroment(token, token->value[0]);
@@ -98,7 +98,8 @@ void	ft_execute_command(char *line, t_main *main)
 			ft_execute_enviroment(main->token, main->token->value[0]);
 		else if (ft_check_builtin(main->token) && !main->redirections)
 			main->token = ft_execute_builtin(main->token);
-		else if (main->redirections)
+		else if (main->token->input || main->token->append \
+				|| main->token->output || main->token->heredoc)
 			main->token = ft_redirections(main->token, main);
 		else // Qui entra se il comando bultin é errato o se non é da gestirte
 			main->token = ft_execute_exeve(main->token);

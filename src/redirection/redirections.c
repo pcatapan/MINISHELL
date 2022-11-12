@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/11 21:57:33 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/12 20:46:12 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,72 +83,18 @@ int	ft_count_redirection(t_token *token)
 	return (count);
 }
 
-char	*ft_create_line(t_token *token)
-{
-	char	*tmp;
-	char	*val;
-	int		i;
-
-	if (!(tmp = (char *)malloc(sizeof(char) * 1)))
-		return (NULL);
-	tmp = "\0";
-	while (token->value[i])
-	{
-		val = ft_strjoin(token->value[i], " ");
-		tmp = ft_strjoin(tmp, val);
-		free(val);
-		i++;
-	}
-	return (tmp);
-}
-
-char	*ft_set_to_del(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '>' || line[i] == '<')
-			line[i] = 127;
-		i++;
-	}
-	return (line);
-}
-
-void	ft_execute_multi_redir(t_main *main)
-{
-	char	*line;
-	char	**matrix;
-	t_token	*tmp_token;
-	int		i;
-	int		input;
-	int		ouput;
-
-	line = ft_set_to_del(main->copy_line);
-	matrix = ft_split_original(line, 127);
-	ft_set_info(matrix, main, main->copy_line, 1);
-	ft_print_lst(main->token);
-	while (main->token)
-	{
-		if (main->token->command == NULL || ft_strcmp(main->token->command, "bin/file"))
-			input = open(main->token->value[0], O_CREAT | O_RDWR, 0644);
-		main->token = main->token->next;
-	}
-}
-
 t_token	*ft_redirections(t_token *token, t_main *main)
 {
 	pid_t	pidchild;
 	char	*line;
 
 	if (ft_count_redirection(token) != 1)
-		ft_execute_multi_redir(main);
+		ft_execute_multi_redir(token);
 	else
 	{
 		pidchild = fork();
 		if (pidchild != 0)
-			waitpid(pidchild, 0, 0);
+			waitpid(pidchild, &main->token->res, 0);
 		else
 		{
 			if (token->output == 1 || token->append == 1)
@@ -164,7 +110,7 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 			dup2(token->dup, STDIN_FILENO);
 	}
 	if (token->next)
-	token = token->next;
+		token = token->next;
 	return (token);
 }
 
@@ -173,25 +119,19 @@ void	ft_delete_redirection(t_token *token)
 	int	i;
 
 	i = 0;
-	while (token)
+	if (token)
 	{
-		if (token->output || token->input || token->append || token->heredoc)
+		while (token->value[i])
 		{
-			while (token->value[i])
+			if (ft_strcmp(token->value[i], "<") \
+				|| ft_strcmp(token->value[i], "<<") \
+				|| ft_strcmp(token->value[i], ">") \
+				|| ft_strcmp(token->value[i], ">>"))
 			{
-				if (ft_strcmp(token->value[i], "<") \
-					|| ft_strcmp(token->value[i], "<<") \
-					|| ft_strcmp(token->value[i], ">") \
-					|| ft_strcmp(token->value[i], ">>"))
-				{
-					free(token->value[i]);
-					token->value[i] = NULL;
-				}
-				i++;
+				free(token->value[i]);
+				token->value[i] = NULL;
 			}
+			i++;
 		}
-		if (!token->next)
-			break ;
-		token = token->next;
 	}
 }
