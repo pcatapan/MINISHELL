@@ -169,7 +169,7 @@ extern void	rl_replace_line(const char *text, int clear_undo);
 int			ft_heredoc(t_token *token, t_main *main);
 int			ft_write_fd(int fd, char *limiter, t_main *main);
 void		ft_input_redirect(t_token *token, t_main *main);
-void		ft_output_redirect(t_token *token, t_main *main);
+void		ft_output_redirect(t_token *token);
 void		ft_delete_redirection(t_token *token);
 t_token		*ft_redirections(t_token *token, t_main *main);
 void		ft_execute_multi_redir(t_token *token);

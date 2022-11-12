@@ -6,20 +6,20 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/12 20:46:12 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/12 21:04:34 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_output_redirect(t_token *token, t_main *main)
+void	ft_output_redirect(t_token *token)
 {
 	int	fd;
 
 	token->dup = dup(STDOUT_FILENO);
 	if (token->output == 1)
 	{
-		fd = open (token->name_file, O_CREAT | O_RDWR, 0644);
+		fd = open (token->name_file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 		dup2(fd, STDOUT_FILENO);
 	}
 	else if (token->append == 1)
@@ -83,6 +83,23 @@ int	ft_count_redirection(t_token *token)
 	return (count);
 }
 
+void	ft_single_redir(t_token *token, t_main *main)
+{
+	if (token->output == 1 || token->append == 1)
+		ft_output_redirect(token);
+	if (token->input == 1 || token->heredoc == 1)
+		ft_input_redirect(token, main);
+	ft_delete_redirection(token);
+	if (token->command == NULL)
+	{
+		if (token->stdoutput != STDOUT_FILENO)
+			dup2(token->dup, STDOUT_FILENO);
+		else if (token->stdinput != STDIN_FILENO)
+			dup2(token->dup, STDIN_FILENO);
+	}
+	ft_qualcosa(token);
+}
+
 t_token	*ft_redirections(t_token *token, t_main *main)
 {
 	pid_t	pidchild;
@@ -96,14 +113,7 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 		if (pidchild != 0)
 			waitpid(pidchild, &main->token->res, 0);
 		else
-		{
-			if (token->output == 1 || token->append == 1)
-				ft_output_redirect(token, main);
-			if (token->input == 1 || token->heredoc == 1)
-				ft_input_redirect(token, main);
-			ft_delete_redirection(token);
-			ft_qualcosa(token);
-		}
+			ft_single_redir(token, main);
 		if (token->stdoutput != STDOUT_FILENO)
 			dup2(token->dup, STDOUT_FILENO);
 		else if (token->stdinput != STDIN_FILENO)
