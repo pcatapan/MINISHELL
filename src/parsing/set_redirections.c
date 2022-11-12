@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirections.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:54:54 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/26 18:11:08 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/12 23:29:02 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	ft_set_redirections(t_token *token)
 	{
 		if (ft_search_redir(token, ">") == 1)
 			token->output = true;
-		else if (ft_search_redir(token, ">>") == 1)
+		if (ft_search_redir(token, ">>") == 1)
 			token->append = true;
-		else if (ft_search_redir(token, "<") == 1)
+		if (ft_search_redir(token, "<") == 1)
 			token->input = true;
-		else if (ft_search_redir(token, "<<") == 1)
+		if (ft_search_redir(token, "<<") == 1)
 			token->heredoc = true;
 		if (!token->next)
 			break ;

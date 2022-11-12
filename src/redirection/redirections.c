@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/12 21:04:34 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/12 23:55:20 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,20 @@ void	ft_input_redirect(t_token *token, t_main *main)
 	int	fd;
 
 	token->dup = dup(STDIN_FILENO);
-	if (token->input == 1)
+	if (token->heredoc == 1)
 	{
-		fd = open (token->name_file, O_RDONLY);
-		dup2(fd, STDIN_FILENO);
-		if (fd == -1)
+		if (ft_heredoc(token, main) == -1)
 		{
 			perror(RED ERROR_FILE COLOR_RES);
 			write(fd, "1", 1);
 			exit(0);
 		}
 	}
-	else if (token->heredoc == 1)
+	if (token->input == 1)
 	{
-		if (ft_heredoc(token, main) == -1)
+		fd = open (token->name_file, O_RDONLY);
+		dup2(fd, STDIN_FILENO);
+		if (fd == -1)
 		{
 			perror(RED ERROR_FILE COLOR_RES);
 			write(fd, "1", 1);
@@ -85,10 +85,10 @@ int	ft_count_redirection(t_token *token)
 
 void	ft_single_redir(t_token *token, t_main *main)
 {
-	if (token->output == 1 || token->append == 1)
-		ft_output_redirect(token);
 	if (token->input == 1 || token->heredoc == 1)
 		ft_input_redirect(token, main);
+	if (token->output == 1 || token->append == 1)
+		ft_output_redirect(token);
 	ft_delete_redirection(token);
 	if (token->command == NULL)
 	{
@@ -105,9 +105,9 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 	pid_t	pidchild;
 	char	*line;
 
-	if (ft_count_redirection(token) != 1)
-		ft_execute_multi_redir(token);
-	else
+	// if (ft_count_redirection(token) != 1)
+	// 	ft_execute_multi_redir(token);
+	// else
 	{
 		pidchild = fork();
 		if (pidchild != 0)

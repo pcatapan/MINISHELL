@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:31:25 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/29 00:24:19 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/13 00:00:14 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int	ft_write_fd(int fd, char *limiter, t_main *main)
 int	ft_heredoc(t_token *token, t_main *main)
 {
 	int		fd;
+	int		start;
+	char	*tmp;
+	int		end;
 	char	*n_file;
 
 	n_file = ".heredoc";
@@ -48,5 +51,17 @@ int	ft_heredoc(t_token *token, t_main *main)
 	ft_write_fd(fd, token->name_file, main);
 	fd = open (n_file, O_RDWR);
 	dup2(fd, STDIN_FILENO);
+	start = 0;
+	end = 0;
+	while (main->copy_line[start] != '>')
+		start++;
+	start += 2;
+	while (main->copy_line[start + end] != 32 \
+			&& main->copy_line[start + end])
+		end++;
+	tmp = ft_substr(main->copy_line, start, end);
+	free(token->name_file);
+	token->name_file = ft_strdup(tmp);
+	free(tmp);
 	return (fd);
 }
