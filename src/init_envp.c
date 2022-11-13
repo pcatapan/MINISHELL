@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/30 00:48:40 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 05:15:20 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**ft_init_envp(char **envp)
 	i = 0;
 	while (envp[i])
 		i++;
-	copy_envp = malloc(sizeof(char *) * (i + 2));
+	copy_envp = malloc(sizeof(char *) * (i + 3));
 	i = -1;
 	while (envp[++i])
 	{

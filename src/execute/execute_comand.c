@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/12 20:29:34 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 04:47:29 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	ft_qualcosa(t_token *token)
 {
 	ft_execute_dollar(token);
-	if (ft_check_builtin(token))
-		token = ft_execute_builtin(token);
-	else if (ft_strchr(token->value[0], '=') && ft_check_envi(token->value[0]))
+	// if (ft_check_builtin(token))
+	// 	token = ft_execute_builtin(token);
+	/*else */if (ft_strchr(token->value[0], '=') && ft_check_envi(token->value[0]))
 		token = ft_execute_enviroment(token, token->value[0]);
 	else // Qui entra se il comando bultin é errato o se non é da gestirte
 		token = ft_execute_exeve(token);
-	exit(0);
+	exit(token->res);
 }
 
 void	ft_exceve(t_token *token)
@@ -86,7 +86,6 @@ void	ft_execute_command(char *line, t_main *main)
 	main->count = 0;
 	lstsize = ft_lstsize(main->token);
 	main->token = ft_return_head(main->token);
-	// ft_print_lst(main->token);
 	while (main->count < lstsize)
 	{
 		if (main->token->priority != 0)
@@ -96,8 +95,8 @@ void	ft_execute_command(char *line, t_main *main)
 			&& ft_check_envi(main->token->value[0]))
 			main->token = \
 			ft_execute_enviroment(main->token, main->token->value[0]);
-		else if (ft_check_builtin(main->token) && !main->redirections)
-			main->token = ft_execute_builtin(main->token);
+		// else if (ft_check_builtin(main->token) && !main->redirections)
+		// 	main->token = ft_execute_builtin(main->token);
 		else if (main->token->input || main->token->append \
 				|| main->token->output || main->token->heredoc)
 			main->token = ft_redirections(main->token, main);

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:36:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/13 03:30:58 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 04:12:14 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	ft_strjoin_redir(char *f_part, char *line, int fd, t_token *token)
 	free(tmp);
 	ft_set_new_command(rtr, token, token->main);
 	ft_set_new_valus(token, rtr);
+	free(token->name_file);
+	ft_search_redir(token, ">");
 	ft_single_redir(token, token->main);
 }
 
@@ -81,7 +83,8 @@ void	ft_execute_multi_redir(t_token *token, t_main *main)
 	line = ft_create_line(token);
 	matrix = ft_split_original(line, '>');
 	while (matrix[++i])
-		input = open(ft_find_name_file(matrix[i]), O_CREAT | O_RDWR, 0644);
+		input = open(ft_find_name_file(matrix[i]), O_CREAT \
+			| O_RDWR, 0644);
 	matrix = ft_clear_matrix(matrix);
 	tmp = (char *)malloc(sizeof(char) * 1);
 	tmp[0] = '\0';

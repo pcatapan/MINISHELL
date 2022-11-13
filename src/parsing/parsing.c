@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:58:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/13 00:01:16 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 05:19:10 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_set_info(char **tmp, t_main *main, char *copy_line, int count)
 	int		i;
 
 	tmp_value = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!tmp_value)
+		return ;
 	i = -1;
 	main->token = NULL;
 	while (tmp[++i])
