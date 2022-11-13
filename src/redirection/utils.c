@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 03:26:32 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/13 03:30:48 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 03:41:11 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,21 @@ char	**ft_clear_matrix(char **matrix)
 		free(tmp);
 	}
 	return (matrix);
+}
+
+int	ft_count_redirection(t_token *token)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (token->value[i])
+	{
+		if (ft_strcmp(token->value[i], ">") \
+			|| ft_strcmp(token->value[i], ">>"))
+			count++;
+		i++;
+	}
+	return (count);
 }

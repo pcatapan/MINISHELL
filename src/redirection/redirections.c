@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/13 03:36:32 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 03:41:03 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,26 @@ void	ft_input_redirect(t_token *token, t_main *main)
 	token->stdinput = fd;
 }
 
-int	ft_count_redirection(t_token *token)
+void	ft_delete_redirection(t_token *token)
 {
 	int	i;
-	int	count;
 
 	i = 0;
-	count = 0;
-	while (token->value[i])
+	if (token)
 	{
-		if (ft_strcmp(token->value[i], ">") \
-			|| ft_strcmp(token->value[i], ">>"))
-			count++;
-		i++;
+		while (token->value[i])
+		{
+			if (ft_strcmp(token->value[i], "<") \
+				|| ft_strcmp(token->value[i], "<<") \
+				|| ft_strcmp(token->value[i], ">") \
+				|| ft_strcmp(token->value[i], ">>"))
+			{
+				free(token->value[i]);
+				token->value[i] = NULL;
+			}
+			i++;
+		}
 	}
-	return (count);
 }
 
 void	ft_single_redir(t_token *token, t_main *main)
@@ -111,26 +116,4 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 	if (token->next)
 		token = token->next;
 	return (token);
-}
-
-void	ft_delete_redirection(t_token *token)
-{
-	int	i;
-
-	i = 0;
-	if (token)
-	{
-		while (token->value[i])
-		{
-			if (ft_strcmp(token->value[i], "<") \
-				|| ft_strcmp(token->value[i], "<<") \
-				|| ft_strcmp(token->value[i], ">") \
-				|| ft_strcmp(token->value[i], ">>"))
-			{
-				free(token->value[i]);
-				token->value[i] = NULL;
-			}
-			i++;
-		}
-	}
 }

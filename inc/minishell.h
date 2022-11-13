@@ -178,7 +178,7 @@ void		ft_execute_multi_redir(t_token *token, t_main *main);
 void		ft_single_redir(t_token *token, t_main *main);
 char		*ft_create_line(t_token *token);
 char		**ft_clear_matrix(char **matrix);
-
+int			ft_count_redirection(t_token *token);
 
 // temporary
 void		ft_print_lst(t_token *a);
