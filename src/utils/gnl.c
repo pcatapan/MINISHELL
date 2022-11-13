@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:28:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/16 21:45:15 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 17:33:24 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	**ft_get_next_line(int fd)
 		i++;
 	}
 	new_a = malloc(i + 1);
+	if (!new_a)
+		return (NULL);
 	i = -1;
 	while (array[++i])
 		new_a[i] = array[i];

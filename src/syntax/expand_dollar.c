@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/31 01:13:48 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/13 17:31:55 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*ft_change_var_in_dollar(int start, int l, char *str, t_main *main)
 	if (insert_word == NULL)
 	{
 		insert_word = (char *)malloc(sizeof(char) * 1);
+		if (!insert_word)
+			return (NULL);
 		insert_word[0] = '\0';
 	}
 	free(word);
@@ -83,7 +85,7 @@ char	*ft_expand_heredoc(char *line, t_main *main)
 	return (line);
 }
 
-char *ft_delete_brackets(char *line)
+char	*ft_delete_brackets(char *line)
 {
 	char	*tmp;
 	char	*tmp2;

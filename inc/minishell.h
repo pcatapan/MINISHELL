@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/13 17:50:19 by aanghel           #+#    #+#             */
+/*   Updated: 2022/11/13 17:50:45 by aanghel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "../PRINTF/ft_printf.h"
@@ -129,7 +141,7 @@ void		ft_check_redirection(char *line, t_main *main);
 char		*ft_delete_brackets(char *line);
 
 // DIR Execute
-void		ft_execute_command(char *line, t_main *main);
+void		ft_execute_command(t_main *main);
 void		ft_execute_dollar(t_token *token);
 void		ft_store_matrix(t_token *token, char **matrix);
 t_token		*ft_execute_enviroment(t_token *token, char *var_add);
@@ -170,11 +182,11 @@ extern void	rl_replace_line(const char *text, int clear_undo);
 void		ft_heredoc(t_token *token, t_main *main);
 char		*ft_find_name_file(char *str);
 int			ft_write_fd(int fd, char *limiter, t_main *main);
-void		ft_input_redirect(t_token *token, t_main *main);
+void		ft_input_redirect(t_token *token);
 void		ft_output_redirect(t_token *token, t_main *main);
 void		ft_delete_redirection(t_token *token);
 t_token		*ft_redirections(t_token *token, t_main *main);
-void		ft_execute_multi_redir(t_token *token, t_main *main);
+void		ft_execute_multi_redir(t_token *token);
 void		ft_single_redir(t_token *token, t_main *main);
 char		*ft_create_line(t_token *token);
 char		**ft_clear_matrix(char **matrix);

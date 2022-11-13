@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:36:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/13 04:12:14 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 17:46:14 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_set_new_valus(t_token *token, char *line)
 	ft_free_matrix(token->value);
 	matrix = ft_split_original(line, 32);
 	token->value = (char **)malloc(sizeof(char *) * (ft_matrixlen(matrix) + 1));
+	if (!token->value)
+		return ;
 	while (matrix[i])
 	{
 		token->value[i] = ft_strdup(matrix[i]);
@@ -38,6 +40,8 @@ void	ft_set_new_command(char *str, t_token *token, t_main *main)
 	while (str[i] != 32)
 		i++;
 	command = (char *)malloc(sizeof(char) * i + 1);
+	if (!command)
+		return ;
 	i = 0;
 	while (str[i] != 32)
 	{
@@ -49,11 +53,10 @@ void	ft_set_new_command(char *str, t_token *token, t_main *main)
 	token->command = ft_find_path(command, main);
 }
 
-void	ft_strjoin_redir(char *f_part, char *line, int fd, t_token *token)
+void	ft_strjoin_redir(char *f_part, char *line, t_token *token)
 {
 	int		start;
 	int		end;
-	int		i;
 	char	*rtr;
 	char	*tmp;
 
@@ -71,7 +74,7 @@ void	ft_strjoin_redir(char *f_part, char *line, int fd, t_token *token)
 	ft_single_redir(token, token->main);
 }
 
-void	ft_execute_multi_redir(t_token *token, t_main *main)
+void	ft_execute_multi_redir(t_token *token)
 {
 	char	*line;
 	char	**matrix;
@@ -87,10 +90,12 @@ void	ft_execute_multi_redir(t_token *token, t_main *main)
 			| O_RDWR, 0644);
 	matrix = ft_clear_matrix(matrix);
 	tmp = (char *)malloc(sizeof(char) * 1);
+	if (!tmp)
+		return ;
 	tmp[0] = '\0';
 	i = 0;
 	while (matrix[i])
 		tmp = ft_strjoin(tmp, matrix[i++]);
 	ft_free_matrix(matrix);
-	ft_strjoin_redir(tmp, line, input, token);
+	ft_strjoin_redir(tmp, line, token);
 }

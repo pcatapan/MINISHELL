@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_easy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/30 00:26:30 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 17:44:29 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	cd_path(t_token *token)
 	int		i;
 	char	*tmp;
 
+	i = 0;
 	while (token->main->copy_env[i])
 	{
 		if (ft_strncmp(token->main->copy_env[i], "PWD=", 4) == 0)

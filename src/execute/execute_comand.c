@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_comand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/13 04:47:29 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 17:43:28 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ t_token	*ft_execute_exeve(t_token *token)
 	return (token);
 }
 
-void	ft_execute_command(char *line, t_main *main)
+void	ft_execute_command(t_main *main)
 {
-	pid_t	pidchild;
 	int		lstsize;
 
 	main->count = 0;

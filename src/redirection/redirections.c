@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/13 16:53:51 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/13 17:51:13 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_output_redirect(t_token *token, t_main *main)
 {
 	int	fd;
 
+	fd = 0;
 	token->dup = dup(STDOUT_FILENO);
 	if (token->output == 1)
 	{
@@ -38,7 +39,7 @@ void	ft_output_redirect(t_token *token, t_main *main)
 		ft_change_name_file(main, token, '<');
 }
 
-void	ft_input_redirect(t_token *token, t_main *main)
+void	ft_input_redirect(t_token *token)
 {
 	int	fd;
 
@@ -83,7 +84,7 @@ void	ft_single_redir(t_token *token, t_main *main)
 	if (token->output == 1 || token->append == 1)
 		ft_output_redirect(token, main);
 	if (token->input == 1)
-		ft_input_redirect(token, main);
+		ft_input_redirect(token);
 	ft_delete_redirection(token);
 	if (token->command == NULL)
 	{
@@ -98,7 +99,6 @@ void	ft_single_redir(t_token *token, t_main *main)
 t_token	*ft_redirections(t_token *token, t_main *main)
 {
 	pid_t	pidchild;
-	char	*line;
 
 	pidchild = fork();
 	if (pidchild != 0)
@@ -106,7 +106,7 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 	else
 	{
 		if (ft_count_redirection(token) > 1)
-			ft_execute_multi_redir(token, main);
+			ft_execute_multi_redir(token);
 		else
 		{
 			ft_single_redir(token, main);
