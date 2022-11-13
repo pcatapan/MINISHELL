@@ -167,11 +167,11 @@ t_token		*ft_end_execute_(t_token *token, int fd_pipe[2]);
 extern void	rl_replace_line(const char *text, int clear_undo);
 
 //DIR Redirection
-int			ft_heredoc(t_token *token, t_main *main);
+void		ft_heredoc(t_token *token, t_main *main);
 char		*ft_find_name_file(char *str);
 int			ft_write_fd(int fd, char *limiter, t_main *main);
 void		ft_input_redirect(t_token *token, t_main *main);
-void		ft_output_redirect(t_token *token);
+void		ft_output_redirect(t_token *token, t_main *main);
 void		ft_delete_redirection(t_token *token);
 t_token		*ft_redirections(t_token *token, t_main *main);
 void		ft_execute_multi_redir(t_token *token, t_main *main);

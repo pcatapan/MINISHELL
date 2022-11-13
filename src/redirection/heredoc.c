@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:31:25 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/13 00:00:14 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 00:46:36 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,15 @@ int	ft_write_fd(int fd, char *limiter, t_main *main)
 	return (0);
 }
 
-int	ft_heredoc(t_token *token, t_main *main)
+void	ft_change_name_file(t_main *main, t_token *token, char redir)
 {
-	int		fd;
 	int		start;
 	char	*tmp;
 	int		end;
-	char	*n_file;
 
-	n_file = ".heredoc";
-	fd = open (n_file, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	ft_write_fd(fd, token->name_file, main);
-	fd = open (n_file, O_RDWR);
-	dup2(fd, STDIN_FILENO);
 	start = 0;
 	end = 0;
-	while (main->copy_line[start] != '>')
+	while (main->copy_line[start] != redir)
 		start++;
 	start += 2;
 	while (main->copy_line[start + end] != 32 \
@@ -63,5 +56,24 @@ int	ft_heredoc(t_token *token, t_main *main)
 	free(token->name_file);
 	token->name_file = ft_strdup(tmp);
 	free(tmp);
-	return (fd);
+}
+
+void	ft_heredoc(t_token *token, t_main *main)
+{
+	int		fd;
+	char	*n_file;
+
+	token->dup = dup(STDIN_FILENO);
+	n_file = ".heredoc";
+	fd = open (n_file, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	ft_write_fd(fd, token->name_file, main);
+	fd = open (n_file, O_RDWR);
+	dup2(fd, STDIN_FILENO);
+	ft_change_name_file(main, token, '>');
+	if (fd == -1)
+	{
+		perror(RED ERROR_FILE COLOR_RES);
+		write(fd, "1", 1);
+		exit(0);
+	}
 }
