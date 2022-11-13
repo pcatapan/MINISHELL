@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/12 20:19:30 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 03:04:11 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,3 @@ t_token	*ft_execute_builtin(t_token *token)
 	token = ft_end_execute_(token, fd_pipe);
 	return (token);
 }
-

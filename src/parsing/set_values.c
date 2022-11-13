@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:57:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/30 01:10:36 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 01:41:20 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_count_array(char *line, t_main *main)
 	return (count);
 }
 
-char	*find_path(char *cmd, t_main *main)
+char	*ft_find_path(char *cmd, t_main *main)
 {
 	char	**paths;
 	char	*right_path;
@@ -100,7 +100,7 @@ void	ft_set_values(char **line, t_main *main)
 							(ft_count_array(line[j], main) + 2));
 		token->value[0] = ft_strdup(token->command);
 		free(token->command);
-		token->command = find_path(token->value[0], main);
+		token->command = ft_find_path(token->value[0], main);
 		ft_divide_line(line[j], token, main);
 		if (token->next)
 			token = token->next;

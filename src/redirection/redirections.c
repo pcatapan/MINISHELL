@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/12 23:55:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 03:32:20 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ int	ft_count_redirection(t_token *token)
 	count = 0;
 	while (token->value[i])
 	{
-		if (ft_strcmp(token->value[i], "<") \
-			|| ft_strcmp(token->value[i], "<<") \
-			|| ft_strcmp(token->value[i], ">") \
+		if (ft_strcmp(token->value[i], ">") \
 			|| ft_strcmp(token->value[i], ">>"))
 			count++;
 		i++;
@@ -105,9 +103,9 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 	pid_t	pidchild;
 	char	*line;
 
-	// if (ft_count_redirection(token) != 1)
-	// 	ft_execute_multi_redir(token);
-	// else
+	if (ft_count_redirection(token) != 1)
+		ft_execute_multi_redir(token, main);
+	else
 	{
 		pidchild = fork();
 		if (pidchild != 0)

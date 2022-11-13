@@ -103,6 +103,7 @@ int			ft_find_in_exp(char **matrix, char *str);
 char		**ft_get_next_line(int fd);
 char		*ft_clear_brackets(char *str);
 char		*ft_strcpy(char *dst, char *src);
+char		*ft_strclear(char *str, char del);
 
 // free.c
 void		ft_free_matrix(char **matrix);
@@ -125,7 +126,7 @@ char		*ft_expand_dollar(char *line, t_main *main);
 char		*ft_expand_heredoc(char *line, t_main *main);
 void		ft_check_syntax(char *line, t_main *main);
 void		ft_check_redirection(char *line, t_main *main);
-char 		*ft_delete_brackets(char *line);
+char		*ft_delete_brackets(char *line);
 
 // DIR Execute
 void		ft_execute_command(char *line, t_main *main);
@@ -140,7 +141,7 @@ void		ft_execve_and(t_token *token);
 t_token		*ft_priority(t_token *token, int lvl, t_main *main);
 
 // DIR Parsing
-char		*find_path(char *cmd, t_main *main);
+char		*ft_find_path(char *cmd, t_main *main);
 char		*ft_find_token(char *line, t_main *main);
 void		ft_parsing(char *line, t_main *main);
 void		ft_set_op_logic(char *line, t_token *token);
@@ -167,12 +168,16 @@ extern void	rl_replace_line(const char *text, int clear_undo);
 
 //DIR Redirection
 int			ft_heredoc(t_token *token, t_main *main);
+char		*ft_find_name_file(char *str);
 int			ft_write_fd(int fd, char *limiter, t_main *main);
 void		ft_input_redirect(t_token *token, t_main *main);
 void		ft_output_redirect(t_token *token);
 void		ft_delete_redirection(t_token *token);
 t_token		*ft_redirections(t_token *token, t_main *main);
-void		ft_execute_multi_redir(t_token *token);
+void		ft_execute_multi_redir(t_token *token, t_main *main);
+void		ft_single_redir(t_token *token, t_main *main);
+char		*ft_create_line(t_token *token);
+char		**ft_clear_matrix(char **matrix);
 
 
 // temporary

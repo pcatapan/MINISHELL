@@ -6,88 +6,88 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:36:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/12 22:51:19 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 03:30:58 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*ft_set_to_del(char *line)
+void	ft_set_new_valus(t_token *token, char *line)
 {
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '>' || line[i] == '<')
-			line[i] = 127;
-		i++;
-	}
-	return (line);
-}
-
-char	*ft_create_line(t_token *token)
-{
-	char	*tmp;
-	char	*val;
+	char	**matrix;
 	int		i;
 
-	if (!(tmp = (char *)malloc(sizeof(char) * 1)))
-		return (NULL);
 	i = 0;
-	tmp = "\0";
-	while (token->value[i])
+	ft_free_matrix(token->value);
+	matrix = ft_split_original(line, 32);
+	token->value = (char **)malloc(sizeof(char *) * (ft_matrixlen(matrix) + 1));
+	while (matrix[i])
 	{
-		val = ft_strjoin(token->value[i], " ");
-		tmp = ft_strjoin(tmp, val);
-		free(val);
+		token->value[i] = ft_strdup(matrix[i]);
 		i++;
 	}
-	return (tmp);
+	token->value[i] = NULL;
 }
 
-char	*ft_find_name_file(char *str)
+void	ft_set_new_command(char *str, t_token *token, t_main *main)
+{
+	char	*command;
+	int		i;
+
+	i = 0;
+	while (str[i] != 32)
+		i++;
+	command = (char *)malloc(sizeof(char) * i + 1);
+	i = 0;
+	while (str[i] != 32)
+	{
+		command[i] = str[i];
+		i++;
+	}
+	command[i] = '\0';
+	free(token->command);
+	token->command = ft_find_path(command, main);
+}
+
+void	ft_strjoin_redir(char *f_part, char *line, int fd, t_token *token)
 {
 	int		start;
 	int		end;
-	int		delete;
+	int		i;
 	char	*rtr;
+	char	*tmp;
 
+	end = ft_strlen(line);
 	start = 0;
-	end = 0;
-	while (str[start] == 32)
+	while (line[end - start] != '>')
 		start++;
-	while (str[start + end] != 32)
-		end++;
-	rtr = ft_substr(str, start, end);
-	delete = start + end;
-	while (delete != -1)
-		str[delete--] = 127;
-	return (rtr);
+	tmp = ft_substr(line, (end - start), start);
+	rtr = ft_strjoin(f_part, tmp);
+	free(tmp);
+	ft_set_new_command(rtr, token, token->main);
+	ft_set_new_valus(token, rtr);
+	ft_single_redir(token, token->main);
 }
 
-void	ft_execute_multi_redir(t_token *token)
+void	ft_execute_multi_redir(t_token *token, t_main *main)
 {
 	char	*line;
 	char	**matrix;
+	char	*tmp;
 	int		i;
 	int		input;
-	// int		ouput;
 
-	// ft_print_lst(token);
 	i = 0;
 	line = ft_create_line(token);
 	matrix = ft_split_original(line, '>');
 	while (matrix[++i])
 		input = open(ft_find_name_file(matrix[i]), O_CREAT | O_RDWR, 0644);
+	matrix = ft_clear_matrix(matrix);
+	tmp = (char *)malloc(sizeof(char) * 1);
+	tmp[0] = '\0';
 	i = 0;
 	while (matrix[i])
-		printf("%s\n", matrix[i++]);
-	// ft_set_info(matrix, main, main->copy_line, 1);
-	// ft_print_lst(main->token);
-	// while (main->token)
-	// {
-	// if (main->token->command == NULL || ft_strcmp(main->token->command, "bin/file"))
-	// 	main->token = main->token->next;
-	// }
+		tmp = ft_strjoin(tmp, matrix[i++]);
+	ft_free_matrix(matrix);
+	ft_strjoin_redir(tmp, line, input, token);
 }
