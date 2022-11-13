@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/12 23:55:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/13 00:46:42 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_output_redirect(t_token *token)
+void	ft_output_redirect(t_token *token, t_main *main)
 {
 	int	fd;
 
@@ -34,6 +34,7 @@ void	ft_output_redirect(t_token *token)
 		exit(0);
 	}
 	token->stdoutput = fd;
+	ft_change_name_file(main, token, '<');
 }
 
 void	ft_input_redirect(t_token *token, t_main *main)
@@ -41,25 +42,13 @@ void	ft_input_redirect(t_token *token, t_main *main)
 	int	fd;
 
 	token->dup = dup(STDIN_FILENO);
-	if (token->heredoc == 1)
+	fd = open (token->name_file, O_RDONLY);
+	dup2(fd, STDIN_FILENO);
+	if (fd == -1)
 	{
-		if (ft_heredoc(token, main) == -1)
-		{
-			perror(RED ERROR_FILE COLOR_RES);
-			write(fd, "1", 1);
-			exit(0);
-		}
-	}
-	if (token->input == 1)
-	{
-		fd = open (token->name_file, O_RDONLY);
-		dup2(fd, STDIN_FILENO);
-		if (fd == -1)
-		{
-			perror(RED ERROR_FILE COLOR_RES);
-			write(fd, "1", 1);
-			exit(0);
-		}
+		perror(RED ERROR_FILE COLOR_RES);
+		write(fd, "1", 1);
+		exit(0);
 	}
 	token->stdinput = fd;
 }
@@ -85,10 +74,12 @@ int	ft_count_redirection(t_token *token)
 
 void	ft_single_redir(t_token *token, t_main *main)
 {
-	if (token->input == 1 || token->heredoc == 1)
-		ft_input_redirect(token, main);
+	if (token->heredoc == 1)
+		ft_heredoc(token, main);
 	if (token->output == 1 || token->append == 1)
-		ft_output_redirect(token);
+		ft_output_redirect(token, main);
+	if (token->input == 1)
+		ft_input_redirect(token, main);
 	ft_delete_redirection(token);
 	if (token->command == NULL)
 	{
