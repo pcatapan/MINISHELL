@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/13 17:43:28 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/15 11:15:32 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_execute_command(t_main *main)
 		// else if (ft_check_builtin(main->token) && !main->redirections)
 		// 	main->token = ft_execute_builtin(main->token);
 		else if (main->token->input || main->token->append \
-				|| main->token->output || main->token->heredoc)
+				|| main->token->output || main->token->heredoc || main->redirections)
 			main->token = ft_redirections(main->token, main);
 		else // Qui entra se il comando bultin é errato o se non é da gestirte
 			main->token = ft_execute_exeve(main->token);

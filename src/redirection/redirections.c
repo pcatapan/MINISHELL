@@ -6,17 +6,19 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/13 17:51:13 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/18 18:11:27 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_output_redirect(t_token *token, t_main *main)
+void	
+ft_output_redirect(t_token *token, t_main *main)
 {
 	int	fd;
 
 	fd = 0;
+	printf("name file: %s\n", token->name_file);
 	token->dup = dup(STDOUT_FILENO);
 	if (token->output == 1)
 	{
@@ -69,8 +71,8 @@ void	ft_delete_redirection(t_token *token)
 				|| ft_strcmp(token->value[i], ">") \
 				|| ft_strcmp(token->value[i], ">>"))
 			{
-				free(token->value[i]);
 				token->value[i] = NULL;
+				free(token->value[i]);
 			}
 			i++;
 		}
@@ -107,6 +109,8 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 	{
 		if (ft_count_redirection(token) > 1)
 			ft_execute_multi_redir(token);
+		if ((ft_count_redir_value(token) > 1 && !token->append))
+			ft_no_space(token);
 		else
 		{
 			ft_single_redir(token, main);

@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 17:50:19 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/13 17:50:45 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/16 13:04:39 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,15 @@ char		**ft_clear_matrix(char **matrix);
 int			ft_search_redir(t_token *token, char *redir);
 int			ft_count_redirection(t_token *token);
 void		ft_change_name_file(t_main *main, t_token *token, char redir);
+int			ft_count_redir_value(t_token *token);
+void		ft_multi_no_space(t_token *token);
+int			ft_count_redir_value(t_token *token);
+void		ft_strjoin_redir(char *f_part, char *line, t_token *token);
+void		ft_set_new_command(char *str, t_token *token, t_main *main);
+void		ft_set_new_valus(t_token *token, char *line);
+void		ft_new_token(t_token *token, char *line, char dir);
+void		ft_no_space(t_token *token);
+char		*ft_new_line(char *tmp, int count);
 
 // temporary
 void		ft_print_lst(t_token *a);

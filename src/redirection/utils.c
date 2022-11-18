@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 03:26:32 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/13 16:47:15 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/16 12:54:39 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,25 @@ char	**ft_clear_matrix(char **matrix)
 	return (matrix);
 }
 
-int	ft_count_redirection(t_token *token)
+int	ft_count_redir_value(t_token *token)
 {
 	int	i;
+	int	j;
 	int	count;
 
-	i = 0;
 	count = 0;
+	i = 0;
 	while (token->value[i])
 	{
-		if (ft_strcmp(token->value[i], ">") \
-			|| ft_strcmp(token->value[i], ">>"))
-			count++;
+		j = 0;
+		while (token->value[i][j])
+		{
+			if (token->value[i][j] == 62 || token->value[i][j] == 60)
+				count++;
+			j++;
+		}
+		if (count > 1)
+			break ;
 		i++;
 	}
 	return (count);

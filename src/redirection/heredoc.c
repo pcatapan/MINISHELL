@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:31:25 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/13 05:10:52 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/18 18:16:46 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_heredoc(t_token *token, t_main *main)
 	ft_write_fd(fd, token->name_file, main);
 	fd = open (n_file, O_RDWR);
 	dup2(fd, STDIN_FILENO);
+	printf("name file dopo heredoc: %s\n", token->name_file);
 	if (ft_search_redir(token, ">"))
 		ft_change_name_file(main, token, '>');
 	if (fd == -1)
