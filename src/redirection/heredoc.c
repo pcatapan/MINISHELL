@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:31:25 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/18 18:16:46 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/19 02:10:47 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ void	ft_change_name_file(t_main *main, t_token *token, char redir)
 	char	*tmp;
 	int		end;
 
-	start = 0;
-	end = 0;
+	start = ft_strlen(main->copy_line);
+	end = 1;
 	while (main->copy_line[start] != redir)
+		start--;
+	start++;
+	while (main->copy_line[start] == 32 \
+			&& main->copy_line[start])
 		start++;
-	start += 2;
 	while (main->copy_line[start + end] != 32 \
 			&& main->copy_line[start + end])
 		end++;
@@ -69,7 +72,6 @@ void	ft_heredoc(t_token *token, t_main *main)
 	ft_write_fd(fd, token->name_file, main);
 	fd = open (n_file, O_RDWR);
 	dup2(fd, STDIN_FILENO);
-	printf("name file dopo heredoc: %s\n", token->name_file);
 	if (ft_search_redir(token, ">"))
 		ft_change_name_file(main, token, '>');
 	if (fd == -1)

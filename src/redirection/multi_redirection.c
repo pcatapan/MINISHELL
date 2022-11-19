@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:36:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 01:11:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/19 01:36:43 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,11 @@ void	ft_strjoin_redir(char *f_part, char *line, t_token *token)
 	free(tmp);
 	ft_set_new_command(rtr, token, token->main);
 	ft_set_new_valus(token, rtr);
-	free(token->name_file);
-	ft_search_redir(token, ">");
+	if (!token->heredoc)
+	{
+		free(token->name_file);
+		ft_search_redir(token, ">");
+	}
 	ft_single_redir(token, token->main);
 }
 
@@ -111,10 +114,7 @@ void	ft_execute_multi_redir(t_token *token)
 	tmp[0] = '\0';
 	i = 0;
 	while (matrix[i])
-	{	printf("matrix : %s\n", matrix[i]);
 		tmp = ft_strjoin(tmp, matrix[i++]);
-	}
 	ft_free_matrix(matrix);
-	printf("tmp: %s -- line: %s\n", tmp, line);
 	ft_strjoin_redir(tmp, line, token);
 }

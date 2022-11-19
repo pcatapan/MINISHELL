@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prova.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 00:59:00 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/18 13:53:01 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/19 02:50:51 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void	ft_token_with_space(char *line, t_token *token)
 	ft_set_new_valus(token, tmp);
 	ft_set_redirections(token);
 	ft_execute_multi_redir(token);
-
 }
 
+/*DEVIIIIII FARE free tmp*/
 void	ft_no_space(t_token *token)
 {
 	int		i;
