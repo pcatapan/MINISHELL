@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:43:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 03:46:56 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/19 20:34:27 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,16 @@ void	ft_execute_dollar(t_token *token)
 {
 	int		i;
 	char	*tmp;
-	bool	res;
 
 	i = 0;
-	res = FALSE;
 	while (token->value[i])
 	{
-		while (ft_strchr(token->value[i], '$'))
+		while (ft_strchr(token->value[i], '$') && \
+				!ft_strchr(token->value[i], '\''))
 		{
-			if (ft_strchr(token->value[i], '$'))
-				res = TRUE;
-			if (res)
-			{
-				tmp = ft_expand_dollar(token->value[i], token->main);
-				token->value[i] = ft_strdup(tmp);
-				free(tmp);
-			}
+			tmp = ft_expand_dollar(token->value[i], token->main);
+			token->value[i] = ft_strdup(tmp);
+			free(tmp);
 		}
 		i++;
 	}

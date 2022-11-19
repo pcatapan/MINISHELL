@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 03:52:10 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/19 21:01:58 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*ft_change_var_in_dollar(int start, int l, char *str, t_main *main)
 	free(str);
 	str = ft_strjoin(word, second_part);
 	free(second_part);
+	free(word);
 	return (str);
 }
 
@@ -47,7 +48,7 @@ char	*ft_expand_dollar(char *line, t_main *main)
 	i = 0;
 	l = 0;
 	start = 0;
-	if (ft_strchr(line, '{'))
+	// *** Utilizzare trim 3 (ft_strchr(line, '{'))
 		line = ft_delete_brackets(line);
 	while (line[i] != '$' && line[i])
 	{
@@ -84,18 +85,19 @@ char	*ft_expand_heredoc(char *line, t_main *main)
 	return (line);
 }
 
-char *ft_delete_brackets(char *line)
+char	*ft_delete_brackets(char *line)
 {
 	char	*tmp;
 	char	*tmp2;
 
-	tmp = malloc(sizeof(line));
+	// tmp = malloc(sizeof(line));
 	tmp2 = malloc(sizeof(line));
 	if (!(tmp) || !tmp2)
 		return (NULL);
-	tmp = NULL;
-	tmp = line;
-	line = "$";
+	// tmp = NULL;
+	tmp = ft_strdup(line);
+	free(line);
+	line = ft_strdup("$");
 	tmp = ft_clear_brackets(tmp);
 	ft_strcpy(tmp2, line);
 	ft_strcat(tmp2, tmp);

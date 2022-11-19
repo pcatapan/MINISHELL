@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:10:04 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 18:44:57 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/11/19 20:20:34 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_echo(t_token *token)
 		if (token->value[i][0] == '$')
 			printf("%s", getenv(token->value[i]));
 		else
-			printf("%s", ft_strtrim(token->value[i], "\""));
+			printf("%s", ft_strtrim2(ft_strtrim2(token->value[i], '"'), '\''));
 		if (token->value[i + 1])
 			printf(" ");
 		i++;
