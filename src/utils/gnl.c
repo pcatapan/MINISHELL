@@ -3,40 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:28:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/13 17:33:24 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/16 21:45:15 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	**ft_get_next_line(int fd)
+char	**ft_get_next_line(int fd, char *file)
 {
-	char	array[999999];
-	char	buffer[1];
-	char	*new_a;
 	int		i;
-	char	**set;
+	char	c;
+	char	**rtr;
+	char	*buffer;
 
 	i = 0;
-	array[i] = 0;
-	while (read(fd, buffer, 1) == 1)
+	buffer = malloc (9999);
+	fd = open(file, O_CREAT | O_RDONLY, 0644);
+	while (read(fd, &c, 1) > 0)
 	{
-		array[i] = buffer[0];
-		array[i + 1] = '\0';
-		if (array[i] == '\0')
-			break ;
+		buffer[i] = c;
 		i++;
+		if (c == '\0')
+			break ;
 	}
-	new_a = malloc(i + 1);
-	if (!new_a)
-		return (NULL);
-	i = -1;
-	while (array[++i])
-		new_a[i] = array[i];
-	new_a[i] = '\0';
-	set = ft_split_original(new_a, '\n');
-	return (set);
+	buffer[i] = '\0';
+	rtr = ft_split_original(buffer, '\n');
+	return (rtr);
 }

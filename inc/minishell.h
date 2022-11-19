@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/13 17:50:19 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/16 13:04:39 by aanghel          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "../PRINTF/ft_printf.h"
@@ -32,6 +20,8 @@
 # define DIVISOR_SHELL " ▸ "
 # define HOME_SHELL " ~ "
 # define FILE_HISTORY "/.42minishell_history"
+# define FILE_MATRIX "/Users/fgrossi/Desktop/Pollo/irina"
+# define FILE_EXPORT "/Users/fgrossi/Desktop/Pollo/export"
 # define RED "\x1b[31m"
 # define COLOR_RES  "\x1b[0m"
 # define ERROR_DOUBLE_QUOTE "Mistake : unclosed double quotes"
@@ -70,9 +60,12 @@ typedef struct s_main
 {
 	char		**copy_env;
 	char		**export_env;
+	char		*files_pwd;
 	char		*copy_line;
 	int			open_brackets;
 	int			close_brackets;
+	int			fd_matrix;
+	int			fd_export;
 	int			dub_quotes;
 	int			sin_quotes;
 	int			count;
@@ -112,7 +105,7 @@ size_t		ft_strlen(char *s);
 size_t		ft_matrixlen(char **s);
 int			ft_find_in_env(char **matrix, char *str);
 int			ft_find_in_exp(char **matrix, char *str);
-char		**ft_get_next_line(int fd);
+char		**ft_get_next_line(int fd, char *file);
 char		*ft_clear_brackets(char *str);
 char		*ft_strcpy(char *dst, char *src);
 char		*ft_strclear(char *str, char del);
@@ -141,11 +134,11 @@ void		ft_check_redirection(char *line, t_main *main);
 char		*ft_delete_brackets(char *line);
 
 // DIR Execute
-void		ft_execute_command(t_main *main);
+void		ft_execute_command(char *line, t_main *main);
 void		ft_execute_dollar(t_token *token);
-void		ft_store_matrix(t_token *token, char **matrix);
+void		ft_store_matrix(t_main *main);
 t_token		*ft_execute_enviroment(t_token *token, char *var_add);
-t_token		*ft_execute_exeve(t_token *token);
+t_token		*ft_execute_exeve(t_token *token, t_main *main);
 int			ft_check_envi(char *line);
 //// DIR EXECVE
 void		ft_execve_or(t_token *token);
@@ -167,14 +160,14 @@ void		ft_set_info(char **tmp, t_main *main, char *copy_line, int count);
 int			ft_check_builtin(t_token *token);
 char		*ft_clear_value(char *str);
 void		ft_check_echo(t_token *token);
-void		ft_export(t_token *token);
-void		ft_cd(t_token *token);
+void		ft_export(t_token *token, t_main *main);
+void		ft_cd(t_token *token, t_main *main);
 void		ft_pwd(void);
-void		ft_env(t_token *token);
-void		ft_unset(t_token *token);
+void		ft_env(t_main *main);
+void		ft_unset(t_token *token, t_main *main);
 void		ft_exit(t_token *token);
-t_token		*ft_execute_builtin(t_token *s_token);
-t_token		*ft_end_execute_(t_token *token, int fd_pipe[2]);
+t_token		*ft_execute_builtin(t_token *s_token, t_main *main);
+t_token		*ft_end_execute_(t_token *token, int fd_pipe[2], t_main *main);
 
 extern void	rl_replace_line(const char *text, int clear_undo);
 
@@ -192,20 +185,15 @@ char		*ft_create_line(t_token *token);
 char		**ft_clear_matrix(char **matrix);
 int			ft_search_redir(t_token *token, char *redir);
 int			ft_count_redirection(t_token *token);
-void		ft_change_name_file(t_main *main, t_token *token, char redir);
 int			ft_count_redir_value(t_token *token);
-void		ft_multi_no_space(t_token *token);
-int			ft_count_redir_value(t_token *token);
-void		ft_strjoin_redir(char *f_part, char *line, t_token *token);
-void		ft_set_new_command(char *str, t_token *token, t_main *main);
 void		ft_set_new_valus(t_token *token, char *line);
 void		ft_new_token(t_token *token, char *line, char dir);
 void		ft_no_space(t_token *token);
-char		*ft_new_line(char *tmp, int count);
+void		ft_change_name_file(t_main *main, t_token *token, char redir);
 
 // temporary
 void		ft_print_lst(t_token *a);
-void		ft_qualcosa(t_token *token);
-t_token		*ft_execute_exeve(t_token *token);
+void		ft_qualcosa(t_token *token, t_main *main);
+t_token		*ft_execute_exeve(t_token *token, t_main *main);
 
 #endif

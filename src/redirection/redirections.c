@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/18 18:11:27 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/19 01:07:40 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_single_redir(t_token *token, t_main *main)
 		else if (token->stdinput != STDIN_FILENO)
 			dup2(token->dup, STDIN_FILENO);
 	}
-	ft_qualcosa(token);
+	ft_qualcosa(token, main);
 }
 
 t_token	*ft_redirections(t_token *token, t_main *main)

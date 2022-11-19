@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   priority.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 19:44:36 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/13 17:44:13 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/30 23:59:24 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_token	*ft_priority(t_token *token, int lvl, t_main *main)
 {
+	pid_t	pidchild;
 	int		lstsize;
 
 	lstsize = ft_lstsize_this(token);
@@ -31,7 +32,7 @@ t_token	*ft_priority(t_token *token, int lvl, t_main *main)
 		else if (token->main->redirections)
 			token = ft_redirections(token, token->main);
 		else // Qui entra se il comando bultin é errato o se non é da gestirte
-			token = ft_execute_exeve(token);
+			token = ft_execute_exeve(token, main);
 		main->count++;
 	}
 	return (token);

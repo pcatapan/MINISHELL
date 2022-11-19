@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execute_comand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/15 11:15:32 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/19 01:10:29 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_qualcosa(t_token *token)
+void	ft_qualcosa(t_token *token, t_main *main)
 {
 	ft_execute_dollar(token);
 	// if (ft_check_builtin(token))
@@ -20,7 +20,7 @@ void	ft_qualcosa(t_token *token)
 	/*else */if (ft_strchr(token->value[0], '=') && ft_check_envi(token->value[0]))
 		token = ft_execute_enviroment(token, token->value[0]);
 	else // Qui entra se il comando bultin é errato o se non é da gestirte
-		token = ft_execute_exeve(token);
+		token = ft_execute_exeve(token, main);
 	exit(token->res);
 }
 
@@ -51,7 +51,7 @@ void	ft_exceve(t_token *token)
 	exit(1);
 }
 
-t_token	*ft_execute_exeve(t_token *token)
+t_token	*ft_execute_exeve(t_token *token, t_main *main)
 {
 	pid_t	pidchild;
 	int		fd_pipe[2];
@@ -74,12 +74,33 @@ t_token	*ft_execute_exeve(t_token *token)
 		}
 		ft_exceve(token);
 	}
-	token = ft_end_execute_(token, fd_pipe);
+	token = ft_end_execute_(token, fd_pipe, main);
 	return (token);
 }
 
-void	ft_execute_command(t_main *main)
+void	ft_check_dir(t_main *main)
 {
+	int		i;
+	char	*pwd;
+
+	i = 0;
+	pwd = getcwd(NULL, 0);
+	while (main->copy_env[i])
+	{
+		if (ft_strncmp(main->copy_env[i], "PWD=", 4) == 0
+			&& pwd != ft_substr(main->copy_env[i],
+				4, ft_strlen(main->copy_env[i])))
+		{
+			pwd = ft_substr(main->copy_env[i], 4, ft_strlen(main->copy_env[i]));
+			chdir(pwd);
+		}
+		i++;
+	}
+}
+
+void	ft_execute_command(char *line, t_main *main)
+{
+	pid_t	pidchild;
 	int		lstsize;
 
 	main->count = 0;
@@ -94,13 +115,14 @@ void	ft_execute_command(t_main *main)
 			&& ft_check_envi(main->token->value[0]))
 			main->token = \
 			ft_execute_enviroment(main->token, main->token->value[0]);
-		// else if (ft_check_builtin(main->token) && !main->redirections)
-		// 	main->token = ft_execute_builtin(main->token);
+		else if (ft_check_builtin(main->token) && !main->redirections)
+			main->token = ft_execute_builtin(main->token, main);
 		else if (main->token->input || main->token->append \
-				|| main->token->output || main->token->heredoc || main->redirections)
+				|| main->token->output || main->token->heredoc)
 			main->token = ft_redirections(main->token, main);
 		else // Qui entra se il comando bultin é errato o se non é da gestirte
-			main->token = ft_execute_exeve(main->token);
+			main->token = ft_execute_exeve(main->token, main);
+		ft_check_dir(main);
 		main->count++;
 	}
 }

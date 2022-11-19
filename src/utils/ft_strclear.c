@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 00:31:42 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/13 17:53:06 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/13 01:08:36 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,12 @@ char	*ft_strclear(char *str, char del)
 	char	*rtr;
 
 	i = -1;
-	count = 0;
 	while (str[++i])
 	{
 		if (str[i] != del)
 			count++;
 	}
 	rtr = (char *)malloc(sizeof(char) * count);
-	if (!rtr)
-		return (NULL);
 	i = -1;
 	count = 0;
 	while (str[++i])

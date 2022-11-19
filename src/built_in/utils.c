@@ -33,7 +33,7 @@ int	ft_find_in_exp(char **matrix, char *str)
 	i = 0;
 	while (matrix[i])
 	{
-		if (ft_strncmp(matrix[i], str, ft_strlen(str)) == 0)
+		if (ft_strncmp(matrix[i], str, (ft_strlen(str))) == 0)
 			return (i);
 		i++;
 	}

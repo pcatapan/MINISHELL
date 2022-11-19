@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 19:10:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/13 17:36:39 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/26 16:42:52 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	main(int argc, char **argv, char **envp)
 		return (0);
 	main->copy_env = ft_init_envp(envp);
 	main->export_env = malloc (sizeof(char **) * 1);
-	if (!main->export_env)
-		return (0);
 	main->export_env[0] = NULL;
+	main->files_pwd = getcwd(NULL, 0);
+	main->files_pwd = ft_strjoin(main->files_pwd, "/");
 	signal(SIGINT, ft_sig_handel);
 	signal(SIGQUIT, ft_sig_handel);
 	while (1)
