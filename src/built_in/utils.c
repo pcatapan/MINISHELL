@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 23:32:54 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/31 00:40:49 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/19 17:51:42 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ char	*ft_clear_brackets(char *str)
 	start = i + 1;
 	while (str[i] != 125)
 		i++;
-	end  = i - 2;
+	end = i - 2;
 	return (ft_substr(str, start, end));
 }

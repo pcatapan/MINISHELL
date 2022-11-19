@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 05:24:22 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:52:05 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_token	*ft_execute_builtin(t_token *token, t_main *main)
 	{
 		close(fd_pipe[1]);
 		waitpid(pidchild, &token->res, 0);
-		// printf("%d\n", WEXITSTATUS(token->res));
 		if (token->res != 0)
 			exit(token->res);
 	}

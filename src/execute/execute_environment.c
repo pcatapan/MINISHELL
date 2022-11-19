@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_environment.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 02:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/26 16:57:46 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:41:05 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ int	ft_check_envi(char *line)
 	int	i;
 
 	i = 1;
-	if (ft_isalpha(line[0]) == 0)
+	if (ft_isalpha(line[0]) == 0 && line[0] != '_')
 		return (0);
+	while (line[i] == '_')
+		i++;
 	while (line[i])
 	{
 		if (ft_isalnum(line[i]) == 0)

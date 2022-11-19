@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:46:39 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/12 19:49:49 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:49:26 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_print_lst(t_token *token)
 	int		i;
 	t_token	*a;
 
-	// a = ft_return_head(token);
 	a = token;
 	while (a)
 	{
