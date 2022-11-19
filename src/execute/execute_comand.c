@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 02:56:13 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/19 03:36:42 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ t_token	*ft_execute_exeve(t_token *token, t_main *main)
 	pid_t	pidchild;
 	int		fd_pipe[2];
 
-	if (pipe(fd_pipe) == -1)
-		perror(RED"ERRORE2"COLOR_RES);
+	pipe(fd_pipe);
+	main->fd_matrix = open(ft_strjoin(main->files_pwd, "irina"),
+			O_CREAT | O_RDWR | O_TRUNC, 0644);
+	main->fd_export = open(ft_strjoin(main->files_pwd, "export"),
+			O_CREAT | O_RDWR | O_TRUNC, 0644);
 	pidchild = fork();
 	if (pidchild != 0)
 	{
@@ -72,6 +75,7 @@ t_token	*ft_execute_exeve(t_token *token, t_main *main)
 			dup2(fd_pipe[1], STDOUT_FILENO);
 			close(fd_pipe[1]);
 		}
+		ft_store_matrix(main);
 		ft_exceve(token);
 	}
 	token = ft_end_execute_(token, fd_pipe, main);
@@ -108,19 +112,19 @@ void	ft_execute_command(char *line, t_main *main)
 	main->token = ft_return_head(main->token);
 	while (main->count < lstsize)
 	{
+		ft_execute_dollar(main->token);
 		if (main->token->priority != 0)
 			main->token = ft_priority(main->token, main->token->priority, main);
-		ft_execute_dollar(main->token);
 		if (ft_strchr(main->token->value[0], '=') \
 			&& ft_check_envi(main->token->value[0]))
 			main->token = \
 			ft_execute_enviroment(main->token, main->token->value[0]);
-		else if (main->token->input || main->token->append \
-				|| main->token->output || main->token->heredoc || main->redirections)
+		else if (main->token->input || main->token->append || \
+		main->token->output || main->token->heredoc || main->redirections)
 			main->token = ft_redirections(main->token, main);
 		else if (ft_check_builtin(main->token) && !main->redirections)
 			main->token = ft_execute_builtin(main->token, main);
-		else // Qui entra se il comando bultin é errato o se non é da gestirte
+		else
 			main->token = ft_execute_exeve(main->token, main);
 		ft_check_dir(main);
 		main->count++;
