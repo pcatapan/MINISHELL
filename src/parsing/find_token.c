@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:56:42 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/15 19:25:33 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/19 04:29:06 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*ft_find_token(char *line, t_main *main)
 {
 	int		start;
 	char	*command;
+	char	*tmp;
 	int		end;
 
 	start = 0;
@@ -24,7 +25,8 @@ char	*ft_find_token(char *line, t_main *main)
 		start++;
 	while (line[start + end] != ' ' && line[start + end] != '\0')
 		end++;
-	command = ft_substr(line, start, end);
+	tmp = ft_substr(line, start, end);
+	command = ft_strtrim2(tmp, '\"');
 	if (!main->token)
 		main->token = ft_lstnew(command, main);
 	else

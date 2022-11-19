@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:31:25 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/19 02:10:47 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/19 04:58:48 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	ft_write_fd(int fd, char *limiter, t_main *main)
 	char	*str;
 
 	main->expand = ft_strchr(limiter, '"');
-	limiter = ft_strtrim(limiter, "\"");
+	limiter = ft_strtrim2(limiter, '"');
+	printf("%s\n", limiter);
 	while (1)
 	{
 		str = readline("> ");

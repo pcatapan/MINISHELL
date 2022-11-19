@@ -109,6 +109,7 @@ char		**ft_get_next_line(int fd, char *file);
 char		*ft_clear_brackets(char *str);
 char		*ft_strcpy(char *dst, char *src);
 char		*ft_strclear(char *str, char del);
+char		*ft_strtrim2(char *str, char del);
 
 // free.c
 void		ft_free_matrix(char **matrix);

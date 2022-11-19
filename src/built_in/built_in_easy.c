@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/30 00:26:30 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/19 05:17:59 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,5 @@ void	ft_exit(t_token *token)
 	}
 	free(token->main->copy_env);
 	printf(RED "\texit\n" COLOR_RES);
-	exit(3);
+	exit((int)token->value[1]);
 }

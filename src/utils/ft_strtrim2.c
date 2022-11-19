@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 13:50:05 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 04:16:03 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/11/19 04:17:48 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/11/19 04:56:52 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/minishell.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim2(char *str, char del)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	int		count;
+	char	*rtr;
 
-	j = 0;
-	if (!s1 || !set)
+	i = -1;
+	count = 0;
+	while (str[++i])
+	{
+		if (str[i] == del)
+			count++;
+	}
+	i = -1;
+	j = -1;
+	rtr = (char *)malloc(sizeof(char) * (ft_strlen(str) - count));
+	if (!rtr)
 		return (NULL);
-	while (*s1 && ft_strchr(set, *s1))
-		s1++;
-	i = ft_strlen((char *)s1);
-	while (i && ft_strchr(set, s1[i - 1]))
-		i--;
-	return (ft_substr(s1, 0, i));
+	while (str[++i])
+	{
+		if (str[i] != del)
+			rtr[++j] = str[i];
+	}
+	free(str);
+	return (rtr);
 }

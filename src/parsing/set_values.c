@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:57:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/13 01:41:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/19 03:59:54 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	ft_set_values(char **line, t_main *main)
 {
 	int		j;
 	t_token	*token;
+	char	*tmp;
 
 	token = ft_return_head(main->token);
 	j = 0;
