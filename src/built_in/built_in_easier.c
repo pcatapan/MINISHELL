@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_easier.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:50:21 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/19 17:51:06 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/11/20 05:01:38 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	ft_env(t_main *main)
 	int	i;
 
 	i = 0;
-	printf("nostro\n");
 	while (main->copy_env[i])
 	{
 		ft_printf("%s\n", main->copy_env[i]);

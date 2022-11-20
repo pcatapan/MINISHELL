@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:00:25 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/11 19:32:20 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 07:03:45 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	**ft_utils_set_priority(char *line, t_main *main)
 {
-	int	i;
-	char *dup;
+	int		i;
+	char	*dup;
 
 	i = 0;
 	dup = ft_strdup(line);

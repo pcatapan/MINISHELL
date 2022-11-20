@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/19 17:48:57 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/11/20 06:30:10 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define ERROR_CLOSE_BRACKETS "Mistake : find close brackets exstra"
 # define ERROR_OP_LOGIC "Syntax error near unexpected token"
 # define ERROR_FILE "No such file or directory"
+# define ERROR_EXIT "Exit"
 # define INPUT 60
 # define OUTPUT 62
 
@@ -88,6 +89,9 @@ typedef struct s_main
 	bool		expand;
 	t_token		*token;
 }	t_main;
+
+// Global
+int	g_exit;
 
 // DIR Utils
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -208,5 +212,6 @@ void		ft_change_name_file(t_main *main, t_token *token, char redir);
 void		ft_print_lst(t_token *a);
 void		ft_qualcosa(t_token *token, t_main *main);
 t_token		*ft_execute_exeve(t_token *token, t_main *main);
+void		ft_free_all(t_main *main);
 
 #endif

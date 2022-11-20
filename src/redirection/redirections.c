@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/19 02:56:59 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 07:59:24 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_output_redirect(t_token *token, t_main *main)
 	{
 		perror(RED ERROR_FILE COLOR_RES);
 		write(fd, "1", 1);
-		exit(0);
+		exit(errno);
 	}
 	token->stdoutput = fd;
 	if (ft_search_redir(token, "<"))
@@ -50,7 +50,7 @@ void	ft_input_redirect(t_token *token)
 	{
 		perror(RED ERROR_FILE COLOR_RES);
 		write(fd, "1", 1);
-		exit(1);
+		exit(errno);
 	}
 	token->stdinput = fd;
 }
@@ -102,7 +102,11 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 
 	pidchild = fork();
 	if (pidchild != 0)
+	{
 		waitpid(pidchild, &token->res, 0);
+		if (WIFEXITED(token->res))
+			g_exit = WEXITSTATUS(token->res);
+	}
 	else
 	{
 		if (ft_count_redir_value(token) >= 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 17:52:05 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/11/20 07:59:09 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	ft_search_builtin(t_token *token, t_main *main)
 		ft_cd(token, main);
 	else if (ft_strcmp(token->value[0], "export"))
 		ft_export(token, main);
-	else if (ft_strcmp(token->value[0], "exit"))
-		ft_exit(token);
 }
 
 t_token	*ft_execute_builtin(t_token *token, t_main *main)
@@ -41,13 +39,15 @@ t_token	*ft_execute_builtin(t_token *token, t_main *main)
 			O_CREAT | O_RDWR | O_TRUNC, 0644);
 	main->fd_export = open(ft_strjoin(main->files_pwd, "export"),
 			O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (ft_strcmp(token->value[0], "exit"))
+		ft_exit(token);
 	pidchild = fork();
 	if (pidchild != 0)
 	{
 		close(fd_pipe[1]);
 		waitpid(pidchild, &token->res, 0);
-		if (token->res != 0)
-			exit(token->res);
+		if (WIFEXITED(token->res))
+			g_exit = WEXITSTATUS(token->res);
 	}
 	else
 	{
@@ -57,8 +57,8 @@ t_token	*ft_execute_builtin(t_token *token, t_main *main)
 			dup2(fd_pipe[1], STDOUT_FILENO);
 			close(fd_pipe[1]);
 		}
-		ft_search_builtin(token, main);
 		ft_store_matrix(main);
+		ft_search_builtin(token, main);
 		exit(0);
 	}
 	token = ft_end_execute_(token, fd_pipe, main);

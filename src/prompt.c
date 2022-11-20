@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:57:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 03:43:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 09:02:54 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	ft_prompt(char **envp, t_main *main)
 	if (!line)
 	{
 		printf(RED "\texit\n" COLOR_RES);
-		exit(0);
+		exit(127);
 	}
 	else if (line[0] != '\0')
 	{
@@ -106,6 +106,7 @@ int	ft_prompt(char **envp, t_main *main)
 		{
 			ft_parsing(line, main);
 			ft_execute_command(line, main);
+			ft_free_all(main);
 		}
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_comand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 20:23:24 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 07:59:20 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_exceve(t_token *token)
 		if (execve(token->command, token->value, token->main->copy_env))
 		{
 			printf(RED"%s: command not found\n"COLOR_RES, token->value[0]);
-			exit(1);
+			exit(127);
 		}
 	}
 	else
@@ -45,7 +45,7 @@ void	ft_exceve(t_token *token)
 		if (execve(token->command, token->value, token->main->copy_env))
 		{
 			printf(RED"%s: command not found\n"COLOR_RES, token->value[0]);
-			exit(1);
+			exit(127);
 		}
 	}
 	exit(1);
@@ -66,6 +66,8 @@ t_token	*ft_execute_exeve(t_token *token, t_main *main)
 	{
 		close(fd_pipe[1]);
 		waitpid(pidchild, &token->res, 0);
+		if (WIFEXITED(token->res))
+			g_exit = WEXITSTATUS(token->res);
 	}
 	else
 	{

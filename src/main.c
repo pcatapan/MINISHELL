@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 19:10:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 20:44:30 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 07:15:02 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGINT, ft_sig_handel);
 	signal(SIGQUIT, ft_sig_handel);
 	while (1)
+	{
 		ft_prompt(main->copy_env, main);
+	}
 	ft_free_matrix(main->copy_env);
 	free(main);
 }

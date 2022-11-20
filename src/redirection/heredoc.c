@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:31:25 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/19 04:58:48 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 05:41:45 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ void	ft_heredoc(t_token *token, t_main *main)
 	{
 		perror(RED ERROR_FILE COLOR_RES);
 		write(fd, "1", 1);
-		exit(0);
+		exit(errno);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_envp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 03:10:35 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 05:38:51 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**ft_init_envp(char **envp)
 	int		i;
 	char	**copy_envp;
 
-	i = 0;
+	i = 0 ;
 	while (envp[i])
 		i++;
 	copy_envp = malloc(sizeof(char *) * (i + 3));
@@ -72,7 +72,7 @@ char	**ft_init_envp(char **envp)
 			if (copy_envp[i])
 				continue ;
 			ft_free_matrix(copy_envp);
-			exit(write(1, "Error setting up env\n", 21));
+			exit(127);
 		}				
 	}
 	ft_add_shell_env(copy_envp, envp, i);

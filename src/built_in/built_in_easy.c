@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_easy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 18:19:32 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/11/20 04:59:41 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,21 @@ void	ft_unset(t_token *token, t_main *main)
 void	ft_exit(t_token *token)
 {
 	int	i;
+	int	num;
 
 	i = 0;
-	while (token->main->copy_env[i])
-	{
-		free(token->main->copy_env[i]);
+	while (token->value[i])
 		i++;
+	if (i > 2)
+	{
+		printf("Exit\n");
+		perror(RED ERROR_EXIT COLOR_RES);
+		exit(0);
 	}
-	free(token->main->copy_env);
-	printf(RED "\texit\n" COLOR_RES);
-	exit((int)token->value[1]);
+	else
+	{
+		num = ft_atoi(token->value[1]);
+		printf(RED "\texit\n" COLOR_RES);
+		exit(num);
+	}
 }

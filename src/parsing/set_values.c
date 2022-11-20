@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_values.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:57:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 20:21:23 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 06:48:45 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ char	*ft_find_path(char *cmd, t_main *main)
 		i++;
 	}
 	ft_free_matrix(paths);
-	return (0);
+	//fare free
+	return (NULL);
 }
 
 /*
