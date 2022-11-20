@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/20 09:19:49 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 18:48:37 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,10 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 	{
 		waitpid(pidchild, &token->res, 0);
 		if (WIFEXITED(token->res))
+		{
 			g_exit = WEXITSTATUS(token->res);
+			printf("g_exit: %d\n", g_exit);
+		}
 	}
 	else
 	{
