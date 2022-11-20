@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 04:56:12 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 07:41:17 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_qualcosa(t_token *token, t_main *main)
 {
-	ft_execute_dollar(token);
 	// if (ft_check_builtin(token))
 	// 	token = ft_execute_builtin(token);
 	/*else */if (ft_strchr(token->value[0], '=') && ft_check_envi(token->value[0]))
@@ -122,8 +121,8 @@ void	ft_execute_command(char *line, t_main *main)
 		else if (main->token->input || main->token->append || \
 		main->token->output || main->token->heredoc || main->redirections)
 			main->token = ft_redirections(main->token, main);
-		else if (ft_check_builtin(main->token) && !main->redirections)
-			main->token = ft_execute_builtin(main->token, main);
+		// else if (ft_check_builtin(main->token) && !main->redirections)
+		// 	main->token = ft_execute_builtin(main->token, main);
 		else
 			main->token = ft_execute_exeve(main->token, main);
 		ft_check_dir(main);

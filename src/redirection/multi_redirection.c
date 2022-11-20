@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:36:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 01:36:43 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 08:40:39 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ void	ft_strjoin_redir(char *f_part, char *line, t_token *token)
 	if (!token->heredoc)
 	{
 		free(token->name_file);
-		ft_search_redir(token, ">");
+		if (token->output)
+			ft_search_redir(token, ">");
+		else if (token->append)
+			ft_search_redir(token, ">>");
 	}
 	ft_single_redir(token, token->main);
 }

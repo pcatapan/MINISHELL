@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 00:59:00 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/19 02:50:51 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 09:10:26 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	*ft_new_line(char *tmp, int count)
 			i++;
 		}
 	}
+	line[j] = '\0';
 	return (line);
 }
 
@@ -58,13 +59,17 @@ void	ft_token_with_space(char *line, t_token *token)
 	char	*tmp;
 
 	i = -1;
-	tmp = (char *)malloc(sizeof(char) + 1);
+	tmp = (char *)malloc(sizeof(char) * 1);
+	if (!tmp)
+		perror("Stronzo");
+	tmp[0] = '\0';
 	while (token->value[++i])
+	{
 		if (ft_strchr(token->value[i], '>') || ft_strchr(token->value[i], '<'))
 			break ;
+	}
 	token->value[i] = ft_strcpy(token->value[i], line);
 	token->value[i] = ft_substr(token->value[i], 0, ft_strlen(line));
-	tmp[0] = '\0';
 	i = -1;
 	while (token->value[++i])
 	{
@@ -88,9 +93,6 @@ void	ft_no_space(t_token *token)
 	while (token->value[++i])
 		if (ft_strchr(token->value[i], '>') || ft_strchr(token->value[i], '<'))
 			break ;
-	tmp = (char *)malloc(sizeof(ft_strlen(token->value[i])));
-	if (!tmp)
-		return ;
 	tmp = ft_strdup(token->value[i]);
 	i = -1;
 	count = 0;
@@ -103,5 +105,6 @@ void	ft_no_space(t_token *token)
 			count++;
 	}
 	rtr = ft_new_line(tmp, count);
+	free(tmp);
 	ft_token_with_space(rtr, token);
 }

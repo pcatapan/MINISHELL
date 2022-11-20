@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/19 02:56:59 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 08:05:43 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_output_redirect(t_token *token, t_main *main)
 	}
 	else if (token->append == 1)
 	{
+		printf("sono qua\n");
 		fd = open (token->name_file, O_CREAT | O_RDWR | O_APPEND, 0644);
 		dup2(fd, STDOUT_FILENO);
 	}
@@ -93,6 +94,7 @@ void	ft_single_redir(t_token *token, t_main *main)
 		else if (token->stdinput != STDIN_FILENO)
 			dup2(token->dup, STDIN_FILENO);
 	}
+	printf("Dopo dup\n");
 	ft_qualcosa(token, main);
 }
 

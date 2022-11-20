@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 05:25:23 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 07:13:51 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ char	*ft_expand_dollar(char *line, t_main *main)
 	start = 0;
 	if (ft_strchr(line, 123) && ft_strchr(line, 125))
 		line = ft_strtrim3(line, "{ }");
-	// line = ft_delete_brackets(line);
 	while (line[i] != '$' && line[i])
 	{
 		i = ft_check_single_quote(line, main, i);
@@ -61,7 +60,7 @@ char	*ft_expand_dollar(char *line, t_main *main)
 	while (line[i++] && line[i] != ' ' && line[i] != '"' && line[i] != '\'' \
 		&& line[i] != '$' && line[i] != 62 && line[i] != 60)
 		l++;
-	if (start != 0 && start != 1)
+	if (start != 0 && l > 1)
 		line = ft_change_var_in_dollar(start, l, line, main);
 	return (line);
 }
@@ -86,16 +85,16 @@ char	*ft_expand_heredoc(char *line, t_main *main)
 	return (line);
 }
 
-char	*ft_delete_brackets(char *line)
+int	ft_check_expand(char *line)
 {
-	char	*tmp;
-	char	*rtr;
+	int	i;
 
-	tmp = ft_strdup(line);
-	free(line);
-	tmp = ft_clear_brackets(tmp);
-	rtr = ft_strdup("$\0");
-	rtr = ft_strcat(rtr, tmp);
-	free(tmp);
-	return (rtr);
+	i = 0;
+	while (line[i] != '$' && line[i])
+		i++;
+	if (line[i + 1] == 32 || line[i + 1] == '?' || ft_strlen(line) < 2)
+		return (0);
+	if (ft_strchr(line, '\'') || !ft_strchr(line, '$'))
+		return (0);
+	return (1);
 }
