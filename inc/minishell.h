@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/20 09:21:32 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 19:41:24 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,10 +145,12 @@ void		ft_add_history(char *line, char **envp);
 int			ft_check_single_quote(char *line, t_main *main, int i);
 int			ft_check_double_quote(char *line, t_main *main, int i);
 int			ft_check_expand(char *line);
+int			ft_jump_brackets(char *line, int i);
 char		*ft_expand_dollar(char *line, t_main *main);
 char		*ft_expand_heredoc(char *line, t_main *main);
 void		ft_check_syntax(char *line, t_main *main);
 void		ft_check_redirection(char *line, t_main *main);
+int			ft_check_redir_char(char *line, int i);
 
 // DIR Execute
 void		ft_execute_command(char *line, t_main *main);
