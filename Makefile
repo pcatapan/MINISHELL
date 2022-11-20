@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maflabeda <maflabeda@student.42.fr>        +#+  +:+       +#+         #
+#    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/11/20 09:31:29 by maflabeda        ###   ########.fr        #
+#    Updated: 2022/11/20 18:28:59 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJC = $(SRC:%.c=%.o)
 
 CC = gcc
 
-USER = pcapatan
+USER = pcatapan
 
 #LDFLAGS = -L/opt/homebrew/opt/readline/lib
 #CPPFLAGS = -I/opt/homebrew/opt/readline/include
@@ -52,6 +52,7 @@ fclean: clean
 	@rm -f .heredoc
 	@rm -f export
 	@rm -f irina
+	@rm -rf *.dSYM
 	
 re: fclean all
 

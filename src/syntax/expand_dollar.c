@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 07:13:51 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 18:28:12 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	ft_check_expand(char *line)
 	if (line[i + 1] == 32 || line[i + 1] == '?' || ft_strlen(line) < 2)
 		return (0);
 	if (ft_strchr(line, '\'') || !ft_strchr(line, '$'))
+		return (0);
+	if (line[i] == '$' && line[i + 1] == '$')
 		return (0);
 	return (1);
 }
