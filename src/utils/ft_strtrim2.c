@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 04:17:48 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 04:56:52 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 04:40:50 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strtrim2(char *str, char del)
 	}
 	i = -1;
 	j = -1;
-	rtr = (char *)malloc(sizeof(char) * (ft_strlen(str) - count));
+	rtr = (char *)malloc(sizeof(char) * (ft_strlen(str) - count + 1));
 	if (!rtr)
 		return (NULL);
 	while (str[++i])
@@ -36,6 +36,7 @@ char	*ft_strtrim2(char *str, char del)
 		if (str[i] != del)
 			rtr[++j] = str[i];
 	}
+	rtr[++j] = '\0';
 	free(str);
 	return (rtr);
 }

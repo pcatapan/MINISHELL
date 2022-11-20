@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:10:04 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 05:57:14 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 09:20:37 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	ft_echo(t_token *token)
 		i++;
 	while (token->value[i])
 	{
-		if (token->value[i][0] == '$')
-			printf("%s", getenv(token->value[i]));
-		else
-			printf("%s", ft_strtrim2(ft_strtrim2(token->value[i], '"'), '\''));
+		printf("%s", ft_strtrim2(ft_strtrim2(token->value[i], '"'), '\''));
 		if (token->value[i + 1])
 			printf(" ");
 		i++;

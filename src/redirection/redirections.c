@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/20 07:59:24 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 09:19:49 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_output_redirect(t_token *token, t_main *main)
 	}
 	else if (token->append == 1)
 	{
+		printf("sono qua\n");
 		fd = open (token->name_file, O_CREAT | O_RDWR | O_APPEND, 0644);
 		dup2(fd, STDOUT_FILENO);
 	}

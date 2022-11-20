@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 07:59:20 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 09:17:26 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_qualcosa(t_token *token, t_main *main)
 {
-	ft_execute_dollar(token);
 	// if (ft_check_builtin(token))
 	// 	token = ft_execute_builtin(token);
 	/*else */if (ft_strchr(token->value[0], '=') && ft_check_envi(token->value[0]))
