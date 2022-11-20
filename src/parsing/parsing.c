@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:58:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 19:47:25 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:43:53 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_set_info(char **tmp, t_main *main, char *copy_line, int count)
 	ft_set_op_logic(copy_line, main->token);
 	ft_set_priority(copy_line, main, 0);
 	ft_set_redirections(main->token);
+	ft_free_matrix(tmp);
 }
 
 void	ft_parsing(char *line, t_main *main)

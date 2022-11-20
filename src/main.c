@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 19:10:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 07:15:02 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:32:18 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGQUIT, ft_sig_handel);
 	while (1)
 	{
+		if (!main->copy_env)
+			main->copy_env = ft_init_envp(envp);
 		ft_prompt(main->copy_env, main);
 	}
 	ft_free_matrix(main->copy_env);

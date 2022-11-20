@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 19:37:39 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:31:17 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,4 +132,5 @@ void	ft_execute_command(char *line, t_main *main)
 		ft_check_dir(main);
 		main->count++;
 	}
+	//ft_free_all(main);
 }
