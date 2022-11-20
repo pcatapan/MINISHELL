@@ -6,11 +6,37 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:32:21 by aanghel           #+#    #+#             */
-/*   Updated: 2022/10/15 16:56:29 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:51:10 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+/**
+ * @brief The funcion check the redirecion
+ * 
+ * @param line Str in to find the redirection
+ * @param i Position of str in to find
+ * @return int Return 0 isn't find and 1 is find
+ */
+int	ft_check_redir_char(char *line, int i)
+{
+	if (line[i] == '<')
+	{
+		if (line[i + 1] == '<' && line[i - 1] != '<')
+			return (1);
+		else
+			return (1);
+	}
+	if (line[i] == '>')
+	{
+		if (line[i + 1] == '>' && line[i - 1] != '>')
+			return (1);
+		else
+			return (1);
+	}
+	return (0);
+}
 
 void	ft_check_redirection(char *line, t_main *main)
 {

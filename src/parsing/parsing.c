@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:58:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 20:20:46 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:47:25 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,12 @@ void	ft_parsing(char *line, t_main *main)
 	{
 		i = ft_check_single_quote(line, main, i);
 		i = ft_check_double_quote(line, main, i);
-		if (line[i] == 38 || line[i] == 59 || line[i] == 124)
+		i = ft_jump_brackets(line, i);
+		if (line[i] == 38 || line[i] == 59 || line[i] == 124 || \
+										ft_check_redir_char(line, i))
 		{
-			if (line[i + 1] == 38 || line[i + 1] == 124 || line[i] == 59)
+			if (line[i + 1] == 38 || line[i + 1] == 124 || line[i] == 59 || \
+						ft_check_redir_char(line, i))
 				count++;
 			line[i] = 127;
 			i++;

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 20:59:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 18:48:14 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:09:52 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_check_operetor_logic(char *line, t_main *main)
 			if (line[i + 1] == '&' && line[i + 2] != '&')
 				i++;
 			else if ((line[i + 1] == '|' || line[i + 1] != '|') \
-					&& line[i + 2] != '|')
+					&& line[i + 2] != '|' && line[i] != '&')
 				i++;
 			else
 			{
