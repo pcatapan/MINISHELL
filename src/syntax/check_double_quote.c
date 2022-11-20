@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 18:54:17 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/07/14 03:20:08 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 18:44:50 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_check_double_quote(char *line, t_main *main, int i)
 			if (line[i] == '"' && line[i - 1] != 92)
 			{
 				main->dub_quotes++;
-				i++;
+				// i++;
 				break ;
 			}
 			i++;
