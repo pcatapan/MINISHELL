@@ -6,7 +6,7 @@
 #    By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/11/20 18:15:32 by aanghel          ###   ########.fr        #
+#    Updated: 2022/11/20 18:40:00 by aanghel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ fclean: clean
 	@rm -f .heredoc
 	@rm -f export
 	@rm -f irina
+	@rm -rf *.dSYM
 	
 re: fclean all
 
