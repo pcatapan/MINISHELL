@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 04:55:56 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 05:25:23 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*ft_expand_dollar(char *line, t_main *main)
 	while (line[i++] && line[i] != ' ' && line[i] != '"' && line[i] != '\'' \
 		&& line[i] != '$' && line[i] != 62 && line[i] != 60)
 		l++;
-	if (start != 0 || start != 1)
+	if (start != 0 && start != 1)
 		line = ft_change_var_in_dollar(start, l, line, main);
 	return (line);
 }
