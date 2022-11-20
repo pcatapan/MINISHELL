@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_easy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: maflabeda <maflabeda@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 04:59:41 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 09:30:55 by maflabeda        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,11 @@ void	ft_exit(t_token *token)
 	{
 		printf("Exit\n");
 		perror(RED ERROR_EXIT COLOR_RES);
+		exit(0);
+	}
+	else if (token->value[1] == NULL)
+	{
+		printf(RED "\texit\n" COLOR_RES);
 		exit(0);
 	}
 	else
