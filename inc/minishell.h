@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/19 17:48:57 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/11/20 01:15:38 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ char		*ft_clear_brackets(char *str);
 char		*ft_strcpy(char *dst, char *src);
 char		*ft_strclear(char *str, char del);
 char		*ft_strtrim2(char *str, char del);
+char		*ft_strtrim3(char *str, char *del);
 
 // free.c
 void		ft_free_matrix(char **matrix);

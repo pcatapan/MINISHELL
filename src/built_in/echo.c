@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:10:04 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 20:20:34 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 04:44:59 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ void	ft_echo(t_token *token)
 		i++;
 	while (token->value[i])
 	{
-		if (token->value[i][0] == '$')
-			printf("%s", getenv(token->value[i]));
-		else
-			printf("%s", ft_strtrim2(ft_strtrim2(token->value[i], '"'), '\''));
+		// if (ft_strchr(token->value[i], '\'') || ft_strchr(token->value[i], '"'))
+		printf("%s", ft_strtrim2(ft_strtrim2(token->value[i], '"'), '\''));
 		if (token->value[i + 1])
 			printf(" ");
 		i++;
