@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 05:38:51 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 19:34:53 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	**ft_init_envp(char **envp)
 			if (copy_envp[i])
 				continue ;
 			ft_free_matrix(copy_envp);
+			g_exit = 127;
 			exit(127);
 		}				
 	}

@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:31:25 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/20 09:22:02 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 19:33:19 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	ft_write_fd(int fd, char *limiter, t_main *main)
 
 	main->expand = ft_strchr(limiter, '"');
 	limiter = ft_strtrim2(limiter, '"');
-	printf("%s\n", limiter);
 	while (1)
 	{
 		str = readline("> ");
@@ -79,6 +78,7 @@ void	ft_heredoc(t_token *token, t_main *main)
 	{
 		perror(RED ERROR_FILE COLOR_RES);
 		write(fd, "1", 1);
-		exit(errno);
+		g_exit = 1;
+		exit(1);
 	}
 }

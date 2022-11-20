@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/20 18:48:37 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 19:31:03 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	ft_output_redirect(t_token *token, t_main *main)
 	{
 		perror(RED ERROR_FILE COLOR_RES);
 		write(fd, "1", 1);
-		exit(errno);
+		g_exit = 1;
+		exit(1);
 	}
 	token->stdoutput = fd;
 	if (ft_search_redir(token, "<"))
@@ -51,7 +52,9 @@ void	ft_input_redirect(t_token *token)
 	{
 		perror(RED ERROR_FILE COLOR_RES);
 		write(fd, "1", 1);
-		exit(errno);
+		printf("errno : %d\n", errno);
+		g_exit = 1;
+		exit(1);
 	}
 	token->stdinput = fd;
 }
@@ -106,23 +109,15 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 	{
 		waitpid(pidchild, &token->res, 0);
 		if (WIFEXITED(token->res))
-		{
 			g_exit = WEXITSTATUS(token->res);
-			printf("g_exit: %d\n", g_exit);
-		}
 	}
 	else
 	{
-		if (ft_count_redir_value(token) >= 1)
-			ft_no_space(token);
-		else
-		{
-			ft_single_redir(token, main);
-			if (token->stdoutput != STDOUT_FILENO)
-				dup2(token->dup, STDOUT_FILENO);
-			else if (token->stdinput != STDIN_FILENO)
-				dup2(token->dup, STDIN_FILENO);
-		}
+		ft_no_space(token);
+		if (token->stdoutput != STDOUT_FILENO)
+			dup2(token->dup, STDOUT_FILENO);
+		else if (token->stdinput != STDIN_FILENO)
+			dup2(token->dup, STDIN_FILENO);
 	}
 	if (token->next)
 	{

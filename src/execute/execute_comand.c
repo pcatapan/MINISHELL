@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 09:17:26 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 19:37:39 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_qualcosa(t_token *token, t_main *main)
 {
-	// if (ft_check_builtin(token))
-	// 	token = ft_execute_builtin(token);
-	/*else */if (ft_strchr(token->value[0], '=') && ft_check_envi(token->value[0]))
+	if (ft_check_builtin(token))
+		token = ft_execute_builtin(token, main);
+	else if (ft_strchr(token->value[0], '=') && ft_check_envi(token->value[0]))
 		token = ft_execute_enviroment(token, token->value[0]);
 	else // Qui entra se il comando bultin é errato o se non é da gestirte
 		token = ft_execute_exeve(token, main);
@@ -36,6 +36,7 @@ void	ft_exceve(t_token *token)
 		if (execve(token->command, token->value, token->main->copy_env))
 		{
 			printf(RED"%s: command not found\n"COLOR_RES, token->value[0]);
+			g_exit = 127;
 			exit(127);
 		}
 	}
@@ -44,6 +45,7 @@ void	ft_exceve(t_token *token)
 		if (execve(token->command, token->value, token->main->copy_env))
 		{
 			printf(RED"%s: command not found\n"COLOR_RES, token->value[0]);
+			g_exit = 127;
 			exit(127);
 		}
 	}

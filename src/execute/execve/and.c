@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 19:44:12 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 09:21:55 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 19:37:57 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_execve_and(t_token *token)
 		if (execve(token->command, token->value, token->main->copy_env))
 		{
 			printf(RED"%s: command not found\n"COLOR_RES, token->value[0]);
+			g_exit = 127;
 			exit(127);
 		}
 	}

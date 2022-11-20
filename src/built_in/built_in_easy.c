@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_easy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maflabeda <maflabeda@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 09:30:55 by maflabeda        ###   ########.fr       */
+/*   Updated: 2022/11/20 19:53:27 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	ft_unset(t_token *token, t_main *main)
 	i = 1;
 	while (token->value[i])
 	{
-		j = 0;
-		while (main->copy_env[j])
+		j = -1;
+		while (main->copy_env[++j])
 		{
 			if (ft_strncmp(token->value[i], main->copy_env[j], \
 			ft_strlen(token->value[i])) == 0)
@@ -64,7 +64,6 @@ void	ft_unset(t_token *token, t_main *main)
 				}
 				main->copy_env[j] = NULL;
 			}
-			j++;
 		}
 		i++;
 	}
@@ -81,9 +80,9 @@ void	ft_exit(t_token *token)
 		i++;
 	if (i > 2)
 	{
+		g_exit = 1;
 		printf("Exit\n");
 		perror(RED ERROR_EXIT COLOR_RES);
-		exit(0);
 	}
 	else if (token->value[1] == NULL)
 	{

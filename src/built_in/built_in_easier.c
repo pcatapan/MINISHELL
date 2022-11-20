@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:50:21 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/20 05:01:38 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 19:55:30 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_cd(t_token *token, t_main *main)
 	}
 	else if (chdir(token->value[1]) == -1)
 	{
+		g_exit = 1;
 		ft_printf(RED"cd: " ERROR_FILE COLOR_RES, token->value[1]);
 		ft_printf("\n");
 	}
