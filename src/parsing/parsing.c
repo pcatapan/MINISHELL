@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:58:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 19:47:25 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:45:53 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,24 @@ void	ft_set_info(char **tmp, t_main *main, char *copy_line, int count)
 	ft_set_values(tmp_value, main);
 	ft_set_op_logic(copy_line, main->token);
 	ft_set_priority(copy_line, main, 0);
-	ft_set_redirections(main->token);
+	ft_set_regit directions(main->token);
 }
 
 void	ft_parsing(char *line, t_main *main)
 {
 	char	**tmp;
-	char	*copy_line;
 	int		i;
 	int		count;
 
 	i = 0;
 	count = 1;
-	copy_line = ft_strdup(line);
 	main->copy_line = ft_strdup(line);
 	while (line[i])
 	{
 		i = ft_check_single_quote(line, main, i);
 		i = ft_check_double_quote(line, main, i);
 		i = ft_jump_brackets(line, i);
-		if (line[i] == 38 || line[i] == 59 || line[i] == 124 || \
-										ft_check_redir_char(line, i))
+		if (line[i] == 38 || line[i] == 59 || line[i] == 124)
 		{
 			if (line[i + 1] == 38 || line[i + 1] == 124 || line[i] == 59 || \
 						ft_check_redir_char(line, i))
@@ -60,5 +57,5 @@ void	ft_parsing(char *line, t_main *main)
 			i++;
 	}
 	tmp = ft_split_original(line, 127);
-	ft_set_info(tmp, main, copy_line, count);
+	ft_set_info(tmp, main, main->copy_line, count);
 }
