@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:10:04 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 09:20:37 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 18:37:57 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,20 @@ void	ft_echo(t_token *token)
 		i++;
 	while (token->value[i])
 	{
-		printf("%s", ft_strtrim2(ft_strtrim2(token->value[i], '"'), '\''));
-		if (token->value[i + 1])
-			printf(" ");
-		i++;
+		token->value[i] = ft_strtrim2(token->value[i], '"');
+		token->value[i] = ft_strtrim2(token->value[i], '\'');
+		if (ft_strcmp(token->value[1], "$?"))
+		{
+			printf("%d\n", g_exit);
+			exit(1);
+		}
+		else
+		{
+			printf("%s", token->value[i]);
+			if (token->value[i + 1])
+				printf(" ");
+			i++;
+		}
 	}
 	if (ft_strcmp(token->value[1], "-n") == 0)
 		printf("\n");
