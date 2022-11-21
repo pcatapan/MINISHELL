@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_environment.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 02:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 18:41:05 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/11/21 22:10:32 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**ft_add_envi(char *var_add, t_main *main)
 	temp[i++] = ft_strdup(var_add);
 	temp[i] = NULL;
 	ft_free_matrix(main->copy_env);
-	//free(var_add);
+	free(var_add);
 	return (temp);
 }
 
@@ -58,7 +58,6 @@ int	ft_check_envi(char *line)
 t_token	*ft_execute_enviroment(t_token *token, char *var_add)
 {
 	token->main->copy_env = ft_add_envi(var_add, token->main);
-	// ft_store_matrix(token, token->main->set_variables);
 	if (token->next)
 		token = token->next;
 	return (token);

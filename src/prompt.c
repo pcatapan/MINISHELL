@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:57:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 20:44:41 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/21 21:54:44 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,10 @@ int	ft_prompt(char **envp, t_main *main)
 	{
 		printf(RED "\texit\n" COLOR_RES);
 		g_exit = 127;
+		free(line);
+		ft_free_matrix(main->copy_env);
+		ft_free_matrix(main->export_env);
+		free(main->files_pwd);
 		exit(127);
 	}
 	else if (line[0] != '\0')
@@ -108,6 +112,7 @@ int	ft_prompt(char **envp, t_main *main)
 			ft_parsing(line, main);
 			ft_execute_command(line, main);
 		}
+		free(line);
 	}
 	return (0);
 }

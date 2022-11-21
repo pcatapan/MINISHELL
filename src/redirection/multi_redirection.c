@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:36:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 08:40:39 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/21 22:16:39 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_set_new_valus(t_token *token, char *line)
 		i++;
 	}
 	token->value[i] = NULL;
+	ft_free_matrix(matrix);
 }
 
 void	ft_set_new_command(char *str, t_token *token, t_main *main)
@@ -68,6 +69,7 @@ void	ft_set_new_command(char *str, t_token *token, t_main *main)
 	command[i] = '\0';
 	free(token->command);
 	token->command = ft_find_path(command, main);
+	free(command);
 }
 
 void	ft_strjoin_redir(char *f_part, char *line, t_token *token)
@@ -86,6 +88,7 @@ void	ft_strjoin_redir(char *f_part, char *line, t_token *token)
 	free(tmp);
 	ft_set_new_command(rtr, token, token->main);
 	ft_set_new_valus(token, rtr);
+	free(rtr);
 	if (!token->heredoc)
 	{
 		free(token->name_file);

@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 20:30:38 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/21 19:47:39 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ t_token	*ft_execute_builtin(t_token *token, t_main *main)
 		close(fd_pipe[1]);
 		waitpid(pidchild, &token->res, 0);
 		if (WIFEXITED(token->res))
-		{
 			g_exit = WEXITSTATUS(token->res);
-			// printf("dopo %d\n", g_exit);
-		}
 	}
 	else
 	{

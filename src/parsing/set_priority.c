@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:00:25 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 07:03:45 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/21 21:56:41 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	**ft_utils_set_priority(char *line, t_main *main)
 {
 	int		i;
 	char	*dup;
+	char	**rtr;
 
 	i = 0;
 	dup = ft_strdup(line);
@@ -31,7 +32,9 @@ char	**ft_utils_set_priority(char *line, t_main *main)
 			i++;
 		}
 	}
-	return (ft_split_original(dup, 127));
+	rtr = ft_split_original(dup, 127);
+	free(dup);
+	return (rtr);
 }
 
 void	ft_set_priority(char *line, t_main *main, int brack)
@@ -61,4 +64,5 @@ void	ft_set_priority(char *line, t_main *main, int brack)
 		if (main->token->next)
 			main->token = main->token->next;
 	}
+	ft_free_matrix(tmp);
 }

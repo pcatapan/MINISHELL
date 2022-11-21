@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/20 19:31:03 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/21 22:22:34 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_output_redirect(t_token *token, t_main *main)
 	}
 	else if (token->append == 1)
 	{
-		printf("sono qua\n");
 		fd = open (token->name_file, O_CREAT | O_RDWR | O_APPEND, 0644);
 		dup2(fd, STDOUT_FILENO);
 	}
@@ -33,6 +32,7 @@ void	ft_output_redirect(t_token *token, t_main *main)
 	{
 		perror(RED ERROR_FILE COLOR_RES);
 		write(fd, "1", 1);
+		ft_free_all(main);
 		g_exit = 1;
 		exit(1);
 	}
@@ -41,7 +41,7 @@ void	ft_output_redirect(t_token *token, t_main *main)
 		ft_change_name_file(main, token, '<');
 }
 
-void	ft_input_redirect(t_token *token)
+void	ft_input_redirect(t_token *token, t_main *main)
 {
 	int	fd;
 
@@ -53,6 +53,7 @@ void	ft_input_redirect(t_token *token)
 		perror(RED ERROR_FILE COLOR_RES);
 		write(fd, "1", 1);
 		printf("errno : %d\n", errno);
+		ft_free_all(main);
 		g_exit = 1;
 		exit(1);
 	}
@@ -88,7 +89,7 @@ void	ft_single_redir(t_token *token, t_main *main)
 	if (token->output == 1 || token->append == 1)
 		ft_output_redirect(token, main);
 	if (token->input == 1)
-		ft_input_redirect(token);
+		ft_input_redirect(token, main);
 	ft_delete_redirection(token);
 	if (token->command == NULL)
 	{

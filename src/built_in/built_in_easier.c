@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:50:21 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/20 19:55:30 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/21 19:49:36 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_pwd(void)
 
 	pwd = getcwd(NULL, 0);
 	ft_printf("%s\n", pwd);
+	free(pwd);
 }
 
 void	ft_env(t_main *main)

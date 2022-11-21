@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:57:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 06:48:45 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/21 21:50:17 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_divide_line(char *line, t_token *token, t_main *main)
 {
 	int		i;
 	char	**tmp;
-	char	*tmp_comand;
 
 	i = -1;
 	while (line[++i])
@@ -34,6 +33,7 @@ void	ft_divide_line(char *line, t_token *token, t_main *main)
 		i++;
 	}
 	token->value[i + 1] = NULL;
+	ft_free_matrix(tmp);
 }
 
 int	ft_count_array(char *line, t_main *main)
@@ -79,7 +79,6 @@ char	*ft_find_path(char *cmd, t_main *main)
 		i++;
 	}
 	ft_free_matrix(paths);
-	//fare free
 	return (NULL);
 }
 
@@ -92,7 +91,6 @@ void	ft_set_values(char **line, t_main *main)
 {
 	int		j;
 	t_token	*token;
-	char	*tmp;
 
 	token = ft_return_head(main->token);
 	j = 0;
