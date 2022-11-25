@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:58:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/21 20:20:39 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/25 23:54:31 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_set_info(char **tmp, t_main *main, char *copy_line, int count)
 	char	**tmp_value;
 	int		i;
 
-	tmp_value = (char **)malloc(sizeof(char *) * (count + 1));
+	tmp_value = malloc(sizeof(char *) * (count + 1));
 	if (!tmp_value)
 		return ;
 	i = -1;
@@ -38,10 +38,10 @@ void	ft_parsing(char *line, t_main *main)
 	int		i;
 	int		count;
 
-	i = 0;
+	i = -1;
 	count = 1;
 	main->copy_line = ft_strdup(line);
-	while (line[i])
+	while (line[++i])
 	{
 		i = ft_check_single_quote(line, main, i);
 		i = ft_check_double_quote(line, main, i);
@@ -52,11 +52,10 @@ void	ft_parsing(char *line, t_main *main)
 						ft_check_redir_char(line, i))
 				count++;
 			line[i] = 127;
-			i++;
-		}	
-		else
-			i++;
+		}
+		i++;
 	}
 	tmp = ft_split_original(line, 127);
+	free(line);
 	ft_set_info(tmp, main, main->copy_line, count);
 }

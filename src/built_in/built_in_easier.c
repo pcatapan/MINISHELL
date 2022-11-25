@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:50:21 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/21 19:49:36 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/24 02:21:05 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	cd_path(t_main *main)
 	{
 		if (ft_strncmp(main->copy_env[i], "PWD=", 4) == 0)
 		{
-			tmp = getcwd(NULL, 0);
+			tmp = (char *)malloc(sizeof(char) * 256);
+			if (!tmp)
+				return ;
+			getcwd(tmp, 256);
 			free(main->copy_env[i]);
 			main->copy_env[i] = ft_strjoin("PWD=", tmp);
 			free(tmp);
@@ -52,7 +55,10 @@ void	ft_pwd(void)
 {
 	char	*pwd;
 
-	pwd = getcwd(NULL, 0);
+	pwd = (char *)malloc(sizeof(char) * 256);
+	if (!pwd)
+		return ;
+	getcwd(pwd, 256);
 	ft_printf("%s\n", pwd);
 	free(pwd);
 }

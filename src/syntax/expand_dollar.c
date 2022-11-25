@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 18:28:12 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:55:50 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*ft_change_var_in_dollar(int start, int l, char *str, t_main *main)
 	if (insert_word == NULL)
 	{
 		insert_word = (char *)malloc(sizeof(char) * 1);
+		if (!insert_word)
+			return (NULL);
 		insert_word[0] = '\0';
 	}
 	free(word);

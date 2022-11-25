@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:57:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/21 21:54:44 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/25 23:54:35 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,23 +96,41 @@ int	ft_prompt(char **envp, t_main *main)
 	if (!line)
 	{
 		printf(RED "\texit\n" COLOR_RES);
-		g_exit = 127;
 		free(line);
 		ft_free_matrix(main->copy_env);
-		ft_free_matrix(main->export_env);
-		free(main->files_pwd);
 		exit(127);
 	}
 	else if (line[0] != '\0')
 	{
+		main->export_env = malloc (sizeof(char **) * 1);
+		if (!main->export_env)
+		{
+			free(line);
+			ft_free_matrix(main->copy_env);
+			exit(127);
+		}
+		main->export_env[0] = NULL;
+		main->files_pwd = (char *)malloc(sizeof(char) * 256);
+		if (!main->files_pwd)
+		{
+			free(line);
+			ft_free_matrix(main->copy_env);
+			ft_free_matrix(main->export_env);
+			exit(127);
+		}
+		getcwd(main->files_pwd, 256);
 		ft_add_history(line, envp);
 		ft_check_syntax(line, main);
 		if (!main->error)
 		{
 			ft_parsing(line, main);
-			ft_execute_command(line, main);
+			ft_execute_command(main->copy_line, main);
 		}
-		free(line);
+		free(main->copy_line);
+		free(main->files_pwd);
+		// ft_free_token(main->token);
+		close(main->fd_export);
+		close(main->fd_matrix);
 	}
 	return (0);
 }

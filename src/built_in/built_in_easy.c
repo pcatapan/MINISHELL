@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 19:53:27 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/24 03:59:36 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,14 @@ void	ft_exit(t_token *token)
 	else if (token->value[1] == NULL)
 	{
 		printf(RED "\texit\n" COLOR_RES);
+		ft_free_token(token);
 		exit(0);
 	}
 	else
 	{
 		num = ft_atoi(token->value[1]);
 		printf(RED "\texit\n" COLOR_RES);
+		ft_free_token(token);
 		exit(num);
 	}
 }

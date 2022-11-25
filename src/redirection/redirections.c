@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/21 22:22:34 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/24 01:28:37 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ft_output_redirect(t_token *token, t_main *main)
 	{
 		perror(RED ERROR_FILE COLOR_RES);
 		write(fd, "1", 1);
-		ft_free_all(main);
 		g_exit = 1;
 		exit(1);
 	}
@@ -53,7 +52,6 @@ void	ft_input_redirect(t_token *token, t_main *main)
 		perror(RED ERROR_FILE COLOR_RES);
 		write(fd, "1", 1);
 		printf("errno : %d\n", errno);
-		ft_free_all(main);
 		g_exit = 1;
 		exit(1);
 	}

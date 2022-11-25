@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/21 22:23:20 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/24 03:27:21 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ char		*ft_strtrim3(char *str, char *del);
 
 // free.c
 void		ft_free_matrix(char **matrix);
+void		ft_free_token(t_token *token);
+void		ft_free_main(t_main *main);
 
 // init_envp.c
 char		**ft_init_envp(char **envp);

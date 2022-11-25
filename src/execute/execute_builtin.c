@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/21 19:47:39 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/24 17:31:46 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ t_token	*ft_execute_builtin(t_token *token, t_main *main)
 
 	if (pipe(fd_pipe) == -1)
 		perror(RED"ERRORE2"COLOR_RES);
-	main->fd_matrix = open(ft_strjoin(main->files_pwd, "irina"),
-			O_CREAT | O_RDWR | O_TRUNC, 0644);
-	main->fd_export = open(ft_strjoin(main->files_pwd, "export"),
-			O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (ft_strcmp(token->value[0], "exit"))
 		ft_exit(token);
 	pidchild = fork();
@@ -57,8 +53,8 @@ t_token	*ft_execute_builtin(t_token *token, t_main *main)
 			dup2(fd_pipe[1], STDOUT_FILENO);
 			close(fd_pipe[1]);
 		}
-		ft_store_matrix(main);
 		ft_search_builtin(token, main);
+		ft_store_matrix(main);
 		exit(0);
 	}
 	token = ft_end_execute_(token, fd_pipe, main);

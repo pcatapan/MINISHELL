@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/21 17:38:09 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/24 01:22:17 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ char	**ft_init_envp(char **envp)
 	while (envp[i])
 		i++;
 	copy_envp = malloc(sizeof(char *) * (i + 3));
+	if (!copy_envp)
+		return (NULL);
 	i = -1;
 	while (envp[++i])
 	{

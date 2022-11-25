@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:10:04 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/21 20:01:33 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/24 04:00:13 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	ft_echo(t_token *token)
 {
-	int	i;
+	int		i;
 
 	i = 1;
 	if (ft_strcmp(token->value[1], "-n") != 0)
 		i++;
 	while (token->value[i])
-	{
-		if (ft_strcmp(token->value[1], "$?"))
+	{	
+		if (ft_strcmp(token->value[i], "$?"))
 		{
-			printf("%d\n", g_exit);
-			exit(1);
+			printf("%d ", g_exit);
+			i++;
 		}
 		else
 		{
@@ -86,7 +86,6 @@ void	ft_preparet_echo(t_token *token)
 			j++;
 		}
 		tmp = ft_strtrim2(token->value[i], 127);
-		// free(token->value[i]);
 		token->value[i] = ft_strdup(tmp);
 		free(tmp);
 	}
