@@ -6,47 +6,33 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:43:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 03:24:11 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/27 00:51:08 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_execute_dollar(t_token *token)
+void	ft_execute_dollar(t_token *token, t_main *main)
 {
 	int		i;
 	int		j;
-	bool	sing_quote;
-	char	*tmp;
+	bool	doub_quot;
 
 	i = 0;
-	sing_quote = FALSE;
+	j = 0;
+	doub_quot = FALSE;
 	while (token->value[i])
 	{
 		j = 0;
 		while (token->value[i][j])
 		{
-			if (token->value[i][j] == '\'' && !sing_quote)
-			{
-				sing_quote = TRUE;
-				i = ft_check_single_quote(token->value[i], token->main, i);
-			}e
+			if (token->value[i][j] == '"')
+				doub_quot = TRUE;
+			if (!doub_quot)
+				j = ft_check_single_quote(token->value[i], main, j);
+			if (ft_check_expand(token->value[i], j))
+				token->value[i] = ft_expand_doll(token->value[i], main, j + 1);
 			j++;
-		}
-
-
-
-
-		
-
-
-
-
-		while (ft_check_expand(token->value[i]))
-		{
-			tmp = ft_expand_dollar(token->value[i], token->main);
-			token->value[i] = ft_strdup(tmp);
-			free(tmp);
 		}
 		i++;
 	}

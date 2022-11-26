@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 19:44:36 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/10/30 23:59:24 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/26 22:41:20 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_token	*ft_priority(t_token *token, int lvl, t_main *main)
 	{
 		if (token->priority != lvl)
 			token = ft_priority(token, token->priority, main);
-		ft_execute_dollar(token);
+		// ft_execute_dollar(token);
 		if (ft_strchr(token->value[0], '=') && ft_check_envi(token->value[0]))
 			token = ft_execute_enviroment(token, token->value[0]);
 		// else if (ft_check_builtin(token) && !redirections)

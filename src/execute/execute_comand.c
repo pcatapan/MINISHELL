@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 03:05:38 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/26 23:00:59 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,10 @@ void	ft_execute_command(char *line, t_main *main)
 	main->count = 0;
 	lstsize = ft_lstsize(main->token);
 	main->token = ft_return_head(main->token);
-	ft_print_lst(main->token);
 	while (main->count < lstsize)
 	{
-		ft_execute_dollar(main->token);
+		if (!main->token->heredoc)
+			ft_execute_dollar(main->token, main);
 		if (main->token->priority != 0)
 			main->token = ft_priority(main->token, main->token->priority, main);
 		if (ft_strchr(main->token->value[0], '=') \
