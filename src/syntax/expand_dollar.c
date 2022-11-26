@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/25 23:55:50 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/26 03:14:13 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	ft_check_expand(char *line)
 		i++;
 	if (line[i + 1] == 32 || line[i + 1] == '?' || ft_strlen(line) < 2)
 		return (0);
-	if (ft_strchr(line, '\'') || !ft_strchr(line, '$'))
+	if (!ft_strchr(line, '$'))
 		return (0);
 	if (line[i] == '$' && line[i + 1] == '$')
 		return (0);

@@ -6,7 +6,7 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/11/26 02:36:13 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/11/26 02:48:24 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,14 +26,14 @@ OBJC = $(SRC:%.c=%.o)
 
 CC = gcc
 
-USER = aanghel
+USER = pcatapan
 
 #LDFLAGS = -L/opt/homebrew/opt/readline/lib
 #CPPFLAGS = -I/opt/homebrew/opt/readline/include
 
-FLAGS = -g #-fsanitize=address #-Wall -Werror -Wextra
+FLAGS = #-fsanitize=address #-Wall -Werror -Wextra
 
-#F_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
+#aF_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
 FLAG_READLINE = -lreadline -lcurses -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 

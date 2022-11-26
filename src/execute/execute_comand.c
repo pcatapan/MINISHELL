@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 02:42:56 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/26 03:05:38 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,16 @@ t_token	*ft_execute_exeve(t_token *token, t_main *main)
 {
 	pid_t	pidchild;
 	int		fd_pipe[2];
+	char	*irina;
+	char	*export;
 
 	pipe(fd_pipe);
-	main->fd_matrix = open(ft_strjoin(main->files_pwd, "irina"),
-			O_CREAT | O_RDWR | O_TRUNC, 0644);
-	main->fd_export = open(ft_strjoin(main->files_pwd, "export"),
-			O_CREAT | O_RDWR | O_TRUNC, 0644);
+	irina = ft_strjoin(main->files_pwd, "irina");
+	main->fd_matrix = open(irina, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	export = ft_strjoin(main->files_pwd, "export");
+	main->fd_export = open(export, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	free(irina);
+	free(export);
 	pidchild = fork();
 	if (pidchild != 0)
 	{
@@ -113,6 +117,7 @@ void	ft_execute_command(char *line, t_main *main)
 	main->count = 0;
 	lstsize = ft_lstsize(main->token);
 	main->token = ft_return_head(main->token);
+	ft_print_lst(main->token);
 	while (main->count < lstsize)
 	{
 		ft_execute_dollar(main->token);
