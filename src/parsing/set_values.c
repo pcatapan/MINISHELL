@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:57:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 00:38:44 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/26 02:46:02 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ char	*ft_find_path(char *cmd, t_main *main)
 		i++;
 	}
 	ft_free_matrix(paths);
+	//fare free
 	return (NULL);
 }
 

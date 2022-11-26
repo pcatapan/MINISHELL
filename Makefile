@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+         #
+#    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/11/25 21:26:45 by aanghel          ###   ########.fr        #
+#    Updated: 2022/11/26 02:36:13 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ USER = aanghel
 #LDFLAGS = -L/opt/homebrew/opt/readline/lib
 #CPPFLAGS = -I/opt/homebrew/opt/readline/include
 
-FLAGS = #-fsanitize=address #-Wall -Werror -Wextra
+FLAGS = -g #-fsanitize=address #-Wall -Werror -Wextra
 
 #F_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
 FLAG_READLINE = -lreadline -lcurses -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include

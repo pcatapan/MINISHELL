@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/24 03:27:21 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/26 02:36:37 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ extern void	rl_replace_line(const char *text, int clear_undo);
 void		ft_heredoc(t_token *token, t_main *main);
 char		*ft_find_name_file(char *str);
 int			ft_write_fd(int fd, char *limiter, t_main *main);
-void		ft_input_redirect(t_token *token, t_main *main);
+void		ft_input_redirect(t_token *token);
 void		ft_output_redirect(t_token *token, t_main *main);
 void		ft_delete_redirection(t_token *token);
 t_token		*ft_redirections(t_token *token, t_main *main);

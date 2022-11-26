@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_environment.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 02:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/24 03:49:33 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/26 02:43:33 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**ft_add_envi(char *var_add, t_main *main)
 	temp[i++] = ft_strdup(var_add);
 	temp[i] = NULL;
 	ft_free_matrix(main->copy_env);
-	free(var_add);
+	//free(var_add);
 	return (temp);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_comand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/25 23:59:50 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/26 02:42:56 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ t_token	*ft_execute_exeve(t_token *token, t_main *main)
 	int		fd_pipe[2];
 
 	pipe(fd_pipe);
+	main->fd_matrix = open(ft_strjoin(main->files_pwd, "irina"),
+			O_CREAT | O_RDWR | O_TRUNC, 0644);
+	main->fd_export = open(ft_strjoin(main->files_pwd, "export"),
+			O_CREAT | O_RDWR | O_TRUNC, 0644);
 	pidchild = fork();
 	if (pidchild != 0)
 	{
@@ -87,8 +91,7 @@ void	ft_check_dir(t_main *main)
 	char	*pwd;
 
 	i = 0;
-	pwd = (char *)malloc(sizeof(char) * 256);
-	getcwd(pwd, 256);
+	pwd = getcwd(NULL, 0);
 	while (main->copy_env[i])
 	{
 		if (ft_strncmp(main->copy_env[i], "PWD=", 4) == 0
@@ -100,44 +103,34 @@ void	ft_check_dir(t_main *main)
 		}
 		i++;
 	}
-	free(pwd);
 }
 
 void	ft_execute_command(char *line, t_main *main)
 {
 	pid_t	pidchild;
 	int		lstsize;
-	char	*irina;
-	char	*export;
 
 	main->count = 0;
 	lstsize = ft_lstsize(main->token);
 	main->token = ft_return_head(main->token);
-	irina = ft_strjoin(main->files_pwd, "/irina");
-	export = ft_strjoin(main->files_pwd, "/export");
-	main->fd_matrix = open(irina, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	main->fd_export = open(export, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	free(irina);
-	free(export);
 	while (main->count < lstsize)
 	{
-		// if (ft_searchstrchr("$", main->token->value))
-			ft_execute_dollar(main->token);
-		// if (main->token->priority != 0)
-		// 	main->token = ft_priority(main->token, main->token->priority, main);
+		ft_execute_dollar(main->token);
+		if (main->token->priority != 0)
+			main->token = ft_priority(main->token, main->token->priority, main);
 		if (ft_strchr(main->token->value[0], '=') \
 			&& ft_check_envi(main->token->value[0]))
 			main->token = \
 			ft_execute_enviroment(main->token, main->token->value[0]);
-		// else if (main->token->input || main->token->append || \
-		// main->token->output || main->token->heredoc || main->redirections)
-		// 	main->token = ft_redirections(main->token, main);
+		else if (main->token->input || main->token->append || \
+		main->token->output || main->token->heredoc || main->redirections)
+			main->token = ft_redirections(main->token, main);
 		else if (ft_check_builtin(main->token) && !main->redirections)
 			main->token = ft_execute_builtin(main->token, main);
 		else
 			main->token = ft_execute_exeve(main->token, main);
-		if (ft_searchstrchr("cd", main->token->value))
-			ft_check_dir(main);
+		ft_check_dir(main);
 		main->count++;
 	}
+	//ft_free_all(main);
 }

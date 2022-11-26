@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:43:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/24 17:25:25 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/26 02:43:51 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ t_token	*ft_end_execute_(t_token *token, int fd_pipe[2], t_main *main)
 	ft_free_matrix(main->copy_env);
 	ft_free_matrix(main->export_env);
 	main->copy_env = ft_get_next_line(main->fd_matrix,
-			ft_strjoin(main->files_pwd, "/irina"));
+			ft_strjoin(main->files_pwd, "irina"));
 	main->export_env = ft_get_next_line(main->fd_export,
-			ft_strjoin(main->files_pwd, "/export"));
+			ft_strjoin(main->files_pwd, "export"));
 	return (token);
 }
 

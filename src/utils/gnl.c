@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:28:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/21 19:57:49 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:37:36 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ char	**ft_get_next_line(int fd, char *file)
 	buffer[i] = '\0';
 	rtr = ft_split_original(buffer, '\n');
 	free(buffer);
-	free(file);
 	return (rtr);
 }
