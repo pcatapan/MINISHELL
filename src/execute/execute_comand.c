@@ -6,7 +6,11 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/11/27 02:21:48 by aanghel          ###   ########.fr       */
+=======
+/*   Updated: 2022/11/20 19:37:39 by aanghel          ###   ########.fr       */
+>>>>>>> parent of d679adb... fix primi leaks echo ciao
 /*                                                                            */
 /* ************************************************************************** */
 

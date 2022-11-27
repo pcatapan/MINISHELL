@@ -6,7 +6,11 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:57:38 by pcatapan          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/11/26 21:19:51 by aanghel          ###   ########.fr       */
+=======
+/*   Updated: 2022/11/20 19:35:04 by aanghel          ###   ########.fr       */
+>>>>>>> parent of d679adb... fix primi leaks echo ciao
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +112,12 @@ int	ft_prompt(char **envp, t_main *main)
 		if (!main->error)
 		{
 			ft_parsing(line, main);
+<<<<<<< HEAD
 			ft_execute_command(main->copy_line, main);
+=======
+			ft_execute_command(line, main);
+			ft_free_all(main);
+>>>>>>> parent of d679adb... fix primi leaks echo ciao
 		}
 	}
 	free(line);

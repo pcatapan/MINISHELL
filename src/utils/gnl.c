@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:28:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/20 20:37:36 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/10/16 21:45:15 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ char	**ft_get_next_line(int fd, char *file)
 	}
 	buffer[i] = '\0';
 	rtr = ft_split_original(buffer, '\n');
-	free(buffer);
 	return (rtr);
 }

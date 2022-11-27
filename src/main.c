@@ -6,7 +6,11 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 19:10:14 by pcatapan          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/11/26 21:14:44 by aanghel          ###   ########.fr       */
+=======
+/*   Updated: 2022/11/20 07:15:02 by aanghel          ###   ########.fr       */
+>>>>>>> parent of d679adb... fix primi leaks echo ciao
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +39,14 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGQUIT, ft_sig_handel);
 	while (1)
 	{
+<<<<<<< HEAD
 		tmp = getcwd(NULL, 0);
 		main->files_pwd = ft_strjoin(tmp, "/");
 		free(tmp);
 		if (!main->copy_env)
 			main->copy_env = ft_init_envp(envp);
+=======
+>>>>>>> parent of d679adb... fix primi leaks echo ciao
 		ft_prompt(main->copy_env, main);
 		free(main->files_pwd);
 	}
