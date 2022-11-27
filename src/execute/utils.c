@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:43:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 03:24:11 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/26 21:21:49 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,11 @@
 void	ft_execute_dollar(t_token *token)
 {
 	int		i;
-	int		j;
-	bool	sing_quote;
 	char	*tmp;
 
 	i = 0;
-	sing_quote = FALSE;
 	while (token->value[i])
 	{
-		j = 0;
-		while (token->value[i][j])
-		{
-			if (token->value[i][j] == '\'' && !sing_quote)
-			{
-				sing_quote = TRUE;
-				i = ft_check_single_quote(token->value[i], token->main, i);
-			}e
-			j++;
-		}
-
-
-
-
-		
-
-
-
-
 		while (ft_check_expand(token->value[i]))
 		{
 			tmp = ft_expand_dollar(token->value[i], token->main);

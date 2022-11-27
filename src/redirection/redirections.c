@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/26 02:46:13 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/26 22:25:30 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	ft_input_redirect(t_token *token)
 	{
 		perror(RED ERROR_FILE COLOR_RES);
 		write(fd, "1", 1);
-		printf("errno : %d\n", errno);
 		g_exit = 1;
 		exit(1);
 	}
@@ -112,7 +111,13 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 	}
 	else
 	{
-		ft_no_space(token);
+		ft_print_lst(token);
+		if (ft_count_redir_value(token) > 1)
+			ft_no_space(token);
+		else if (ft_count_redirection(token) > 1)
+			ft_execute_multi_redir(token);
+		else
+			ft_single_redir(token, main);
 		if (token->stdoutput != STDOUT_FILENO)
 			dup2(token->dup, STDOUT_FILENO);
 		else if (token->stdinput != STDIN_FILENO)

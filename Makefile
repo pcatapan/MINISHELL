@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
+#    By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/11/26 02:48:24 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/11/27 00:08:25 by aanghel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,14 +26,14 @@ OBJC = $(SRC:%.c=%.o)
 
 CC = gcc
 
-USER = pcatapan
+USER = aanghel
 
 #LDFLAGS = -L/opt/homebrew/opt/readline/lib
 #CPPFLAGS = -I/opt/homebrew/opt/readline/include
 
 FLAGS = #-fsanitize=address #-Wall -Werror -Wextra
 
-#aF_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
+#F_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
 FLAG_READLINE = -lreadline -lcurses -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:36:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 08:40:39 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/26 22:52:49 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	ft_execute_multi_redir(t_token *token)
 
 	i = 0;
 	line = ft_create_line(token);
+	
 	matrix = ft_split_original(line, '>');
 	while (matrix[++i])
 		open(ft_find_name_file(matrix[i]), O_CREAT \

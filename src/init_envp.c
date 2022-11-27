@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_envp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 01:33:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 02:47:55 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/26 21:17:06 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ char	**ft_init_envp(char **envp)
 	while (envp[i])
 		i++;
 	copy_envp = malloc(sizeof(char *) * (i + 3));
-	if (!copy_envp)
-		return (NULL);
 	i = -1;
 	while (envp[++i])
 	{
@@ -74,7 +72,6 @@ char	**ft_init_envp(char **envp)
 			if (copy_envp[i])
 				continue ;
 			ft_free_matrix(copy_envp);
-			g_exit = 127;
 			exit(127);
 		}				
 	}

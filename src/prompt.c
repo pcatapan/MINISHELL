@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:57:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 02:39:12 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/26 21:19:51 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int	ft_prompt(char **envp, t_main *main)
 	if (!line)
 	{
 		printf(RED "\texit\n" COLOR_RES);
+		ft_free_matrix(main->copy_env);
+		ft_free_matrix(main->export_env);
 		g_exit = 127;
 		exit(127);
 	}
@@ -109,5 +111,7 @@ int	ft_prompt(char **envp, t_main *main)
 			ft_execute_command(main->copy_line, main);
 		}
 	}
+	free(line);
+	ft_free_token(main->token);
 	return (0);
 }

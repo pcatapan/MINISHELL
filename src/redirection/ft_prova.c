@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prova.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 00:59:00 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/20 09:10:26 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/27 02:14:38 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@ char	*ft_new_line(char *tmp, int count)
 {
 	char	*line;
 	int		i;
+	int		len;
 	int		j;
 
-	line = (char *)malloc(sizeof(ft_strlen(tmp) + 1 + (count * 2)));
+	len = ft_strlen(tmp);
+	line = malloc(sizeof(len + count + 1));
+	if (!line)
+		return (0);
 	i = 0;
 	j = 0;
 	while (tmp[i])
@@ -57,31 +61,26 @@ void	ft_token_with_space(char *line, t_token *token)
 {
 	int		i;
 	char	*tmp;
+	char	*tmp2;
 
 	i = -1;
-	tmp = (char *)malloc(sizeof(char) * 1);
-	if (!tmp)
-		perror("Stronzo");
-	tmp[0] = '\0';
+	tmp2 = ft_strdup(line);
+	free(line);
 	while (token->value[++i])
 	{
 		if (ft_strchr(token->value[i], '>') || ft_strchr(token->value[i], '<'))
 			break ;
+		else if (i == 0)
+			tmp = ft_strdup(token->value[i]);
+		else
+		{
+			tmp = ft_strjoin(tmp, token->value[i]);
+		}	
 	}
-	token->value[i] = ft_strcpy(token->value[i], line);
-	token->value[i] = ft_substr(token->value[i], 0, ft_strlen(line));
-	i = -1;
-	while (token->value[++i])
-	{
-		tmp = ft_strjoin(tmp, token->value[i]);
-		tmp = ft_strjoin(tmp, " ");
-	}
-	ft_set_new_valus(token, tmp);
-	ft_set_redirections(token);
-	ft_execute_multi_redir(token);
+	tmp = ft_strjoin(tmp, tmp2);
+	printf("tmp: %s\n", tmp);
 }
 
-/*DEVIIIIII FARE free tmp*/
 void	ft_no_space(t_token *token)
 {
 	int		i;
@@ -93,7 +92,9 @@ void	ft_no_space(t_token *token)
 	while (token->value[++i])
 		if (ft_strchr(token->value[i], '>') || ft_strchr(token->value[i], '<'))
 			break ;
+	printf("i: %d --- value: %s\n", i, token->value[i]);
 	tmp = ft_strdup(token->value[i]);
+	printf("tmp: %s\n", tmp);
 	i = -1;
 	count = 0;
 	while (tmp[++i])
@@ -104,7 +105,9 @@ void	ft_no_space(t_token *token)
 				|| (tmp[i] == '>' && tmp[i + 1] == '>'))
 			count++;
 	}
-	rtr = ft_new_line(tmp, count);
-	free(tmp);
-	ft_token_with_space(rtr, token);
+	printf("count: %d\n", count);
+	rtr = ft_new_line(tmp, count * 2);
+	printf("rtr: %s\n", rtr);
+	// free(tmp);
+	// ft_token_with_space(rtr, token);
 }

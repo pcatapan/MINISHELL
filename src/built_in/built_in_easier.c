@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_easier.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:50:21 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/26 02:39:56 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/26 21:11:16 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_pwd(void)
 
 	pwd = getcwd(NULL, 0);
 	ft_printf("%s\n", pwd);
+	free(pwd);
 }
 
 void	ft_env(t_main *main)
