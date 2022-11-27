@@ -6,11 +6,20 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 03:14:13 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/27 00:51:20 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+static char	*ft_search_word(char *word, char **env)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(word, "=");
+	free(word);
+	return (ft_searchstrchr(tmp, env));
+}
 
 char	*ft_change_var_in_dollar(int start, int l, char *str, t_main *main)
 {
@@ -22,7 +31,7 @@ char	*ft_change_var_in_dollar(int start, int l, char *str, t_main *main)
 	first_part = ft_substr(str, 0, start - 1);
 	second_part = ft_substr(str, start + l, ft_strlen(str));
 	word = ft_substr(str, start, l);
-	insert_word = ft_searchstrchr(ft_strjoin(word, "="), main->copy_env);
+	insert_word = ft_search_word(word, main->copy_env);
 	if (insert_word == NULL)
 	{
 		insert_word = (char *)malloc(sizeof(char) * 1);
@@ -30,7 +39,6 @@ char	*ft_change_var_in_dollar(int start, int l, char *str, t_main *main)
 			return (NULL);
 		insert_word[0] = '\0';
 	}
-	free(word);
 	word = ft_strjoin(first_part, insert_word);
 	free(insert_word);
 	free(first_part);
@@ -41,29 +49,31 @@ char	*ft_change_var_in_dollar(int start, int l, char *str, t_main *main)
 	return (str);
 }
 
-char	*ft_expand_dollar(char *line, t_main *main)
+char	*ft_expand_doll(char *line, t_main *main, int i)
 {
-	int		i;
-	int		l;
+	char	*tmp;
 	int		start;
+	int		l;
 
-	i = 0;
+	start = i;
 	l = 0;
-	start = 0;
-	if (ft_strchr(line, 123) && ft_strchr(line, 125))
-		line = ft_strtrim3(line, "{ }");
-	while (line[i] != '$' && line[i])
+	if (line[i] == '{')
 	{
-		i = ft_check_single_quote(line, main, i);
-		i++;
+		line[i] = 127;
+		while (line[i] != '}')
+			i++;
+		line[i] = 127;
+		tmp = ft_strdup(line);
+		free(line);
+		line = ft_strtrim2(tmp, 127);
+		free(tmp);
 	}
-	if (line[i] == '$')
-		start = i + 1;
-	while (line[i++] && line[i] != ' ' && line[i] != '"' && line[i] != '\'' \
+	while (line[++i] && line[i] != ' ' && line[i] != '"' && line[i] != '\'' \
 		&& line[i] != '$' && line[i] != 62 && line[i] != 60)
 		l++;
-	if (start != 0 && l > 1)
-		line = ft_change_var_in_dollar(start, l, line, main);
+	tmp = ft_strdup(line);
+	free(line);
+	line = ft_change_var_in_dollar(start, l + 1, tmp, main);
 	return (line);
 }
 
@@ -87,18 +97,16 @@ char	*ft_expand_heredoc(char *line, t_main *main)
 	return (line);
 }
 
-int	ft_check_expand(char *line)
+int	ft_check_expand(char *line, int i)
 {
-	int	i;
+	bool	dollar;
 
-	i = 0;
-	while (line[i] != '$' && line[i])
-		i++;
-	if (line[i + 1] == 32 || line[i + 1] == '?' || ft_strlen(line) < 2)
+	dollar = FALSE;
+	if (line[i] == '$')
+		dollar = TRUE;
+	if (line[i + 1] == '$' && dollar)
 		return (0);
-	if (!ft_strchr(line, '$'))
-		return (0);
-	if (line[i] == '$' && line[i + 1] == '$')
-		return (0);
-	return (1);
+	if (dollar)
+		return (1);
+	return (0);
 }

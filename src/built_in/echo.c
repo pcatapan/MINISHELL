@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:10:04 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 02:40:06 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/27 00:49:54 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,42 +52,37 @@ void	ft_echo_or(t_token *token)
 	ft_echo(token);
 }
 
-void	ft_echo_and(t_token *token)
+static int	ft_oppost_trim(char *line, int i, char trim)
 {
-	if (token->res)
-	{
-		if (token->priority == 0)
-			ft_echo(token);
-		exit(1);
-	}
-	ft_echo(token);
+	char	quot;
+
+	quot = line[i];
+	if (ft_strchr(&line[i], trim))
+		line[i] = 127;
+	while (line[i] != quot)
+		i++;
+	if (line[i] == quot)
+		line[i] = 127;
+	return (i);
 }
 
 void	ft_preparet_echo(t_token *token)
 {
 	int		i;
 	int		j;
-	char	*tmp;
 
 	i = -1;
 	while (token->value[++i])
 	{
-		j = 0;
-		while (token->value[i][j])
+		j = -1;
+		while (token->value[i][++j])
 		{
-			if (token->value[i][j] == '"' || token->value[i][j] == '\'')
-			{
-				if (token->value[i][j] == '"' && \
-					token->value[i][j - 1] == '\\')
-					token->value[i][j - 1] = 127;
-				else
-					token->value[i][j] = 127;
-			}
-			j++;
+			if (token->value[i][j] == '\'')
+				j = ft_oppost_trim(token->value[i], j, '"');
+			else if (token->value[i][j] == '"')
+				j = ft_oppost_trim(token->value[i], j, '\'');
 		}
-		tmp = ft_strtrim2(token->value[i], 127);
-		token->value[i] = ft_strdup(tmp);
-		free(tmp);
+		token->value[i] = ft_strtrim2(token->value[i], 127);
 	}
 }
 
@@ -99,7 +94,15 @@ void	ft_check_echo(t_token *token)
 		if (token->prev->or)
 			ft_echo_or(token);
 		else if (token->prev->and)
-			ft_echo_and(token);
+		{
+			if (token->res)
+			{
+				if (token->priority == 0)
+					ft_echo(token);
+				exit(1);
+			}
+			ft_echo(token);
+		}
 		else
 			ft_echo(token);
 	}

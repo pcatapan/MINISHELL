@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 21:24:00 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/27 02:21:48 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,10 @@ void	ft_execute_command(char *line, t_main *main)
 	main->token = ft_return_head(main->token);
 	while (main->count < lstsize)
 	{
-		ft_execute_dollar(main->token);
-		// if (main->token->priority != 0)
-		// 	main->token = ft_priority(main->token, main->token->priority, main);
+		if (!main->token->heredoc)
+			ft_execute_dollar(main->token, main);
+		if (main->token->priority != 0)
+			main->token = ft_priority(main->token, main->token->priority, main);
 		if (ft_strchr(main->token->value[0], '=') \
 			&& ft_check_envi(main->token->value[0]))
 			main->token = \

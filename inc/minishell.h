@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/26 02:36:37 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/27 00:51:27 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define ERROR_BACKSLASH "Mistake : find the '\\'"
 # define ERROR_OPEN_BRACKETS "Mistake : find open brackets exstra"
 # define ERROR_CLOSE_BRACKETS "Mistake : find close brackets exstra"
+# define ERROR_CLOSE_ "Mistake : bad substitution"
 # define ERROR_OP_LOGIC "Syntax error near unexpected token"
 # define ERROR_FILE "No such file or directory"
 # define ERROR_EXIT "Exit"
@@ -146,9 +147,9 @@ void		ft_add_history(char *line, char **envp);
 // DIR syntax_check
 int			ft_check_single_quote(char *line, t_main *main, int i);
 int			ft_check_double_quote(char *line, t_main *main, int i);
-int			ft_check_expand(char *line);
+int			ft_check_expand(char *line, int i);
 int			ft_jump_brackets(char *line, int i);
-char		*ft_expand_dollar(char *line, t_main *main);
+char		*ft_expand_doll(char *line, t_main *main, int i);
 char		*ft_expand_heredoc(char *line, t_main *main);
 void		ft_check_syntax(char *line, t_main *main);
 void		ft_check_redirection(char *line, t_main *main);
@@ -156,7 +157,7 @@ int			ft_check_redir_char(char *line, int i);
 
 // DIR Execute
 void		ft_execute_command(char *line, t_main *main);
-void		ft_execute_dollar(t_token *token);
+void		ft_execute_dollar(t_token *token, t_main *main);
 void		ft_store_matrix(t_main *main);
 t_token		*ft_execute_enviroment(t_token *token, char *var_add);
 t_token		*ft_execute_exeve(t_token *token, t_main *main);

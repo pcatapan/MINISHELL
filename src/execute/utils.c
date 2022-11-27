@@ -6,25 +6,33 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:43:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 21:21:49 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/27 02:22:15 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_execute_dollar(t_token *token)
+void	ft_execute_dollar(t_token *token, t_main *main)
 {
 	int		i;
-	char	*tmp;
+	int		j;
+	bool	doub_quot;
 
 	i = 0;
+	j = 0;
+	doub_quot = FALSE;
 	while (token->value[i])
 	{
-		while (ft_check_expand(token->value[i]))
+		j = 0;
+		while (token->value[i][j])
 		{
-			tmp = ft_expand_dollar(token->value[i], token->main);
-			token->value[i] = ft_strdup(tmp);
-			free(tmp);
+			if (token->value[i][j] == '"')
+				doub_quot = TRUE;
+			if (!doub_quot)
+				j = ft_check_single_quote(token->value[i], main, j);
+			if (ft_check_expand(token->value[i], j))
+				token->value[i] = ft_expand_doll(token->value[i], main, j + 1);
+			j++;
 		}
 		i++;
 	}
