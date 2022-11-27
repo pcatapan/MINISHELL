@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/27 02:42:40 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/27 04:28:20 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ t_token	*ft_execute_exeve(t_token *token, t_main *main)
 	pid_t	pidchild;
 	int		fd_pipe[2];
 
-	pipe(fd_pipe);
+	if (pipe(fd_pipe) == -1)
+		perror(RED"ERRORE2"COLOR_RES);
 	main->fd_matrix = open(ft_strjoin(main->files_pwd, "irina"),
 			O_CREAT | O_RDWR | O_TRUNC, 0644);
 	main->fd_export = open(ft_strjoin(main->files_pwd, "export"),
@@ -131,7 +132,7 @@ void	ft_execute_command(char *line, t_main *main)
 			main->token = ft_execute_builtin(main->token, main);
 		else
 			main->token = ft_execute_exeve(main->token, main);
-		ft_check_dir(main);
+		// ft_check_dir(main);
 		main->count++;
 	}
 }

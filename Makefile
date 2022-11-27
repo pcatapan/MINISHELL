@@ -6,7 +6,7 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/11/27 02:37:50 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/11/27 04:12:41 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ USER = pcatapan
 FLAGS = #-fsanitize=address #-Wall -Werror -Wextra
 
 #F_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
-FLAG_READLINE = -lreadline -lcurses -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
+FLAG_READLINE = -g -lreadline -lcurses -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 
 all: $(NAME)

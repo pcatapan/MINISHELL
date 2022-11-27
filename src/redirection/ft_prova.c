@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prova.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 00:59:00 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/27 02:14:38 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/27 04:02:07 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_new_line(char *tmp, int count)
 	int		j;
 
 	len = ft_strlen(tmp);
-	line = malloc(sizeof(len + count + 1));
+	line = (char *)malloc(sizeof(char) * (len + count + 1));
 	if (!line)
 		return (0);
 	i = 0;
@@ -108,6 +108,6 @@ void	ft_no_space(t_token *token)
 	printf("count: %d\n", count);
 	rtr = ft_new_line(tmp, count * 2);
 	printf("rtr: %s\n", rtr);
-	// free(tmp);
-	// ft_token_with_space(rtr, token);
+	free(tmp);
+	ft_token_with_space(rtr, token);
 }

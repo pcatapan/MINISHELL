@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:10:04 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/27 02:40:42 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/27 03:31:32 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	ft_oppost_trim(char *line, int i, char trim)
 	return (i);
 }
 
-void	ft_preparet_echo(t_token *token)
+static void	ft_preparet_echo(t_token *token)
 {
 	int		i;
 	int		j;

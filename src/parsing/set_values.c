@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_values.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:57:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/27 00:07:41 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/27 04:27:50 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ void	ft_set_values(char **line, t_main *main)
 		token->value[i] = ft_strdup(token->command);
 		free(token->command);
 		token->command = ft_find_path(token->value[i], main);
+		token->value[i] = ft_strtrim2(token->value[i], '"');
+		printf("Command :%s\n", token->command);
 		ft_divide_line(line[j], token, main);
 		if (token->next)
 			token = token->next;
