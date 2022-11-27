@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/27 00:51:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/27 07:54:00 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,21 @@ char	*ft_expand_heredoc(char *line, t_main *main)
 int	ft_check_expand(char *line, int i)
 {
 	bool	dollar;
+	int		count;
 
 	dollar = FALSE;
+	count = 0;
 	if (line[i] == '$')
 		dollar = TRUE;
-	if (line[i + 1] == '$' && dollar)
+	if ((line[i + 1] == '$' || line[i - 1] == '$') && dollar)
+		return (0);
+	while (i > 0)
+	{
+		if (line[i] == '"')
+			count++;
+		i--;
+	}
+	if ((count % 2) == 0 && !ft_strchr(line, '"'))
 		return (0);
 	if (dollar)
 		return (1);

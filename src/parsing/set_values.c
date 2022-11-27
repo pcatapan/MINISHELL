@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:57:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/27 04:27:50 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/27 04:30:49 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	ft_divide_line(char *line, t_token *token, t_main *main)
 	char	**tmp;
 
 	i = -1;
-	// tmp = malloc(sizeof(char *) * 1);
-	// if (!tmp)
-	// 	return ;
- 	while (line[++i])
+	while (line[++i])
 	{
 		i = ft_check_double_quote(line, main, i);
 		i = ft_check_single_quote(line, main, i);
@@ -112,7 +109,6 @@ void	ft_set_values(char **line, t_main *main)
 		free(token->command);
 		token->command = ft_find_path(token->value[i], main);
 		token->value[i] = ft_strtrim2(token->value[i], '"');
-		printf("Command :%s\n", token->command);
 		ft_divide_line(line[j], token, main);
 		if (token->next)
 			token = token->next;

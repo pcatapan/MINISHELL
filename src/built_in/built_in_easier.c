@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_easier.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:50:21 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/26 21:11:16 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/11/27 05:09:14 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ void	cd_path(t_main *main)
 		if (ft_strncmp(main->copy_env[i], "PWD=", 4) == 0)
 		{
 			tmp = getcwd(NULL, 0);
+			printf("TMP2 :%s\n", tmp);
+			printf("line Env :%s\n", main->copy_env[i]);
 			free(main->copy_env[i]);
 			main->copy_env[i] = ft_strjoin("PWD=", tmp);
+			printf("line Env 2:%s\n", main->copy_env[i]);
 			free(tmp);
 		}
 		i++;
@@ -33,9 +36,13 @@ void	cd_path(t_main *main)
 
 void	ft_cd(t_token *token, t_main *main)
 {
+	char	*tmp;
+
 	if (token->value[1] == NULL)
 	{
-		chdir(getenv("HOME"));
+		tmp = getenv("HOME");
+		printf("%s\n", tmp);
+		chdir(tmp);
 		cd_path(main);
 	}
 	else if (chdir(token->value[1]) == -1)

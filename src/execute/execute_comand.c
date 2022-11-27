@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/27 04:28:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/27 05:15:58 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	ft_execute_command(char *line, t_main *main)
 			main->token = ft_execute_builtin(main->token, main);
 		else
 			main->token = ft_execute_exeve(main->token, main);
-		// ft_check_dir(main);
+		ft_check_dir(main);
 		main->count++;
 	}
 }
