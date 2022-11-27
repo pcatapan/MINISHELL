@@ -6,11 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/11/26 02:58:40 by pcatapan         ###   ########.fr       */
-=======
-/*   Updated: 2022/11/20 19:57:13 by aanghel          ###   ########.fr       */
->>>>>>> parent of d679adb... fix primi leaks echo ciao
+/*   Updated: 2022/11/27 02:41:39 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +32,13 @@ t_token	*ft_execute_builtin(t_token *token, t_main *main)
 {
 	pid_t	pidchild;
 	int		fd_pipe[2];
-	char	*irina;
-	char	*export;
 
 	if (pipe(fd_pipe) == -1)
 		perror(RED"ERRORE2"COLOR_RES);
-	irina = ft_strjoin(main->files_pwd, "irina");
-	main->fd_matrix = open(irina, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	export = ft_strjoin(main->files_pwd, "export");
-	main->fd_export = open(export, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	free(irina);
-	free(export);
+	main->fd_matrix = open(ft_strjoin(main->files_pwd, "irina"),
+			O_CREAT | O_RDWR | O_TRUNC, 0644);
+	main->fd_export = open(ft_strjoin(main->files_pwd, "export"),
+			O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (ft_strcmp(token->value[0], "exit"))
 		ft_exit(token);
 	pidchild = fork();

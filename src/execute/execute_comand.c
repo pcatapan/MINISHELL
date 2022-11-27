@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_comand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/11/27 02:21:48 by aanghel          ###   ########.fr       */
-=======
-/*   Updated: 2022/11/20 19:37:39 by aanghel          ###   ########.fr       */
->>>>>>> parent of d679adb... fix primi leaks echo ciao
+/*   Updated: 2022/11/27 02:42:40 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +56,12 @@ t_token	*ft_execute_exeve(t_token *token, t_main *main)
 {
 	pid_t	pidchild;
 	int		fd_pipe[2];
-	char	*irina;
-	char	*export;
 
 	pipe(fd_pipe);
-	irina = ft_strjoin(main->files_pwd, "irina");
-	main->fd_matrix = open(irina, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	export = ft_strjoin(main->files_pwd, "export");
-	main->fd_export = open(export, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	free(irina);
-	free(export);
+	main->fd_matrix = open(ft_strjoin(main->files_pwd, "irina"),
+			O_CREAT | O_RDWR | O_TRUNC, 0644);
+	main->fd_export = open(ft_strjoin(main->files_pwd, "export"),
+			O_CREAT | O_RDWR | O_TRUNC, 0644);
 	pidchild = fork();
 	if (pidchild != 0)
 	{

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:57:38 by pcatapan          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/11/26 21:19:51 by aanghel          ###   ########.fr       */
-=======
-/*   Updated: 2022/11/20 19:35:04 by aanghel          ###   ########.fr       */
->>>>>>> parent of d679adb... fix primi leaks echo ciao
+/*   Updated: 2022/11/27 02:40:07 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +96,6 @@ int	ft_prompt(char **envp, t_main *main)
 	if (!line)
 	{
 		printf(RED "\texit\n" COLOR_RES);
-		ft_free_matrix(main->copy_env);
-		ft_free_matrix(main->export_env);
 		g_exit = 127;
 		exit(127);
 	}
@@ -112,15 +106,9 @@ int	ft_prompt(char **envp, t_main *main)
 		if (!main->error)
 		{
 			ft_parsing(line, main);
-<<<<<<< HEAD
-			ft_execute_command(main->copy_line, main);
-=======
 			ft_execute_command(line, main);
 			ft_free_all(main);
->>>>>>> parent of d679adb... fix primi leaks echo ciao
 		}
 	}
-	free(line);
-	ft_free_token(main->token);
 	return (0);
 }

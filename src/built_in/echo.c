@@ -6,11 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:10:04 by pcatapan          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/11/27 00:49:54 by pcatapan         ###   ########.fr       */
-=======
-/*   Updated: 2022/11/20 20:14:38 by aanghel          ###   ########.fr       */
->>>>>>> parent of d679adb... fix primi leaks echo ciao
+/*   Updated: 2022/11/27 02:40:42 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
