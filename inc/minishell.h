@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/27 00:51:27 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:37:24 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ char		**ft_get_next_line(int fd, char *file);
 char		*ft_strcpy(char *dst, char *src);
 char		*ft_strclear(char *str, char del);
 char		*ft_strtrim2(char *str, char del);
+void		ft_print_matrix(char **matrix);
 char		*ft_strtrim3(char *str, char *del);
 
 // free.c
@@ -169,7 +170,7 @@ t_token		*ft_priority(t_token *token, int lvl, t_main *main);
 
 // DIR Parsing
 char		*ft_find_path(char *cmd, t_main *main);
-char		*ft_find_token(char *line, t_main *main);
+char		*ft_find_token(char *line, t_main *main, bool first);
 void		ft_parsing(char *line, t_main *main);
 void		ft_set_op_logic(char *line, t_token *token);
 void		ft_set_values(char **line, t_main *main);
