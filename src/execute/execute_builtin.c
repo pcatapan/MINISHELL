@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/28 22:03:48 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/28 23:27:33 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_token	*ft_execute_builtin(t_token *token, t_main *main)
 
 	if (pipe(fd_pipe) == -1)
 		perror(RED"ERRORE2"COLOR_RES);
+	tmp = ft_strjoin(main->files_pwd, "irina");
 	main->fd_matrix = open(tmp, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	free(tmp);
 	tmp = ft_strjoin(main->files_pwd, "export");
