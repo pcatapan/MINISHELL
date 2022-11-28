@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:57:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/28 21:20:13 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/28 21:55:57 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ int	ft_prompt(char **envp, t_main *main)
 	tmp = getcwd(NULL, 0);
 	main->files_pwd = ft_strjoin(tmp, "/");
 	free(tmp);
+	main->token = (t_token *)malloc(sizeof(t_token));
+	if (!main->token)
+		return (0);
 	line = ft_get_line_input(main->copy_env);
 	if (!line)
 	{
@@ -112,9 +115,10 @@ int	ft_prompt(char **envp, t_main *main)
 		{
 			ft_parsing(line, main);
 			free(main->copy_line);
-			// ft_execute_command(line, main);
+			ft_execute_command(line, main);
 		}
 	}
+	ft_free_main(main);
 	ft_free_token(main->token);
 	free(main->files_pwd);
 	free(line);

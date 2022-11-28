@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:46:39 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/19 17:49:26 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/11/28 21:37:28 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	ft_print_lst(t_token *token)
 	{
 		printf("%s --- Comand\n", a->command);
 		i = -1;
-		while (a->value[++i] != NULL)
-			printf("%s --- Value %d\n", a->value[i], i);
+		// while (a->value[++i] != NULL)
+		// 	printf("%s --- Value %d\n", a->value[i], i);
 		printf("%d -- Priority\n", a->priority);
 		printf("%d -- Bool Res\n", a->res);
 		printf("%d -- Bool And\n", a->and);

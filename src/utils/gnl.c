@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:28:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/27 05:51:26 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/28 22:02:06 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ char	**ft_get_next_line(int fd, char *file)
 	buffer[i] = '\0';
 	rtr = ft_split_original(buffer, '\n');
 	free(buffer);
+	free(file);
 	return (rtr);
 }

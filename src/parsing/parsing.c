@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:58:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/28 21:03:04 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/28 21:48:13 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	ft_set_info(char **tmp, t_main *main, char *copy_line, int count)
 		first = FALSE;
 	}
 	tmp_value[i] = NULL;
-	// ft_set_values(tmp_value, main);
-	// ft_set_op_logic(copy_line, main->token);
-	// ft_set_priority(copy_line, main, 0);
-	// ft_set_redirections(main->token);
+	ft_set_values(tmp_value, main);
+	ft_set_op_logic(copy_line, main->token);
+	ft_set_priority(copy_line, main, 0);
+	ft_set_redirections(main->token);
 	ft_free_matrix(tmp_value);
 }
 
