@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:32:21 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/20 19:51:10 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:40:12 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ void	ft_check_redirection(char *line, t_main *main)
 		i = ft_check_double_quote(line, main, i);
 		i = ft_check_single_quote(line, main, i);
 		if ((line[i] == OUTPUT && line[i + 1] == INPUT) || \
-			(line[i] == INPUT && line[i + 1] == OUTPUT))
+			(line[i] == INPUT && line[i + 1] == OUTPUT) || \
+			(line[i] == INPUT && line[i + 1] == INPUT && line[i - 1] == INPUT) \
+			|| (line[i] == OUTPUT && line[i + 1] == OUTPUT&& line[i - 1] == OUTPUT))
 			main->error = true;
 		if (line[i] == INPUT)
 			main->redirections = true;

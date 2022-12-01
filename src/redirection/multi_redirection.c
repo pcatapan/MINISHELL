@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:36:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 22:52:49 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/12/01 19:02:44 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	ft_strjoin_redir(char *f_part, char *line, t_token *token)
 		else if (token->append)
 			ft_search_redir(token, ">>");
 	}
+	ft_print_lst(token);
 	ft_single_redir(token, token->main);
 }
 

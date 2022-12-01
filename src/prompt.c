@@ -6,7 +6,7 @@
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:57:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/28 23:52:10 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/12/01 19:04:02 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ int	ft_prompt(char **envp, t_main *main)
 		if (!main->error)
 		{
 			ft_parsing(line, main);
+			ft_execute_command(line, main);
 			free(main->copy_line);
-			//ft_execute_command(line, main);
 		}
 	}
 	//ft_free_main(main);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/11/28 18:37:24 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/01 11:51:41 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void		ft_set_priority(char *line, t_main *main, int brack);
 void		ft_set_redirections(t_token *token);
 t_token		*ft_return_head(t_token *list);
 void		ft_set_info(char **tmp, t_main *main, char *copy_line, int count);
+char		*ft_add_space(char *line);
 
 // DIR Built_in
 int			ft_check_builtin(t_token *token);
@@ -211,7 +212,7 @@ int			ft_count_redirection(t_token *token);
 int			ft_count_redir_value(t_token *token);
 void		ft_set_new_valus(t_token *token, char *line);
 void		ft_new_token(t_token *token, char *line, char dir);
-void		ft_no_space(t_token *token);
+void		ft_no_space(t_token *token, t_main *main);
 void		ft_change_name_file(t_main *main, t_token *token, char redir);
 
 // temporary

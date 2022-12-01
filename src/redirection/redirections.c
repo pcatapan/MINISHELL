@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/27 03:06:11 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/01 19:08:13 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,7 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 	}
 	else
 	{
-		ft_print_lst(token);
-		if (ft_count_redir_value(token) > 1)
-			ft_no_space(token);
-		else if (ft_count_redirection(token) > 1)
+		if (ft_count_redirection(token) > 2)
 			ft_execute_multi_redir(token);
 		else
 			ft_single_redir(token, main);
