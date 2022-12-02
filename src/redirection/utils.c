@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 03:26:32 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 22:21:44 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/12/02 21:12:56 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,27 @@ char	*ft_find_name_file(char *str)
 
 char	*ft_create_line(t_token *token)
 {
+	char	*rtr;
 	char	*tmp;
 	char	*val;
 	int		i;
 
-	tmp = (char *)malloc(sizeof(char) * 1);
-	if (!tmp)
+	rtr = (char *)malloc(sizeof(char) * 1);
+	if (!rtr)
 		return (NULL);
 	i = 0;
 	tmp = "\0";
 	while (token->value[i])
 	{
 		val = ft_strjoin(token->value[i], " ");
-		tmp = ft_strjoin(tmp, val);
+		rtr = ft_strjoin(tmp, val);
+		// free(tmp);
 		free(val);
+		tmp = ft_strdup(rtr);
 		i++;
 	}
-	return (tmp);
+	free(tmp);
+	return (rtr);
 }
 
 char	*ft_set_to_del(char *line)

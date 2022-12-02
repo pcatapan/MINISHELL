@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_comand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/01 18:53:17 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/12/02 20:19:12 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,20 +93,22 @@ void	ft_check_dir(t_main *main)
 {
 	int		i;
 	char	*pwd;
+	char	*tmp;
 
 	i = 0;
+	tmp = ft_substr(main->copy_env[i], 4, ft_strlen(main->copy_env[i]));
 	pwd = getcwd(NULL, 0);
 	while (main->copy_env[i])
 	{
-		if (ft_strncmp(main->copy_env[i], "PWD=", 4) == 0
-			&& pwd != ft_substr(main->copy_env[i],
-				4, ft_strlen(main->copy_env[i])))
+		if (ft_strncmp(main->copy_env[i], "PWD=", 4) == 0 && pwd != tmp)
 		{
+			free(pwd);
 			pwd = ft_substr(main->copy_env[i], 4, ft_strlen(main->copy_env[i]));
 			chdir(pwd);
 		}
 		i++;
 	}
+	free(tmp);
 	free(pwd);
 }
 
@@ -121,7 +123,9 @@ void	ft_execute_command(char *line, t_main *main)
 	while (main->count < lstsize)
 	{
 		if (!main->token->heredoc)
+		{
 			ft_execute_dollar(main->token, main);
+		}
 		if (main->token->priority != 0)
 			main->token = ft_priority(main->token, main->token->priority, main);
 		if (ft_strchr(main->token->value[0], '=') \

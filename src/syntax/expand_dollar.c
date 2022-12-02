@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/27 07:54:00 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/02 20:42:35 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 static char	*ft_search_word(char *word, char **env)
 {
 	char	*tmp;
+	char	*rtr;
 
 	tmp = ft_strjoin(word, "=");
 	free(word);
-	return (ft_searchstrchr(tmp, env));
+	rtr = ft_searchstrchr(tmp, env);
+	free (tmp);
+	return (rtr);
 }
 
 char	*ft_change_var_in_dollar(int start, int l, char *str, t_main *main)
@@ -36,7 +39,12 @@ char	*ft_change_var_in_dollar(int start, int l, char *str, t_main *main)
 	{
 		insert_word = (char *)malloc(sizeof(char) * 1);
 		if (!insert_word)
+		{
+			free(word);
+			free(first_part);
+			free(second_part);
 			return (NULL);
+		}
 		insert_word[0] = '\0';
 	}
 	word = ft_strjoin(first_part, insert_word);
@@ -103,9 +111,11 @@ int	ft_check_expand(char *line, int i)
 	int		count;
 
 	dollar = FALSE;
-	count = 0;
+	count = 1;
 	if (line[i] == '$')
 		dollar = TRUE;
+	else
+		return (0);
 	if ((line[i + 1] == '$' || line[i - 1] == '$') && dollar)
 		return (0);
 	while (i > 0)

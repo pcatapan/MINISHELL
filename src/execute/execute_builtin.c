@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/28 23:27:33 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/12/02 20:03:31 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ t_token	*ft_execute_builtin(t_token *token, t_main *main)
 			dup2(fd_pipe[1], STDOUT_FILENO);
 			close(fd_pipe[1]);
 		}
-		// ft_store_matrix(main);
 		ft_search_builtin(token, main);
 		ft_store_matrix(main);
 		exit(0);
