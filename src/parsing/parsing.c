@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:58:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/01 19:02:39 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/12/02 22:57:58 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,10 @@ void	ft_parsing(char *line, t_main *main)
 		i = ft_check_single_quote(line, main, i);
 		i = ft_check_double_quote(line, main, i);
 		i = ft_jump_brackets(line, i);
-		if (line[i] == 38 || line[i] == 59 || line[i] == 124 \
-					/*|| ft_check_redir_char(line, i)*/)
+		if (line[i] == 38 || line[i] == 59 || line[i] == 124)
 		{
 			if (line[i + 1] == 38 || line[i + 1] == 124 || line[i] == 59 || \
-			/*ft_check_redir_char(line, i) ||*/ (line[i] == 124 && line[i - 1] != 124))
+							(line[i] == 124 && line[i - 1] != 124))
 				count++;
 			line[i] = 127;
 			i++;
@@ -73,7 +72,7 @@ void	ft_parsing(char *line, t_main *main)
 	free(new_line);
 }
 
-int		ft_count_space(char *line)
+int	ft_count_space(char *line)
 {
 	int		i;
 	int		count;
@@ -96,17 +95,17 @@ char	*ft_add_space(char *tmp)
 	char	*line;
 	int		i;
 	int		j;
-	int 	count;
+	int		count;
 	int		len;
 
-	line = (char *)malloc(sizeof(char) * (ft_strlen(tmp) + (ft_count_space(tmp) * 2) + 1));
+	line = (char *)malloc(sizeof(char) * (ft_strlen(tmp) + \
+				(ft_count_space(tmp) * 2) + 1));
 	if (!line)
 		return (0);
 	i = 0;
 	j = 0;
 	while (tmp[i])
 	{
-		
 		if ((tmp[i] == '<' && tmp[i + 1] == '<' && tmp[i - 1] != '<') \
 				|| (tmp[i] == '>' && tmp[i + 1] == '>' && tmp[i - 1] != '>'))
 		{

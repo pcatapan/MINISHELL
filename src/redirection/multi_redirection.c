@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:36:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/02 21:04:13 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 00:21:58 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	ft_strjoin_redir(char *f_part, char *line, t_token *token)
 	tmp = ft_substr(line, (end - start), start);
 	rtr = ft_strjoin(f_part, tmp);
 	free(tmp);
-	free(line);
 	ft_set_new_command(rtr, token, token->main);
 	ft_set_new_valus(token, rtr);
 	free(rtr);
@@ -103,15 +102,12 @@ void	ft_strjoin_redir(char *f_part, char *line, t_token *token)
 
 void	ft_execute_multi_redir(t_token *token)
 {
-	char	*line;
 	char	**matrix;
 	char	*tmp;
 	int		i;
 
 	i = 0;
-	line = ft_create_line(token);
-	printf("line:%s\n", line);
-	matrix = ft_split_original(line, '>');
+	matrix = ft_split_original(token->main->copy_line, '>');
 	while (matrix[++i])
 	{
 		tmp = ft_find_name_file(matrix[i]);
@@ -127,6 +123,6 @@ void	ft_execute_multi_redir(t_token *token)
 	while (matrix[i])
 		tmp = ft_strjoin(tmp, matrix[i++]);
 	ft_free_matrix(matrix);
-	ft_strjoin_redir(tmp, line, token);
+	ft_strjoin_redir(tmp, token->main->copy_line, token);
 	free(tmp);
 }

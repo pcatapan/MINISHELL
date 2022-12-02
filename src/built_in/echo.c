@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:10:04 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/02 20:35:22 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 00:37:25 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ static void	ft_preparet_echo(t_token *token)
 	while (token->value[i])
 	{
 		j = 0;
+		if (ft_strnstr(token->value[i], "-n", 2))
+		{
+			free(token->value[i]);
+			token->value[i] = ft_strdup("-n");
+		}
 		while (token->value[i][j])
 		{
 			if (token->value[i][j] == '\'')

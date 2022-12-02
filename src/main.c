@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 19:10:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/28 23:24:41 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/12/03 00:26:38 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	ft_loop(t_main *main)
+{
+	char	*tmp;
+
+	tmp = getcwd(NULL, 0);
+	main->files_pwd = ft_strjoin(tmp, "/");
+	free(tmp);
+	main->token = (t_token *)malloc(sizeof(t_token));
+	if (!main->token)
+		return ;
+	ft_prompt(main->copy_env, main);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -18,6 +31,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
+	g_exit = 0;
 	main = (t_main *)malloc(sizeof(t_main));
 	if (!main)
 		return (0);
@@ -32,7 +46,6 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGINT, ft_sig_handel);
 	signal(SIGQUIT, ft_sig_handel);
 	while (1)
-		ft_prompt(main->copy_env, main);
+		ft_loop(main);
 	ft_free_matrix(main->copy_env);
-	// free(main);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_environment.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 02:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 21:26:31 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/12/02 23:24:59 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,25 @@
 char	**ft_add_envi(char *var_add, t_main *main)
 {
 	int		i;
-	char	**temp;
+	char	**tmp;
 
 	i = 0;
 	while (main->copy_env[i])
 		i++;
-	temp = malloc(sizeof(char *) * (i + 2));
-	if (!temp)
+	tmp = malloc(sizeof(char *) * (i + 2));
+	if (!tmp)
 		return (NULL);
 	i = -1;
 	while (main->copy_env[++i])
 	{
-		temp[i] = ft_strdup(main->copy_env[i]);
-		if (!temp[i])
+		tmp[i] = ft_strdup(main->copy_env[i]);
+		if (!tmp[i])
 			break ;
 	}
-	temp[i++] = ft_strdup(var_add);
-	temp[i] = NULL;
+	tmp[i++] = ft_strdup(var_add);
+	tmp[i] = NULL;
 	ft_free_matrix(main->copy_env);
-	free(var_add);
-	return (temp);
+	return (tmp);
 }
 
 int	ft_check_envi(char *line)
