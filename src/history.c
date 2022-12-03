@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:53:41 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 18:12:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 20:00:18 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_add_history(char *line, char **envp)
+void	ft_add_history(char *line)
 {
 	int		fd;
 	char	*path;

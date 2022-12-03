@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 17:28:43 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 22:57:07 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,48 @@ static char	*ft_search_word(char *word, char **env)
 
 char	*ft_change_var_in_dollar(int start, int l, char *str, t_main *main)
 {
-	char	*first_part;
-	char	*second_part;
-	char	*word;
-	char	*insert_word;
-
-	first_part = ft_substr(str, 0, start - 1);
-	second_part = ft_substr(str, start + l, ft_strlen(str));
-	word = ft_substr(str, start, l);
-	insert_word = ft_search_word(word, main->copy_env);
-	if (insert_word == NULL)
+	main->first_part = ft_substr(str, 0, start - 1);
+	main->second_part = ft_substr(str, start + l, ft_strlen(str));
+	main->word = ft_substr(str, start, l);
+	main->insert_word = ft_search_word(main->word, main->copy_env);
+	if (main->insert_word == NULL)
 	{
-		insert_word = (char *)malloc(sizeof(char) * 1);
-		if (!insert_word)
+		main->insert_word = (char *)malloc(sizeof(char) * 1);
+		if (!main->insert_word)
 		{
-			free(word);
-			free(first_part);
-			free(second_part);
+			free(main->word);
+			free(main->first_part);
+			free(main->second_part);
 			return (NULL);
 		}
-		insert_word[0] = '\0';
+		main->insert_word[0] = '\0';
 	}
-	word = ft_strjoin(first_part, insert_word);
-	free(insert_word);
-	free(first_part);
+	main->word = ft_strjoin(main->first_part, main->insert_word);
+	free(main->insert_word);
+	free(main->first_part);
 	free(str);
-	str = ft_strjoin(word, second_part);
-	free(second_part);
-	free(word);
+	str = ft_strjoin(main->word, main->second_part);
+	free(main->second_part);
+	free(main->word);
 	return (str);
+}
+
+char	*ft_expand_further(char *line, t_main *main, int i, int start)
+{
+	char	*tmp;
+	int		l;
+
+	l = 0;
+	while (line[++i] && line[i] != ' ' && line[i] != '"' && line[i] != '\'' \
+		&& line[i] != '$' && line[i] != 62 && line[i] != 60)
+		l++;
+	tmp = ft_strdup(line);
+	free(line);
+	if (tmp[start] == '?')
+		line = ft_itoa(g_exit);
+	else
+		line = ft_change_var_in_dollar(start, l + 1, tmp, main);
+	return (line);
 }
 
 char	*ft_expand_doll(char *line, t_main *main, int i)
@@ -76,16 +89,7 @@ char	*ft_expand_doll(char *line, t_main *main, int i)
 		line = ft_strtrim2(tmp, 127);
 		free(tmp);
 	}
-	while (line[++i] && line[i] != ' ' && line[i] != '"' && line[i] != '\'' \
-		&& line[i] != '$' && line[i] != 62 && line[i] != 60)
-		l++;
-	tmp = ft_strdup(line);
-	free(line);
-	if (tmp[start] == '?')
-		line = ft_itoa(g_exit);
-	else
-		line = ft_change_var_in_dollar(start, l + 1, tmp, main);
-	return (line);
+	return (ft_expand_further(line, main, i, start));
 }
 
 char	*ft_expand_heredoc(char *line, t_main *main)
@@ -106,31 +110,4 @@ char	*ft_expand_heredoc(char *line, t_main *main)
 	if (start != 0)
 		line = ft_change_var_in_dollar(start, l, line, main);
 	return (line);
-}
-
-int	ft_check_expand(char *line, int i)
-{
-	bool	dollar;
-	int		count;
-
-	dollar = FALSE;
-	count = 1;
-	if (line[i] == '$')
-		dollar = TRUE;
-	else
-		return (0);
-	if (((line[i + 1] == '$' || line[i - 1] == '$') && dollar) \
-			|| ft_strlen(line) == 1)
-		return (0);
-	while (i > 0)
-	{
-		if (line[i] == '"')
-			count++;
-		i--;
-	}
-	if ((count % 2) == 0 && !ft_strchr(line, '"'))
-		return (0);
-	if (dollar)
-		return (1);
-	return (0);
 }

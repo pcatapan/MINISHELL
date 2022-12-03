@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:32:21 by aanghel           #+#    #+#             */
-/*   Updated: 2022/11/29 23:40:12 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/12/03 19:52:09 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	ft_check_redirection(char *line, t_main *main)
 		if ((line[i] == OUTPUT && line[i + 1] == INPUT) || \
 			(line[i] == INPUT && line[i + 1] == OUTPUT) || \
 			(line[i] == INPUT && line[i + 1] == INPUT && line[i - 1] == INPUT) \
-			|| (line[i] == OUTPUT && line[i + 1] == OUTPUT&& line[i - 1] == OUTPUT))
+			|| (line[i] == OUTPUT && line[i + 1] == OUTPUT
+				&& line[i - 1] == OUTPUT))
 			main->error = true;
 		if (line[i] == INPUT)
 			main->redirections = true;

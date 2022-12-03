@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:57:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 18:56:23 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 21:46:33 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_clear_prompt(char *prompt)
 	return (rtr);
 }
 
-char	*ft_get_line_input(char **copy_envp)
+char	*ft_get_line_input(void)
 {
 	char	*prompt;
 	char	*tmp;
@@ -87,11 +87,11 @@ char	*ft_get_line_input(char **copy_envp)
 	return (prompt);
 }
 
-int	ft_prompt(char **envp, t_main *main)
+int	ft_prompt(t_main *main)
 {
 	char	*line;
 
-	line = ft_get_line_input(envp);
+	line = ft_get_line_input();
 	if (!line)
 	{
 		printf(RED "\texit\n" COLOR_RES);
@@ -102,12 +102,12 @@ int	ft_prompt(char **envp, t_main *main)
 	}
 	else if (line[0] != '\0')
 	{
-		ft_add_history(line, envp);
+		ft_add_history(line);
 		ft_check_syntax(line, main);
 		if (!main->error)
 		{
 			ft_parsing(line, main);
-			ft_execute_command(line, main);
+			ft_execute_command(main);
 			free(main->copy_line);
 		}
 		ft_free_token(main->token);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 00:31:42 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/13 01:08:36 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 20:06:30 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*ft_strclear(char *str, char del)
 	int		count;
 	char	*rtr;
 
+	count = 0;
 	i = -1;
 	while (str[++i])
 	{

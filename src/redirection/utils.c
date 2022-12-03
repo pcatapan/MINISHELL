@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 03:26:32 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 00:16:18 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 19:52:26 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	*ft_create_line(t_token *token)
 	{
 		val = ft_strjoin(token->value[i], " ");
 		rtr = ft_strjoin(tmp, val);
-		// free(tmp);
 		free(val);
 		tmp = ft_strdup(rtr);
 		i++;

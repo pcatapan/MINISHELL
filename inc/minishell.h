@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/12/03 19:27:37 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 22:53:31 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,15 @@ typedef struct s_main
 	bool		redirections;
 	bool		sub_shell;
 	bool		expand;
+
+	char		**paths;
+	char		*right_path;
+	char		*part_path;
+
+	char		*first_part;
+	char		*second_part;
+	char		*word;
+	char		*insert_word;
 	t_token		*token;
 }	t_main;
 
@@ -137,11 +146,11 @@ char		**ft_init_envp(char **envp);
 char		**ft_init_set(char	**envp);
 
 // prompt.c
-int			ft_prompt(char **envp, t_main *main);
+int			ft_prompt(t_main *main);
 void		ft_sig_handel(int signal);
 
 // history.c
-void		ft_add_history(char *line, char **envp);
+void		ft_add_history(char *line);
 
 // DIR syntax_check
 int			ft_check_single_quote(char *line, t_main *main, int i);
@@ -155,12 +164,14 @@ void		ft_check_redirection(char *line, t_main *main);
 int			ft_check_redir_char(char *line, int i);
 
 // DIR Execute
-void		ft_execute_command(char *line, t_main *main);
+void		ft_execute_command(t_main *main);
 void		ft_execute_dollar(t_token *token, t_main *main);
 void		ft_store_matrix(t_main *main);
 t_token		*ft_execute_enviroment(t_token *token, char *var_add);
 t_token		*ft_execute_exeve(t_token *token, t_main *main);
 int			ft_check_envi(char *line);
+void		ft_exceve(t_token *token);
+
 //// DIR EXECVE
 void		ft_execve_or(t_token *token);
 void		ft_execve_and(t_token *token);
@@ -178,6 +189,8 @@ t_token		*ft_return_head(t_token *list);
 void		ft_set_info(char **tmp, t_main *main, char *copy_line, int count);
 char		*ft_add_space(char *line);
 int			ft_support_parsing(char *line, t_main *main, int i);
+void		ft_check_dir(t_main *main);
+int			ft_count_array(char *line, t_main *main);
 
 // DIR Built_in
 int			ft_check_builtin(t_token *token);
@@ -214,8 +227,10 @@ void		ft_set_new_valus(t_token *token, char *line);
 void		ft_new_token(t_token *token, char *line, char dir);
 void		ft_no_space(t_token *token, t_main *main);
 void		ft_change_name_file(t_main *main, t_token *token, char redir);
+void		ft_single_redir(t_token *token, t_main *main);
 
 // temporary
+int			ft_check_expand(char *line, int i);
 void		ft_print_lst(t_token *a);
 void		ft_qualcosa(t_token *token, t_main *main);
 t_token		*ft_execute_exeve(t_token *token, t_main *main);

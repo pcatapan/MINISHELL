@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/12/02 21:03:25 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 22:43:35 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,16 @@ void	ft_delete_redirection(t_token *token)
 	}
 }
 
-void	ft_single_redir(t_token *token, t_main *main)
+void	ft_stdout(t_token *token, t_main *main)
 {
-	if (token->heredoc == 1)
-		ft_heredoc(token, main);
-	if (token->output == 1 || token->append == 1)
-		ft_output_redirect(token, main);
-	if (token->input == 1)
-		ft_input_redirect(token);
-	ft_delete_redirection(token);
-	if (token->command == NULL)
-	{
-		if (token->stdoutput != STDOUT_FILENO)
-			dup2(token->dup, STDOUT_FILENO);
-		else if (token->stdinput != STDIN_FILENO)
-			dup2(token->dup, STDIN_FILENO);
-	}
-	ft_qualcosa(token, main);
+	if (ft_count_redirection(token) > 1)
+		ft_execute_multi_redir(token);
+	else
+		ft_single_redir(token, main);
+	if (token->stdoutput != STDOUT_FILENO)
+		dup2(token->dup, STDOUT_FILENO);
+	else if (token->stdinput != STDIN_FILENO)
+		dup2(token->dup, STDIN_FILENO);
 }
 
 t_token	*ft_redirections(t_token *token, t_main *main)
@@ -111,16 +104,7 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 			g_exit = WEXITSTATUS(token->res);
 	}
 	else
-	{
-		if (ft_count_redirection(token) > 1)
-			ft_execute_multi_redir(token);
-		else
-			ft_single_redir(token, main);
-		if (token->stdoutput != STDOUT_FILENO)
-			dup2(token->dup, STDOUT_FILENO);
-		else if (token->stdinput != STDIN_FILENO)
-			dup2(token->dup, STDIN_FILENO);
-	}
+		ft_stdout(token, main);
 	if (token->next)
 	{
 		token = token->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:43:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 19:27:17 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 22:22:39 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,24 @@ void	ft_store_matrix(t_main *main)
 		i++;
 	}
 	close(main->fd_export);
+}
+
+void	ft_check_dir(t_main *main)
+{
+	int		i;
+	char	*pwd;
+
+	i = 0;
+	pwd = getcwd(NULL, 0);
+	while (main->copy_env[i])
+	{
+		if (ft_strncmp(main->copy_env[i], "PWD=", 4) == 0)
+		{
+			free(pwd);
+			pwd = ft_substr(main->copy_env[i], 4, ft_strlen(main->copy_env[i]));
+			chdir(pwd);
+		}
+		i++;
+	}
+	free(pwd);
 }

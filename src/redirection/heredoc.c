@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:31:25 by aanghel           #+#    #+#             */
-/*   Updated: 2022/12/01 19:08:30 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/12/03 22:44:24 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,23 @@ void	ft_heredoc(t_token *token, t_main *main)
 		g_exit = 1;
 		exit(1);
 	}
+}
+
+void	ft_single_redir(t_token *token, t_main *main)
+{
+	if (token->heredoc == 1)
+		ft_heredoc(token, main);
+	if (token->output == 1 || token->append == 1)
+		ft_output_redirect(token, main);
+	if (token->input == 1)
+		ft_input_redirect(token);
+	ft_delete_redirection(token);
+	if (token->command == NULL)
+	{
+		if (token->stdoutput != STDOUT_FILENO)
+			dup2(token->dup, STDOUT_FILENO);
+		else if (token->stdinput != STDIN_FILENO)
+			dup2(token->dup, STDIN_FILENO);
+	}
+	ft_qualcosa(token, main);
 }

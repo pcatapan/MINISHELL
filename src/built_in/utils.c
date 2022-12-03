@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 23:32:54 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 16:25:14 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 21:45:51 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_check_builtin(t_token *token)
 
 char	*ft_check_echo_n(char *str)
 {
-	int		i;
+	size_t		i;
 
 	i = 1;
 	while (str[i] == 'n')

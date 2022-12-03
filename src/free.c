@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 20:44:10 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 15:49:05 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 19:49:00 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,4 @@ void	ft_free_token(t_token *token)
 			break ;
 		token = token->next;
 	}
-}
-
-void	ft_free_main(t_main *main)
-{
-	// ft_free_matrix(main->copy_env);
-	// free(main->token);
-	// close(main->fd_export);
-	// close(main->fd_matrix);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 01:02:30 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 05:10:48 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 19:49:27 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char	*ft_strtrim3(char *str, char *del)
 			if (!matrix[i])
 				break ;
 		}
-		// free(str);
 		str = ft_strdup(rtr);
 		free(rtr);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 19:27:22 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 21:59:00 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,27 @@ void	ft_search_builtin(t_token *token, t_main *main)
 		ft_export(token, main);
 }
 
+t_token	*ft_false_builtin(t_token *token, t_main *main, int *fd_pipe)
+{
+	close(fd_pipe[0]);
+	if (token->pipe)
+	{
+		dup2(fd_pipe[1], STDOUT_FILENO);
+		close(fd_pipe[1]);
+	}
+	ft_search_builtin(token, main);
+	ft_store_matrix(main);
+	exit(0);
+}
+
+void	ft_true_builtin(t_token *token, int *fd_pipe, pid_t pidchild)
+{
+	close(fd_pipe[1]);
+	waitpid(pidchild, &token->res, 0);
+	if (WIFEXITED(token->res))
+		g_exit = WEXITSTATUS(token->res);
+}
+
 t_token	*ft_execute_builtin(t_token *token, t_main *main)
 {
 	pid_t	pidchild;
@@ -48,24 +69,9 @@ t_token	*ft_execute_builtin(t_token *token, t_main *main)
 		ft_exit(token);
 	pidchild = fork();
 	if (pidchild != 0)
-	{
-		close(fd_pipe[1]);
-		waitpid(pidchild, &token->res, 0);
-		if (WIFEXITED(token->res))
-			g_exit = WEXITSTATUS(token->res);
-	}
+		ft_true_builtin(token, fd_pipe, pidchild);
 	else
-	{
-		close(fd_pipe[0]);
-		if (token->pipe)
-		{
-			dup2(fd_pipe[1], STDOUT_FILENO);
-			close(fd_pipe[1]);
-		}
-		ft_search_builtin(token, main);
-		ft_store_matrix(main);
-		exit(0);
-	}
+		ft_false_builtin(token, main, fd_pipe);
 	token = ft_end_execute_(token, fd_pipe, main);
 	return (token);
 }
