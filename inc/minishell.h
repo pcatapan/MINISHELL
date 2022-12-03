@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/12/03 22:53:31 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/12/03 23:34:06 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,6 @@ typedef struct s_main
 	bool		redirections;
 	bool		sub_shell;
 	bool		expand;
-
-	char		**paths;
-	char		*right_path;
-	char		*part_path;
-
-	char		*first_part;
-	char		*second_part;
-	char		*word;
-	char		*insert_word;
 	t_token		*token;
 }	t_main;
 
@@ -228,6 +219,8 @@ void		ft_new_token(t_token *token, char *line, char dir);
 void		ft_no_space(t_token *token, t_main *main);
 void		ft_change_name_file(t_main *main, t_token *token, char redir);
 void		ft_single_redir(t_token *token, t_main *main);
+
+bool		ft_expand_check(char *line);
 
 // temporary
 int			ft_check_expand(char *line, int i);

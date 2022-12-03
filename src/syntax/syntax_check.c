@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 20:59:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 22:59:31 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 23:33:40 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,36 +95,6 @@ void	ft_check_operetor_logic(char *line, t_main *main)
 		}
 		i++;
 	}
-}
-
-static bool	ft_expand_check(char *line)
-{
-	int		i;
-	bool	error;
-
-	i = 0;
-	error = TRUE;
-	while (line[i] != '$')
-		i++;
-	if (line[++i] == '{')
-	{
-		while (line[++i] != 32 && line[i])
-		{
-			if (line[i] == '}')
-			{
-				error = FALSE;
-				break ;
-			}
-		}
-	}
-	else
-		error = FALSE;
-	if (error)
-	{
-		ft_putendl_fd(RED ERROR_CLOSE_ COLOR_RES, STDOUT_FILENO);
-		return (TRUE);
-	}
-	return (FALSE);
 }
 
 void	ft_check_syntax(char *line, t_main *main)

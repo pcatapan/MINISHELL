@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+         #
+#    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/12/03 19:59:44 by fgrossi          ###   ########.fr        #
+#    Updated: 2022/12/03 23:32:19 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,15 @@ SRC =	./PRINTF/*.c \
 		./src/execute/*.c \
 		./src/execute/execve/*.c \
 		./src/built_in/*.c \
-		./src/redirection/*.c 
+		./src/redirection/*.c \
+		./src/expand_dollar/*.c
 
 OBJC = $(SRC:%.c=%.o)
 
 CC = gcc
 
-USER = fgrossi
+USER = pcatapan
+HOME = /Users/${USER}
 
 #LDFLAGS = -L/opt/homebrew/opt/readline/lib
 #CPPFLAGS = -I/opt/homebrew/opt/readline/include
@@ -47,11 +49,11 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f 42minishell_history
+	@rm -f ${HOME}/.42minishell_history
 	@rm -f fil*
 	@rm -f .heredoc
-	@rm -f export
-	@rm -f irina
+	@rm -f ${HOME}/.export
+	@rm -f ${HOME}/.help
 	@rm -rf *.dSYM
 	
 re: fclean all
