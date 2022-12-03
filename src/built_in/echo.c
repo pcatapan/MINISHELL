@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:10:04 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 00:37:25 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 14:26:41 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,33 +58,44 @@ static int	ft_oppost_trim(char *line, int i, char trim)
 	return (i);
 }
 
+static char *ft_check_echo_n(char *str)
+{
+	int		i;
+
+	i = 1;
+	while (str[i] == 'n')
+		i++;
+	if (i < ft_strlen(str))
+		return (str);
+	else
+	{
+		//free(str);
+		return ("-n");
+	}	
+}
+
 static void	ft_preparet_echo(t_token *token)
 {
 	int		i;
 	int		j;
 	char	*tmp;
 
-	i = 1;
-	while (token->value[i])
+	i = 0;
+	while (token->value[++i])
 	{
-		j = 0;
+		j = -1;
 		if (ft_strnstr(token->value[i], "-n", 2))
-		{
-			free(token->value[i]);
-			token->value[i] = ft_strdup("-n");
-		}
-		while (token->value[i][j])
+			token->value[i] = ft_check_echo_n(token->value[i]);
+		while (token->value[i][++j])
 		{
 			if (token->value[i][j] == '\'')
 				j = ft_oppost_trim(token->value[i], j, '"');
 			else if (token->value[i][j] == '"')
 				j = ft_oppost_trim(token->value[i], j, '\'');
-				j++;
 		}
 		tmp = ft_strtrim2(token->value[i], 127);
-		free(token->value[i]);
+		//free(token->value[i]);
 		token->value[i] = ft_strdup(tmp);
-		i++;
 	}
 }
 
