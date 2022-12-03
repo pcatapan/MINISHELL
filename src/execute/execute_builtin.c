@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/02 20:03:31 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 19:27:22 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 void	ft_search_builtin(t_token *token, t_main *main)
 {
-	if (ft_strcmp(token->value[0], "echo"))
+	if (ft_strcmp(token->value[0], "echo") || \
+			ft_strcmp(token->value[0], "/bin/echo"))
 		ft_check_echo(token);
 	else if (ft_strcmp(token->value[0], "env"))
 		ft_env(main);
 	else if (ft_strcmp(token->value[0], "unset"))
 		ft_unset(token, main);
-	else if (ft_strcmp(token->value[0], "pwd"))
+	else if (ft_strcmp(token->value[0], "pwd") || \
+			ft_strcmp(token->value[0], "/bin/pwd"))
 		ft_pwd();
 	else if (ft_strcmp(token->value[0], "cd"))
 		ft_cd(token, main);
@@ -36,10 +38,10 @@ t_token	*ft_execute_builtin(t_token *token, t_main *main)
 
 	if (pipe(fd_pipe) == -1)
 		perror(RED"ERRORE2"COLOR_RES);
-	tmp = ft_strjoin(main->files_pwd, "irina");
+	tmp = ft_strjoin(main->files_pwd, ".help");
 	main->fd_matrix = open(tmp, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	free(tmp);
-	tmp = ft_strjoin(main->files_pwd, "export");
+	tmp = ft_strjoin(main->files_pwd, ".export");
 	main->fd_export = open(tmp, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	free(tmp);
 	if (ft_strcmp(token->value[0], "exit"))

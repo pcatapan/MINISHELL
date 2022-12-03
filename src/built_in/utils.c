@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 23:32:54 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/20 06:37:00 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 16:25:14 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,19 @@ int	ft_check_builtin(t_token *token)
 	|| ft_strcmp(token->value[0], "export"))
 		return (1);
 	return (0);
+}
+
+char	*ft_check_echo_n(char *str)
+{
+	int		i;
+
+	i = 1;
+	while (str[i] == 'n')
+		i++;
+	if (i < ft_strlen(str))
+		return (str);
+	else
+		return ("-n");
 }
 
 char	*ft_clear_value(char *str)

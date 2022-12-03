@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 20:44:10 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/28 21:55:50 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 15:49:05 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ void	ft_free_token(t_token *token)
 	token = ft_return_head(token);
 	while (token)
 	{
-		free(token->command);
+		if (token->command)
+			free(token->command);
 		ft_free_matrix(token->value);
 		if (token->name_file)
 			free(token->name_file);
-		// free(token->main);
-		free(token);
+		if (token->next)
+			free(token);
 		if (!token)
 			break ;
 		token = token->next;

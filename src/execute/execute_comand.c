@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:44:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/02 23:05:45 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 19:27:03 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ t_token	*ft_execute_exeve(t_token *token, t_main *main)
 
 	if (pipe(fd_pipe) == -1)
 		perror(RED"ERRORE2"COLOR_RES);
-	tmp = ft_strjoin(main->files_pwd, "irina");
+	tmp = ft_strjoin(main->files_pwd, ".help");
 	main->fd_matrix = open(tmp, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	free(tmp);
-	tmp = ft_strjoin(main->files_pwd, "export");
+	tmp = ft_strjoin(main->files_pwd, ".export");
 	main->fd_export = open(tmp, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	free(tmp);
 	pidchild = fork();
@@ -93,14 +93,12 @@ void	ft_check_dir(t_main *main)
 {
 	int		i;
 	char	*pwd;
-	char	*tmp;
 
 	i = 0;
-	tmp = ft_substr(main->copy_env[i], 4, ft_strlen(main->copy_env[i]));
 	pwd = getcwd(NULL, 0);
 	while (main->copy_env[i])
 	{
-		if (ft_strncmp(main->copy_env[i], "PWD=", 4) == 0 && pwd != tmp)
+		if (ft_strncmp(main->copy_env[i], "PWD=", 4) == 0)
 		{
 			free(pwd);
 			pwd = ft_substr(main->copy_env[i], 4, ft_strlen(main->copy_env[i]));
@@ -108,7 +106,6 @@ void	ft_check_dir(t_main *main)
 		}
 		i++;
 	}
-	free(tmp);
 	free(pwd);
 }
 
@@ -124,8 +121,8 @@ void	ft_execute_command(char *line, t_main *main)
 	{
 		if (!main->token->heredoc)
 			ft_execute_dollar(main->token, main);
-		if (main->token->priority != 0)
-			main->token = ft_priority(main->token, main->token->priority, main);
+		// if (main->token->priority != 0)
+		// 	main->token = ft_priority(main->token, main->token->priority, main);
 		if (ft_strchr(main->token->value[0], '=') \
 			&& ft_check_envi(main->token->value[0]))
 			main->token = \

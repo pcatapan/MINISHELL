@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:57:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/28 18:40:17 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 19:24:33 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,23 @@ char	*ft_find_path(char *cmd, t_main *main)
 	char	*right_path;
 	int		i;
 	char	*part_path;
+	int		len;
 
 	i = 0;
-	while (ft_strncmp("PATH=", main->copy_env[i], 5))
+	len = ft_matrixlen(main->copy_env);
+	if (ft_strnstr(cmd, "/bin/", ft_strlen(cmd)))
+		return (ft_strdup(cmd));
+	while (main->copy_env[i])
+	{
+		if (!(ft_strncmp("PATH=", main->copy_env[i], 5)))
+			break ;
 		i++;
+	}
+	if (i >= len)
+	{
+		g_exit = 127;
+		return (NULL);
+	}
 	paths = ft_split(main->copy_env[i] + 5, ":");
 	i = 0;
 	while (paths[i])
@@ -111,7 +124,7 @@ void	ft_set_values(char **line, t_main *main)
 		token->command = ft_find_path(token->value[i], main);
 		tmp = ft_strtrim2(token->value[i], '"');
 		free(token->value[i]);
-		token->value[i] = ft_strdup(tmp);
+		token->value[i] = ft_strtrim2(tmp, '\'');
 		free(tmp);
 		ft_divide_line(line[j], token, main);
 		if (token->next)

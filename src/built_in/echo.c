@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:10:04 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 14:26:41 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 19:17:14 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	ft_echo(t_token *token)
 	int		i;
 
 	i = 1;
+	if (!token->value[1])
+	{
+		printf("\n");
+		return ;
+	}
 	if (ft_strcmp(token->value[1], "-n") != 0)
 		i++;
 	while (token->value[i])
@@ -41,7 +46,10 @@ void	ft_echo_or(t_token *token)
 		}
 	}
 	else
+	{
+		printf("Comm :%s\n", token->value[1]);
 		ft_echo(token);
+	}
 }
 
 static int	ft_oppost_trim(char *line, int i, char trim)
@@ -56,22 +64,6 @@ static int	ft_oppost_trim(char *line, int i, char trim)
 	if (line[i] == quot)
 		line[i] = 127;
 	return (i);
-}
-
-static char *ft_check_echo_n(char *str)
-{
-	int		i;
-
-	i = 1;
-	while (str[i] == 'n')
-		i++;
-	if (i < ft_strlen(str))
-		return (str);
-	else
-	{
-		//free(str);
-		return ("-n");
-	}	
 }
 
 static void	ft_preparet_echo(t_token *token)
@@ -94,7 +86,6 @@ static void	ft_preparet_echo(t_token *token)
 				j = ft_oppost_trim(token->value[i], j, '\'');
 		}
 		tmp = ft_strtrim2(token->value[i], 127);
-		//free(token->value[i]);
 		token->value[i] = ft_strdup(tmp);
 	}
 }
@@ -109,7 +100,7 @@ void	ft_check_echo(t_token *token)
 		else if (token->prev->and)
 		{
 			if (token->res)
-				;
+				exit (1);
 			else
 				ft_echo(token);
 		}

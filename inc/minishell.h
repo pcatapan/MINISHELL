@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/12/01 11:51:41 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/12/03 19:27:37 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@
 # define DIVISOR_SHELL " ▸ "
 # define HOME_SHELL " ~ "
 # define FILE_HISTORY "/.42minishell_history"
-# define FILE_MATRIX "/Users/fgrossi/Desktop/Pollo/irina"
-# define FILE_EXPORT "/Users/fgrossi/Desktop/Pollo/export"
 # define RED "\x1b[31m"
 # define COLOR_RES  "\x1b[0m"
 # define ERROR_DOUBLE_QUOTE "Mistake : unclosed double quotes"
@@ -179,6 +177,7 @@ void		ft_set_redirections(t_token *token);
 t_token		*ft_return_head(t_token *list);
 void		ft_set_info(char **tmp, t_main *main, char *copy_line, int count);
 char		*ft_add_space(char *line);
+int			ft_support_parsing(char *line, t_main *main, int i);
 
 // DIR Built_in
 int			ft_check_builtin(t_token *token);
@@ -192,6 +191,7 @@ void		ft_unset(t_token *token, t_main *main);
 void		ft_exit(t_token *token);
 t_token		*ft_execute_builtin(t_token *s_token, t_main *main);
 t_token		*ft_end_execute_(t_token *token, int fd_pipe[2], t_main *main);
+char		*ft_check_echo_n(char *str);
 
 extern void	rl_replace_line(const char *text, int clear_undo);
 

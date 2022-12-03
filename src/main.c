@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 19:10:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 00:26:38 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 18:24:34 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ void	ft_loop(t_main *main)
 {
 	char	*tmp;
 
-	tmp = getcwd(NULL, 0);
+	tmp = getenv("HOME");
 	main->files_pwd = ft_strjoin(tmp, "/");
-	free(tmp);
+	// free(tmp);
 	main->token = (t_token *)malloc(sizeof(t_token));
 	if (!main->token)
 		return ;
 	ft_prompt(main->copy_env, main);
+	free(main->token);
+	free(main->files_pwd);
 }
 
 int	main(int argc, char **argv, char **envp)

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 00:31:02 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:28:43 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ int	ft_check_expand(char *line, int i)
 		dollar = TRUE;
 	else
 		return (0);
-	if ((line[i + 1] == '$' || line[i - 1] == '$') && dollar)
+	if (((line[i + 1] == '$' || line[i - 1] == '$') && dollar) \
+			|| ft_strlen(line) == 1)
 		return (0);
 	while (i > 0)
 	{

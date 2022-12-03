@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:53:41 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/26 02:47:43 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/03 18:12:20 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ void	ft_add_history(char *line, char **envp)
 	char	*path;
 	char	*tmp;
 
-	tmp = ft_searchstrchr("HOME=", envp);
+	tmp = getenv("HOME");
 	path = ft_strjoin(tmp, FILE_HISTORY);
-	free(tmp);
 	fd = open(path, O_APPEND | O_WRONLY | O_CREAT, S_IRWXU | S_IRGRP | S_IROTH);
 	free(path);
 	add_history(line);
