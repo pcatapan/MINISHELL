@@ -37,7 +37,7 @@ void	ft_output_redirect(t_token *token, t_main *main)
 		exit(1);
 	}
 	token->stdoutput = fd;
-	if (ft_search_redir(token, "<"))
+	if (ft_set_bool_redir(token, "<"))
 		ft_change_name_file(main, token, '<');
 }
 
@@ -50,7 +50,6 @@ void	ft_input_redirect(t_token *token)
 	dup2(fd, STDIN_FILENO);
 	if (fd == -1)
 	{
-		printf("QUI -- 2\n");
 		perror(RED ERROR_FILE COLOR_RES);
 		write(fd, "1", 1);
 		g_exit = 1;
@@ -97,6 +96,7 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 {
 	pid_t	pidchild;
 
+	printf("name_file: %s\n", token->name_file);
 	pidchild = fork();
 	if (pidchild != 0)
 	{

@@ -68,11 +68,13 @@ void	ft_heredoc(t_token *token, t_main *main)
 
 	token->dup = dup(STDIN_FILENO);
 	n_file = ".heredoc";
+	free(token->name_file);
+	ft_search_redir(token, "<<");
 	fd = open (n_file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	ft_write_fd(fd, token->name_file, main);
 	fd = open (n_file, O_RDWR);
 	dup2(fd, STDIN_FILENO);
-	if (ft_search_redir(token, ">"))
+	if (ft_set_bool_redir(token, ">"))
 		ft_change_name_file(main, token, '>');
 	if (fd == -1)
 	{

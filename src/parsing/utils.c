@@ -14,8 +14,12 @@
 
 t_token	*ft_return_head(t_token *list)
 {
-	while (list->prev)
+	while (list)
+	{
+		if (!list->prev)
+			break ;
 		list = list->prev;
+	}
 	return (list);
 }
 

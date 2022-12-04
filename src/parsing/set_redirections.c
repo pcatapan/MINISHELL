@@ -29,6 +29,20 @@ int	ft_search_redir(t_token *token, char *redir)
 	return (0);
 }
 
+int	ft_set_bool_redir(t_token *token, char *redir)
+{
+	int	i;
+
+	i = 0;
+	while (token->value[i])
+	{
+		if (ft_strcmp(token->value[i], redir))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	ft_set_redirections(t_token *token)
 {
 	token = ft_return_head(token);
@@ -40,7 +54,7 @@ void	ft_set_redirections(t_token *token)
 			token->append = true;
 		if (ft_search_redir(token, "<") == 1)
 			token->input = true;
-		if (ft_search_redir(token, "<<") == 1)
+		if (ft_set_bool_redir(token, "<<") == 1)
 			token->heredoc = true;
 		if (!token->next)
 			break ;
