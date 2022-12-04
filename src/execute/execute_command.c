@@ -6,13 +6,13 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 22:11:00 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/12/04 04:39:35 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:17:29 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_qualcosa(t_token *token, t_main *main)
+void	ft_execute_redi(t_token *token, t_main *main)
 {
 	if (!main->token->heredoc)
 		ft_execute_dollar(main->token, main);

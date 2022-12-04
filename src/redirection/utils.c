@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 03:26:32 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 18:08:16 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:17:21 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_single_redir(t_token *token, t_main *main)
 		else if (token->stdinput != STDIN_FILENO)
 			dup2(token->dup, STDIN_FILENO);
 	}
-	ft_qualcosa(token, main);
+	ft_execute_redi(token, main);
 }
 
 char	*ft_set_to_del(char *line)

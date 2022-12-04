@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 17:58:06 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 19:06:29 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_search_builtin(t_token *token, t_main *main)
 			ft_strcmp(token->value[0], "/bin/echo"))
 		ft_check_echo(token);
 	else if (ft_strcmp(token->value[0], "env"))
-		ft_check_env(main);
+		ft_check_env(token, main);
 	else if (ft_strcmp(token->value[0], "unset"))
 		ft_check_unset(token, main);
 	else if (ft_strcmp(token->value[0], "pwd") || \
@@ -39,7 +39,7 @@ t_token	*ft_execute_builtin(t_token *token, t_main *main)
 		perror(RED"ERRORE2"COLOR_RES);
 	ft_start_execute_(main);
 	if (ft_strcmp(token->value[0], "exit"))
-		ft_exit(token);
+		ft_check_exit(token);
 	pidchild = fork();
 	if (pidchild != 0)
 		ft_parent_execute_(token, pidchild, fd_pipe);

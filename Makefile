@@ -6,7 +6,7 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/12/04 17:26:17 by fgrossi          ###   ########.fr        #
+#    Updated: 2022/12/04 19:06:56 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OBJC = $(SRC:%.c=%.o)
 
 CC = gcc
 
-USER = fgrossi
+USER = pcatapan
 HOME = /Users/${USER}
 
 #LDFLAGS = -L/opt/homebrew/opt/readline/lib

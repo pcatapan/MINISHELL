@@ -6,13 +6,13 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 17:54:17 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 17:55:56 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 19:03:36 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_echo_or(t_token *token, t_main *main)
+void	ft_export_or(t_token *token, t_main *main)
 {
 	if (token->res == 0)
 	{

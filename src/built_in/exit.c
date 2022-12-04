@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 17:37:16 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 17:38:51 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 19:03:52 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_check_exit(t_token *token)
 	if (token->prev)
 	{
 		if (token->prev->or)
-			ft_echo_or(token);
+			ft_exit_or(token);
 		else if (token->prev->and)
 		{
 			if (token->res)

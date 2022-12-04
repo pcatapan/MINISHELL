@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/12/04 18:09:44 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 19:05:31 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct s_main
 	bool		op_logic;
 	bool		error;
 	bool		redirections;
-	bool		sub_shell;
 	bool		expand;
 	t_token		*token;
 }	t_main;
@@ -149,16 +148,16 @@ int			ft_check_double_quote(char *line, t_main *main, int i);
 int			ft_check_expand(char *line, int i);
 int			ft_jump_brackets(char *line, int i);
 int			ft_check_redir_char(char *line, int i);
-char		*ft_expand_doll(char *line, t_main *main, int i);
-char		*ft_expand_heredoc(char *line, t_main *main);
 void		ft_check_syntax(char *line, t_main *main);
 void		ft_check_redirection(char *line, t_main *main);
 
 // DIR Execute
 int			ft_check_envi(char *line);
 void		ft_execute_command(t_main *main);
-void		ft_execute_dollar(t_token *token, t_main *main);
 void		ft_store_matrix(t_main *main);
+void		ft_execute_redi(t_token *token, t_main *main);
+void		ft_start_execute_(t_main *main);
+void		ft_parent_execute_(t_token *token, pid_t pidchild, int fd_pipe[2]);
 t_token		*ft_execute_enviroment(t_token *token, char *var_add);
 t_token		*ft_execute_exeve(t_token *token, t_main *main);
 
@@ -185,40 +184,37 @@ void		ft_check_cd(t_token *token, t_main *main);
 void		ft_check_pwd(t_token *token);
 void		ft_check_env(t_token *token, t_main *main);
 void		ft_check_unset(t_token *token, t_main *main);
+void		ft_export(t_token *token, t_main *main);
 void		ft_check_exit(t_token *token);
 t_token		*ft_execute_builtin(t_token *s_token, t_main *main);
 t_token		*ft_end_execute_(t_token *token, int fd_pipe[2], t_main *main);
 
 //DIR Redirection
-void		ft_heredoc(t_token *token, t_main *main);
-char		*ft_find_name_file(char *str);
 int			ft_write_fd(int fd, char *limiter, t_main *main);
+int			ft_search_redir(t_token *token, char *redir);
+int			ft_count_redirection(t_token *token);
+char		*ft_find_name_file(char *str);
+char		**ft_clear_matrix(char **matrix);
+void		ft_heredoc(t_token *token, t_main *main);
 void		ft_input_redirect(t_token *token);
 void		ft_output_redirect(t_token *token, t_main *main);
 void		ft_delete_redirection(t_token *token);
-t_token		*ft_redirections(t_token *token, t_main *main);
 void		ft_execute_multi_redir(t_token *token);
 void		ft_single_redir(t_token *token, t_main *main);
-char		**ft_clear_matrix(char **matrix);
-int			ft_search_redir(t_token *token, char *redir);
-int			ft_count_redirection(t_token *token);
 void		ft_set_new_valus(t_token *token, char *line);
 void		ft_change_name_file(t_main *main, t_token *token, char redir);
 void		ft_single_redir(t_token *token, t_main *main);
-
-bool		ft_expand_check(char *line);
-char		*ft_change_var_in_dollar(int start, int l, char *str, t_main *main);
-void		ft_start_execute_(t_main *main);
-void		ft_parent_execute_(t_token *token, pid_t pidchild, int fd_pipe[2]);
-char		*ft_find_path(char *cmd, t_main *main);
+t_token		*ft_redirections(t_token *token, t_main *main);
 
 // Dir Expan Dollar
+int			ft_check_expand(char *line, int i);
+char		*ft_change_var_in_dollar(int start, int l, char *str, t_main *main);
+char		*ft_expand_doll(char *line, t_main *main, int i);
+char		*ft_expand_heredoc(char *line, t_main *main);
+void		ft_execute_dollar(t_token *token, t_main *main);
+bool		ft_expand_check(char *line);
 
 // temporary
-int			ft_check_expand(char *line, int i);
 void		ft_print_lst(t_token *a);
-void		ft_qualcosa(t_token *token, t_main *main);
-t_token		*ft_execute_exeve(t_token *token, t_main *main);
-void		ft_free_all(t_main *main);
 
 #endif

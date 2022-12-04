@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 20:59:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 23:33:40 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:24:49 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ void	ft_check_operetor_logic(char *line, t_main *main)
 void	ft_check_syntax(char *line, t_main *main)
 {
 	main->error = false;
-	main->sub_shell = false;
 	main->dub_quotes = 0;
 	main->sin_quotes = 0;
 	main->redirections = false;

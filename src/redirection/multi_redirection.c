@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:36:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 00:21:58 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 20:47:44 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,18 @@ void	ft_strjoin_redir(char *f_part, char *line, t_token *token)
 {
 	int		start;
 	int		end;
+	int		x;
 	char	*rtr;
 	char	*tmp;
 
 	end = ft_strlen(line);
 	start = 0;
+	x = 0;
 	while (line[end - start] != '>')
 		start++;
-	tmp = ft_substr(line, (end - start), start);
+	while (line[end - start + x] != 32 && line[end - start + x])
+		x++;
+	tmp = ft_substr(line, (end - start), (start - x));
 	rtr = ft_strjoin(f_part, tmp);
 	free(tmp);
 	ft_set_new_command(rtr, token, token->main);
@@ -97,6 +101,7 @@ void	ft_strjoin_redir(char *f_part, char *line, t_token *token)
 		else if (token->append)
 			ft_search_redir(token, ">>");
 	}
+	ft_print_lst(token);
 	ft_single_redir(token, token->main);
 }
 
