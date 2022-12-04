@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:31:25 by aanghel           #+#    #+#             */
-/*   Updated: 2022/12/04 03:37:47 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:41:24 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_heredoc(t_token *token, t_main *main)
 	token->dup = dup(STDIN_FILENO);
 	n_file = ".heredoc";
 	free(token->name_file);
+	token->name_file = NULL;
 	ft_search_redir(token, "<<");
 	fd = open (n_file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	ft_write_fd(fd, token->name_file, main);

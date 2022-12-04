@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/12/04 20:54:46 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 20:57:03 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,8 +193,6 @@ t_token		*ft_end_execute_(t_token *token, int fd_pipe[2], t_main *main);
 
 //DIR Redirection
 int			ft_set_bool_redir(t_token *token, char *redir);
-void		ft_heredoc(t_token *token, t_main *main);
-char		*ft_find_name_file(char *str);
 int			ft_write_fd(int fd, char *limiter, t_main *main);
 int			ft_search_redir(t_token *token, char *redir);
 int			ft_count_redirection(t_token *token);

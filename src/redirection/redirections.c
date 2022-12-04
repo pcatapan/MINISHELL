@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/12/04 04:41:48 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:48:38 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	ft_delete_redirection(t_token *token)
 				|| ft_strcmp(token->value[i], ">") \
 				|| ft_strcmp(token->value[i], ">>"))
 			{
-				token->value[i] = NULL;
 				free(token->value[i]);
+				token->value[i] = NULL;
 			}
 			i++;
 		}
@@ -96,7 +96,6 @@ t_token	*ft_redirections(t_token *token, t_main *main)
 {
 	pid_t	pidchild;
 
-	printf("name_file: %s\n", token->name_file);
 	pidchild = fork();
 	if (pidchild != 0)
 	{

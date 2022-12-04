@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:54:54 by aanghel           #+#    #+#             */
-/*   Updated: 2022/12/04 05:46:38 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:37:00 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	ft_search_redir(t_token *token, char *redir)
 	{
 		if (ft_strcmp(token->value[i], redir))
 		{
-			token->name_file = ft_strdup(token->value[i + 1]);
+			if (!token->name_file)
+				token->name_file = ft_strdup(token->value[i + 1]);
 			return (1);
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:36:58 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 20:52:00 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:38:30 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	ft_support_strjoin_redir(t_token *token)
 	if (!token->heredoc)
 	{
 		free(token->name_file);
+		token->name_file = NULL;
 		if (token->output)
 			ft_search_redir(token, ">");
 		else if (token->append)
