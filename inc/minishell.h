@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/12/03 23:34:06 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 04:46:55 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,11 +161,8 @@ void		ft_store_matrix(t_main *main);
 t_token		*ft_execute_enviroment(t_token *token, char *var_add);
 t_token		*ft_execute_exeve(t_token *token, t_main *main);
 int			ft_check_envi(char *line);
-void		ft_exceve(t_token *token);
 
 //// DIR EXECVE
-void		ft_execve_or(t_token *token);
-void		ft_execve_and(t_token *token);
 t_token		*ft_priority(t_token *token, int lvl, t_main *main);
 
 // DIR Parsing
@@ -178,7 +175,6 @@ void		ft_set_priority(char *line, t_main *main, int brack);
 void		ft_set_redirections(t_token *token);
 t_token		*ft_return_head(t_token *list);
 void		ft_set_info(char **tmp, t_main *main, char *copy_line, int count);
-char		*ft_add_space(char *line);
 int			ft_support_parsing(char *line, t_main *main, int i);
 void		ft_check_dir(t_main *main);
 int			ft_count_array(char *line, t_main *main);
@@ -221,6 +217,10 @@ void		ft_change_name_file(t_main *main, t_token *token, char redir);
 void		ft_single_redir(t_token *token, t_main *main);
 
 bool		ft_expand_check(char *line);
+char		*ft_change_var_in_dollar(int start, int l, char *str, t_main *main);
+void		ft_start_execute_(t_main *main);
+void		ft_parent_execute_(t_token *token, pid_t pidchild, int fd_pipe[2]);
+char		*ft_find_path(char *cmd, t_main *main);
 
 // temporary
 int			ft_check_expand(char *line, int i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:58:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 21:45:01 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/12/04 04:40:17 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,56 +21,49 @@ int	ft_count_space(char *line)
 	count = 0;
 	while (line[++i])
 	{
-		if ((line[i] == '<' && line[i + 1] != '<' && line[i - 1] != '<') \
-				|| (line[i] == '>' && line[i + 1] != '>' && line[i - 1] != '>') \
-				|| (line[i] == '<' && line[i + 1] == '<') \
-				|| (line[i] == '>' && line[i + 1] == '>'))
-			count++;
+		if (line[i] == '>' || line[i] == '<')
+		{
+			if (line[i - 1] != '<' && line[i - 1] != '>')
+				count++;
+			else if (line[i + 1] != '<' && line[i + 1] != '>')
+				count++;
+		}
 	}
 	return (count);
 }
 
-char	*ft_add_space(char *tmp)
+static int	ft_add_space(char *tmp, int i, char *line, int j)
+{
+	if (tmp[i - 1] != '<' && tmp[i - 1] != '>')
+		line[j++] = ' ';
+	line[j] = tmp[i];
+	if (tmp[i + 1] != '<' && tmp[i + 1] != '>')
+		line[++j] = ' ';
+	return (j);
+}
+
+static char	*ft_preparate_space(char *tmp)
 {
 	char	*line;
 	int		i;
 	int		j;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	line = (char *)malloc(sizeof(char) * (ft_strlen(tmp) + \
 				(ft_count_space(tmp) * 2) + 1));
 	if (!line)
 		return (0);
-	while (tmp[i])
+	while (tmp[++i])
 	{
-		if ((tmp[i] == '<' && tmp[i + 1] == '<' && tmp[i - 1] != '<') \
-				|| (tmp[i] == '>' && tmp[i + 1] == '>' && tmp[i - 1] != '>'))
-		{
-			line[j] = ' ';
-			line[j + 1] = tmp[i];
-			line[j + 2] = tmp[i + 1];
-			line[j + 3] = ' ';
-			j += 4;
-			i += 2;
-		}
-		else if ((tmp[i] == '<' && tmp[i + 1] != '<' && tmp[i - 1] != '<') \
-				|| (tmp[i] == '>' && tmp[i + 1] != '>' && tmp[i - 1] != '>'))
-		{
-			line[j] = ' ';
-			line[j + 1] = tmp[i];
-			line[j + 2] = ' ';
-			j += 3;
-			i++;
-		}
+		if (tmp[i] == '>' || tmp[i] == '<')
+			j = ft_add_space(tmp, i, line, j);
 		else
-		{
 			line[j] = tmp[i];
-			j++;
-			i++;
-		}
+		j++;
 	}
 	line[j] = '\0';
+	free(tmp);
 	return (line);
 }
 
@@ -109,6 +102,8 @@ void	ft_parsing(char *line, t_main *main)
 
 	i = 0;
 	count = 1;
+	line = ft_preparate_space(line);
+	main->copy_line = ft_strdup(line);
 	copy_line = ft_strdup(line);
 	while (line[i])
 	{
@@ -119,12 +114,10 @@ void	ft_parsing(char *line, t_main *main)
 							(line[i] == 124 && line[i - 1] != 124))
 				count++;
 			line[i] = 127;
-			i++;
-		}	
-		else
-			i++;
+		}
+		i++;
 	}
-	main->copy_line = ft_add_space(line);
 	tmp = ft_split_original(line, 127);
 	ft_set_info(tmp, main, copy_line, count);
+	free(line);
 }

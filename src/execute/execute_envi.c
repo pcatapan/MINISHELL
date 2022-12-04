@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-char	**ft_add_envi(char *var_add, t_main *main)
+static char	**ft_add_envi(char *var_add, t_main *main)
 {
 	int		i;
 	char	**tmp;

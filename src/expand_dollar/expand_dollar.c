@@ -12,6 +12,16 @@
 
 #include "../../inc/minishell.h"
 
+static void	ft_free_expand(char *str, char *str1, char *str2)
+{
+	if (str)
+		free(str);
+	if (str1)
+		free(str1);
+	if (str2)
+		free(str2);
+}
+
 static char	*ft_search_word(char *word, char **env)
 {
 	char	*tmp;
@@ -33,7 +43,6 @@ char	*ft_change_var_in_dollar(int start, int l, char *str, t_main *main)
 
 	first_part = ft_substr(str, 0, start - 1);
 	second_part = ft_substr(str, start + l, ft_strlen(str));
-	printf("Start :%d\nL :%d\nC :%c\n", start, l, str[start + l]);
 	word = ft_substr(str, start, l);
 	insert_word = ft_search_word(word, main->copy_env);
 	if (insert_word == NULL)
@@ -41,39 +50,30 @@ char	*ft_change_var_in_dollar(int start, int l, char *str, t_main *main)
 		insert_word = (char *)malloc(sizeof(char) * 1);
 		if (!insert_word)
 		{
-			free(word);
-			free(first_part);
-			free(second_part);
+			ft_free_expand(word, first_part, second_part);
 			return (NULL);
 		}
 		insert_word[0] = '\0';
 	}
 	word = ft_strjoin(first_part, insert_word);
-	free(insert_word);
-	free(first_part);
-	free(str);
+	ft_free_expand(insert_word, first_part, str);
 	str = ft_strjoin(word, second_part);
-	free(second_part);
-	free(word);
+	ft_free_expand(NULL, second_part, word);
 	return (str);
 }
 
-char	*ft_expand_further(char *line, t_main *main, int i, int start)
+static void	ft_expand_support(char *line, int i)
 {
 	char	*tmp;
-	int		l;
 
-	l = 0;
-	while (line[++i] && line[i] != ' ' && line[i] != '"' && line[i] != '\'' \
-		&& line[i] != '$' && line[i] != 62 && line[i] != 60)
-		l++;
+	line[i] = 127;
+	while (line[i] != '}')
+		i++;
+	line[i] = 127;
 	tmp = ft_strdup(line);
 	free(line);
-	if (tmp[start] == '?')
-		line = ft_itoa(g_exit);
-	else
-		line = ft_change_var_in_dollar(start, l + 1, tmp, main);
-	return (line);
+	line = ft_strtrim2(tmp, 127);
+	free(tmp);
 }
 
 char	*ft_expand_doll(char *line, t_main *main, int i)
@@ -85,36 +85,15 @@ char	*ft_expand_doll(char *line, t_main *main, int i)
 	start = i;
 	l = 0;
 	if (line[i] == '{')
-	{
-		start--;
-		line[i] = 127;
-		while (line[i] != '}')
-			i++;
-		line[i] = 127;
-		tmp = ft_strdup(line);
-		free(line);
-		line = ft_strtrim2(tmp, 127);
-		free(tmp);
-	}
-	return (ft_expand_further(line, main, i, start));
-}
-
-char	*ft_expand_heredoc(char *line, t_main *main)
-{
-	int	i;
-	int	l;
-	int	start;
-
-	i = 0;
-	l = 0;
-	start = 0;
-	while (line[i] != '$' )
-		i++;
-	if (line[i] == '$')
-		start = i + 1;
-	while (line[++i] && line[i] != ' ' && line[i] != '"')
+		ft_expand_support(line, i);
+	while (line[++i] && line[i] != ' ' && line[i] != '"' && line[i] != '\'' \
+	&& line[i] != '$' && line[i] != 62 && line[i] != 60)
 		l++;
-	if (start != 0)
-		line = ft_change_var_in_dollar(start, l, line, main);
+	tmp = ft_strdup(line);
+	free(line);
+	if (tmp[start] == '?')
+		line = ft_itoa(g_exit);
+	else
+		line = ft_change_var_in_dollar(start, l + 1, tmp, main);
 	return (line);
 }

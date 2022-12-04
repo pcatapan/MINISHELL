@@ -3,33 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 03:26:32 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 19:52:26 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/12/04 03:14:15 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*ft_find_name_file(char *str)
+void	ft_single_redir(t_token *token, t_main *main)
 {
-	int		start;
-	int		end;
-	int		delete;
-	char	*rtr;
-
-	start = 0;
-	end = 0;
-	while (str[start] == 32)
-		start++;
-	while (str[start + end] != 32)
-		end++;
-	rtr = ft_substr(str, start, end);
-	delete = start + end;
-	while (delete != -1)
-		str[delete--] = 127;
-	return (rtr);
+	if (token->heredoc == 1)
+		ft_heredoc(token, main);
+	if (token->output == 1 || token->append == 1)
+		ft_output_redirect(token, main);
+	if (token->input == 1)
+		ft_input_redirect(token);
+	ft_delete_redirection(token);
+	if (token->command == NULL)
+	{
+		if (token->stdoutput != STDOUT_FILENO)
+			dup2(token->dup, STDOUT_FILENO);
+		else if (token->stdinput != STDIN_FILENO)
+			dup2(token->dup, STDIN_FILENO);
+	}
+	ft_qualcosa(token, main);
 }
 
 char	*ft_create_line(t_token *token)

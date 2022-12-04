@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:15:28 by aanghel           #+#    #+#             */
-/*   Updated: 2022/12/03 22:43:35 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/12/04 04:41:48 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_input_redirect(t_token *token)
 	dup2(fd, STDIN_FILENO);
 	if (fd == -1)
 	{
+		printf("QUI -- 2\n");
 		perror(RED ERROR_FILE COLOR_RES);
 		write(fd, "1", 1);
 		g_exit = 1;

@@ -12,30 +12,24 @@
 
 #include "../../inc/minishell.h"
 
-void	ft_execute_dollar(t_token *token, t_main *main)
+void	ft_parent_execute_(t_token *token, pid_t pidchild, int fd_pipe[2])
 {
-	int		i;
-	int		j;
-	int		doub_quot;
+	close(fd_pipe[1]);
+	waitpid(pidchild, &token->res, 0);
+	if (WIFEXITED(token->res))
+		g_exit = WEXITSTATUS(token->res);
+}
 
-	i = 0;
-	j = 0;
-	doub_quot = 0;
-	while (token->value[i])
-	{
-		j = 0;
-		while (token->value[i][j])
-		{
-			if (token->value[i][j] == '"')
-				doub_quot++;
-			if (doub_quot % 2 == 0)
-				j = ft_check_single_quote(token->value[i], main, j);
-			if (ft_check_expand(token->value[i], j))
-				token->value[i] = ft_expand_doll(token->value[i], main, j + 1);
-			j++;
-		}
-		i++;
-	}
+void	ft_start_execute_(t_main *main)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(main->files_pwd, ".help");
+	main->fd_matrix = open(tmp, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	free(tmp);
+	tmp = ft_strjoin(main->files_pwd, ".export");
+	main->fd_export = open(tmp, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	free(tmp);
 }
 
 t_token	*ft_end_execute_(t_token *token, int fd_pipe[2], t_main *main)

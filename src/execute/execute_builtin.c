@@ -30,48 +30,31 @@ void	ft_search_builtin(t_token *token, t_main *main)
 		ft_export(token, main);
 }
 
-t_token	*ft_false_builtin(t_token *token, t_main *main, int *fd_pipe)
-{
-	close(fd_pipe[0]);
-	if (token->pipe)
-	{
-		dup2(fd_pipe[1], STDOUT_FILENO);
-		close(fd_pipe[1]);
-	}
-	ft_search_builtin(token, main);
-	ft_store_matrix(main);
-	exit(0);
-}
-
-void	ft_true_builtin(t_token *token, int *fd_pipe, pid_t pidchild)
-{
-	close(fd_pipe[1]);
-	waitpid(pidchild, &token->res, 0);
-	if (WIFEXITED(token->res))
-		g_exit = WEXITSTATUS(token->res);
-}
-
 t_token	*ft_execute_builtin(t_token *token, t_main *main)
 {
 	pid_t	pidchild;
 	int		fd_pipe[2];
-	char	*tmp;
 
 	if (pipe(fd_pipe) == -1)
 		perror(RED"ERRORE2"COLOR_RES);
-	tmp = ft_strjoin(main->files_pwd, ".help");
-	main->fd_matrix = open(tmp, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	free(tmp);
-	tmp = ft_strjoin(main->files_pwd, ".export");
-	main->fd_export = open(tmp, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	free(tmp);
+	ft_start_execute_(main);
 	if (ft_strcmp(token->value[0], "exit"))
 		ft_exit(token);
 	pidchild = fork();
 	if (pidchild != 0)
-		ft_true_builtin(token, fd_pipe, pidchild);
+		ft_parent_execute_(token, pidchild, fd_pipe);
 	else
-		ft_false_builtin(token, main, fd_pipe);
+	{
+		close(fd_pipe[0]);
+		if (token->pipe)
+		{
+			dup2(fd_pipe[1], STDOUT_FILENO);
+			close(fd_pipe[1]);
+		}
+		ft_search_builtin(token, main);
+		ft_store_matrix(main);
+		exit(0);
+	}
 	token = ft_end_execute_(token, fd_pipe, main);
 	return (token);
 }
