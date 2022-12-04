@@ -60,7 +60,7 @@ void	ft_check_exit(t_token *token)
 	if (token->prev)
 	{
 		if (token->prev->or)
-			ft_echo_or(token);
+			ft_exit_or(token);
 		else if (token->prev->and)
 		{
 			if (token->res)

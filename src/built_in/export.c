@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-void	ft_echo_or(t_token *token, t_main *main)
+void	ft_export_or(t_token *token, t_main *main)
 {
 	if (token->res == 0)
 	{

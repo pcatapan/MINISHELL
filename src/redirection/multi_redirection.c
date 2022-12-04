@@ -12,21 +12,16 @@
 
 #include "../../inc/minishell.h"
 
-int	ft_count_redirection(t_token *token)
+static void	ft_support_strjoin_redir(t_token *token)
 {
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (token->value[i])
+	if (!token->heredoc)
 	{
-		if (ft_strcmp(token->value[i], ">") \
-			|| ft_strcmp(token->value[i], ">>"))
-			count++;
-		i++;
+		free(token->name_file);
+		if (token->output)
+			ft_search_redir(token, ">");
+		else if (token->append)
+			ft_search_redir(token, ">>");
 	}
-	return (count);
 }
 
 void	ft_set_new_valus(t_token *token, char *line)
@@ -83,46 +78,40 @@ void	ft_strjoin_redir(char *f_part, char *line, t_token *token)
 	start = 0;
 	while (line[end - start] != '>')
 		start++;
-	tmp = ft_substr(line, (end - start), start);
+	tmp = ft_substr(line, (end - start), (start));
+	f_part = ft_strcat(f_part, " ");
 	rtr = ft_strjoin(f_part, tmp);
 	free(tmp);
 	ft_set_new_command(rtr, token, token->main);
 	ft_set_new_valus(token, rtr);
 	free(rtr);
-	if (!token->heredoc)
-	{
-		free(token->name_file);
-		if (token->output)
-			ft_search_redir(token, ">");
-		else if (token->append)
-			ft_search_redir(token, ">>");
-	}
+	ft_support_strjoin_redir(token);
 	ft_single_redir(token, token->main);
 }
 
 void	ft_execute_multi_redir(t_token *token)
 {
 	char	**matrix;
-	char	*tmp;
+	char	*rtr;
 	int		i;
 
 	i = 0;
 	matrix = ft_split_original(token->main->copy_line, '>');
 	while (matrix[++i])
 	{
-		tmp = ft_find_name_file(matrix[i]);
-		open(tmp, O_CREAT | O_RDONLY, 0644);
-		free(tmp);
+		rtr = ft_find_name_file(matrix[i]);
+		open(rtr, O_CREAT | O_RDONLY, 0644);
+		free(rtr);
 	}
 	matrix = ft_clear_matrix(matrix);
-	tmp = (char *)malloc(sizeof(char) * 1);
-	if (!tmp)
+	rtr = (char *)malloc(sizeof(char) * 1);
+	if (!rtr)
 		return ;
-	tmp[0] = '\0';
+	rtr[0] = '\0';
 	i = 0;
 	while (matrix[i])
-		tmp = ft_strjoin(tmp, matrix[i++]);
+		rtr = ft_strjoin(rtr, matrix[i++]);
 	ft_free_matrix(matrix);
-	ft_strjoin_redir(tmp, token->main->copy_line, token);
-	free(tmp);
+	ft_strjoin_redir(rtr, token->main->copy_line, token);
+	free(rtr);
 }

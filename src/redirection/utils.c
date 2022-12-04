@@ -55,8 +55,25 @@ char	**ft_clear_matrix(char **matrix)
 	{
 		tmp = ft_strdup(matrix[i]);
 		free(matrix[i]);
-		matrix[i++] = ft_strclear(tmp, 127);
+		matrix[i++] = ft_strtrim2(tmp, 127);
 		free(tmp);
 	}
 	return (matrix);
+}
+
+int	ft_count_redirection(t_token *token)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (token->value[i])
+	{
+		if (ft_strcmp(token->value[i], ">") \
+			|| ft_strcmp(token->value[i], ">>"))
+			count++;
+		i++;
+	}
+	return (count);
 }

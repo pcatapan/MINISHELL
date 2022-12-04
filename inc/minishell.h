@@ -186,10 +186,13 @@ void		ft_check_pwd(t_token *token);
 void		ft_check_env(t_token *token, t_main *main);
 void		ft_check_unset(t_token *token, t_main *main);
 void		ft_check_exit(t_token *token);
+void		ft_export(t_token *token, t_main *main);
+void		ft_exit(t_token *token);
 t_token		*ft_execute_builtin(t_token *s_token, t_main *main);
 t_token		*ft_end_execute_(t_token *token, int fd_pipe[2], t_main *main);
 
 //DIR Redirection
+int			ft_set_bool_redir(t_token *token, char *redir);
 void		ft_heredoc(t_token *token, t_main *main);
 char		*ft_find_name_file(char *str);
 int			ft_write_fd(int fd, char *limiter, t_main *main);
@@ -211,8 +214,7 @@ char		*ft_change_var_in_dollar(int start, int l, char *str, t_main *main);
 void		ft_start_execute_(t_main *main);
 void		ft_parent_execute_(t_token *token, pid_t pidchild, int fd_pipe[2]);
 char		*ft_find_path(char *cmd, t_main *main);
-
-// Dir Expan Dollar
+int			ft_count_redirection(t_token *token);
 
 // temporary
 int			ft_check_expand(char *line, int i);
