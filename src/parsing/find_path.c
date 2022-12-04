@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 04:45:34 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 04:52:01 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 17:29:58 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ static int	ft_exceptions_path(t_main *main)
 	return (i);
 }
 
-static char	*ft_support_path(char *part_path, char *cmd, char *paths)
+static char	*ft_support_path(char *cmd, char *paths)
 {
 	char	*rtr;
+	char	*part_path;
 
 	part_path = ft_strjoin(paths, "/");
 	rtr = ft_strjoin(part_path, cmd);
@@ -47,7 +48,6 @@ char	*ft_find_path(char *cmd, t_main *main)
 {
 	char	**paths;
 	char	*right_path;
-	char	*part_path;
 	int		i;
 
 	i = ft_exceptions_path(main);
@@ -59,7 +59,7 @@ char	*ft_find_path(char *cmd, t_main *main)
 	i = -1;
 	while (paths[++i])
 	{
-		right_path = ft_support_path(part_path, cmd, paths[i]);
+		right_path = ft_support_path(cmd, paths[i]);
 		if (access(right_path, F_OK) == 0)
 		{
 			ft_free_matrix(paths);

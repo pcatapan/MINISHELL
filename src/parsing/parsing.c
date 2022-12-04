@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:58:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 05:44:18 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 17:30:35 by fgrossi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	ft_set_info(char **tmp, t_main *main, char *copy_line, int count)
 	ft_set_redirections(main->token);
 	ft_free_matrix(tmp_value);
 	ft_free_matrix(tmp);
-	// free(copy_line);
 }
 
 void	ft_parsing(char *line, t_main *main)
@@ -103,8 +102,6 @@ void	ft_parsing(char *line, t_main *main)
 	count = 1;
 	copy_line = ft_preparate_space(line);
 	main->copy_line = ft_strdup(copy_line);
-	// free(line);
-	// line = ft_strdup(copy_line);
 	while (copy_line[i])
 	{
 		i = ft_support_parsing(copy_line, main, i);
