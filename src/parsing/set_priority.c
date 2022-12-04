@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_priority.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:00:25 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 22:21:36 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/12/05 00:06:47 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**ft_utils_set_priority(char *line, t_main *main)
 	return (rtr);
 }
 
-int	ft_vamente_inutile(char **tmp, t_main	*main, int i, int j)
+static int	ft_support_priority(char **tmp, t_main	*main, int i, int j)
 {
 	j = ft_check_double_quote(tmp[i], main, j);
 	j = ft_check_single_quote(tmp[i], main, j);
@@ -57,7 +57,7 @@ void	ft_set_priority(char *line, t_main *main, int brack)
 		j = -1;
 		while (tmp[i][++j])
 		{
-			j = ft_vamente_inutile(tmp, main, i, j);
+			j = ft_support_priority(tmp, main, i, j);
 			if (tmp[i][j] == '(')
 				brack++;
 			main->token->priority = brack;

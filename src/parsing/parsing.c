@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:58:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 23:27:59 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/05 00:24:37 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	ft_parsing(char *line, t_main *main)
 	while (copy_line[i])
 	{
 		i = ft_support_parsing(copy_line, main, i);
-		if (copy_line[i] == 38 || line[i] == 59 || line[i] == 124)
+		if (copy_line[i] == 38 || copy_line[i] == 59 || copy_line[i] == 124)
 		{
 			if (copy_line[i + 1] == 38 || copy_line[i + 1] == 124 || \
 		copy_line[i] == 59 || (copy_line[i] == 124 && copy_line[i - 1] != 124))
