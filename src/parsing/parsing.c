@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:58:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 04:40:17 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 05:44:18 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static char	*ft_preparate_space(char *tmp)
 		j++;
 	}
 	line[j] = '\0';
-	free(tmp);
 	return (line);
 }
 
@@ -90,7 +89,7 @@ void	ft_set_info(char **tmp, t_main *main, char *copy_line, int count)
 	ft_set_redirections(main->token);
 	ft_free_matrix(tmp_value);
 	ft_free_matrix(tmp);
-	free(copy_line);
+	// free(copy_line);
 }
 
 void	ft_parsing(char *line, t_main *main)
@@ -102,22 +101,23 @@ void	ft_parsing(char *line, t_main *main)
 
 	i = 0;
 	count = 1;
-	line = ft_preparate_space(line);
-	main->copy_line = ft_strdup(line);
-	copy_line = ft_strdup(line);
-	while (line[i])
+	copy_line = ft_preparate_space(line);
+	main->copy_line = ft_strdup(copy_line);
+	// free(line);
+	// line = ft_strdup(copy_line);
+	while (copy_line[i])
 	{
-		i = ft_support_parsing(line, main, i);
-		if (line[i] == 38 || line[i] == 59 || line[i] == 124)
+		i = ft_support_parsing(copy_line, main, i);
+		if (copy_line[i] == 38 || line[i] == 59 || line[i] == 124)
 		{
-			if (line[i + 1] == 38 || line[i + 1] == 124 || line[i] == 59 || \
-							(line[i] == 124 && line[i - 1] != 124))
+			if (copy_line[i + 1] == 38 || copy_line[i + 1] == 124 || \
+		copy_line[i] == 59 || (copy_line[i] == 124 && copy_line[i - 1] != 124))
 				count++;
-			line[i] = 127;
+			copy_line[i] = 127;
 		}
 		i++;
 	}
-	tmp = ft_split_original(line, 127);
-	ft_set_info(tmp, main, copy_line, count);
-	free(line);
+	tmp = ft_split_original(copy_line, 127);
+	ft_set_info(tmp, main, main->copy_line, count);
+	free(copy_line);
 }

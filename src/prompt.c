@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:57:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 04:39:19 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 05:43:50 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int	ft_prompt(t_main *main)
 	if (!line)
 	{
 		printf(RED "\texit\n" COLOR_RES);
-		g_exit = 127;
 		free(main->files_pwd);
 		free(main->token);
 		exit(127);
@@ -108,8 +107,10 @@ int	ft_prompt(t_main *main)
 		{
 			ft_parsing(line, main);
 			ft_execute_command(main);
+			ft_free_token(main->token);
+			free(main->copy_line);
 		}
-		ft_free_token(main->token);
 	}
+	free(line);
 	return (0);
 }

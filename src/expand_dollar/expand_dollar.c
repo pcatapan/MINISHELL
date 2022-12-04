@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:33:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 23:57:18 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/04 05:56:26 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,10 @@ char	*ft_expand_doll(char *line, t_main *main, int i)
 	tmp = ft_strdup(line);
 	free(line);
 	if (tmp[start] == '?')
+	{
 		line = ft_itoa(g_exit);
+		free(tmp);
+	}
 	else
 		line = ft_change_var_in_dollar(start, l + 1, tmp, main);
 	return (line);
