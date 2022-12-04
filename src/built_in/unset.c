@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_easy.c                                    :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/11/24 03:59:36 by aanghel          ###   ########.fr       */
+/*   Created: 2022/12/04 17:39:11 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/12/04 17:43:07 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,31 +70,36 @@ void	ft_unset(t_token *token, t_main *main)
 	ft_unset_exp(token, main);
 }
 
-void	ft_exit(t_token *token)
+void	ft_echo_unset(t_token *token, t_main *main)
 {
-	int	i;
-	int	num;
-
-	i = 0;
-	while (token->value[i])
-		i++;
-	if (i > 2)
+	if (token->res == 0)
 	{
-		g_exit = 1;
-		printf("Exit\n");
-		perror(RED ERROR_EXIT COLOR_RES);
-	}
-	else if (token->value[1] == NULL)
-	{
-		printf(RED "\texit\n" COLOR_RES);
-		ft_free_token(token);
-		exit(0);
+		if (token->next)
+		{
+			if (token->and)
+				;
+		}
 	}
 	else
+		ft_unset(token, main);
+}
+
+void	ft_check_unset(t_token *token, t_main *main)
+{
+	if (token->prev)
 	{
-		num = ft_atoi(token->value[1]);
-		printf(RED "\texit\n" COLOR_RES);
-		ft_free_token(token);
-		exit(num);
+		if (token->prev->or)
+			ft_echo_unset(token, main);
+		else if (token->prev->and)
+		{
+			if (token->res)
+				exit (1);
+			else
+				ft_unset(token, main);
+		}
+		else
+			ft_unset(token, main);
 	}
+	else
+		ft_unset(token, main);
 }

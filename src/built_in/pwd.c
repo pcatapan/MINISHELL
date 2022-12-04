@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 17:54:17 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 17:55:56 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/12/04 17:44:09 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/12/04 17:50:29 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_echo_or(t_token *token, t_main *main)
+void	ft_pwd(void)
+{
+	char	*pwd;
+
+	pwd = getcwd(NULL, 0);
+	ft_printf("%s\n", pwd);
+	free(pwd);
+}
+
+void	ft_pwd_or(t_token *token)
 {
 	if (token->res == 0)
 	{
@@ -23,25 +32,25 @@ void	ft_echo_or(t_token *token, t_main *main)
 		}
 	}
 	else
-		ft_export(token, main);
+		ft_pwd();
 }
 
-void	ft_check_export(t_token *token, t_main *main)
+void	ft_check_pwd(t_token *token)
 {
 	if (token->prev)
 	{
 		if (token->prev->or)
-			ft_export_or(token, main);
+			ft_pwd_or(token);
 		else if (token->prev->and)
 		{
 			if (token->res)
 				exit (1);
 			else
-				ft_export(token, main);
+				ft_pwd();
 		}
 		else
-			ft_export(token, main);
+			ft_pwd();
 	}
 	else
-		ft_export(token, main);
+		ft_pwd();
 }

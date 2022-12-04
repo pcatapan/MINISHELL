@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 23:32:54 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 21:45:51 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/12/04 18:03:15 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,4 @@ char	*ft_check_echo_n(char *str)
 		return (str);
 	else
 		return ("-n");
-}
-
-char	*ft_clear_value(char *str)
-{
-	int		start;
-	int		end;
-	int		i;
-
-	start = 0;
-	end = 0;
-	i = 0;
-	if (str[0] == 34 || str[0] == 39)
-		start = 1;
-	while (str[i + start])
-		i++;
-	if (str[i] == 34 || str[i] == 39)
-		end = i - 1;
-	else
-		end = ft_strlen(str);
-	return (ft_substr(str, start, end));
 }

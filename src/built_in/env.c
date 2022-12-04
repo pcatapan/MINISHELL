@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 17:54:17 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 17:55:56 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/12/04 17:46:27 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/12/04 17:49:06 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_echo_or(t_token *token, t_main *main)
+void	ft_env(t_main *main)
+{
+	int	i;
+
+	i = 0;
+	while (main->copy_env[i])
+	{
+		printf("%s\n", main->copy_env[i]);
+		i++;
+	}
+}
+
+void	ft_env_or(t_token *token, t_main *main)
 {
 	if (token->res == 0)
 	{
@@ -23,25 +35,25 @@ void	ft_echo_or(t_token *token, t_main *main)
 		}
 	}
 	else
-		ft_export(token, main);
+		ft_env(main);
 }
 
-void	ft_check_export(t_token *token, t_main *main)
+void	ft_check_env(t_token *token, t_main *main)
 {
 	if (token->prev)
 	{
 		if (token->prev->or)
-			ft_export_or(token, main);
+			ft_env_or(token, main);
 		else if (token->prev->and)
 		{
 			if (token->res)
 				exit (1);
 			else
-				ft_export(token, main);
+				ft_env(main);
 		}
 		else
-			ft_export(token, main);
+			ft_env(main);
 	}
 	else
-		ft_export(token, main);
+		ft_env(main);
 }

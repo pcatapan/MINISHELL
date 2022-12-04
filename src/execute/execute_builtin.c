@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrossi <fgrossi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:42:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/03 21:59:00 by fgrossi          ###   ########.fr       */
+/*   Updated: 2022/12/04 17:58:06 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ void	ft_search_builtin(t_token *token, t_main *main)
 			ft_strcmp(token->value[0], "/bin/echo"))
 		ft_check_echo(token);
 	else if (ft_strcmp(token->value[0], "env"))
-		ft_env(main);
+		ft_check_env(main);
 	else if (ft_strcmp(token->value[0], "unset"))
-		ft_unset(token, main);
+		ft_check_unset(token, main);
 	else if (ft_strcmp(token->value[0], "pwd") || \
 			ft_strcmp(token->value[0], "/bin/pwd"))
-		ft_pwd();
+		ft_check_pwd(token);
 	else if (ft_strcmp(token->value[0], "cd"))
-		ft_cd(token, main);
+		ft_check_cd(token, main);
 	else if (ft_strcmp(token->value[0], "export"))
-		ft_export(token, main);
+		ft_check_export(token, main);
 }
 
 t_token	*ft_execute_builtin(t_token *token, t_main *main)
