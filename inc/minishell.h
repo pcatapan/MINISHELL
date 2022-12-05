@@ -6,13 +6,12 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:48:56 by fgrossi           #+#    #+#             */
-/*   Updated: 2022/12/04 20:57:03 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:54:11 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include "../PRINTF/ft_printf.h"
 # include <fcntl.h>
 # include <errno.h>
 # include <stdio.h>

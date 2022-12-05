@@ -6,14 +6,13 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 19:54:47 by pcatapan          #+#    #+#              #
-#    Updated: 2022/12/05 00:10:35 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/12/05 16:54:50 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRC =	./PRINTF/*.c \
-		./src/*.c \
+SRC =	./src/*.c \
 		./src/utils/*.c \
 		./src/syntax/*.c \
 		./src/parsing/*.c \
@@ -30,12 +29,8 @@ CC = gcc
 USER = pcatapan
 HOME = /Users/${USER}
 
-#LDFLAGS = -L/opt/homebrew/opt/readline/lib
-#CPPFLAGS = -I/opt/homebrew/opt/readline/include
+FLAGS = -Wall -Werror -Wextra 
 
-FLAGS = #-Wall -Werror -Wextra 
-
-#F_IRINA = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
 FLAG_READLINE =-lreadline -lcurses -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 
@@ -52,8 +47,6 @@ fclean: clean
 	@rm -f ${HOME}/.42minishell_history
 	@rm -f fil*
 	@rm -f .heredoc
-	@rm -f ${HOME}/.export
-	@rm -f ${HOME}/.help
 	@rm -rf *.dSYM
 	
 re: fclean all

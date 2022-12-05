@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 17:44:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 17:50:29 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:54:03 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_pwd(void)
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
-	ft_printf("%s\n", pwd);
+	printf("%s\n", pwd);
 	free(pwd);
 }
 

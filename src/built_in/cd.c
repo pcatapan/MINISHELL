@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 17:49:28 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/12/04 17:51:51 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:55:55 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	ft_cd(t_token *token, t_main *main)
 	else if (chdir(token->value[1]) == -1)
 	{
 		g_exit = 1;
-		ft_printf(RED"cd: " ERROR_FILE COLOR_RES, token->value[1]);
-		ft_printf("\n");
+		printf(RED"cd: %s: " ERROR_FILE COLOR_RES, token->value[1]);
+		printf("\n");
 	}
 	else
 		cd_path(main);
